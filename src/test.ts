@@ -10,7 +10,7 @@ const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545");
 web3.eth.getAccounts =async () => ['0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43'];
 //Enter PrivateKey here
 const privateKey =
-  "a0c31ec3759513cbdcb60bd0d3f30d298bcede28c06c5dd3b77b2b8219158de6";
+  "";
 const accountAddr = "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43";
 const account = web3.eth.accounts.privateKeyToAccount(privateKey);
 web3.eth.accounts.wallet.add(account);
