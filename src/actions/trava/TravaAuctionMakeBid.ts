@@ -16,6 +16,5 @@ export class TravaAuctionMakeBid extends Action {
       ["uint256", "uint256", "address"],
       [tokenId, bidPrice, from]
     );
-  
   }
 }
