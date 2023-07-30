@@ -1,0 +1,71 @@
+import dfs from ".";
+import Web3 from "web3";
+import Dec from "decimal.js";
+import { encodeForDsProxyCall } from "./RecipeUtils";
+import { encodeForRecipe } from "./ActionUtils";
+async function test()
+{
+const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545");
+//web3.eth.getAccounts =async () => ['0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43'];
+//Enter PrivateKey here
+const privateKey =
+  "";
+const accountAddr = "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43";
+const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+web3.eth.accounts.wallet.add(account);
+web3.eth.defaultAccount = accountAddr;
+let dfsWeb3;
+dfsWeb3 = new dfs.DfsWeb3(web3);
+dfsWeb3.account = "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43"
+dfsWeb3.proxy = "0x826D824BE55A403859A6Db67D5EeC5aC386307fE"
+dfsWeb3.accountReady=true
+// const a = new dfs.actions.trava.TravaAuctionCreateAuction(
+//   "85",
+//   new Dec("1000")
+//     .mul(10 ** 18)
+//     .floor()
+//     .toString(),
+//   "172800",
+//   "0",
+//   "0",
+//   "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43"
+// )
+// // const exec : any = await dfsWeb3.executeAction(a);
+// console.log(encodeForRecipe(a));
+const r = new dfs.Recipe("Auction Recipe", [
+ 
+  new dfs.actions.trava.TravaAuctionCreateAuction(
+    "86",
+    new Dec("1000")
+      .mul(10 ** 18)
+      .floor()
+      .toString(),
+    "172800",
+    "0",
+    "0",
+    "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43"
+  ),
+  // new dfs.actions.trava.TravaAuctionMakeBid(
+  //   "53",
+  //   new Dec("3000")
+  //     .mul(10 ** 18)
+  //     .floor()
+  //     .toString(),
+  //   "0x826D824BE55A403859A6Db67D5EeC5aC386307fE"
+  // ),
+]);
+// console.log(encodeForDsProxyCall(r));
+
+//r._validateParamMappings();
+
+// console.log(r.recipeExecutorAddress)
+  const exec :any= await dfsWeb3.executeRecipe(r);
+
+ await exec.send({
+      from: dfsWeb3.account,
+      gasPrice: 1000000000,
+      gasLimit: 20000000,
+    });
+
+  }
+test()
