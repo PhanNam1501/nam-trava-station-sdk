@@ -45,10 +45,11 @@ export class DfsWeb3 {
     if (!accounts || !accounts.length) throw new Error('Supplied web3 has no account');
     this.account = accounts[0];
     const DFSPRoxyRegistyAbiItems : AbiItem[] = DFSPRoxyRegistyAbi.map(item => ({ ...item, stateMutability: item.stateMutability as StateMutabilityType, type: item.type as AbiType }));
+    
     const dfsRegistry = new this.web3.eth.Contract(DFSPRoxyRegistyAbiItems, getAddr('DFSProxyRegistry', CONFIG.chainId));
-    const proxies = await dfsRegistry.methods.getAllProxies(this.account).call();
-    if (proxies[0] !== '0x0000000000000000000000000000000000000000') {
-      this.proxy = proxies[0];
+    const proxies = await dfsRegistry.methods.proxies(this.account).call();
+    if (proxies) {
+      this.proxy = proxies;
     }
     this.accountReady = true;
   }

@@ -11,7 +11,7 @@ import { EthAddress, uint256 } from '../../types';
 export class TravaAuctionMakeBid extends Action {
   constructor(tokenId:uint256,bidPrice: uint256 ,from:EthAddress = getAddr('Empty')) {
     super(
-      'TravaAuctionMakeBid',
+      'TravaNFTAuctionMakeBid',
       getAddr('TravaAuctionMakeBid'),
       ["uint256", "uint256", "address"],
       [tokenId, bidPrice, from]

@@ -5,20 +5,23 @@ import { encodeForDsProxyCall } from "./RecipeUtils";
 import { encodeForRecipe } from "./ActionUtils";
 async function test()
 {
+//Front end can use injected Web3
 const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545");
-//web3.eth.getAccounts =async () => ['0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43'];
+web3.eth.getAccounts =async () => ['0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43'];
 //Enter PrivateKey here
 const privateKey =
-  "";
+  "a0c31ec3759513cbdcb60bd0d3f30d298bcede28c06c5dd3b77b2b8219158de6";
 const accountAddr = "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43";
 const account = web3.eth.accounts.privateKeyToAccount(privateKey);
 web3.eth.accounts.wallet.add(account);
 web3.eth.defaultAccount = accountAddr;
 let dfsWeb3;
 dfsWeb3 = new dfs.DfsWeb3(web3);
-dfsWeb3.account = "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43"
-dfsWeb3.proxy = "0x826D824BE55A403859A6Db67D5EeC5aC386307fE"
-dfsWeb3.accountReady=true
+await dfsWeb3.prepareAccount();
+console.log(dfsWeb3.proxy,dfsWeb3.accountReady,dfsWeb3.account)
+// dfsWeb3.account = "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43"
+// dfsWeb3.proxy = "0x826D824BE55A403859A6Db67D5EeC5aC386307fE"
+// dfsWeb3.accountReady=true
 // const a = new dfs.actions.trava.TravaAuctionCreateAuction(
 //   "85",
 //   new Dec("1000")
@@ -59,13 +62,13 @@ const r = new dfs.Recipe("Auction Recipe", [
 //r._validateParamMappings();
 
 // console.log(r.recipeExecutorAddress)
-  const exec :any= await dfsWeb3.executeRecipe(r);
+//   const exec :any= await dfsWeb3.executeRecipe(r);
 
- await exec.send({
-      from: dfsWeb3.account,
-      gasPrice: 1000000000,
-      gasLimit: 20000000,
-    });
+//  await exec.send({
+//       from: dfsWeb3.account,
+//       gasPrice: 1000000000,
+//       gasLimit: 20000000,
+//     });
 
   }
 test()
