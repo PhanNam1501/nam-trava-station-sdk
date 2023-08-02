@@ -21,6 +21,7 @@ export const actionAddresses = {
     TravaBorrow: "0x31Da583b0F55E988790F6602Cb88aeE62AbACd5A",
     TravaRepay: "0x4e3c45BA8838b33F6eD7345Bd2DB824b589C4CEf",
     TravaWithdraw: "0x92f93da4C46c66ea8C154a93c49663Cf83990244",
+    TravaStakingStake: "0x3937F711DB4ec9A0E3E416054cbBc98184127ebF",
   },
 };
 
