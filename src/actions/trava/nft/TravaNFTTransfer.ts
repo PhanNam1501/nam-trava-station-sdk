@@ -8,12 +8,12 @@ import { EthAddress, uint256 } from '../../../types';
  * @category Trava
  */
 export class TravaNFTTransfer extends Action {
-  constructor(from: EthAddress, to: EthAddress, tokenId: uint256) {
+  constructor(from: EthAddress, to: EthAddress, tokenId: uint256, nftCore: EthAddress) {
     super(
       "TravaNFTTransfer",
       getAddr('TravaNFTTransfer'),
-      ["address", "address", "uint256"],
-      [from, to, tokenId]
+      ["address", "address", "uint256", "address"],
+      [from, to, tokenId, nftCore]
     );
   }
 }

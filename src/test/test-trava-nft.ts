@@ -47,7 +47,14 @@ async function test() {
     new dfs.actions.trava.TravaNFTTransfer(
       accountAddr,
       "0x0d7a757EECAbfe8daa06E9ab8F106911d846D8a1",
-      "4210" // *** ID của NFT muốn transfer
+      "4210", // *** ID của NFT muốn transfer
+      "0xd2Eca5a421db7c2e2aC88Da684214B52915A66b3" // Address của nft core
+    ),
+    new dfs.actions.trava.TravaNFTTransfer(
+      accountAddr,
+      "0x0d7a757EECAbfe8daa06E9ab8F106911d846D8a1",
+      "91", // *** ID của Collection muốn transfer
+      "0x5D996eC57756cEB127a4eD3302d7F28F52FDEbb1" // Address của nft collection
     ),
     new dfs.actions.trava.TravaNFTCreateSale(
       "5332", // *** ID của NFT muốn bán
@@ -62,7 +69,7 @@ async function test() {
 
   await exec.send({
     from: dfsWeb3.account,
-    gasPrice: 1000000000,
+    gasPrice: 10000000000,
     gasLimit: 20000000,
   }).then(function(receipt: any){
     console.log('Transaction Hash:', receipt.transactionHash);
