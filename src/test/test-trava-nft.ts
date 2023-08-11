@@ -65,7 +65,23 @@ async function test() {
       accountAddr
     ),
   ]);
-  const exec: any = await dfsWeb3.executeRecipe(r);
+
+  const r1 = new dfs.Recipe("Sale",[
+  new dfs.actions.trava.TravaNFTCreateSale(
+    "4776", // *** ID của NFT muốn bán
+    new Dec("10")
+      .mul(10 ** 18)
+      .floor()
+      .toString(),
+    accountAddr),
+    new dfs.actions.trava.TravaNFTCancelSale(
+    "4776",
+    "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43")
+  
+  ]
+  )
+  //const exec: any = await dfsWeb3.executeRecipe(r);
+  const exec: any = await dfsWeb3.executeRecipe(r1);
 
   await exec.send({
     from: dfsWeb3.account,
