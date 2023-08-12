@@ -3,6 +3,22 @@
     testingMode: boolean,
     [key: string]: any,
   };
+
+  type SwapInfoIfInput ={
+    amountIn : string,
+    amountOut : string,
+    minimumReceive: string,
+    priceImpact: number,
+    path :EthAddress[]
+  }
+
+  type SwapInfoIfOutput ={
+    amountIn : string,
+    amountOut : string,
+    maximumSold: string,
+    priceImpact: number,
+    path :EthAddress[]
+  }
   
   type Network = {
     chainId: number;
@@ -33,6 +49,6 @@
   type int24 = string;
   
   export {
-     Config, Network, Networks, EthAddress, bytes32, bytes, uint256, uint160, uint32, uint128, uint80, uint64, uint24, uint16, uint8, int256, int24,
+     Config, Network, Networks, EthAddress, bytes32, bytes, uint256, uint160, uint32, uint128, uint80, uint64, uint24, uint16, uint8, int256, int24,SwapInfoIfInput,SwapInfoIfOutput
   };
   
