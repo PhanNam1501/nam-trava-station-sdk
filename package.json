@@ -1,13 +1,13 @@
 {
-  "name": "@trava-station/sdk",
+  "name": "trava-station-sdk",
   "version": "1.0.39",
   "description": "",
   "main": "./umd/index.js",
   "module": "./esm/src/index.js",
   "types": "./esm/src/index.d.ts",
   "scripts": {
-    "build:esm": "rm -rf esm && tsc -b",
-    "build:umd": "rm -rf umd && webpack --config=webpack.umd.js",
+    "build:esm": "tsc -b",
+    "build:umd": "webpack --config=webpack.umd.js",
     "build": "npm run lint && npm run build:umd && npm run build:esm"
   },
   "author": "Trava Station",
