@@ -43,6 +43,7 @@ async function test() {
       "0",
       "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43"
     ),
+  
     // new dfs.actions.trava.TravaAuctionMakeBid(
     //   "53",
     //   new Dec("3000")
@@ -51,6 +52,7 @@ async function test() {
     //     .toString(),
     //   "0x826D824BE55A403859A6Db67D5EeC5aC386307fE"
     // ),
+  
   ]);
   // console.log(encodeForDsProxyCall(r));
 
