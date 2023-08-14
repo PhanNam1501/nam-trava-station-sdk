@@ -14,6 +14,7 @@ import type {
   import * as actions from './actions';
 //   import * as triggers from './triggers';
 //   import * as utils from './utils';
+import { SwapUtil } from './SwapUtils';
   
   import {
     configure, getNetworkData, CONFIG, NETWORKS as networks,
@@ -33,7 +34,7 @@ import type {
   
   export {
     Action, Recipe, DfsWeb3,
-    actions,
+    actions,SwapUtil,
     configure, getNetworkData, CONFIG, networks,
     actionAddresses, actionAddressesAllChains, getAddr,
   };
@@ -52,5 +53,7 @@ import type {
     actionAddresses,
     actionAddressesAllChains,
     getAddr,
+    SwapUtil
+
   };
   
