@@ -1,10 +1,9 @@
 import { EthAddress, SwapInfoIfInput,SwapInfoIfOutput, uint256 } from "./types"
-import { AbiItem,StateMutabilityType,AbiType } from "web3-utils";
 import RouterAbi from "./abis/Swap/PancakeSwapRouter.json";
 import FactoryAbi from "./abis/Swap/PancakeSwapFactory.json";
 import PairAbi from "./abis/Swap/PancakeSwapPair.json";
-import Web3 from "web3";
 import Dec from "decimal.js";
+import { JsonRpcProvider,Contract,InterfaceAbi,ZeroAddress } from "ethers";
 
 
 export const PancakeSwapV2Address = {
@@ -85,61 +84,61 @@ const BscMainnetTokens = {
     },
   };
 
-  const RouterAbiItem : AbiItem[] = RouterAbi.map(item => ({ ...item, stateMutability: item.stateMutability as StateMutabilityType, type: item.type as AbiType }));
-  const FactoryAbiItem :  AbiItem[] = FactoryAbi.map(item => ({ ...item, stateMutability: item.stateMutability as StateMutabilityType, type: item.type as AbiType }));
-  const PairAbiItem :  AbiItem[] = PairAbi.map(item => ({ ...item, stateMutability: item.stateMutability as StateMutabilityType, type: item.type as AbiType }));
+  const RouterAbiItem :InterfaceAbi = RouterAbi
+  const FactoryAbiItem : InterfaceAbi = FactoryAbi
+  const PairAbiItem :InterfaceAbi = PairAbi
 
 export class RouterContract{
-    contractUtil : any
-    constructor (web3:Web3,address:EthAddress)
+    contractUtil : Contract
+    constructor (web3:JsonRpcProvider,address:EthAddress)
     {
-        this.contractUtil = new web3.eth.Contract(RouterAbiItem,address);
+        this.contractUtil = new Contract(address,RouterAbiItem,web3);
     }
     async getAmountOut(amount : uint256, path :EthAddress[]) : Promise<any>{
-        const res = await this.contractUtil.methods.getAmountsOut(amount,path).call();
-        return res;
+        const res = await this.contractUtil.getAmountsOut(amount,path)
+        return res.map((el : string) => BigInt(el).toString());
     }
     async getAmountIn(amount : uint256, path :EthAddress[]) : Promise<any>{
-      const res = await this.contractUtil.methods.getAmountsIn(amount,path).call();
-      return res;
+      const res = await this.contractUtil.getAmountsIn(amount,path)
+      return res.map((el : string) =>BigInt(el).toString());
   }
 
 }
 export class FactoryContract{
-    contractUtil : any
-    constructor (web3:Web3,address:EthAddress)
+    contractUtil : Contract
+    constructor (web3:JsonRpcProvider,address:EthAddress)
     {
-        this.contractUtil = new web3.eth.Contract(FactoryAbiItem,address);
+        this.contractUtil = new Contract(address,FactoryAbiItem,web3);
     }
     async getPair (addr1:EthAddress,addr2:EthAddress) :Promise<any>
     {
-        const res = await this.contractUtil.methods.getPair(addr1,addr2).call()
+        const res = await this.contractUtil.getPair(addr1,addr2)
         return res
     }
 }
 
 export class PairContract{
-    contractUtil : any
-    constructor (web3:Web3,address:EthAddress)
+    contractUtil : Contract
+    constructor (web3:JsonRpcProvider,address:EthAddress)
     {
-        this.contractUtil = new web3.eth.Contract(PairAbiItem,address);
+        this.contractUtil = new Contract(address,PairAbiItem,web3);
     }
     async getReserves () : Promise<any>{
-        const res = await this.contractUtil.methods.getReserves().call();
-        return res;
+        const res = await this.contractUtil.getReserves();
+        return res.map((el :any) =>new Dec(String(el)).toFixed());
     }
 }
 export class SwapUtil {
-    web3: Web3;
+    web3: JsonRpcProvider;
     FactoryContract : FactoryContract;
     RouterContract  : RouterContract
-    constructor(_web3:Web3){
+    constructor(_web3:JsonRpcProvider){
         this.web3 = _web3
         this.FactoryContract = new FactoryContract(_web3,PancakeSwapV2Address.FactoryAddress)
         this.RouterContract = new RouterContract(_web3,PancakeSwapV2Address.RouterAddress)
     }
     isZeroAddress(address : EthAddress) : boolean{
-        return address.toLowerCase() === this.web3.utils.toChecksumAddress('0x0000000000000000000000000000000000000000')
+        return address.toLowerCase() === ZeroAddress
     }
     async getInformationFromInput (
         fromToken : EthAddress,
@@ -165,13 +164,13 @@ export class SwapUtil {
             const reserve  = await pairContract.getReserves();
             if(Number(fromToken)<Number(toToken))
             {
-             fromR = reserve[0]
-             toR = reserve[1]
+             fromR = String(reserve[0])
+             toR = String(reserve[1])
             }
             else 
             {
-             fromR = reserve[1]
-             toR =reserve[0]
+             fromR = String(reserve[1])
+             toR =String(reserve[0])
             }
             let tmpImpact = new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR)));
             console.log("tmpImpact is",tmpImpact)
@@ -180,7 +179,7 @@ export class SwapUtil {
               needUseMultihop = true;
             else 
             {
-            amountOut = amountOutFromContract[1];
+            amountOut = String(amountOutFromContract[1]);
             minimumReceive = (new Dec(amountOutFromContract[1]).mul(1-slippage).floor());
             impact = Number(tmpImpact)
             }
@@ -201,7 +200,6 @@ export class SwapUtil {
             {
              fromR = reserve[1]
             }
-          
             amountOut = amountOutFromContract[2];
             minimumReceive = (new Dec(amountOutFromContract[2]).mul(1-slippage).floor())
             impact = Number(new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR))))
@@ -272,8 +270,10 @@ export class SwapUtil {
       }
       if((this.isZeroAddress(pairAddr) || needUseMultihop ) && (fromToken!=PancakeSwapV2Address.WBNBAdress && toToken != PancakeSwapV2Address.WBNBAdress))
       {
+        
           path = [fromToken,PancakeSwapV2Address.WBNBAdress,toToken]
           let amountInFromContract  = await this.RouterContract.getAmountIn(amountTo,path)
+          
           let pair1Addr = await this.FactoryContract.getPair(PancakeSwapV2Address.WBNBAdress,toToken)
           let pair1Contract = new PairContract(this.web3,pair1Addr)
           const reserve  = await pair1Contract.getReserves();
@@ -289,6 +289,7 @@ export class SwapUtil {
            fromR = reserve[1]
            toR = reserve [0]
           }
+         
          
           amountIn = amountInFromContract[0];
           maximumSold = (new Dec(amountInFromContract[0]).mul(1+slippage).floor().toFixed())

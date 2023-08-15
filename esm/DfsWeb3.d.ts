@@ -1,18 +1,17 @@
-import Web3 from 'web3';
 import { Action } from './Action';
 import { Recipe } from './Recipe';
 import { EthAddress } from './types';
+import { JsonRpcProvider } from 'ethers';
 /**
  *
  * @category Base Classes
  */
 export declare class DfsWeb3 {
-    web3: Web3;
+    web3: JsonRpcProvider;
     accountReady: boolean;
     account?: EthAddress;
     proxy?: EthAddress;
-    constructor(web3: Web3);
-    onAccountsChanged(_arg0: string, _onAccountsChanged: any): void;
+    constructor(web3: JsonRpcProvider);
     prepareAccount(): Promise<void>;
     createSmartWallet(): Promise<any>;
     /**

@@ -5,7 +5,7 @@ module.exports = {
   entry: "./src/index.ts",
   target: "node",
   output: {
-    library: "@trava-station/sdk",
+    library: "trava-station-sdk",
     libraryTarget: "umd",
     path: path.resolve(__dirname, "umd"),
     filename: "index.js",
@@ -37,7 +37,6 @@ module.exports = {
   },
   externals: [
     "decimal.js",
-    "web3",
     "web3-eth-abi",
     "web3-utils",
     "@zennomi/tokens",
@@ -46,6 +45,7 @@ module.exports = {
     "@types/web3-eth-abi",
     "@types/web3",
     "axios",
+    "ethers",
   ],
   resolve: {
     extensions: [".ts", ".js"],

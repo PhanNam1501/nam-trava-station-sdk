@@ -1,6 +1,5 @@
 import AbiCoder from 'web3-eth-abi';
 import { keccak256, padLeft, toHex } from 'web3-utils';
-import { CONFIG } from './config';
 import ActionAbi from './abis/Action.json';
 import {EthAddress } from './types';
 

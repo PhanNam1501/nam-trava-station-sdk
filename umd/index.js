@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("web3-eth-abi"), require("web3-utils"), require("@zennomi/tokens"), require("decimal.js"));
+		module.exports = factory(require("web3-eth-abi"), require("web3-utils"), require("@zennomi/tokens"), require("decimal.js"), require("ethers"));
 	else if(typeof define === 'function' && define.amd)
-		define(["web3-eth-abi", "web3-utils", "@zennomi/tokens", "decimal.js"], factory);
+		define(["web3-eth-abi", "web3-utils", "@zennomi/tokens", "decimal.js", "ethers"], factory);
 	else if(typeof exports === 'object')
-		exports["@trava-station/sdk"] = factory(require("web3-eth-abi"), require("web3-utils"), require("@zennomi/tokens"), require("decimal.js"));
+		exports["trava-station-sdk"] = factory(require("web3-eth-abi"), require("web3-utils"), require("@zennomi/tokens"), require("decimal.js"), require("ethers"));
 	else
-		root["@trava-station/sdk"] = factory(root["web3-eth-abi"], root["web3-utils"], root["@zennomi/tokens"], root["decimal.js"]);
-})(this, (__WEBPACK_EXTERNAL_MODULE__2__, __WEBPACK_EXTERNAL_MODULE__3__, __WEBPACK_EXTERNAL_MODULE__6__, __WEBPACK_EXTERNAL_MODULE__9__) => {
+		root["trava-station-sdk"] = factory(root["web3-eth-abi"], root["web3-utils"], root["@zennomi/tokens"], root["decimal.js"], root["ethers"]);
+})(this, (__WEBPACK_EXTERNAL_MODULE__2__, __WEBPACK_EXTERNAL_MODULE__3__, __WEBPACK_EXTERNAL_MODULE__6__, __WEBPACK_EXTERNAL_MODULE__9__, __WEBPACK_EXTERNAL_MODULE__16__) => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ([
@@ -578,8 +578,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _abis_Erc20_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(16);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_6__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -591,7 +591,9 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
+
 // reports error but it works ?????
+
 /**
  *
  * @category Base Classes
@@ -602,32 +604,20 @@ class DfsWeb3 {
     _defineProperty(this, "accountReady", void 0);
     _defineProperty(this, "account", void 0);
     _defineProperty(this, "proxy", void 0);
-    // const networkId = await web3.eth.net.getId();
-    // if (networkId !== 1) throw new Error('Supplied web3 is not on Mainnet');
     this.web3 = web3;
     this.accountReady = false;
-    //this.prepareAccount();
-    /* if (this.web3.currentProvider!.on) {
-      this.web3.currentProvider!.on('accountsChanged', this.onAccountsChanged);
-    } */
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onAccountsChanged(_arg0, _onAccountsChanged) {
-    throw new Error('Method not implemented.');
+    this.prepareAccount();
   }
   prepareAccount() {
     var _this = this;
     return _asyncToGenerator(function* () {
-      var accounts = yield _this.web3.eth.getAccounts();
+      var accounts = yield _this.web3.listAccounts();
+      console.log(accounts);
       if (!accounts || !accounts.length) throw new Error('Supplied web3 has no account');
-      _this.account = accounts[0];
-      var DFSPRoxyRegistyAbiItems = _abis_DFSProxyRegistry_json__WEBPACK_IMPORTED_MODULE_0__.map(item => _objectSpread(_objectSpread({}, item), {}, {
-        stateMutability: item.stateMutability,
-        type: item.type
-      }));
-      var dfsRegistry = new _this.web3.eth.Contract(DFSPRoxyRegistyAbiItems, (0,_addresses__WEBPACK_IMPORTED_MODULE_4__.getAddr)('DFSProxyRegistry', _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG.chainId));
-      var proxies = yield dfsRegistry.methods.proxies(_this.account).call();
+      _this.account = accounts[0].address;
+      var DFSPRoxyRegistyAbiItems = _abis_DFSProxyRegistry_json__WEBPACK_IMPORTED_MODULE_0__;
+      var dfsRegistryContract = new ethers__WEBPACK_IMPORTED_MODULE_6__.Contract((0,_addresses__WEBPACK_IMPORTED_MODULE_4__.getAddr)('DFSProxyRegistry', _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG.chainId), DFSPRoxyRegistyAbiItems, _this.web3);
+      var proxies = yield dfsRegistryContract.proxies(_this.account);
       if (proxies) {
         _this.proxy = proxies;
       }
@@ -640,12 +630,9 @@ class DfsWeb3 {
       if (!_this2.accountReady) yield _this2.prepareAccount();
       if (!_this2.account) throw new Error('DfsWeb3 has not been instantiated properly');
       if (_this2.proxy) throw new Error('Account already has DsProxy');
-      var ProxyRegistryAbiItems = _abis_ProxyRegistry_json__WEBPACK_IMPORTED_MODULE_1__.map(item => _objectSpread(_objectSpread({}, item), {}, {
-        stateMutability: item.stateMutability,
-        type: item.type
-      }));
-      var makerRegistry = new _this2.web3.eth.Contract(ProxyRegistryAbiItems, (0,_addresses__WEBPACK_IMPORTED_MODULE_4__.getAddr)('ProxyRegistry', _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG.chainId));
-      return makerRegistry.methods.build();
+      var ProxyRegistryAbiItems = _abis_ProxyRegistry_json__WEBPACK_IMPORTED_MODULE_1__;
+      var registryContract = new ethers__WEBPACK_IMPORTED_MODULE_6__.Contract((0,_addresses__WEBPACK_IMPORTED_MODULE_4__.getAddr)('ProxyRegistry', _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG.chainId), ProxyRegistryAbiItems, _this2.web3);
+      return yield registryContract.build();
     })();
   }
 
@@ -662,14 +649,11 @@ class DfsWeb3 {
       yield Promise.all(approvals.map( /*#__PURE__*/function () {
         var _ref = _asyncToGenerator(function* (a) {
           if (a.owner.toLowerCase() === _this3.proxy.toLowerCase()) {
-            var Erc20AbiItems = _abis_Erc20_json__WEBPACK_IMPORTED_MODULE_3__.map(item => _objectSpread(_objectSpread({}, item), {}, {
-              stateMutability: item.stateMutability,
-              type: item.type
-            }));
-            var tokenContract = new _this3.web3.eth.Contract(Erc20AbiItems, a.asset);
-            var allowance = yield tokenContract.methods.allowance(_this3.account, _this3.proxy).call();
+            var Erc20AbiItems = _abis_Erc20_json__WEBPACK_IMPORTED_MODULE_3__;
+            var tokenContract = new ethers__WEBPACK_IMPORTED_MODULE_6__.Contract(a.assetErc20Abi, Erc20AbiItems, _this3.web3);
+            var allowance = yield tokenContract.allowance(_this3.account, _this3.proxy);
             if (parseFloat(allowance.toString()) === 0) {
-              transactions.push(tokenContract.methods.approve(_this3.proxy, '-1'));
+              transactions.push(tokenContract.approve(_this3.proxy, '-1'));
             }
           }
         });
@@ -685,12 +669,9 @@ class DfsWeb3 {
     return _asyncToGenerator(function* () {
       if (!_this4.accountReady) yield _this4.prepareAccount();
       if (!_this4.proxy) throw new Error('Account does not have a Smart Wallet. Run createSmartWallet first');
-      var DsProxyAbiItems = _abis_DsProxy_json__WEBPACK_IMPORTED_MODULE_2__.map(item => _objectSpread(_objectSpread({}, item), {}, {
-        stateMutability: item.stateMutability,
-        type: item.type
-      }));
-      var proxyContract = new _this4.web3.eth.Contract(DsProxyAbiItems, _this4.proxy);
-      return proxyContract.methods['execute(address,bytes)'](address, params);
+      var DsProxyAbiItems = _abis_DsProxy_json__WEBPACK_IMPORTED_MODULE_2__;
+      var proxyContract = new ethers__WEBPACK_IMPORTED_MODULE_6__.Contract(_this4.proxy, DsProxyAbiItems, _this4.web3);
+      return proxyContract.execute(address, params);
     })();
   }
 
@@ -743,6 +724,12 @@ module.exports = JSON.parse('[{"constant":true,"inputs":[],"name":"name","output
 
 /***/ }),
 /* 16 */
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__16__;
+
+/***/ }),
+/* 17 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -751,16 +738,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   pancake: () => (/* reexport module object */ _pancakeswap__WEBPACK_IMPORTED_MODULE_1__),
 /* harmony export */   trava: () => (/* reexport module object */ _trava__WEBPACK_IMPORTED_MODULE_0__)
 /* harmony export */ });
-/* harmony import */ var _trava__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17);
-/* harmony import */ var _pancakeswap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(29);
-/* harmony import */ var _basic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31);
+/* harmony import */ var _trava__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
+/* harmony import */ var _pancakeswap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(30);
+/* harmony import */ var _basic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(32);
 
 
 
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -777,17 +764,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaSupply: () => (/* reexport safe */ _market_TravaSupply__WEBPACK_IMPORTED_MODULE_7__.TravaSupply),
 /* harmony export */   TravaWithdraw: () => (/* reexport safe */ _market_TravaWithdraw__WEBPACK_IMPORTED_MODULE_8__.TravaWithdraw)
 /* harmony export */ });
-/* harmony import */ var _TravaAuctionCreateAuction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
-/* harmony import */ var _TravaAuctionMakeBid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19);
-/* harmony import */ var _nft_marketplace_TravaNFTBuy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(20);
-/* harmony import */ var _nft_TravaNFTTransfer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
-/* harmony import */ var _nft_marketplace_TravaNFTCreateSale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(22);
-/* harmony import */ var _market_TravaBorrow__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(23);
-/* harmony import */ var _market_TravaRepay__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(24);
-/* harmony import */ var _market_TravaSupply__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(25);
-/* harmony import */ var _market_TravaWithdraw__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(26);
-/* harmony import */ var _staking_TravaStakingStake__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(27);
-/* harmony import */ var _nft_marketplace_TravaNFTCancelSale__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(28);
+/* harmony import */ var _TravaAuctionCreateAuction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
+/* harmony import */ var _TravaAuctionMakeBid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
+/* harmony import */ var _nft_marketplace_TravaNFTBuy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21);
+/* harmony import */ var _nft_TravaNFTTransfer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(22);
+/* harmony import */ var _nft_marketplace_TravaNFTCreateSale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23);
+/* harmony import */ var _market_TravaBorrow__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(24);
+/* harmony import */ var _market_TravaRepay__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(25);
+/* harmony import */ var _market_TravaSupply__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(26);
+/* harmony import */ var _market_TravaWithdraw__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(27);
+/* harmony import */ var _staking_TravaStakingStake__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(28);
+/* harmony import */ var _nft_marketplace_TravaNFTCancelSale__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(29);
 
 
 
@@ -801,7 +788,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -825,7 +812,7 @@ class TravaAuctionCreateAuction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Act
 }
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -849,7 +836,7 @@ class TravaAuctionMakeBid extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -872,7 +859,7 @@ class TravaNFTBuy extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -895,7 +882,7 @@ class TravaNFTTransfer extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -918,7 +905,7 @@ class TravaNFTCreateSale extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -942,7 +929,7 @@ class TravaBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -966,7 +953,7 @@ class TravaRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -990,7 +977,7 @@ class TravaSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1013,7 +1000,7 @@ class TravaWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1036,7 +1023,7 @@ class TravaStakingStake extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1059,18 +1046,18 @@ class TravaNFTCancelSale extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PancakeSwapV2: () => (/* reexport safe */ _PancakeSwapV2__WEBPACK_IMPORTED_MODULE_0__.PancakeSwapV2)
 /* harmony export */ });
-/* harmony import */ var _PancakeSwapV2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(30);
+/* harmony import */ var _PancakeSwapV2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1094,7 +1081,7 @@ class PancakeSwapV2 extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1106,12 +1093,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   UnwrapBnbAction: () => (/* reexport safe */ _UnwrapBNB__WEBPACK_IMPORTED_MODULE_4__.UnwrapBnbAction),
 /* harmony export */   WrapBnbAction: () => (/* reexport safe */ _WrapBNB__WEBPACK_IMPORTED_MODULE_3__.WrapBnbAction)
 /* harmony export */ });
-/* harmony import */ var _PullToken__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(32);
-/* harmony import */ var _SendToken__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(34);
-/* harmony import */ var _SendTokenAndUnwrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(35);
-/* harmony import */ var _WrapBNB__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(36);
-/* harmony import */ var _UnwrapBNB__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(37);
-/* harmony import */ var _SendTokens__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(38);
+/* harmony import */ var _PullToken__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
+/* harmony import */ var _SendToken__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(35);
+/* harmony import */ var _SendTokenAndUnwrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(36);
+/* harmony import */ var _WrapBNB__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(37);
+/* harmony import */ var _UnwrapBNB__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(38);
+/* harmony import */ var _SendTokens__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(39);
 
 
 
@@ -1120,14 +1107,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PullTokenAction: () => (/* binding */ PullTokenAction)
 /* harmony export */ });
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(34);
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
@@ -1157,7 +1144,7 @@ class PullTokenAction extends _Action__WEBPACK_IMPORTED_MODULE_1__.Action {
 }
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1200,7 +1187,7 @@ var parsePriceFromContract = (price, from, to) => new (decimal_js__WEBPACK_IMPOR
 var formatPriceForContract = (price, from, to) => new (decimal_js__WEBPACK_IMPORTED_MODULE_0___default())(price).mul(10 ** (0,_zennomi_tokens__WEBPACK_IMPORTED_MODULE_1__.getAssetInfo)(to).decimals).mul(10 ** (18 - (0,_zennomi_tokens__WEBPACK_IMPORTED_MODULE_1__.getAssetInfo)(from).decimals)).floor().toString();
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1208,7 +1195,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SendTokenAction: () => (/* binding */ SendTokenAction)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(33);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(34);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
 
@@ -1231,7 +1218,7 @@ class SendTokenAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1239,7 +1226,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SendTokenAndUnwrapAction: () => (/* binding */ SendTokenAndUnwrapAction)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(33);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(34);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
 
@@ -1262,7 +1249,7 @@ class SendTokenAndUnwrapAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Acti
 }
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1296,7 +1283,7 @@ class WrapBnbAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1304,7 +1291,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   UnwrapBnbAction: () => (/* binding */ UnwrapBnbAction)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(33);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(34);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
 
@@ -1326,7 +1313,7 @@ class UnwrapBnbAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1364,7 +1351,7 @@ class SendTokensAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1375,18 +1362,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   RouterContract: () => (/* binding */ RouterContract),
 /* harmony export */   SwapUtil: () => (/* binding */ SwapUtil)
 /* harmony export */ });
-/* harmony import */ var _abis_Swap_PancakeSwapRouter_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40);
-/* harmony import */ var _abis_Swap_PancakeSwapFactory_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(41);
-/* harmony import */ var _abis_Swap_PancakeSwapPair_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(42);
+/* harmony import */ var _abis_Swap_PancakeSwapRouter_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41);
+/* harmony import */ var _abis_Swap_PancakeSwapFactory_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(42);
+/* harmony import */ var _abis_Swap_PancakeSwapPair_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43);
 /* harmony import */ var decimal_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
 /* harmony import */ var decimal_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(decimal_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_4__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -1509,47 +1497,38 @@ var BscMainnetTokens = {
     }
   }
 };
-var RouterAbiItem = _abis_Swap_PancakeSwapRouter_json__WEBPACK_IMPORTED_MODULE_0__.map(item => _objectSpread(_objectSpread({}, item), {}, {
-  stateMutability: item.stateMutability,
-  type: item.type
-}));
-var FactoryAbiItem = _abis_Swap_PancakeSwapFactory_json__WEBPACK_IMPORTED_MODULE_1__.map(item => _objectSpread(_objectSpread({}, item), {}, {
-  stateMutability: item.stateMutability,
-  type: item.type
-}));
-var PairAbiItem = _abis_Swap_PancakeSwapPair_json__WEBPACK_IMPORTED_MODULE_2__.map(item => _objectSpread(_objectSpread({}, item), {}, {
-  stateMutability: item.stateMutability,
-  type: item.type
-}));
+var RouterAbiItem = _abis_Swap_PancakeSwapRouter_json__WEBPACK_IMPORTED_MODULE_0__;
+var FactoryAbiItem = _abis_Swap_PancakeSwapFactory_json__WEBPACK_IMPORTED_MODULE_1__;
+var PairAbiItem = _abis_Swap_PancakeSwapPair_json__WEBPACK_IMPORTED_MODULE_2__;
 class RouterContract {
   constructor(web3, address) {
     _defineProperty(this, "contractUtil", void 0);
-    this.contractUtil = new web3.eth.Contract(RouterAbiItem, address);
+    this.contractUtil = new ethers__WEBPACK_IMPORTED_MODULE_4__.Contract(address, RouterAbiItem, web3);
   }
   getAmountOut(amount, path) {
     var _this = this;
     return _asyncToGenerator(function* () {
-      var res = yield _this.contractUtil.methods.getAmountsOut(amount, path).call();
-      return res;
+      var res = yield _this.contractUtil.getAmountsOut(amount, path);
+      return res.map(el => BigInt(el).toString());
     })();
   }
   getAmountIn(amount, path) {
     var _this2 = this;
     return _asyncToGenerator(function* () {
-      var res = yield _this2.contractUtil.methods.getAmountsIn(amount, path).call();
-      return res;
+      var res = yield _this2.contractUtil.getAmountsIn(amount, path);
+      return res.map(el => BigInt(el).toString());
     })();
   }
 }
 class FactoryContract {
   constructor(web3, address) {
     _defineProperty(this, "contractUtil", void 0);
-    this.contractUtil = new web3.eth.Contract(FactoryAbiItem, address);
+    this.contractUtil = new ethers__WEBPACK_IMPORTED_MODULE_4__.Contract(address, FactoryAbiItem, web3);
   }
   getPair(addr1, addr2) {
     var _this3 = this;
     return _asyncToGenerator(function* () {
-      var res = yield _this3.contractUtil.methods.getPair(addr1, addr2).call();
+      var res = yield _this3.contractUtil.getPair(addr1, addr2);
       return res;
     })();
   }
@@ -1557,13 +1536,13 @@ class FactoryContract {
 class PairContract {
   constructor(web3, address) {
     _defineProperty(this, "contractUtil", void 0);
-    this.contractUtil = new web3.eth.Contract(PairAbiItem, address);
+    this.contractUtil = new ethers__WEBPACK_IMPORTED_MODULE_4__.Contract(address, PairAbiItem, web3);
   }
   getReserves() {
     var _this4 = this;
     return _asyncToGenerator(function* () {
-      var res = yield _this4.contractUtil.methods.getReserves().call();
-      return res;
+      var res = yield _this4.contractUtil.getReserves();
+      return res.map(el => new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(String(el)).toFixed());
     })();
   }
 }
@@ -1577,7 +1556,7 @@ class SwapUtil {
     this.RouterContract = new RouterContract(_web3, PancakeSwapV2Address.RouterAddress);
   }
   isZeroAddress(address) {
-    return address.toLowerCase() === this.web3.utils.toChecksumAddress('0x0000000000000000000000000000000000000000');
+    return address.toLowerCase() === ethers__WEBPACK_IMPORTED_MODULE_4__.ZeroAddress;
   }
   getInformationFromInput(fromToken, toToken, slippage, amountFrom) {
     var _this5 = this;
@@ -1597,17 +1576,17 @@ class SwapUtil {
         var pairContract = new PairContract(_this5.web3, _pairAddr);
         var reserve = yield pairContract.getReserves();
         if (Number(fromToken) < Number(toToken)) {
-          fromR = reserve[0];
-          toR = reserve[1];
+          fromR = String(reserve[0]);
+          toR = String(reserve[1]);
         } else {
-          fromR = reserve[1];
-          toR = reserve[0];
+          fromR = String(reserve[1]);
+          toR = String(reserve[0]);
         }
         var tmpImpact = new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(amountFrom).div(new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(amountFrom).add(new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(fromR)));
         console.log("tmpImpact is", tmpImpact);
         //impact =new Dec(amountOut).div(new Dec(toR).sub(new Dec(amountOut)))
         if (Number(tmpImpact) > 5 / 100) needUseMultihop = true;else {
-          amountOut = amountOutFromContract[1];
+          amountOut = String(amountOutFromContract[1]);
           minimumReceive = new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(amountOutFromContract[1]).mul(1 - slippage).floor();
           impact = Number(tmpImpact);
         }
@@ -1716,19 +1695,19 @@ class SwapUtil {
 }
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ ((module) => {
 
 module.exports = JSON.parse('[{"inputs":[{"internalType":"address","name":"_factory","type":"address"},{"internalType":"address","name":"_WETH","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"WETH","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"amountADesired","type":"uint256"},{"internalType":"uint256","name":"amountBDesired","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"addLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"},{"internalType":"uint256","name":"liquidity","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amountTokenDesired","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"addLiquidityETH","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"},{"internalType":"uint256","name":"liquidity","type":"uint256"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountIn","outputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountOut","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"}],"name":"getAmountsIn","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"}],"name":"getAmountsOut","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"reserveA","type":"uint256"},{"internalType":"uint256","name":"reserveB","type":"uint256"}],"name":"quote","outputs":[{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidityETH","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidityETHSupportingFeeOnTransferTokens","outputs":[{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityETHWithPermit","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityETHWithPermitSupportingFeeOnTransferTokens","outputs":[{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityWithPermit","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapETHForExactTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETH","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETHSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"amountInMax","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapTokensForExactETH","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"amountInMax","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapTokensForExactTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]');
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ ((module) => {
 
 module.exports = JSON.parse('[{"inputs":[{"internalType":"address","name":"_feeToSetter","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"token0","type":"address"},{"indexed":true,"internalType":"address","name":"token1","type":"address"},{"indexed":false,"internalType":"address","name":"pair","type":"address"},{"indexed":false,"internalType":"uint256","name":"","type":"uint256"}],"name":"PairCreated","type":"event"},{"constant":true,"inputs":[],"name":"INIT_CODE_PAIR_HASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allPairs","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"allPairsLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"}],"name":"createPair","outputs":[{"internalType":"address","name":"pair","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"feeTo","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"feeToSetter","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"getPair","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_feeTo","type":"address"}],"name":"setFeeTo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_feeToSetter","type":"address"}],"name":"setFeeToSetter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]');
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ ((module) => {
 
 module.exports = JSON.parse('[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount0","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1","type":"uint256"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"Burn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount0","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount0In","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1In","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount0Out","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1Out","type":"uint256"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"Swap","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint112","name":"reserve0","type":"uint112"},{"indexed":false,"internalType":"uint112","name":"reserve1","type":"uint112"}],"name":"Sync","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"DOMAIN_SEPARATOR","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MINIMUM_LIQUIDITY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"PERMIT_TYPEHASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"burn","outputs":[{"internalType":"uint256","name":"amount0","type":"uint256"},{"internalType":"uint256","name":"amount1","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getReserves","outputs":[{"internalType":"uint112","name":"_reserve0","type":"uint112"},{"internalType":"uint112","name":"_reserve1","type":"uint112"},{"internalType":"uint32","name":"_blockTimestampLast","type":"uint32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_token0","type":"address"},{"internalType":"address","name":"_token1","type":"address"}],"name":"initialize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"kLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"mint","outputs":[{"internalType":"uint256","name":"liquidity","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"nonces","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"permit","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"price0CumulativeLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"price1CumulativeLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"skim","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount0Out","type":"uint256"},{"internalType":"uint256","name":"amount1Out","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"swap","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sync","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"token0","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"token1","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]');
@@ -1824,8 +1803,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _Recipe__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
 /* harmony import */ var _DfsWeb3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(16);
-/* harmony import */ var _SwapUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17);
+/* harmony import */ var _SwapUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(40);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7);
 /* Export types here */

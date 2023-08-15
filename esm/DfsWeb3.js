@@ -13,6 +13,7 @@ import DsProxyAbi from './abis/DsProxy.json';
 import Erc20Abi from './abis/Erc20.json';
 import { getAddr } from './addresses';
 import { CONFIG } from './config';
+import { Contract } from 'ethers';
 // reports error but it works ?????
 /**
  *
@@ -20,28 +21,20 @@ import { CONFIG } from './config';
  */
 export class DfsWeb3 {
     constructor(web3) {
-        // const networkId = await web3.eth.net.getId();
-        // if (networkId !== 1) throw new Error('Supplied web3 is not on Mainnet');
         this.web3 = web3;
         this.accountReady = false;
-        //this.prepareAccount();
-        /* if (this.web3.currentProvider!.on) {
-          this.web3.currentProvider!.on('accountsChanged', this.onAccountsChanged);
-        } */
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onAccountsChanged(_arg0, _onAccountsChanged) {
-        throw new Error('Method not implemented.');
+        this.prepareAccount();
     }
     prepareAccount() {
         return __awaiter(this, void 0, void 0, function* () {
-            const accounts = yield this.web3.eth.getAccounts();
+            const accounts = yield this.web3.listAccounts();
+            console.log(accounts);
             if (!accounts || !accounts.length)
                 throw new Error('Supplied web3 has no account');
-            this.account = accounts[0];
-            const DFSPRoxyRegistyAbiItems = DFSPRoxyRegistyAbi.map(item => (Object.assign(Object.assign({}, item), { stateMutability: item.stateMutability, type: item.type })));
-            const dfsRegistry = new this.web3.eth.Contract(DFSPRoxyRegistyAbiItems, getAddr('DFSProxyRegistry', CONFIG.chainId));
-            const proxies = yield dfsRegistry.methods.proxies(this.account).call();
+            this.account = accounts[0].address;
+            const DFSPRoxyRegistyAbiItems = DFSPRoxyRegistyAbi;
+            const dfsRegistryContract = new Contract(getAddr('DFSProxyRegistry', CONFIG.chainId), DFSPRoxyRegistyAbiItems, this.web3);
+            const proxies = yield dfsRegistryContract.proxies(this.account);
             if (proxies) {
                 this.proxy = proxies;
             }
@@ -56,9 +49,9 @@ export class DfsWeb3 {
                 throw new Error('DfsWeb3 has not been instantiated properly');
             if (this.proxy)
                 throw new Error('Account already has DsProxy');
-            const ProxyRegistryAbiItems = ProxyRegistryAbi.map(item => (Object.assign(Object.assign({}, item), { stateMutability: item.stateMutability, type: item.type })));
-            const makerRegistry = new this.web3.eth.Contract(ProxyRegistryAbiItems, getAddr('ProxyRegistry', CONFIG.chainId));
-            return makerRegistry.methods.build();
+            const ProxyRegistryAbiItems = ProxyRegistryAbi;
+            const registryContract = new Contract(getAddr('ProxyRegistry', CONFIG.chainId), ProxyRegistryAbiItems, this.web3);
+            return yield registryContract.build();
         });
     }
     /**
@@ -74,11 +67,11 @@ export class DfsWeb3 {
             const approvals = yield action.getAssetsToApprove();
             yield Promise.all(approvals.map((a) => __awaiter(this, void 0, void 0, function* () {
                 if (a.owner.toLowerCase() === this.proxy.toLowerCase()) {
-                    const Erc20AbiItems = Erc20Abi.map(item => (Object.assign(Object.assign({}, item), { stateMutability: item.stateMutability, type: item.type })));
-                    const tokenContract = new this.web3.eth.Contract(Erc20AbiItems, a.asset);
-                    const allowance = yield tokenContract.methods.allowance(this.account, this.proxy).call();
+                    const Erc20AbiItems = Erc20Abi;
+                    const tokenContract = new Contract(a.assetErc20Abi, Erc20AbiItems, this.web3);
+                    const allowance = yield tokenContract.allowance(this.account, this.proxy);
                     if (parseFloat(allowance.toString()) === 0) {
-                        transactions.push(tokenContract.methods.approve(this.proxy, '-1'));
+                        transactions.push(tokenContract.approve(this.proxy, '-1'));
                     }
                 }
             })));
@@ -91,9 +84,9 @@ export class DfsWeb3 {
                 yield this.prepareAccount();
             if (!this.proxy)
                 throw new Error('Account does not have a Smart Wallet. Run createSmartWallet first');
-            const DsProxyAbiItems = DsProxyAbi.map(item => (Object.assign(Object.assign({}, item), { stateMutability: item.stateMutability, type: item.type })));
-            const proxyContract = new this.web3.eth.Contract(DsProxyAbiItems, this.proxy);
-            return proxyContract.methods['execute(address,bytes)'](address, params);
+            const DsProxyAbiItems = DsProxyAbi;
+            const proxyContract = new Contract(this.proxy, DsProxyAbiItems, this.web3);
+            return proxyContract.execute(address, params);
         });
     }
     /**
