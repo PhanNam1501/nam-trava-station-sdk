@@ -611,10 +611,10 @@ class DfsWeb3 {
   prepareAccount() {
     var _this = this;
     return _asyncToGenerator(function* () {
-      var accounts = yield _this.web3.listAccounts();
-      console.log(accounts);
-      if (!accounts || !accounts.length) throw new Error('Supplied web3 has no account');
-      _this.account = accounts[0].address;
+      // const accounts = await this.web3.getAddress()
+      // console.log(accounts);
+      // if (!accounts || !accounts.length) throw new Error('Supplied web3 has no account');
+      _this.account = yield _this.web3.getAddress();
       var DFSPRoxyRegistyAbiItems = _abis_DFSProxyRegistry_json__WEBPACK_IMPORTED_MODULE_0__;
       var dfsRegistryContract = new ethers__WEBPACK_IMPORTED_MODULE_6__.Contract((0,_addresses__WEBPACK_IMPORTED_MODULE_4__.getAddr)('DFSProxyRegistry', _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG.chainId), DFSPRoxyRegistyAbiItems, _this.web3);
       var proxies = yield dfsRegistryContract.proxies(_this.account);

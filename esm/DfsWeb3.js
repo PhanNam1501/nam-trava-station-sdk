@@ -27,11 +27,10 @@ export class DfsWeb3 {
     }
     prepareAccount() {
         return __awaiter(this, void 0, void 0, function* () {
-            const accounts = yield this.web3.listAccounts();
-            console.log(accounts);
-            if (!accounts || !accounts.length)
-                throw new Error('Supplied web3 has no account');
-            this.account = accounts[0].address;
+            // const accounts = await this.web3.getAddress()
+            // console.log(accounts);
+            // if (!accounts || !accounts.length) throw new Error('Supplied web3 has no account');
+            this.account = yield this.web3.getAddress();
             const DFSPRoxyRegistyAbiItems = DFSPRoxyRegistyAbi;
             const dfsRegistryContract = new Contract(getAddr('DFSProxyRegistry', CONFIG.chainId), DFSPRoxyRegistyAbiItems, this.web3);
             const proxies = yield dfsRegistryContract.proxies(this.account);
