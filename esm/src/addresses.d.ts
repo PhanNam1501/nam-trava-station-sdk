@@ -1,5 +1,5 @@
 import { EthAddress } from "./types";
-export declare const actionAddresses: {
+export declare const listAddr: {
     [x: number]: {
         TravaAuctionCreateAuction: string;
         TravaAuctionMakeBid: string;
@@ -21,6 +21,23 @@ export declare const actionAddresses: {
         TravaWithdraw: string;
         TravaStakingStake: string;
         TravaNFTCancelSale: string;
+        RouterAddress: string;
+        FactoryAddress: string;
+        WBNBAdress: string;
+        USDCAddress: string;
+        USDTAddress: string;
+        DAIAddress: string;
+        ETHAddress: string;
+        BUSDAddress: string;
+        XVSAddress: string;
+        DOTAddress: string;
+        AAVEAddress: string;
+        ADAAddress: string;
+        CAKEAddress: string;
+        XRPAddress: string;
+        DOGEAddress: string;
+        TRAVAAddress: string;
+        TODAddress: string;
     };
 };
 /**

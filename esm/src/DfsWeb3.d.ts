@@ -1,17 +1,17 @@
 import { Action } from './Action';
 import { Recipe } from './Recipe';
 import { EthAddress } from './types';
-import { JsonRpcSigner } from 'ethers';
+import { JsonRpcProvider } from 'ethers';
 /**
  *
  * @category Base Classes
  */
 export declare class DfsWeb3 {
-    web3: JsonRpcSigner;
+    web3: JsonRpcProvider;
     accountReady: boolean;
     account?: EthAddress;
     proxy?: EthAddress;
-    constructor(web3: JsonRpcSigner);
+    constructor(web3: JsonRpcProvider);
     prepareAccount(): Promise<void>;
     createSmartWallet(): Promise<any>;
     /**

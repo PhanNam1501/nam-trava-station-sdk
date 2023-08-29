@@ -430,20 +430,21 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__6__;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   actionAddresses: () => (/* binding */ actionAddresses),
-/* harmony export */   getAddr: () => (/* binding */ getAddr)
+/* harmony export */   getAddr: () => (/* binding */ getAddr),
+/* harmony export */   listAddr: () => (/* binding */ listAddr)
 /* harmony export */ });
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
 
-var actionAddresses = {
+var listAddr = {
   [_config__WEBPACK_IMPORTED_MODULE_0__.NETWORKS.bsc.chainId]: {
+    //Action address
     TravaAuctionCreateAuction: "0xadD3754309A7bC4c74E58A9AAb8463a591047123",
     TravaAuctionMakeBid: "0xD291b6b7658a016de5a95240F36eea4fb481d228",
     RecipeExecutor: "0xc3A1B8ec1F11A02410e0e1Ef0b34BCD2fBeDC54a",
     DFSProxyRegistry: "0xddAe0A61D662711EC279686dE17EfB1F57253ab5",
     TravaNFTTransfer: "0x7D2AA60a1741a52F66f81EA2acb30e5BF3761A55",
-    TravaNFTBuy: "0x735da379efd7Fd1A5AA8D464B0184b6160D44360",
-    TravaNFTCreateSale: "0xe1109AeC64861a6E47C899b395dD9C1edec60Fac",
+    TravaNFTBuy: "0x5b7a5b6c5685Ec9601e744127A3113d528c7e121",
+    TravaNFTCreateSale: "0x8cbdF86a8c1D69500183D4a6200f2c789b1020a5",
     PancakeSwapV2: "0x4503A6D439349B09043d6B33f269005eC9BC065d",
     PullToken: "0x6b0FF321C1B4C27174443E06dfAAdBf5783d74d0",
     WrapBnb: "0xd20B3B10521410bF2C9F165638aC30660C426e3F",
@@ -456,7 +457,26 @@ var actionAddresses = {
     TravaRepay: "0x4e3c45BA8838b33F6eD7345Bd2DB824b589C4CEf",
     TravaWithdraw: "0x92f93da4C46c66ea8C154a93c49663Cf83990244",
     TravaStakingStake: "0x3937F711DB4ec9A0E3E416054cbBc98184127ebF",
-    TravaNFTCancelSale: "0xfe9Fc8EDeD36BEe1965b800c5728979fD80eB993"
+    TravaNFTCancelSale: "0xfe9Fc8EDeD36BEe1965b800c5728979fD80eB993",
+    // pancake swap
+    RouterAddress: "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3",
+    FactoryAddress: "0xB7926C0430Afb07AA7DEfDE6DA862aE0Bde767bc",
+    // token address
+    WBNBAdress: "0x910CB19698Eac48a6AB7Ccc9542B756f2Bdd67C6",
+    USDCAddress: "0x345dCB7B8F17D342A3639d1D9bD649189f2D0162",
+    USDTAddress: "0x780397E17dBF97259F3b697Ca3a394fa483A1419",
+    DAIAddress: "0xFCcB260C9074faBB69702C1972aa747aAC6e654F",
+    ETHAddress: "0xBE2a3B225aDA4142C42A36CfbD5b04F28D261CA8",
+    BUSDAddress: "0x2CEC38C779d6b962bc877777b6f70937d21c9c38",
+    XVSAddress: "0x45A80229E1FeAb61E360EfA9005B5AB46821Cee7",
+    DOTAddress: "0x0642E40c9a12fc3C7a3BFfA47e9E41391cC49Dbe",
+    AAVEAddress: "0x3cb48b8e2Ef30a8aD5130ad49b8A6044eA80d1f2",
+    ADAAddress: "0x5303A4c5c5D79d086C77E05338fDf6548A1EE09C",
+    CAKEAddress: "0x97f04BF5FcFF000e2bF72884E6C33a261F8E8ba9",
+    XRPAddress: "0xb868DC5a295489088d3373Ee8d365CeF45c38684",
+    DOGEAddress: "0xe4C7E2f0D19335f9B85e4732eb05eFced2f8f2fb",
+    TRAVAAddress: "0xE1F005623934D3D8C724EC68Cc9bFD95498D4435",
+    TODAddress: "0xFca3Cf5E82F595D4f20C24D007ae5E2e94fab2f0"
   }
 };
 
@@ -468,7 +488,7 @@ var actionAddresses = {
 var getAddr = function getAddr(name) {
   var chainId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _config__WEBPACK_IMPORTED_MODULE_0__.CONFIG.chainId;
   var _chainId = typeof chainId === "undefined" ? _config__WEBPACK_IMPORTED_MODULE_0__.CONFIG.chainId : chainId;
-  var actions = actionAddresses[_chainId];
+  var actions = listAddr[_chainId];
 
   // skip this check if we're in testing mode
   if (!_config__WEBPACK_IMPORTED_MODULE_0__.CONFIG.testingMode) {
@@ -485,6 +505,7 @@ var getAddr = function getAddr(name) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   CONFIG: () => (/* binding */ CONFIG),
+/* harmony export */   MAX_UINT256: () => (/* binding */ MAX_UINT256),
 /* harmony export */   NETWORKS: () => (/* binding */ NETWORKS),
 /* harmony export */   configure: () => (/* binding */ configure),
 /* harmony export */   getNetworkData: () => (/* binding */ getNetworkData)
@@ -551,6 +572,7 @@ var configure = config => {
     if (key === 'chainId') (0,_zennomi_tokens__WEBPACK_IMPORTED_MODULE_1__.set)('network', config[key]);
   });
 };
+var MAX_UINT256 = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
 
 /***/ }),
 /* 9 */
@@ -575,7 +597,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _abis_DFSProxyRegistry_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _abis_ProxyRegistry_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
 /* harmony import */ var _abis_DsProxy_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
-/* harmony import */ var _abis_Erc20_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
+/* harmony import */ var _abis_Bep20_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
 /* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(16);
@@ -611,10 +633,10 @@ class DfsWeb3 {
   prepareAccount() {
     var _this = this;
     return _asyncToGenerator(function* () {
-      // const accounts = await this.web3.getAddress()
-      // console.log(accounts);
-      // if (!accounts || !accounts.length) throw new Error('Supplied web3 has no account');
-      _this.account = yield _this.web3.getAddress();
+      var accounts = yield _this.web3.listAccounts();
+      console.log(accounts);
+      if (!accounts || !accounts.length) throw new Error('Supplied web3 has no account');
+      _this.account = accounts[0].address;
       var DFSPRoxyRegistyAbiItems = _abis_DFSProxyRegistry_json__WEBPACK_IMPORTED_MODULE_0__;
       var dfsRegistryContract = new ethers__WEBPACK_IMPORTED_MODULE_6__.Contract((0,_addresses__WEBPACK_IMPORTED_MODULE_4__.getAddr)('DFSProxyRegistry', _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG.chainId), DFSPRoxyRegistyAbiItems, _this.web3);
       var proxies = yield dfsRegistryContract.proxies(_this.account);
@@ -649,7 +671,7 @@ class DfsWeb3 {
       yield Promise.all(approvals.map( /*#__PURE__*/function () {
         var _ref = _asyncToGenerator(function* (a) {
           if (a.owner.toLowerCase() === _this3.proxy.toLowerCase()) {
-            var Erc20AbiItems = _abis_Erc20_json__WEBPACK_IMPORTED_MODULE_3__;
+            var Erc20AbiItems = _abis_Bep20_json__WEBPACK_IMPORTED_MODULE_3__;
             var tokenContract = new ethers__WEBPACK_IMPORTED_MODULE_6__.Contract(a.assetErc20Abi, Erc20AbiItems, _this3.web3);
             var allowance = yield tokenContract.allowance(_this3.account, _this3.proxy);
             if (parseFloat(allowance.toString()) === 0) {
@@ -720,7 +742,7 @@ module.exports = JSON.parse('[{"constant":false,"inputs":[{"name":"owner_","type
 /* 15 */
 /***/ ((module) => {
 
-module.exports = JSON.parse('[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}]');
+module.exports = JSON.parse('[{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}]');
 
 /***/ }),
 /* 16 */
@@ -1369,6 +1391,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var decimal_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(decimal_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16);
 /* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1379,10 +1402,11 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
+
 var PancakeSwapV2Address = {
-  RouterAddress: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
-  FactoryAddress: "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73",
-  WBNBAdress: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
+  RouterAddress: (0,_addresses__WEBPACK_IMPORTED_MODULE_5__.getAddr)("RouterAddress"),
+  FactoryAddress: (0,_addresses__WEBPACK_IMPORTED_MODULE_5__.getAddr)("FactoryAddress"),
+  WBNBAdress: (0,_addresses__WEBPACK_IMPORTED_MODULE_5__.getAddr)("WBNBAdress")
 };
 var BscMainnetTokens = {
   "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3": {
@@ -1542,6 +1566,7 @@ class PairContract {
     var _this4 = this;
     return _asyncToGenerator(function* () {
       var res = yield _this4.contractUtil.getReserves();
+      console.log("Res reserves", res);
       return res.map(el => new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(String(el)).toFixed());
     })();
   }
@@ -1571,10 +1596,10 @@ class SwapUtil {
         var fromR;
         var toR;
         path = [fromToken, toToken];
-        var amountOutFromContract = yield _this5.RouterContract.getAmountOut(amountFrom, path);
         var _pairAddr = yield _this5.FactoryContract.getPair(fromToken, toToken);
         var pairContract = new PairContract(_this5.web3, _pairAddr);
         var reserve = yield pairContract.getReserves();
+        var amountOutFromContract = yield _this5.RouterContract.getAmountOut(amountFrom, path);
         if (Number(fromToken) < Number(toToken)) {
           fromR = String(reserve[0]);
           toR = String(reserve[1]);
@@ -1607,13 +1632,15 @@ class SwapUtil {
         minimumReceive = new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(_amountOutFromContract[2]).mul(1 - slippage).floor();
         impact = Number(new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(amountFrom).div(new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(amountFrom).add(new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(_fromR))));
       }
-      console.log({
-        amountIn: amountFrom,
-        amountOut: amountOut,
-        minimumReceive: String(minimumReceive),
-        priceImpact: impact,
-        path: path
-      });
+      // console.log(
+      //   {
+      //     amountIn : amountFrom,
+      //     amountOut : amountOut,
+      //     minimumReceive: String(minimumReceive),
+      //     priceImpact: impact,
+      //     path : path
+      // }
+      // )
       return {
         amountIn: amountFrom,
         amountOut: amountOut,
@@ -1650,7 +1677,7 @@ class SwapUtil {
         //let tmpImpact = new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR)));
 
         var tmpImpact = new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(amountTo).div(new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(toR).sub(new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(amountTo)));
-        console.log("tmpImpact is", tmpImpact);
+        // console.log("tmpImpact is",tmpImpact)
         if (Number(tmpImpact) > 5 / 100) needUseMultihop = true;else {
           amountIn = amountInFromContract[0];
           maximumSold = new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(amountInFromContract[0]).mul(1 + slippage).floor().toFixed();
@@ -1676,13 +1703,15 @@ class SwapUtil {
         maximumSold = new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(_amountInFromContract[0]).mul(1 + slippage).floor().toFixed();
         impact = Number(new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(amountTo).div(new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(_toR).sub(new (decimal_js__WEBPACK_IMPORTED_MODULE_3___default())(amountTo))));
       }
-      console.log({
-        amountIn: amountIn,
-        amountOut: amountTo,
-        maximumSold: String(maximumSold),
-        priceImpact: impact,
-        path: path
-      });
+      // console.log(
+      //   {
+      //     amountIn : amountIn,
+      //     amountOut :amountTo,
+      //     maximumSold: String(maximumSold),
+      //     priceImpact: impact,
+      //     path : path
+      // }
+      // )
       return {
         amountIn: amountIn,
         amountOut: amountTo,
@@ -1791,13 +1820,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DfsWeb3: () => (/* reexport safe */ _DfsWeb3__WEBPACK_IMPORTED_MODULE_2__.DfsWeb3),
 /* harmony export */   Recipe: () => (/* reexport safe */ _Recipe__WEBPACK_IMPORTED_MODULE_1__.Recipe),
 /* harmony export */   SwapUtil: () => (/* reexport safe */ _SwapUtils__WEBPACK_IMPORTED_MODULE_4__.SwapUtil),
-/* harmony export */   actionAddresses: () => (/* binding */ actionAddresses),
-/* harmony export */   actionAddressesAllChains: () => (/* binding */ actionAddressesAllChains),
 /* harmony export */   actions: () => (/* reexport module object */ _actions__WEBPACK_IMPORTED_MODULE_3__),
 /* harmony export */   configure: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_5__.configure),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   getAddr: () => (/* reexport safe */ _addresses__WEBPACK_IMPORTED_MODULE_6__.getAddr),
 /* harmony export */   getNetworkData: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_5__.getNetworkData),
+/* harmony export */   listAddresses: () => (/* binding */ listAddresses),
+/* harmony export */   listAddressesAllChains: () => (/* binding */ listAddressesAllChains),
 /* harmony export */   networks: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_5__.NETWORKS)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
@@ -1819,10 +1848,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var actionAddressesAllChains = _addresses__WEBPACK_IMPORTED_MODULE_6__.actionAddresses;
-var actionAddresses = function actionAddresses() {
+var listAddressesAllChains = _addresses__WEBPACK_IMPORTED_MODULE_6__.listAddr;
+var listAddresses = function listAddresses() {
   var chainId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  return _addresses__WEBPACK_IMPORTED_MODULE_6__.actionAddresses[chainId || _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG.chainId];
+  return _addresses__WEBPACK_IMPORTED_MODULE_6__.listAddr[chainId || _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG.chainId];
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1836,8 +1865,8 @@ var actionAddresses = function actionAddresses() {
   getNetworkData: _config__WEBPACK_IMPORTED_MODULE_5__.getNetworkData,
   CONFIG: _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG,
   networks: _config__WEBPACK_IMPORTED_MODULE_5__.NETWORKS,
-  actionAddresses,
-  actionAddressesAllChains,
+  listAddresses,
+  listAddressesAllChains,
   getAddr: _addresses__WEBPACK_IMPORTED_MODULE_6__.getAddr,
   SwapUtil: _SwapUtils__WEBPACK_IMPORTED_MODULE_4__.SwapUtil
 });

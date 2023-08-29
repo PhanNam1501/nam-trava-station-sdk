@@ -7,7 +7,7 @@ import { SwapUtil } from './SwapUtils';
 import { configure, getNetworkData, CONFIG, NETWORKS as networks } from './config';
 import { getAddr } from './addresses';
 export type { EthAddress, Config, Network, Networks, bytes32, bytes, uint256, uint160, uint128, uint80, uint64, uint24, uint16, uint8, int24, };
-declare const actionAddressesAllChains: {
+declare const listAddressesAllChains: {
     [x: number]: {
         TravaAuctionCreateAuction: string;
         TravaAuctionMakeBid: string;
@@ -29,9 +29,26 @@ declare const actionAddressesAllChains: {
         TravaWithdraw: string;
         TravaStakingStake: string;
         TravaNFTCancelSale: string;
+        RouterAddress: string;
+        FactoryAddress: string;
+        WBNBAdress: string;
+        USDCAddress: string;
+        USDTAddress: string;
+        DAIAddress: string;
+        ETHAddress: string;
+        BUSDAddress: string;
+        XVSAddress: string;
+        DOTAddress: string;
+        AAVEAddress: string;
+        ADAAddress: string;
+        CAKEAddress: string;
+        XRPAddress: string;
+        DOGEAddress: string;
+        TRAVAAddress: string;
+        TODAddress: string;
     };
 };
-declare const actionAddresses: (chainId?: null) => {
+declare const listAddresses: (chainId?: null) => {
     TravaAuctionCreateAuction: string;
     TravaAuctionMakeBid: string;
     RecipeExecutor: string;
@@ -52,8 +69,25 @@ declare const actionAddresses: (chainId?: null) => {
     TravaWithdraw: string;
     TravaStakingStake: string;
     TravaNFTCancelSale: string;
+    RouterAddress: string;
+    FactoryAddress: string;
+    WBNBAdress: string;
+    USDCAddress: string;
+    USDTAddress: string;
+    DAIAddress: string;
+    ETHAddress: string;
+    BUSDAddress: string;
+    XVSAddress: string;
+    DOTAddress: string;
+    AAVEAddress: string;
+    ADAAddress: string;
+    CAKEAddress: string;
+    XRPAddress: string;
+    DOGEAddress: string;
+    TRAVAAddress: string;
+    TODAddress: string;
 };
-export { Action, Recipe, DfsWeb3, actions, SwapUtil, configure, getNetworkData, CONFIG, networks, actionAddresses, actionAddressesAllChains, getAddr, };
+export { Action, Recipe, DfsWeb3, actions, SwapUtil, configure, getNetworkData, CONFIG, networks, listAddresses, listAddressesAllChains, getAddr, };
 declare const _default: {
     Action: typeof Action;
     Recipe: typeof Recipe;
@@ -63,7 +97,7 @@ declare const _default: {
     getNetworkData: (chainId: number) => Network;
     CONFIG: Config;
     networks: Networks;
-    actionAddresses: (chainId?: null) => {
+    listAddresses: (chainId?: null) => {
         TravaAuctionCreateAuction: string;
         TravaAuctionMakeBid: string;
         RecipeExecutor: string;
@@ -84,8 +118,25 @@ declare const _default: {
         TravaWithdraw: string;
         TravaStakingStake: string;
         TravaNFTCancelSale: string;
+        RouterAddress: string;
+        FactoryAddress: string;
+        WBNBAdress: string;
+        USDCAddress: string;
+        USDTAddress: string;
+        DAIAddress: string;
+        ETHAddress: string;
+        BUSDAddress: string;
+        XVSAddress: string;
+        DOTAddress: string;
+        AAVEAddress: string;
+        ADAAddress: string;
+        CAKEAddress: string;
+        XRPAddress: string;
+        DOGEAddress: string;
+        TRAVAAddress: string;
+        TODAddress: string;
     };
-    actionAddressesAllChains: {
+    listAddressesAllChains: {
         [x: number]: {
             TravaAuctionCreateAuction: string;
             TravaAuctionMakeBid: string;
@@ -107,6 +158,23 @@ declare const _default: {
             TravaWithdraw: string;
             TravaStakingStake: string;
             TravaNFTCancelSale: string;
+            RouterAddress: string;
+            FactoryAddress: string;
+            WBNBAdress: string;
+            USDCAddress: string;
+            USDTAddress: string;
+            DAIAddress: string;
+            ETHAddress: string;
+            BUSDAddress: string;
+            XVSAddress: string;
+            DOTAddress: string;
+            AAVEAddress: string;
+            ADAAddress: string;
+            CAKEAddress: string;
+            XRPAddress: string;
+            DOGEAddress: string;
+            TRAVAAddress: string;
+            TODAddress: string;
         };
     };
     getAddr: (name: string, chainId?: number) => string;

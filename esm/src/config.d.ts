@@ -18,3 +18,4 @@ export declare const getNetworkData: (chainId: number) => Network;
  * @param config
  */
 export declare const configure: (config: Config) => void;
+export declare const MAX_UINT256: string;

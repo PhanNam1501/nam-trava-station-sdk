@@ -2,7 +2,7 @@
 import DFSPRoxyRegistyAbi from './abis/DFSProxyRegistry.json';
 import ProxyRegistryAbi from './abis/ProxyRegistry.json';
 import DsProxyAbi from './abis/DsProxy.json';
-import Erc20Abi from './abis/Erc20.json';
+import Erc20Abi from './abis/Bep20.json';
 import { getAddr } from './addresses';
 import { Action } from './Action';
 import { Recipe } from './Recipe';

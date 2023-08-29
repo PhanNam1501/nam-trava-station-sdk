@@ -4,12 +4,13 @@ import FactoryAbi from "./abis/Swap/PancakeSwapFactory.json";
 import PairAbi from "./abis/Swap/PancakeSwapPair.json";
 import Dec from "decimal.js";
 import { JsonRpcProvider,Contract,InterfaceAbi,ZeroAddress } from "ethers";
+import { getAddr } from "./addresses";
 
 
 export const PancakeSwapV2Address = {
-    RouterAddress:"0x10ED43C718714eb63d5aA57B78B54704E256024E",
-    FactoryAddress:"0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73",
-    WBNBAdress:"0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
+    RouterAddress: getAddr("RouterAddress"),
+    FactoryAddress: getAddr("FactoryAddress"),
+    WBNBAdress: getAddr("WBNBAdress")
 }
 
 const BscMainnetTokens = {
@@ -125,6 +126,7 @@ export class PairContract{
     }
     async getReserves () : Promise<any>{
         const res = await this.contractUtil.getReserves();
+        console.log("Res reserves", res)
         return res.map((el :any) =>new Dec(String(el)).toFixed());
     }
 }
@@ -134,7 +136,7 @@ export class SwapUtil {
     RouterContract  : RouterContract
     constructor(_web3:JsonRpcProvider){
         this.web3 = _web3
-        this.FactoryContract = new FactoryContract(_web3,PancakeSwapV2Address.FactoryAddress)
+        this.FactoryContract = new FactoryContract(_web3, PancakeSwapV2Address.FactoryAddress)
         this.RouterContract = new RouterContract(_web3,PancakeSwapV2Address.RouterAddress)
     }
     isZeroAddress(address : EthAddress) : boolean{
@@ -158,10 +160,10 @@ export class SwapUtil {
             let fromR;
             let toR;
             path = [fromToken,toToken]
-            let amountOutFromContract  = await this.RouterContract.getAmountOut(amountFrom,path)
             let pairAddr = await this.FactoryContract.getPair(fromToken,toToken)
             let pairContract = new PairContract(this.web3,pairAddr)
             const reserve  = await pairContract.getReserves();
+            let amountOutFromContract  = await this.RouterContract.getAmountOut(amountFrom,path)
             if(Number(fromToken)<Number(toToken))
             {
              fromR = String(reserve[0])
@@ -205,15 +207,15 @@ export class SwapUtil {
             impact = Number(new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR))))
 
         }  
-        console.log(
-          {
-            amountIn : amountFrom,
-            amountOut : amountOut,
-            minimumReceive: String(minimumReceive),
-            priceImpact: impact,
-            path : path
-        }
-        )
+        // console.log(
+        //   {
+        //     amountIn : amountFrom,
+        //     amountOut : amountOut,
+        //     minimumReceive: String(minimumReceive),
+        //     priceImpact: impact,
+        //     path : path
+        // }
+        // )
         return {
             amountIn : amountFrom,
             amountOut : amountOut,
@@ -258,7 +260,7 @@ export class SwapUtil {
           //let tmpImpact = new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR)));
           
           let tmpImpact =new Dec(amountTo).div(new Dec(toR).sub(new Dec(amountTo)))
-          console.log("tmpImpact is",tmpImpact)
+          // console.log("tmpImpact is",tmpImpact)
           if(Number(tmpImpact) > 5/100)
             needUseMultihop = true;
           else 
@@ -296,15 +298,15 @@ export class SwapUtil {
           impact = Number(new Dec(amountTo).div(new Dec(toR).sub(new Dec(amountTo))))
 
       }  
-      console.log(
-        {
-          amountIn : amountIn,
-          amountOut :amountTo,
-          maximumSold: String(maximumSold),
-          priceImpact: impact,
-          path : path
-      }
-      )
+      // console.log(
+      //   {
+      //     amountIn : amountIn,
+      //     amountOut :amountTo,
+      //     maximumSold: String(maximumSold),
+      //     priceImpact: impact,
+      //     path : path
+      // }
+      // )
       return {
           amountIn : amountIn,
           amountOut : amountTo,

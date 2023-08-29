@@ -1,7 +1,7 @@
 import dfs from "../..";
 import Web3 from "web3";
 import Dec from "decimal.js";
-import ERC20ABi from "../../abis/Erc20.json";
+import ERC20ABi from "../../src/abis/Bep20.json";
 import { AbiItem, StateMutabilityType, AbiType } from "web3-utils";
 
 async function test() {

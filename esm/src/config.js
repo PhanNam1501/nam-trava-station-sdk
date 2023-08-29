@@ -51,3 +51,4 @@ export const configure = (config) => {
             dfsTokensSetConfig('network', config[key]);
     });
 };
+export const MAX_UINT256 = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";

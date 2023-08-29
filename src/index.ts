@@ -19,7 +19,7 @@ import { SwapUtil } from './SwapUtils';
   import {
     configure, getNetworkData, CONFIG, NETWORKS as networks,
   } from './config';
-  import { actionAddresses as _actionAddresses, getAddr } from './addresses';
+  import { listAddr as _listAddresses, getAddr } from './addresses';
   
   export type {
     EthAddress,
@@ -28,15 +28,15 @@ import { SwapUtil } from './SwapUtils';
     uint256, uint160, uint128, uint80, uint64, uint24, uint16, uint8, int24,
   };
   
-  const actionAddressesAllChains = _actionAddresses;
-  const actionAddresses = (chainId = null) => _actionAddresses[chainId || CONFIG.chainId];
+  const listAddressesAllChains = _listAddresses;
+  const listAddresses = (chainId = null) => _listAddresses[chainId || CONFIG.chainId];
   
   
   export {
     Action, Recipe, DfsWeb3,
     actions,SwapUtil,
     configure, getNetworkData, CONFIG, networks,
-    actionAddresses, actionAddressesAllChains, getAddr,
+    listAddresses, listAddressesAllChains, getAddr,
   };
   
   export default {
@@ -50,8 +50,8 @@ import { SwapUtil } from './SwapUtils';
     getNetworkData,
     CONFIG,
     networks,
-    actionAddresses,
-    actionAddressesAllChains,
+    listAddresses,
+    listAddressesAllChains,
     getAddr,
     SwapUtil
 

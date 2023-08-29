@@ -58,3 +58,5 @@ export const configure = (config : Config) => {
     if (key === 'chainId') dfsTokensSetConfig('network', config[key]);
   });
 };
+
+export const MAX_UINT256: string = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"

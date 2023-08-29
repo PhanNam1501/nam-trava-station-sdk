@@ -7,10 +7,10 @@ import * as actions from './actions';
 //   import * as utils from './utils';
 import { SwapUtil } from './SwapUtils';
 import { configure, getNetworkData, CONFIG, NETWORKS as networks, } from './config';
-import { actionAddresses as _actionAddresses, getAddr } from './addresses';
-const actionAddressesAllChains = _actionAddresses;
-const actionAddresses = (chainId = null) => _actionAddresses[chainId || CONFIG.chainId];
-export { Action, Recipe, DfsWeb3, actions, SwapUtil, configure, getNetworkData, CONFIG, networks, actionAddresses, actionAddressesAllChains, getAddr, };
+import { listAddr as _listAddresses, getAddr } from './addresses';
+const listAddressesAllChains = _listAddresses;
+const listAddresses = (chainId = null) => _listAddresses[chainId || CONFIG.chainId];
+export { Action, Recipe, DfsWeb3, actions, SwapUtil, configure, getNetworkData, CONFIG, networks, listAddresses, listAddressesAllChains, getAddr, };
 export default {
     Action,
     Recipe,
@@ -22,8 +22,8 @@ export default {
     getNetworkData,
     CONFIG,
     networks,
-    actionAddresses,
-    actionAddressesAllChains,
+    listAddresses,
+    listAddressesAllChains,
     getAddr,
     SwapUtil
 };
