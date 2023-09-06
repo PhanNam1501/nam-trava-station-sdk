@@ -175,7 +175,7 @@ export class SwapUtil {
              toR =String(reserve[0])
             }
             let tmpImpact = new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR)));
-            console.log("tmpImpact is",tmpImpact)
+            // console.log("tmpImpact is",tmpImpact)
             //impact =new Dec(amountOut).div(new Dec(toR).sub(new Dec(amountOut)))
             if(Number(tmpImpact) > 5/100)
               needUseMultihop = true;
@@ -207,15 +207,15 @@ export class SwapUtil {
             impact = Number(new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR))))
 
         }  
-        // console.log(
-        //   {
-        //     amountIn : amountFrom,
-        //     amountOut : amountOut,
-        //     minimumReceive: String(minimumReceive),
-        //     priceImpact: impact,
-        //     path : path
-        // }
-        // )
+        console.log(
+          {
+            amountIn : amountFrom,
+            amountOut : amountOut,
+            minimumReceive: String(minimumReceive),
+            priceImpact: impact,
+            path : path
+        }
+        )
         return {
             amountIn : amountFrom,
             amountOut : amountOut,
