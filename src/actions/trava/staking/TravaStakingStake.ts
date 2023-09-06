@@ -8,12 +8,12 @@ import { EthAddress, uint256 } from "../../../types";
  * @category Trava
  */
 export class TravaStakingStake extends Action {
-  constructor(token: EthAddress, onBehalfOf: EthAddress, amount: string) {
+  constructor(stakingPool: EthAddress, onBehalfOf: EthAddress, amount: string) {
     super(
       "TravaStakingStake",
       getAddr("TravaStakingStake"),
       ["address", "address", "uint256"],
-      [token, onBehalfOf, amount]
+      [stakingPool, onBehalfOf, amount]
     );
   }
 }

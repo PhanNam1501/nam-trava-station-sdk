@@ -22,7 +22,9 @@ export const listAddr = {
     TravaBorrow: "0x31Da583b0F55E988790F6602Cb88aeE62AbACd5A",
     TravaRepay: "0x4e3c45BA8838b33F6eD7345Bd2DB824b589C4CEf",
     TravaWithdraw: "0x92f93da4C46c66ea8C154a93c49663Cf83990244",
-    TravaStakingStake: "0x3937F711DB4ec9A0E3E416054cbBc98184127ebF",
+    TravaStakingStake: "0x21A6F731A297B54a94f2c3b20C3aF51937F83Afa",
+    TravaStakingRedeem:"0x80e34B896148F43176BC78Abc1854872E2a1A1BE",
+    TravaStakingClaimRewards:"0x79B6bB48d74a6E7266E09c9a81CeA359e02AB938",
     TravaNFTCancelSale: "0xfe9Fc8EDeD36BEe1965b800c5728979fD80eB993",
     // pancake swap
     RouterAddress:"0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3",
