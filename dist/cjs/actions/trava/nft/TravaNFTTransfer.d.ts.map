@@ -1,1 +1,0 @@
-{"version":3,"file":"TravaNFTTransfer.d.ts","sourceRoot":"","sources":["../../../../../src/actions/trava/nft/TravaNFTTransfer.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,iBAAiB,CAAC;AAEzC,OAAO,EAAE,UAAU,EAAE,OAAO,EAAE,MAAM,gBAAgB,CAAC;AAErD;;;;GAIG;AACH,qBAAa,gBAAiB,SAAQ,MAAM;gBAC9B,IAAI,EAAE,UAAU,EAAE,EAAE,EAAE,UAAU,EAAE,OAAO,EAAE,OAAO,EAAE,OAAO,EAAE,UAAU;CAQpF"}

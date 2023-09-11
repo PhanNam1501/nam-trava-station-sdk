@@ -13,8 +13,8 @@ Dec.set({
  *
  * @type {Networks}
  */
-export const NETWORKS : Networks = {
-  bsc: {
+export const NETWORKS: Networks = {
+  bscTestnet: {
     chainId: 97,
     chainName: 'Binance Smart Chain Testnet',
     blockExplorerUrls: ['https://testnet.bscscan.com/'],
@@ -27,8 +27,8 @@ export const NETWORKS : Networks = {
 /**
  *
  */
-export const CONFIG : Config = {
-  chainId: NETWORKS.bsc.chainId,
+export const CONFIG: Config = {
+  chainId: NETWORKS.bscTestnet.chainId,
   testingMode: false,
 };
 
@@ -36,8 +36,8 @@ export const CONFIG : Config = {
  *
  * @param chainId
  */
-export const getNetworkData = (chainId:number) : Network => {
-  const networkData : Network | undefined = Object.values(NETWORKS).find((network) => network.chainId === +chainId);
+export const getNetworkData = (chainId: number): Network => {
+  const networkData: Network | undefined = Object.values(NETWORKS).find((network) => network.chainId === +chainId);
 
   if (!networkData) throw new Error(`Cannot find network data for chainId: ${chainId}`);
 
@@ -48,10 +48,10 @@ export const getNetworkData = (chainId:number) : Network => {
  *
  * @param config
  */
-export const configure = (config : Config) => {
+export const configure = (config: Config) => {
   if (!config || typeof config !== 'object') throw new Error('Object expected');
 
-  const newKeys : Array<string> = Object.keys(config);
+  const newKeys: Array<string> = Object.keys(config);
 
   newKeys.forEach((key) => {
     CONFIG[key as keyof Config] = config[key as keyof Config];

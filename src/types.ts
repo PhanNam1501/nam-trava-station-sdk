@@ -30,7 +30,7 @@
   };
   
   type Networks = {
-    bsc:Network,
+    bscTestnet:Network,
   };
   
   type EthAddress = string;

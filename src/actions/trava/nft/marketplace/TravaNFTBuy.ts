@@ -8,12 +8,12 @@ import { EthAddress, uint256 } from '../../../../types';
  * @category Trava
  */
 export class TravaNFTBuy extends Action {
-  constructor(tokenId: uint256, from: EthAddress, to: EthAddress) {
+  constructor(tokenId: uint256, price: uint256, from: EthAddress, to: EthAddress) {
     super(
       "TravaNFTBuy",
       getAddr('TravaNFTBuy'),
-      ["uint256", "address", "address"],
-      [tokenId, from, to]
+      ["uint256", "uint256", "address", "address"],
+      [tokenId, price, from, to]
     );
   }
 }

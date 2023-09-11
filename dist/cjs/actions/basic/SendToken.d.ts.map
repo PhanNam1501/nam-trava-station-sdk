@@ -1,1 +1,0 @@
-{"version":3,"file":"SendToken.d.ts","sourceRoot":"","sources":["../../../../src/actions/basic/SendToken.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,cAAc,CAAC;AAGtC,OAAO,EAAE,UAAU,EAAE,OAAO,EAAE,MAAM,aAAa,CAAC;AAElD;;;;GAIG;AACH,qBAAa,eAAgB,SAAQ,MAAM;IACzC;;;;OAIG;gBACS,KAAK,EAAE,UAAU,EAAE,EAAE,EAAE,UAAU,EAAE,MAAM,EAAC,OAAO;CAa9D"}

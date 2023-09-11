@@ -1,1 +1,0 @@
-{"version":3,"file":"TravaNFTCancelSale.d.ts","sourceRoot":"","sources":["../../../../../../src/actions/trava/nft/marketplace/TravaNFTCancelSale.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,oBAAoB,CAAC;AAE5C,OAAO,EAAE,UAAU,EAAE,OAAO,EAAE,MAAM,mBAAmB,CAAC;AAExD;;;;GAIG;AACH,qBAAa,kBAAmB,SAAQ,MAAM;gBAChC,OAAO,EAAE,OAAO,EAAG,EAAE,EAAE,UAAU;CAQ9C"}

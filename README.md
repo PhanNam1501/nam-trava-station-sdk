@@ -111,11 +111,14 @@ const trava_withdraw_action = new actions.trava.TravaWithdraw(
 ```
 ## Trava NFT Marketplace
 ### Buy
+```
 const trava_nft_buy_action = new actions.trava.TravaNFTBuy(
     tokenId,
+    price,
     from, 
     to
 )
+```
 ### Create Sale
 ```
 const trava_nft_create_sale_action = new actions.trava.TravaNFTCreateSale(

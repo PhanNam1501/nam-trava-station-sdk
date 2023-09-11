@@ -34,7 +34,7 @@ import { SwapUtil } from './SwapUtils';
   
   export {
     Action, Recipe, DfsWeb3,
-    actions,SwapUtil,
+    actions, SwapUtil,
     configure, getNetworkData, CONFIG, networks,
     listAddresses, listAddressesAllChains, getAddr,
   };
