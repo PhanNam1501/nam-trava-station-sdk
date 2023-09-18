@@ -79,7 +79,8 @@ async function test() {
       // console.log("Is " + listToken[i].name + "-" + listToken[j].name + " zero ", swapUtil.isZeroAddress(pair))
       if(!swapUtil.isZeroAddress(pair)) {
         console.log("Test GetInformation")
-        info = await swapUtil.getInformationFromInput(listToken[i].address, listToken[j].address, 0.5 / 100, "10000000");
+        info = await swapUtil.getInformationFromInput(listToken[i].address, listToken[j].address, 0.5 / 100, "100000000000");
+        console.log(info)
       }
     }
   }

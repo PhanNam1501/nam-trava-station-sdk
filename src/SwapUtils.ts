@@ -126,7 +126,6 @@ export class PairContract{
     }
     async getReserves () : Promise<any>{
         const res = await this.contractUtil.getReserves();
-        console.log("Res reserves", res)
         return res.map((el :any) =>new Dec(String(el)).toFixed());
     }
 }
@@ -150,9 +149,9 @@ export class SwapUtil {
     ): Promise<SwapInfoIfInput>{
         
         let path : EthAddress[] =[];
-        let amountOut ;
+        let amountOut = "0" ;
         let impact : number =0;
-        let minimumReceive;
+        let minimumReceive = new Dec(0);
         let pairAddr = await this.FactoryContract.getPair(fromToken,toToken)
         let needUseMultihop = false;
         if(!this.isZeroAddress(pairAddr))
@@ -175,18 +174,15 @@ export class SwapUtil {
              toR =String(reserve[0])
             }
             let tmpImpact = new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR)));
-            // console.log("tmpImpact is",tmpImpact)
-            //impact =new Dec(amountOut).div(new Dec(toR).sub(new Dec(amountOut)))
             if(Number(tmpImpact) > 5/100)
-              needUseMultihop = true;
-            else 
             {
+              needUseMultihop = true;
+            }
             amountOut = String(amountOutFromContract[1]);
             minimumReceive = (new Dec(amountOutFromContract[1]).mul(1-slippage).floor());
             impact = Number(tmpImpact)
-            }
         }
-        if((this.isZeroAddress(pairAddr) || needUseMultihop ) && (fromToken!=PancakeSwapV2Address.WBNBAdress && toToken != PancakeSwapV2Address.WBNBAdress))
+        if((this.isZeroAddress(pairAddr) || needUseMultihop ) &&(fromToken!=PancakeSwapV2Address.WBNBAdress &&  toToken != PancakeSwapV2Address.WBNBAdress))
         {
             path = [fromToken,PancakeSwapV2Address.WBNBAdress,toToken]
             let amountOutFromContract  = await this.RouterContract.getAmountOut(amountFrom,path)
@@ -207,15 +203,6 @@ export class SwapUtil {
             impact = Number(new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR))))
 
         }  
-        console.log(
-          {
-            amountIn : amountFrom,
-            amountOut : amountOut,
-            minimumReceive: String(minimumReceive),
-            priceImpact: impact,
-            path : path
-        }
-        )
         return {
             amountIn : amountFrom,
             amountOut : amountOut,
@@ -233,9 +220,9 @@ export class SwapUtil {
   ): Promise<SwapInfoIfOutput>{
       
       let path : EthAddress[] =[];
-      let amountIn :string = "";
+      let amountIn :string = "0";
       let impact : number =0;
-      let maximumSold ;
+      let maximumSold ="0";
       let pairAddr = await this.FactoryContract.getPair(fromToken,toToken)
       let needUseMultihop = false;
       if(!this.isZeroAddress(pairAddr))
@@ -257,18 +244,13 @@ export class SwapUtil {
            fromR = reserve[1]
            toR =reserve[0]
           }
-          //let tmpImpact = new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR)));
           
           let tmpImpact =new Dec(amountTo).div(new Dec(toR).sub(new Dec(amountTo)))
-          // console.log("tmpImpact is",tmpImpact)
           if(Number(tmpImpact) > 5/100)
             needUseMultihop = true;
-          else 
-          {
           amountIn = amountInFromContract[0];
           maximumSold = new Dec(amountInFromContract[0]).mul(1+ slippage).floor().toFixed();
           impact = Number(tmpImpact)
-          }
       }
       if((this.isZeroAddress(pairAddr) || needUseMultihop ) && (fromToken!=PancakeSwapV2Address.WBNBAdress && toToken != PancakeSwapV2Address.WBNBAdress))
       {
@@ -298,15 +280,6 @@ export class SwapUtil {
           impact = Number(new Dec(amountTo).div(new Dec(toR).sub(new Dec(amountTo))))
 
       }  
-      // console.log(
-      //   {
-      //     amountIn : amountIn,
-      //     amountOut :amountTo,
-      //     maximumSold: String(maximumSold),
-      //     priceImpact: impact,
-      //     path : path
-      // }
-      // )
       return {
           amountIn : amountIn,
           amountOut : amountTo,
