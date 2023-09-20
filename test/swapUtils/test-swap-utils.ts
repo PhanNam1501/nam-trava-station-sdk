@@ -145,25 +145,24 @@ async function test() {
 
   let pair;
   let info;
-  for(let i = 0; i < 1; i++) {
-    for(let j = 1; j < listToken.length; j++) {
+  for (let i = 0; i < 1; i++) {
+    for (let j = 1; j < listToken.length; j++) {
       pair = await swapUtil.FactoryContract.getPair(listToken[i].address, listToken[j].address);
       console.log(listToken[i].name + "-" + listToken[j].name + " pair address is", pair)
       // console.log("Is " + listToken[i].name + "-" + listToken[j].name + " zero ", swapUtil.isZeroAddress(pair))
       // if(!swapUtil.isZeroAddress(pair)) {
-        console.log("Test GetInformation")
-        info = await swapUtil.getInformationFromInput(listToken[j].address.toLowerCase(), listToken[i].address.toLowerCase(), 0.5 / 100, BigInt(5 * 1e23).toString());
-        info = await swapUtil.getInformationFromInput(listToken[j].address.toLowerCase(), listToken[i].address.toLowerCase(), 0.5 / 100, BigInt(5 * 1e22).toString());
-        console.log(info)
-      // }
+      console.log("Test GetInformation")
+      info = await swapUtil.getInformationFromInput(listToken[i].address, listToken[j].address, 0.5 / 100, "100000000000");
+      console.log(info)
     }
   }
-  // const cakeTravaPair = await swapUtil.FactoryContract.getPair("0x0391bE54E72F7e001f6BBc331777710b4f2999Ef","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c");
-  // console.log("CAKE-TRAVA address is",cakeTravaPair)
-  // console.log("=====Fin======")
-  //await swapUtil.getInformationFromOutput("0x0391bE54E72F7e001f6BBc331777710b4f2999Ef","0x55d398326f99059fF775485246999027B3197955",0.5/100,"10000000000000000000");
-
-
 }
+// const cakeTravaPair = await swapUtil.FactoryContract.getPair("0x0391bE54E72F7e001f6BBc331777710b4f2999Ef","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c");
+// console.log("CAKE-TRAVA address is",cakeTravaPair)
+// console.log("=====Fin======")
+//await swapUtil.getInformationFromOutput("0x0391bE54E72F7e001f6BBc331777710b4f2999Ef","0x55d398326f99059fF775485246999027B3197955",0.5/100,"10000000000000000000");
+
+
+
 
 test();
