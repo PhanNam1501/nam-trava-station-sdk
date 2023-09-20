@@ -1,7 +1,13 @@
-import Dec from 'decimal.js';
-import { set as dfsTokensSetConfig } from '@zennomi/tokens';
-Dec.set({
-    rounding: Dec.ROUND_DOWN,
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MAX_UINT256 = exports.configure = exports.getNetworkData = exports.CONFIG = exports.NETWORKS = void 0;
+const decimal_js_1 = __importDefault(require("decimal.js"));
+const tokens_1 = require("@zennomi/tokens");
+decimal_js_1.default.set({
+    rounding: decimal_js_1.default.ROUND_DOWN,
     toExpPos: 9e15,
     toExpNeg: -9e15,
     precision: 100,
@@ -10,7 +16,7 @@ Dec.set({
  *
  * @type {Networks}
  */
-export const NETWORKS = {
+exports.NETWORKS = {
     bscTestnet: {
         chainId: 97,
         chainName: 'Binance Smart Chain Testnet',
@@ -23,32 +29,34 @@ export const NETWORKS = {
 /**
  *
  */
-export const CONFIG = {
-    chainId: NETWORKS.bscTestnet.chainId,
+exports.CONFIG = {
+    chainId: exports.NETWORKS.bscTestnet.chainId,
     testingMode: false,
 };
 /**
  *
  * @param chainId
  */
-export const getNetworkData = (chainId) => {
-    const networkData = Object.values(NETWORKS).find((network) => network.chainId === +chainId);
+const getNetworkData = (chainId) => {
+    const networkData = Object.values(exports.NETWORKS).find((network) => network.chainId === +chainId);
     if (!networkData)
         throw new Error(`Cannot find network data for chainId: ${chainId}`);
     return networkData;
 };
+exports.getNetworkData = getNetworkData;
 /**
  *
  * @param config
  */
-export const configure = (config) => {
+const configure = (config) => {
     if (!config || typeof config !== 'object')
         throw new Error('Object expected');
     const newKeys = Object.keys(config);
     newKeys.forEach((key) => {
-        CONFIG[key] = config[key];
+        exports.CONFIG[key] = config[key];
         if (key === 'chainId')
-            dfsTokensSetConfig('network', config[key]);
+            (0, tokens_1.set)('network', config[key]);
     });
 };
-export const MAX_UINT256 = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
+exports.configure = configure;
+exports.MAX_UINT256 = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";

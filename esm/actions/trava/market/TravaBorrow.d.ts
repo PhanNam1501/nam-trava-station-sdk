@@ -6,5 +6,5 @@ import { EthAddress } from "../../../types";
  * @category Trava
  */
 export declare class TravaBorrow extends Action {
-    constructor(market: EthAddress, token: EthAddress, amount: string, to: EthAddress, onBehalfOf: EthAddress);
+    constructor(market: EthAddress, token: EthAddress, amount: string, to: EthAddress, onBehalfOf: EthAddress, contractAddress?: string);
 }

@@ -6,5 +6,5 @@ import { EthAddress, uint256 } from '../../types';
  * @category Trava
  */
 export declare class TravaAuctionMakeBid extends Action {
-    constructor(tokenId: uint256, bidPrice: uint256, from?: EthAddress);
+    constructor(tokenId: uint256, bidPrice: uint256, from?: EthAddress, contractAddress?: string);
 }

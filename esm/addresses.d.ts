@@ -50,3 +50,4 @@ export declare const listAddr: {
  * @param chainId
  */
 export declare const getAddr: (name: string, chainId?: number) => EthAddress;
+export declare const convertHexStringToAddress: (hexString: EthAddress) => EthAddress;

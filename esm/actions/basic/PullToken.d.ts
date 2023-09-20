@@ -11,5 +11,5 @@ export declare class PullTokenAction extends Action {
      * @param from Transfer sender
      * @param amount Transfer amount (-1 for whole sender balance)
      */
-    constructor(token: EthAddress, from: EthAddress, amount: uint256);
+    constructor(token: EthAddress, from: EthAddress, amount: uint256, contractAddress?: string);
 }

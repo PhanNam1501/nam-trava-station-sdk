@@ -9,6 +9,6 @@ export declare class WrapBnbAction extends Action {
     /**
      * @param amount Wrap amount
      */
-    constructor(amount: uint256);
+    constructor(amount: uint256, contractAddress?: string);
     getEthValue(): Promise<any>;
 }

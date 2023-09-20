@@ -6,5 +6,5 @@ import { EthAddress, uint256 } from '../../../../types';
  * @category Trava
  */
 export declare class TravaNFTCancelSale extends Action {
-    constructor(tokenId: uint256, to: EthAddress);
+    constructor(tokenId: uint256, to: EthAddress, contractAddress?: string);
 }

@@ -8,10 +8,14 @@ import { EthAddress, uint256 } from "../../../types";
  * @category Trava
  */
 export class TravaStakingRedeem extends Action {
-  constructor(stakingPool: EthAddress, to: EthAddress, amount: string) {
+  
+  constructor(stakingPool: EthAddress, to: EthAddress, amount: string, contractAddress?: string) {
+    const _contractAddress: string =
+      typeof contractAddress === "undefined" ? getAddr('TravaStakingRedeem') : contractAddress;
+
     super(
       "TravaStakingRedeem",
-      getAddr("TravaStakingRedeem"),
+      _contractAddress, //getAddr("TravaStakingRedeem"),
       ["address", "address", "uint256"],
       [stakingPool, to, amount]
     );

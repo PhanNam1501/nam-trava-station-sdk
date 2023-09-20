@@ -12,11 +12,15 @@ export class TravaWithdraw extends Action {
     market: EthAddress,
     token: EthAddress,
     amount: string,
-    to: EthAddress
+    to: EthAddress,
+    contractAddress?: string
   ) {
+    const _contractAddress: string =
+      typeof contractAddress === "undefined" ? getAddr('TravaWithdraw') : contractAddress;
+
     super(
       "TravaWithdraw",
-      getAddr("TravaWithdraw"),
+      _contractAddress, //getAddr("TravaWithdraw"),
       ["address", "address", "uint256", "address"],
       [market, token, amount, to]
     );

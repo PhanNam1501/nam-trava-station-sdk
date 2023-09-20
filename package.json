@@ -1,6 +1,6 @@
 {
   "name": "trava-station-sdk",
-  "version": "1.0.27",
+  "version": "1.0.31",
   "description": "",
   "main": "./umd/index.js",
   "module": "./esm/index.js",
@@ -22,7 +22,8 @@
     "decimal.js": "^10.2.1",
     "ethers": "6.7.0",
     "web3-eth-abi": "^1.8.0",
-    "web3-utils": "^1.8.0"
+    "web3-utils": "^1.8.0",
+    "bignumber.js": "^9.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

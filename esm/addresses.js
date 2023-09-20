@@ -1,13 +1,17 @@
-import { CONFIG, NETWORKS } from "./config";
-export const listAddr = {
-    [NETWORKS.bscTestnet.chainId]: {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.convertHexStringToAddress = exports.getAddr = exports.listAddr = void 0;
+const config_1 = require("./config");
+const ethereumjs_util_1 = require("ethereumjs-util");
+exports.listAddr = {
+    [config_1.NETWORKS.bscTestnet.chainId]: {
         //Action address
         TravaAuctionCreateAuction: "0xadD3754309A7bC4c74E58A9AAb8463a591047123",
         TravaAuctionMakeBid: "0xD291b6b7658a016de5a95240F36eea4fb481d228",
         RecipeExecutor: "0xc3A1B8ec1F11A02410e0e1Ef0b34BCD2fBeDC54a",
         DFSProxyRegistry: "0xddAe0A61D662711EC279686dE17EfB1F57253ab5",
         TravaNFTTransfer: "0x7D2AA60a1741a52F66f81EA2acb30e5BF3761A55",
-        TravaNFTBuy: "0xfd5BB0aF6C19E7e46D45dBb00f67eABFd36F045f",
+        TravaNFTBuy: "0x859C6B79c3503611b410Bc01d219131e784022e3",
         TravaNFTCreateSale: "0xe169e64496C314398b3f06fD335dbf47B1B6A6Aa",
         TravaNFTCancelSale: "0x118E304cd6Be76666AEf3EDe59f716473475DADD",
         PancakeSwapV2: "0x4503A6D439349B09043d6B33f269005eC9BC065d",
@@ -52,11 +56,11 @@ export const listAddr = {
  * @param name
  * @param chainId
  */
-export const getAddr = (name, chainId = CONFIG.chainId) => {
-    const _chainId = typeof chainId === "undefined" ? CONFIG.chainId : chainId;
-    const actions = listAddr[_chainId];
+const getAddr = (name, chainId = config_1.CONFIG.chainId) => {
+    const _chainId = typeof chainId === "undefined" ? config_1.CONFIG.chainId : chainId;
+    const actions = exports.listAddr[_chainId];
     // skip this check if we're in testing mode
-    if (!CONFIG.testingMode) {
+    if (!config_1.CONFIG.testingMode) {
         if (!actions)
             throw new Error(`Cannot find address for chainId: ${_chainId}.`);
         if (!actions[name])
@@ -64,3 +68,10 @@ export const getAddr = (name, chainId = CONFIG.chainId) => {
     }
     return actions[name];
 };
+exports.getAddr = getAddr;
+const convertHexStringToAddress = (hexString) => {
+    String(hexString).toLowerCase();
+    const strippedHex = hexString.replace(/^0x/, '');
+    return (0, ethereumjs_util_1.toChecksumAddress)(`0x${strippedHex}`);
+};
+exports.convertHexStringToAddress = convertHexStringToAddress;

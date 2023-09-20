@@ -15,11 +15,15 @@ export class PullTokenAction extends Action {
    * @param from Transfer sender
    * @param amount Transfer amount (-1 for whole sender balance)
    */
-  constructor(token:EthAddress, from:EthAddress, amount:uint256) {
+  constructor(token: EthAddress, from: EthAddress, amount: uint256, contractAddress?: string) {
     requireAddress(from);
+
+    const _contractAddress: string =
+      typeof contractAddress === "undefined" ? getAddr('PullToken') : contractAddress;
+      
     super(
       'PullToken',
-      getAddr('PullToken'),
+      _contractAddress, // getAddr('PullToken'),
       [
         'address',
         'address',
@@ -29,9 +33,9 @@ export class PullTokenAction extends Action {
     );
   }
 
-//   async getAssetsToApprove() {
-//     const asset = getAssetInfoByAddress(this.args[0]);
-//     if (asset.symbol !== 'ETH') return [{ asset: this.args[0], owner: this.args[1] }];
-//     return [];
-//   }
+  //   async getAssetsToApprove() {
+  //     const asset = getAssetInfoByAddress(this.args[0]);
+  //     if (asset.symbol !== 'ETH') return [{ asset: this.args[0], owner: this.args[1] }];
+  //     return [];
+  //   }
 }

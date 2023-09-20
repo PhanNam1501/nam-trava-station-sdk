@@ -7,5 +7,5 @@ import { EthAddress } from "../../../types";
  * need to approve token first
  */
 export declare class TravaSupply extends Action {
-    constructor(market: EthAddress, token: EthAddress, amount: string, from: EthAddress, onBehalfOf: EthAddress, enableAsColl: boolean);
+    constructor(market: EthAddress, token: EthAddress, amount: string, from: EthAddress, onBehalfOf: EthAddress, enableAsColl: boolean, contractAddress?: string);
 }

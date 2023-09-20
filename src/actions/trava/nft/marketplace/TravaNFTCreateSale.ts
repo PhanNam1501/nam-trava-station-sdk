@@ -8,10 +8,13 @@ import { EthAddress, uint256 } from '../../../../types';
  * @category Trava
  */
 export class TravaNFTCreateSale extends Action {
-  constructor(tokenId: uint256, price: uint256, from: EthAddress) {
+  constructor(tokenId: uint256, price: uint256, from: EthAddress, contractAddress?: string) {
+    const _contractAddress: string =
+      typeof contractAddress === "undefined" ? getAddr('TravaNFTCreateSale') : contractAddress;
+
     super(
       "TravaNFTCreateSale",
-      getAddr('TravaNFTCreateSale'),
+      _contractAddress, //getAddr('TravaNFTCreateSale'),
       ["uint256", "uint256", "address"],
       [tokenId, price, from]
     );

@@ -15,11 +15,15 @@ export class TravaSupply extends Action {
     amount: string,
     from: EthAddress,
     onBehalfOf: EthAddress,
-    enableAsColl: boolean
+    enableAsColl: boolean,
+    contractAddress?: string
   ) {
+    const _contractAddress: string =
+      typeof contractAddress === "undefined" ? getAddr('TravaSupply') : contractAddress;
+
     super(
       "TravaSupply",
-      getAddr("TravaSupply"),
+      _contractAddress, //getAddr("TravaSupply"),
       ["address", "address", "uint256", "address", "address", "bool"],
       [market, token, amount, from, onBehalfOf, enableAsColl]
     );

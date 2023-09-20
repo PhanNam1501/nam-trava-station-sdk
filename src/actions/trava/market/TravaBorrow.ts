@@ -14,11 +14,15 @@ export class TravaBorrow extends Action {
     token: EthAddress,
     amount: string,
     to: EthAddress,
-    onBehalfOf: EthAddress
+    onBehalfOf: EthAddress,
+    contractAddress?: string
   ) {
+    const _contractAddress: string =
+      typeof contractAddress === "undefined" ? getAddr('TravaBorrow') : contractAddress;
+
     super(
       "TravaBorrow",
-      getAddr("TravaBorrow"),
+      _contractAddress, //getAddr("TravaBorrow"),
       ["address", "address", "uint256", "address", "address"],
       [market, token, amount, to, onBehalfOf]
     );

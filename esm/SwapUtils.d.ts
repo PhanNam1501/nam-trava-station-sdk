@@ -25,8 +25,8 @@ export declare class SwapUtil {
     web3: JsonRpcProvider;
     FactoryContract: FactoryContract;
     RouterContract: RouterContract;
-    constructor(_web3: JsonRpcProvider);
+    constructor(_url: string);
     isZeroAddress(address: EthAddress): boolean;
-    getInformationFromInput(fromToken: EthAddress, toToken: EthAddress, slippage: number, amountFrom: uint256): Promise<SwapInfoIfInput>;
-    getInformationFromOutput(fromToken: EthAddress, toToken: EthAddress, slippage: number, amountTo: uint256): Promise<SwapInfoIfOutput>;
+    getInformationFromInput(_fromToken: EthAddress, _toToken: EthAddress, slippage: number, amountFrom: uint256): Promise<SwapInfoIfInput>;
+    getInformationFromOutput(_fromToken: EthAddress, _toToken: EthAddress, slippage: number, amountTo: uint256): Promise<SwapInfoIfOutput>;
 }

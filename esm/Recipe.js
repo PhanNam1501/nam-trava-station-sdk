@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -12,20 +13,25 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var _Recipe_instances, _Recipe__encodeForCall;
-import AbiCoder from 'web3-eth-abi';
-import { toBN } from 'web3-utils';
-import { getAssetInfo, utils } from '@zennomi/tokens';
-import { Action } from './Action';
-import { getAddr } from './addresses';
-import RecipeAbi from './abis/Recipe.json';
-import { CONFIG } from './config';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Recipe = void 0;
+const web3_eth_abi_1 = __importDefault(require("web3-eth-abi"));
+const web3_utils_1 = require("web3-utils");
+const tokens_1 = require("@zennomi/tokens");
+const Action_1 = require("./Action");
+const addresses_1 = require("./addresses");
+const Recipe_json_1 = __importDefault(require("./abis/Recipe.json"));
+const config_1 = require("./config");
 /**
  * Set of Actions to be performed sequentially in a single transaction
  *
  * @category Base Classes
  */
-export class Recipe {
+class Recipe {
     /**
      * @param name
      * @param actions
@@ -33,19 +39,19 @@ export class Recipe {
     constructor(name, actions = []) {
         _Recipe_instances.add(this);
         actions.forEach((action) => {
-            if (!(action instanceof Action))
+            if (!(action instanceof Action_1.Action))
                 throw new TypeError('Supplied action does not inherit Action');
         });
         this.name = name;
         this.actions = actions;
         this.extraGas = 0;
-        this.recipeExecutorAddress = getAddr('RecipeExecutor', CONFIG.chainId);
+        this.recipeExecutorAddress = (0, addresses_1.getAddr)('RecipeExecutor', config_1.CONFIG.chainId);
     }
     /**
      * @param action
      */
     addAction(action) {
-        if (!(action instanceof Action))
+        if (!(action instanceof Action_1.Action))
             throw new TypeError('Supplied action does not inherit Action');
         this.actions.push(action);
         return this;
@@ -55,12 +61,12 @@ export class Recipe {
      * @returns `address` & `data` to be passed on to DSProxy's `execute(address _target, bytes memory _data)`
      */
     encodeForDsProxyCall() {
-        const executeTaskAbi = RecipeAbi.find(({ name }) => name === 'executeRecipe');
+        const executeTaskAbi = Recipe_json_1.default.find(({ name }) => name === 'executeRecipe');
         const encoded = __classPrivateFieldGet(this, _Recipe_instances, "m", _Recipe__encodeForCall).call(this);
         return [
             this.recipeExecutorAddress,
             // @ts-expect-error Interface of AbiCoder is wrong :(
-            AbiCoder.encodeFunctionCall(executeTaskAbi, encoded),
+            web3_eth_abi_1.default.encodeFunctionCall(executeTaskAbi, encoded),
         ];
     }
     /**
@@ -100,7 +106,7 @@ export class Recipe {
                     }
                 }
             }
-            return uniqueAssetOwnerPairs.filter(({ address }) => !utils.compare(address, getAssetInfo('ETH').address));
+            return uniqueAssetOwnerPairs.filter(({ address }) => !tokens_1.utils.compare(address, (0, tokens_1.getAssetInfo)('ETH').address));
         });
     }
     /**
@@ -110,11 +116,12 @@ export class Recipe {
     getEthValue() {
         return __awaiter(this, void 0, void 0, function* () {
             return (yield Promise.all(this.actions.map(a => a.getEthValue())))
-                .reduce((acc, val) => acc.add(toBN(val)), toBN(0))
+                .reduce((acc, val) => acc.add((0, web3_utils_1.toBN)(val)), (0, web3_utils_1.toBN)(0))
                 .toString();
         });
     }
 }
+exports.Recipe = Recipe;
 _Recipe_instances = new WeakSet(), _Recipe__encodeForCall = function _Recipe__encodeForCall() {
     const encoded = this.actions.map(action => action.encodeForRecipe());
     const transposed = encoded[0].map((_, colIndex) => encoded.map(row => row[colIndex]));

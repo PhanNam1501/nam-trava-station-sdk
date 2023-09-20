@@ -9,10 +9,13 @@ import { EthAddress, uint256 } from '../../types';
  * @category Trava
  */
 export class TravaAuctionCreateAuction extends Action {
-  constructor(tokenId:uint256, startingBid:uint256, duration:uint256, ceilingPrice:uint256, method:uint256, from:EthAddress = getAddr('Empty')) {
+  constructor(tokenId:uint256, startingBid:uint256, duration:uint256, ceilingPrice:uint256, method:uint256, from:EthAddress = getAddr('Empty'), contractAddress?: string) {
+    const _contractAddress: string =
+      typeof contractAddress === "undefined" ? getAddr('TravaAuctionCreateAuction') : contractAddress;
+
     super(
       'TravaNFTAuctionCreateAuction',
-      getAddr('TravaAuctionCreateAuction'),
+      _contractAddress, //getAddr('TravaAuctionCreateAuction'),
       ["uint256", "uint256", "uint256", "uint256", "uint256", "address"],
       [tokenId, startingBid, duration, ceilingPrice, method, from]
     );

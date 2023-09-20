@@ -13,11 +13,15 @@ export class UnwrapBnbAction extends Action {
    * @param amount Amount to unwrap
    * @param to Transfer recipient
    */
-  constructor(amount:uint256, to:EthAddress) {
+  constructor(amount:uint256, to:EthAddress, contractAddress?: string) {
     requireAddress(to);
+
+    const _contractAddress: string =
+      typeof contractAddress === "undefined" ? getAddr('UnwrapBnb') : contractAddress;
+
     super(
       'UnwrapBnb',
-      getAddr('UnwrapBnb'),
+      _contractAddress, //getAddr('UnwrapBnb'),
       [
         'uint256',
         'address',

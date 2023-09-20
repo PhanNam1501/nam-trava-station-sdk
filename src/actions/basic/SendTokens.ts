@@ -14,10 +14,13 @@ export class SendTokensAction extends Action {
    * @param receivers Transfer recipients
    * @param amounts Transfer amounts (-1 for whole Recipe (DsProxy) balance)
    */
-  constructor(tokens: Array<EthAddress>, receivers: Array<EthAddress>, amounts:Array<uint256>) {
+  constructor(tokens: Array<EthAddress>, receivers: Array<EthAddress>, amounts:Array<uint256>, contractAddress?: string) {
+    const _contractAddress: string =
+      typeof contractAddress === "undefined" ? getAddr('SendTokens') : contractAddress;
+
     super(
       'SendTokens',
-      getAddr('SendTokens'),
+      _contractAddress, //getAddr('SendTokens'),
       [
         'address[]',
         'address[]',

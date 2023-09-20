@@ -22,6 +22,14 @@ export const NETWORKS: Networks = {
     rpcUrls: [],
     nativeCurrency: { name: 'BNB', decimals: 18, symbol: 'BNB' },
   },
+  bscMainnet: {
+    chainId: 56,
+    chainName: 'Binance Smart Chain Mainnet',
+    blockExplorerUrls: ['https://bscscan.com/'],
+    iconUrls: [],
+    rpcUrls: [],
+    nativeCurrency: { name: 'BNB', decimals: 18, symbol: 'BNB' },
+  },
 };
 
 /**

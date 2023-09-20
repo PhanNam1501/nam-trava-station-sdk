@@ -59,10 +59,17 @@ const unwrap_token_action = new actions.basic.UnwrapBnbAction(
 ```
 ### Swap
 ```
+const swapUtil = new SwapUtil(web3);
+const info = new await swapUtil.getInformationFromInput(tokenAddr1, tokenAddr2, slipparage, amount);
+const minimumReceive = info.minimumReceive
+const priceImpact = info.priceImpact;
+const path = info.path;
+```
+```
 const swap_token_action = new actions.pancakeswap.PancakeSwapV2(
     amountIn: uint256,
     amountOutMin: 0,
-    path: [address token1, address token 2],
+    path: path,
     to: _to address,
     deadline: timestamp + 30 * 60 * 1000
     from: _from address

@@ -8,10 +8,13 @@ import { EthAddress, uint256, bytes } from '../../types';
  * @category PancakeSwap
  */
 export class PancakeSwapV2 extends Action {
-  constructor(amountIn: uint256, amountOutMin: uint256, path: bytes, to: EthAddress, deadline: uint256, from: EthAddress) {
+  constructor(amountIn: uint256, amountOutMin: uint256, path: bytes, to: EthAddress, deadline: uint256, from: EthAddress, contractAddress?: string) {
+    const _contractAddress: string =
+      typeof contractAddress === "undefined" ? getAddr('PancakeSwapV2') : contractAddress;
+
     super(
       "PancakeSwapV2",
-      getAddr('PancakeSwapV2'),
+      _contractAddress, //getAddr('PancakeSwapV2'),
       ["uint256", "uint256", "address[]", "address", "uint256", "address"],
       [amountIn, amountOutMin, path, to, deadline, from]
     );

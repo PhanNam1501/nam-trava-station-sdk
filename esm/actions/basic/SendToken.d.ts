@@ -11,5 +11,5 @@ export declare class SendTokenAction extends Action {
      * @param to Transfer recipient
      * @param amount Transfer amount (-1 for whole Recipe (DsProxy) balance)
      */
-    constructor(token: EthAddress, to: EthAddress, amount: uint256);
+    constructor(token: EthAddress, to: EthAddress, amount: uint256, contractAddress?: string);
 }

@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,16 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import RouterAbi from "./abis/Swap/PancakeSwapRouter.json";
-import FactoryAbi from "./abis/Swap/PancakeSwapFactory.json";
-import PairAbi from "./abis/Swap/PancakeSwapPair.json";
-import Dec from "decimal.js";
-import { Contract, ZeroAddress } from "ethers";
-import { getAddr } from "./addresses";
-export const PancakeSwapV2Address = {
-    RouterAddress: getAddr("RouterAddress"),
-    FactoryAddress: getAddr("FactoryAddress"),
-    WBNBAdress: getAddr("WBNBAdress")
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SwapUtil = exports.PairContract = exports.FactoryContract = exports.RouterContract = exports.PancakeSwapV2Address = void 0;
+const PancakeSwapRouter_json_1 = __importDefault(require("./abis/Swap/PancakeSwapRouter.json"));
+const PancakeSwapFactory_json_1 = __importDefault(require("./abis/Swap/PancakeSwapFactory.json"));
+const PancakeSwapPair_json_1 = __importDefault(require("./abis/Swap/PancakeSwapPair.json"));
+const decimal_js_1 = __importDefault(require("decimal.js"));
+const ethers_1 = require("ethers");
+const addresses_1 = require("./addresses");
+exports.PancakeSwapV2Address = {
+    RouterAddress: (0, addresses_1.getAddr)("RouterAddress"),
+    FactoryAddress: (0, addresses_1.getAddr)("FactoryAddress"),
+    WBNBAdress: (0, addresses_1.getAddr)("WBNBAdress")
 };
 const BscMainnetTokens = {
     "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3": {
@@ -89,12 +95,12 @@ const BscMainnetTokens = {
         oracle: { address: "0xBF63F430A79D4036A5900C19818aFf1fa710f206", oracle: "chainlink" },
     },
 };
-const RouterAbiItem = RouterAbi;
-const FactoryAbiItem = FactoryAbi;
-const PairAbiItem = PairAbi;
-export class RouterContract {
+const RouterAbiItem = PancakeSwapRouter_json_1.default;
+const FactoryAbiItem = PancakeSwapFactory_json_1.default;
+const PairAbiItem = PancakeSwapPair_json_1.default;
+class RouterContract {
     constructor(web3, address) {
-        this.contractUtil = new Contract(address, RouterAbiItem, web3);
+        this.contractUtil = new ethers_1.Contract(address, RouterAbiItem, web3);
     }
     getAmountOut(amount, path) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -109,9 +115,10 @@ export class RouterContract {
         });
     }
 }
-export class FactoryContract {
+exports.RouterContract = RouterContract;
+class FactoryContract {
     constructor(web3, address) {
-        this.contractUtil = new Contract(address, FactoryAbiItem, web3);
+        this.contractUtil = new ethers_1.Contract(address, FactoryAbiItem, web3);
     }
     getPair(addr1, addr2) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -120,29 +127,32 @@ export class FactoryContract {
         });
     }
 }
-export class PairContract {
+exports.FactoryContract = FactoryContract;
+class PairContract {
     constructor(web3, address) {
-        this.contractUtil = new Contract(address, PairAbiItem, web3);
+        this.contractUtil = new ethers_1.Contract(address, PairAbiItem, web3);
     }
     getReserves() {
         return __awaiter(this, void 0, void 0, function* () {
             const res = yield this.contractUtil.getReserves();
-            console.log("Res reserves", res);
-            return res.map((el) => new Dec(String(el)).toFixed());
+            return res.map((el) => new decimal_js_1.default(String(el)).toFixed());
         });
     }
 }
-export class SwapUtil {
-    constructor(_web3) {
-        this.web3 = _web3;
-        this.FactoryContract = new FactoryContract(_web3, PancakeSwapV2Address.FactoryAddress);
-        this.RouterContract = new RouterContract(_web3, PancakeSwapV2Address.RouterAddress);
+exports.PairContract = PairContract;
+class SwapUtil {
+    constructor(_url) {
+        this.web3 = new ethers_1.JsonRpcProvider(_url);
+        this.FactoryContract = new FactoryContract(this.web3, exports.PancakeSwapV2Address.FactoryAddress);
+        this.RouterContract = new RouterContract(this.web3, exports.PancakeSwapV2Address.RouterAddress);
     }
     isZeroAddress(address) {
-        return address.toLowerCase() === ZeroAddress;
+        return address.toLowerCase() === ethers_1.ZeroAddress;
     }
-    getInformationFromInput(fromToken, toToken, slippage, amountFrom) {
+    getInformationFromInput(_fromToken, _toToken, slippage, amountFrom) {
         return __awaiter(this, void 0, void 0, function* () {
+            let fromToken = (0, addresses_1.convertHexStringToAddress)(_fromToken);
+            let toToken = (0, addresses_1.convertHexStringToAddress)(_toToken);
             let path = [];
             let amountOut;
             let impact = 0;
@@ -150,10 +160,10 @@ export class SwapUtil {
             let pairAddr = yield this.FactoryContract.getPair(fromToken, toToken);
             let needUseMultihop = false;
             if (!this.isZeroAddress(pairAddr)) {
+                console.log("pairAddr", pairAddr, !this.isZeroAddress(pairAddr));
                 let fromR;
                 let toR;
                 path = [fromToken, toToken];
-                let pairAddr = yield this.FactoryContract.getPair(fromToken, toToken);
                 let pairContract = new PairContract(this.web3, pairAddr);
                 const reserve = yield pairContract.getReserves();
                 let amountOutFromContract = yield this.RouterContract.getAmountOut(amountFrom, path);
@@ -165,41 +175,47 @@ export class SwapUtil {
                     fromR = String(reserve[1]);
                     toR = String(reserve[0]);
                 }
-                let tmpImpact = new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR)));
+                console.log("fromR", fromR);
+                let tmpImpact = new decimal_js_1.default(amountFrom).div(new decimal_js_1.default(amountFrom).add(new decimal_js_1.default(fromR)));
+                // console.log("amountOutFromContract", amountOutFromContract)
                 // console.log("tmpImpact is",tmpImpact)
                 //impact =new Dec(amountOut).div(new Dec(toR).sub(new Dec(amountOut)))
                 if (Number(tmpImpact) > 5 / 100)
                     needUseMultihop = true;
                 else {
                     amountOut = String(amountOutFromContract[1]);
-                    minimumReceive = (new Dec(amountOutFromContract[1]).mul(1 - slippage).floor());
+                    minimumReceive = (new decimal_js_1.default(amountOutFromContract[1]).mul(1 - slippage).floor());
                     impact = Number(tmpImpact);
+                    console.log("amountOut", amountOut);
                 }
             }
-            if ((this.isZeroAddress(pairAddr) || needUseMultihop) && (fromToken != PancakeSwapV2Address.WBNBAdress && toToken != PancakeSwapV2Address.WBNBAdress)) {
-                path = [fromToken, PancakeSwapV2Address.WBNBAdress, toToken];
+            if ((this.isZeroAddress(pairAddr) || needUseMultihop) && (fromToken != exports.PancakeSwapV2Address.WBNBAdress && toToken != exports.PancakeSwapV2Address.WBNBAdress)) {
+                path = [fromToken, exports.PancakeSwapV2Address.WBNBAdress, toToken];
                 let amountOutFromContract = yield this.RouterContract.getAmountOut(amountFrom, path);
-                let pair1Addr = yield this.FactoryContract.getPair(fromToken, PancakeSwapV2Address.WBNBAdress);
+                // console.log("amountOutFromContract", amountOutFromContract)
+                let pair1Addr = yield this.FactoryContract.getPair(fromToken, exports.PancakeSwapV2Address.WBNBAdress);
                 let pair1Contract = new PairContract(this.web3, pair1Addr);
                 const reserve = yield pair1Contract.getReserves();
                 let fromR;
-                if (Number(fromToken) < Number(PancakeSwapV2Address.WBNBAdress)) {
+                if (Number(fromToken) < Number(exports.PancakeSwapV2Address.WBNBAdress)) {
                     fromR = reserve[0];
                 }
                 else {
                     fromR = reserve[1];
                 }
                 amountOut = amountOutFromContract[2];
-                minimumReceive = (new Dec(amountOutFromContract[2]).mul(1 - slippage).floor());
-                impact = Number(new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR))));
+                minimumReceive = (new decimal_js_1.default(amountOutFromContract[2]).mul(1 - slippage).floor());
+                impact = Number(new decimal_js_1.default(amountFrom).div(new decimal_js_1.default(amountFrom).add(new decimal_js_1.default(fromR))));
             }
-            console.log({
-                amountIn: amountFrom,
-                amountOut: amountOut,
-                minimumReceive: String(minimumReceive),
-                priceImpact: impact,
-                path: path
-            });
+            // console.log(
+            //   {
+            //     amountIn: amountFrom,
+            //     amountOut: amountOut,
+            //     minimumReceive: String(minimumReceive),
+            //     priceImpact: impact,
+            //     path: path
+            //   }
+            // )
             return {
                 amountIn: amountFrom,
                 amountOut: amountOut,
@@ -209,8 +225,10 @@ export class SwapUtil {
             };
         });
     }
-    getInformationFromOutput(fromToken, toToken, slippage, amountTo) {
+    getInformationFromOutput(_fromToken, _toToken, slippage, amountTo) {
         return __awaiter(this, void 0, void 0, function* () {
+            let fromToken = (0, addresses_1.convertHexStringToAddress)(_fromToken);
+            let toToken = (0, addresses_1.convertHexStringToAddress)(_toToken);
             let path = [];
             let amountIn = "";
             let impact = 0;
@@ -234,25 +252,25 @@ export class SwapUtil {
                     toR = reserve[0];
                 }
                 //let tmpImpact = new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR)));
-                let tmpImpact = new Dec(amountTo).div(new Dec(toR).sub(new Dec(amountTo)));
+                let tmpImpact = new decimal_js_1.default(amountTo).div(new decimal_js_1.default(toR).sub(new decimal_js_1.default(amountTo)));
                 // console.log("tmpImpact is",tmpImpact)
                 if (Number(tmpImpact) > 5 / 100)
                     needUseMultihop = true;
                 else {
                     amountIn = amountInFromContract[0];
-                    maximumSold = new Dec(amountInFromContract[0]).mul(1 + slippage).floor().toFixed();
+                    maximumSold = new decimal_js_1.default(amountInFromContract[0]).mul(1 + slippage).floor().toFixed();
                     impact = Number(tmpImpact);
                 }
             }
-            if ((this.isZeroAddress(pairAddr) || needUseMultihop) && (fromToken != PancakeSwapV2Address.WBNBAdress && toToken != PancakeSwapV2Address.WBNBAdress)) {
-                path = [fromToken, PancakeSwapV2Address.WBNBAdress, toToken];
+            if ((this.isZeroAddress(pairAddr) || needUseMultihop) && (fromToken != exports.PancakeSwapV2Address.WBNBAdress && toToken != exports.PancakeSwapV2Address.WBNBAdress)) {
+                path = [fromToken, exports.PancakeSwapV2Address.WBNBAdress, toToken];
                 let amountInFromContract = yield this.RouterContract.getAmountIn(amountTo, path);
-                let pair1Addr = yield this.FactoryContract.getPair(PancakeSwapV2Address.WBNBAdress, toToken);
+                let pair1Addr = yield this.FactoryContract.getPair(exports.PancakeSwapV2Address.WBNBAdress, toToken);
                 let pair1Contract = new PairContract(this.web3, pair1Addr);
                 const reserve = yield pair1Contract.getReserves();
                 let fromR;
                 let toR;
-                if (Number(fromToken) < Number(PancakeSwapV2Address.WBNBAdress)) {
+                if (Number(fromToken) < Number(exports.PancakeSwapV2Address.WBNBAdress)) {
                     fromR = reserve[0];
                     toR = reserve[1];
                 }
@@ -261,8 +279,8 @@ export class SwapUtil {
                     toR = reserve[0];
                 }
                 amountIn = amountInFromContract[0];
-                maximumSold = (new Dec(amountInFromContract[0]).mul(1 + slippage).floor().toFixed());
-                impact = Number(new Dec(amountTo).div(new Dec(toR).sub(new Dec(amountTo))));
+                maximumSold = (new decimal_js_1.default(amountInFromContract[0]).mul(1 + slippage).floor().toFixed());
+                impact = Number(new decimal_js_1.default(amountTo).div(new decimal_js_1.default(toR).sub(new decimal_js_1.default(amountTo))));
             }
             // console.log(
             //   {
@@ -283,3 +301,4 @@ export class SwapUtil {
         });
     }
 }
+exports.SwapUtil = SwapUtil;
