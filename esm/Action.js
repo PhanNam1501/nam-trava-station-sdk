@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -13,21 +12,16 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _Action_instances, _Action__getArgumentMappingWithSlots, _Action__getPlaceholderForType;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Action = void 0;
-const web3_eth_abi_1 = __importDefault(require("web3-eth-abi"));
-const web3_utils_1 = require("web3-utils");
-const Action_json_1 = __importDefault(require("./abis/Action.json"));
+import AbiCoder from 'web3-eth-abi';
+import { keccak256 } from 'web3-utils';
+import ActionAbi from './abis/Action.json';
 /**
  * Single action that can be executed directly, or combined into a set (ie. supply a vault)
  *
  * @category Base Classes
  */
-class Action {
+export class Action {
     /**
      * @param name
      * @param contractAddress
@@ -49,7 +43,7 @@ class Action {
      *
      */
     getId() {
-        return (0, web3_utils_1.keccak256)(this.name).substr(0, 10);
+        return keccak256(this.name).substr(0, 10);
     }
     /**
      *
@@ -109,11 +103,11 @@ class Action {
     _encodeForCall() {
         const _arg = this._replaceWithPlaceholders(this.args, this.paramTypes);
         const _paramType = this._formatType(this.paramTypes);
-        return [web3_eth_abi_1.default.encodeParameter(_paramType, _arg)];
+        return [AbiCoder.encodeParameter(_paramType, _arg)];
     }
     encodeForL2DsProxyCall() {
-        const executeActionDirectAbi = (Action_json_1.default.find(({ name }) => name === 'executeActionDirect'));
-        return web3_eth_abi_1.default.encodeFunctionCall(executeActionDirectAbi, this._encodeForCall());
+        const executeActionDirectAbi = (ActionAbi.find(({ name }) => name === 'executeActionDirect'));
+        return AbiCoder.encodeFunctionCall(executeActionDirectAbi, this._encodeForCall());
     }
     encodeForL2Recipe() {
         return this._encodeForCall()[0];
@@ -123,10 +117,10 @@ class Action {
      * @returns `address` & `data` to be passed on to DSProxy's `execute(address _target, bytes memory _data)`
      */
     encodeForDsProxyCall() {
-        const executeActionDirectAbi = (Action_json_1.default.find(({ name }) => name === 'executeActionDirect'));
+        const executeActionDirectAbi = (ActionAbi.find(({ name }) => name === 'executeActionDirect'));
         return [
             this.contractAddress,
-            web3_eth_abi_1.default.encodeFunctionCall(executeActionDirectAbi, this._encodeForCall()),
+            AbiCoder.encodeFunctionCall(executeActionDirectAbi, this._encodeForCall()),
         ];
     }
     /**
@@ -165,7 +159,6 @@ class Action {
         });
     }
 }
-exports.Action = Action;
 _Action_instances = new WeakSet(), _Action__getArgumentMappingWithSlots = function _Action__getArgumentMappingWithSlots(subSlots) {
     return this.mappableArgs.map(arg => {
         if (new RegExp(/\$\d+/).test(arg)) {

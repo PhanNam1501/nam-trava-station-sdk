@@ -15,7 +15,7 @@ export declare class Recipe {
      * @param name
      * @param actions
      */
-    constructor(name: string, actions?: Array<Action>);
+    constructor(name: string, chainId?: number, actions?: Array<Action>);
     /**
      * @param action
      */

@@ -36,7 +36,7 @@ export const NETWORKS: Networks = {
  *
  */
 export const CONFIG: Config = {
-  chainId: NETWORKS.bscTestnet.chainId,
+  chainId: NETWORKS.bscMainnet.chainId,
   testingMode: false,
 };
 

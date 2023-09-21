@@ -1,10 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.convertHexStringToAddress = exports.getAddr = exports.listAddr = void 0;
-const config_1 = require("./config");
-const ethereumjs_util_1 = require("ethereumjs-util");
-exports.listAddr = {
-    [config_1.NETWORKS.bscTestnet.chainId]: {
+import { CONFIG, NETWORKS } from "./config";
+import { toChecksumAddress } from 'ethereumjs-util';
+export const listAddr = {
+    [NETWORKS.bscTestnet.chainId]: {
         //Action address
         TravaAuctionCreateAuction: "0xadD3754309A7bC4c74E58A9AAb8463a591047123",
         TravaAuctionMakeBid: "0xD291b6b7658a016de5a95240F36eea4fb481d228",
@@ -50,17 +47,49 @@ exports.listAddr = {
         TRAVAAddress: "0xE1F005623934D3D8C724EC68Cc9bFD95498D4435",
         TODAddress: "0xFca3Cf5E82F595D4f20C24D007ae5E2e94fab2f0"
     },
+    [NETWORKS.bscMainnet.chainId]: {
+        //Action address
+        DFSProxyRegistry: "0x147f157cB4E328e9C0DB68dBa5305FB7C29e7328",
+        RecipeExecutor: "0x8185f9a9ecE74Fe4dC665F5aF64F11E65bD0259a",
+        TravaAuctionCreateAuction: "0xadD3754309A7bC4c74E58A9AAb8463a591047123",
+        TravaAuctionMakeBid: "0xD291b6b7658a016de5a95240F36eea4fb481d228",
+        TravaNFTTransfer: "0x184f1Db63E5536B3Ac8170Aca930e1A635e6cF67",
+        TravaNFTBuy: "0xCc1B184Bbb1144383683f6D9180440e075e61312",
+        TravaNFTCreateSale: "0xC4FbE950EfE866bcF1518EE04cFd53192Da5708e",
+        TravaNFTCancelSale: "0x507ee79174a7951F21E363eca00f68d01C69BB80",
+        PancakeSwapV2: "0xB262bA9ceF87eb61E21332C2c63dfEb709BC53a2",
+        PullToken: "0xFA9441ece8F1d27b6EF462a6F6C298b62B905AC7",
+        WrapBnb: "0xc0F8ab3BC2bF8CdaB2508E93b2536f4AFc5620dF",
+        UnwrapBnb: "0xB83b83d83A7e0ab4a0012ced0959B472F9639C53",
+        SendToken: "0xE73f2a7e35F588e65db67a8eF744342904964000",
+        SendTokenAndUnwrap: "0x1f144f084B6e9FC4A377D483086FA88fF3AD094d",
+        SendTokens: "0x3eaeD39715A10e4B7D47BBe676FA6c9553A2575d",
+        TravaSupply: "0x720Ffea4337fcE72DcD3E30A2bD128Ef6ECaB57E",
+        TravaBorrow: "0x968df742DbE144010Db52924a16b4f82203CaF66",
+        TravaRepay: "0x2f2df0D329D3B8F1C82BD49Bc10bc2cd428ED665",
+        TravaWithdraw: "0x6B9766FBB57b299eF757c58E066191cD03801705",
+        TravaClaimRewards: "0xC37a6D456657815dB1fb3A4bcf660E2a135f1C67",
+        TravaConvertRewards: "0xA74EC723b099f00Ed33a29c36Ca8B498a9a75B21",
+        TravaStakingStake: "0x9C144C1182Eb10D6e3011259F31EfA0757fA302F",
+        TravaStakingRedeem: "0x8c08F0a32D764fC8D0E98C5C9FDB1c8eCC777758",
+        TravaStakingClaimRewards: "0x5417704fe7D2f3C12B35aF239a42B5b8033A7BF7",
+        // pancake swap
+        RouterAddress: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+        FactoryAddress: "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73",
+        // token address
+        WBNBAdress: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    },
 };
 /**
  *
  * @param name
  * @param chainId
  */
-const getAddr = (name, chainId = config_1.CONFIG.chainId) => {
-    const _chainId = typeof chainId === "undefined" ? config_1.CONFIG.chainId : chainId;
-    const actions = exports.listAddr[_chainId];
+export const getAddr = (name, chainId = CONFIG.chainId) => {
+    const _chainId = typeof chainId === "undefined" ? CONFIG.chainId : chainId;
+    const actions = listAddr[_chainId];
     // skip this check if we're in testing mode
-    if (!config_1.CONFIG.testingMode) {
+    if (!CONFIG.testingMode) {
         if (!actions)
             throw new Error(`Cannot find address for chainId: ${_chainId}.`);
         if (!actions[name])
@@ -68,10 +97,8 @@ const getAddr = (name, chainId = config_1.CONFIG.chainId) => {
     }
     return actions[name];
 };
-exports.getAddr = getAddr;
-const convertHexStringToAddress = (hexString) => {
+export const convertHexStringToAddress = (hexString) => {
     String(hexString).toLowerCase();
     const strippedHex = hexString.replace(/^0x/, '');
-    return (0, ethereumjs_util_1.toChecksumAddress)(`0x${strippedHex}`);
+    return toChecksumAddress(`0x${strippedHex}`);
 };
-exports.convertHexStringToAddress = convertHexStringToAddress;

@@ -1,23 +1,20 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PullTokenAction = void 0;
-const general_1 = require("../../utils/general");
-const Action_1 = require("../../Action");
-const addresses_1 = require("../../addresses");
+import { requireAddress } from '../../utils/general';
+import { Action } from '../../Action';
+import { getAddr } from '../../addresses';
 /**
  * Transfers specified token from a specified address to DSProxy (recipe)
  *
  * @category BasicActions
  */
-class PullTokenAction extends Action_1.Action {
+export class PullTokenAction extends Action {
     /**
      * @param token Token address
      * @param from Transfer sender
      * @param amount Transfer amount (-1 for whole sender balance)
      */
     constructor(token, from, amount, contractAddress) {
-        (0, general_1.requireAddress)(from);
-        const _contractAddress = typeof contractAddress === "undefined" ? (0, addresses_1.getAddr)('PullToken') : contractAddress;
+        requireAddress(from);
+        const _contractAddress = typeof contractAddress === "undefined" ? getAddr('PullToken') : contractAddress;
         super('PullToken', _contractAddress, // getAddr('PullToken'),
         [
             'address',
@@ -26,4 +23,3 @@ class PullTokenAction extends Action_1.Action {
         ], [token, from, amount]);
     }
 }
-exports.PullTokenAction = PullTokenAction;

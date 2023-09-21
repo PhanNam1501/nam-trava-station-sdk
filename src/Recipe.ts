@@ -25,16 +25,18 @@ export class Recipe {
    * @param name
    * @param actions
    */
-  constructor(name: string, actions: Array<Action> = []) {
+  constructor(name: string, chainId?: number, actions: Array<Action> = []) {
     actions.forEach((action: Action) => {
       if (!(action instanceof Action)) throw new TypeError('Supplied action does not inherit Action');
     });
 
+    const _chainId: number =
+      typeof chainId === "undefined" ? CONFIG.chainId : chainId;
     this.name = name;
     this.actions = actions;
 
     this.extraGas = 0;
-    this.recipeExecutorAddress = getAddr('RecipeExecutor', CONFIG.chainId);
+    this.recipeExecutorAddress = getAddr('RecipeExecutor', _chainId);
   }
 
   /**

@@ -4,7 +4,7 @@ import FactoryAbi from "./abis/Swap/PancakeSwapFactory.json";
 import PairAbi from "./abis/Swap/PancakeSwapPair.json";
 import Dec from "decimal.js";
 import { JsonRpcProvider,Contract,InterfaceAbi,ZeroAddress } from "ethers";
-import { getAddr } from "./addresses";
+import { convertHexStringToAddress, getAddr } from "./addresses";
 import BigNumber from "bignumber.js";
 
   const RouterAbiItem :InterfaceAbi = RouterAbi
@@ -13,17 +13,17 @@ import BigNumber from "bignumber.js";
 
 export class RouterContract{
     contractUtil : Contract
-    constructor (web3:JsonRpcProvider,address:EthAddress)
+    constructor (web3:JsonRpcProvider, address:EthAddress)
     {
-        this.contractUtil = new Contract(address,RouterAbiItem,web3);
+        this.contractUtil = new Contract(address, RouterAbiItem, web3);
     }
     async getAmountOut(amount : uint256, path :EthAddress[]) : Promise<any>{
         const res = await this.contractUtil.getAmountsOut(amount,path)
-        return res.map((el : string) => BigInt(el).toString());
+        return res.map((el : string) => BigNumber(el).toFixed());
     }
     async getAmountIn(amount : uint256, path :EthAddress[]) : Promise<any>{
       const res = await this.contractUtil.getAmountsIn(amount,path)
-      return res.map((el : string) =>BigInt(el).toString());
+      return res.map((el : string) => BigNumber(el).toFixed());
   }
 
 }
@@ -63,22 +63,26 @@ export class SwapUtil {
         this.FactoryContract = new FactoryContract(this.web3, getAddr("FactoryAddress", this.chainId))
         this.RouterContract = new RouterContract(this.web3, getAddr("RouterAddress", this.chainId))
     }
+
     isZeroAddress(address : EthAddress) : boolean{
         return address.toLowerCase() === ZeroAddress
     }
+
     async getInformationFromInput (
-        fromToken : EthAddress,
-        toToken :EthAddress,
+        _fromToken : EthAddress,
+        _toToken :EthAddress,
         slippage : number,
         amountFrom : uint256
     ): Promise<SwapInfoIfInput>{
-        
+        let fromToken = convertHexStringToAddress(_fromToken);
+        let toToken = convertHexStringToAddress(_toToken);
         let path : EthAddress[] =[];
         let amountOut = "0" ;
-        let impact : number =0;
-        let minimumReceive = new Dec(0);
+        let impact = BigNumber(0);
+        let minimumReceive = BigNumber(0);
         let pairAddr = await this.FactoryContract.getPair(fromToken,toToken)
         let needUseMultihop = false;
+        let WBNBAddress = getAddr("WBNBAdress", this.chainId);
         if(!this.isZeroAddress(pairAddr))
         {
             let fromR;
@@ -98,24 +102,24 @@ export class SwapUtil {
              fromR = String(reserve[1])
              toR =String(reserve[0])
             }
-            let tmpImpact = new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR)));
+            let tmpImpact = BigNumber(amountFrom).div(BigNumber(amountFrom).plus(fromR));
             if(Number(tmpImpact) > 5/100)
             {
               needUseMultihop = true;
             }
             amountOut = String(amountOutFromContract[1]);
-            minimumReceive = (new Dec(amountOutFromContract[1]).mul(1-slippage).floor());
-            impact = Number(tmpImpact)
+            minimumReceive = (BigNumber(amountOutFromContract[1]).multipliedBy(1-slippage));
+            impact = tmpImpact
         }
-        if((this.isZeroAddress(pairAddr) || needUseMultihop ) &&(fromToken.toLowerCase() != getAddr("WBNBAdress", this.chainId).toLowerCase() &&  toToken.toLowerCase() !=  getAddr("WBNBAdress", this.chainId).toLowerCase()))
+        if((this.isZeroAddress(pairAddr) || needUseMultihop ) &&(fromToken.toLowerCase() != WBNBAddress.toLowerCase() &&  toToken.toLowerCase() !=  WBNBAddress.toLowerCase()))
         {
-            path = [fromToken, getAddr("WBNBAdress", this.chainId).toLowerCase(),toToken]
+            path = [fromToken, WBNBAddress, toToken]
             let amountOutFromContract  = await this.RouterContract.getAmountOut(amountFrom,path)
-            let pair1Addr = await this.FactoryContract.getPair(fromToken, getAddr("WBNBAdress", this.chainId).toLowerCase())
+            let pair1Addr = await this.FactoryContract.getPair(fromToken, WBNBAddress)
             let pair1Contract = new PairContract(this.web3,pair1Addr)
             const reserve  = await pair1Contract.getReserves();
             let fromR;
-            if(BigNumber(fromToken).isLessThan( getAddr("WBNBAdress", this.chainId).toLowerCase()))
+            if(BigNumber(fromToken).isLessThan( WBNBAddress))
             {
              fromR = reserve[0]
             }
@@ -124,32 +128,34 @@ export class SwapUtil {
              fromR = reserve[1]
             }
             amountOut = amountOutFromContract[2];
-            minimumReceive = (new Dec(amountOutFromContract[2]).mul(1-slippage).floor())
-            impact = Number(new Dec(amountFrom).div(new Dec(amountFrom).add(new Dec(fromR))))
+            minimumReceive = (BigNumber(amountOutFromContract[2]).multipliedBy(1-slippage))
+            impact = (BigNumber(amountFrom).div(BigNumber(amountFrom).plus(fromR)))
 
         }  
         return {
             amountIn : amountFrom,
             amountOut : amountOut,
-            minimumReceive: String(minimumReceive),
-            priceImpact: impact,
+            minimumReceive: minimumReceive.toFixed(0),
+            priceImpact: impact.toNumber(),
             path : path
         };
     }
 
     async getInformationFromOutput (
-      fromToken : EthAddress,
-      toToken :EthAddress,
+      _fromToken : EthAddress,
+      _toToken :EthAddress,
       slippage : number,
       amountTo: uint256
   ): Promise<SwapInfoIfOutput>{
-      
+      let fromToken = convertHexStringToAddress(_fromToken);
+      let toToken = convertHexStringToAddress(_toToken);
       let path : EthAddress[] =[];
       let amountIn :string = "0";
-      let impact : number =0;
-      let maximumSold ="0";
+      let impact = BigNumber(0);
+      let maximumSold = BigNumber(0);
       let pairAddr = await this.FactoryContract.getPair(fromToken,toToken)
       let needUseMultihop = false;
+      let WBNBAddress = getAddr("WBNBAdress", this.chainId);
       if(!this.isZeroAddress(pairAddr))
       {
           let fromR;
@@ -170,25 +176,25 @@ export class SwapUtil {
            toR =reserve[0]
           }
           
-          let tmpImpact =new Dec(amountTo).div(new Dec(toR).sub(new Dec(amountTo)))
+          let tmpImpact =BigNumber(amountTo).div(BigNumber(toR).minus(amountTo))
           if(Number(tmpImpact) > 5/100)
             needUseMultihop = true;
           amountIn = amountInFromContract[0];
-          maximumSold = new Dec(amountInFromContract[0]).mul(1+ slippage).floor().toFixed();
-          impact = Number(tmpImpact)
+          maximumSold = BigNumber(amountInFromContract[0]).multipliedBy(1+ slippage);
+          impact = tmpImpact
       }
-      if((this.isZeroAddress(pairAddr) || needUseMultihop ) && (fromToken.toLowerCase() != getAddr("WBNBAdress", this.chainId).toLowerCase() && toToken.toLowerCase() !=  getAddr("WBNBAdress", this.chainId).toLowerCase()))
+      if((this.isZeroAddress(pairAddr) || needUseMultihop ) && (fromToken.toLowerCase() != WBNBAddress.toLowerCase() && toToken.toLowerCase() !=  WBNBAddress.toLowerCase()))
       {
         
-          path = [fromToken, getAddr("WBNBAdress", this.chainId).toLowerCase(),toToken]
+          path = [fromToken, WBNBAddress,toToken]
           let amountInFromContract  = await this.RouterContract.getAmountIn(amountTo,path)
           
-          let pair1Addr = await this.FactoryContract.getPair( getAddr("WBNBAdress", this.chainId).toLowerCase(),toToken)
+          let pair1Addr = await this.FactoryContract.getPair( WBNBAddress,toToken)
           let pair1Contract = new PairContract(this.web3,pair1Addr)
           const reserve  = await pair1Contract.getReserves();
           let fromR;
           let toR;
-          if(BigNumber(fromToken).isLessThan( getAddr("WBNBAdress", this.chainId).toLowerCase()))
+          if(BigNumber(fromToken).isLessThan( WBNBAddress))
           {
            fromR = reserve[0]
            toR = reserve[1]
@@ -201,15 +207,15 @@ export class SwapUtil {
          
          
           amountIn = amountInFromContract[0];
-          maximumSold = (new Dec(amountInFromContract[0]).mul(1+slippage).floor().toFixed())
-          impact = Number(new Dec(amountTo).div(new Dec(toR).sub(new Dec(amountTo))))
+          maximumSold = BigNumber(amountInFromContract[0]).multipliedBy(1+slippage)
+          impact = (BigNumber(amountTo).div(BigNumber(toR).minus(amountTo)))
 
       }  
       return {
           amountIn : amountIn,
           amountOut : amountTo,
-          maximumSold: String(maximumSold),
-          priceImpact: impact,
+          maximumSold: maximumSold.toFixed(0),
+          priceImpact: impact.toNumber(),
           path : path
       };
   }

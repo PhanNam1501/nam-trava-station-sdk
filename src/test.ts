@@ -30,7 +30,7 @@ async function test() {
   // )
   // // const exec : any = await dfsWeb3.executeAction(a);
   // console.log(encodeForRecipe(a));
-  const r = new dfs.Recipe("Auction Recipe", [
+  const r = new dfs.Recipe("Auction Recipe", 56, [
   
     new dfs.actions.trava.TravaAuctionCreateAuction(
       "86",

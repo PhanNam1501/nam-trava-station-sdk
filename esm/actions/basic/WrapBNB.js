@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,21 +7,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.WrapBnbAction = void 0;
-const Action_1 = require("../../Action");
-const addresses_1 = require("../../addresses");
+import { Action } from '../../Action';
+import { getAddr } from '../../addresses';
 /**
  * Wraps a specified amount of ETH from the wallet to WETH on the recipe
  *
  * @category BasicActions
  */
-class WrapBnbAction extends Action_1.Action {
+export class WrapBnbAction extends Action {
     /**
      * @param amount Wrap amount
      */
     constructor(amount, contractAddress) {
-        const _contractAddress = typeof contractAddress === "undefined" ? (0, addresses_1.getAddr)('WrapBnb') : contractAddress;
+        const _contractAddress = typeof contractAddress === "undefined" ? getAddr('WrapBnb') : contractAddress;
         super('WrapBnb', _contractAddress, //getAddr('WrapBnb'),
         ['uint256'], [amount]);
     }
@@ -32,4 +29,3 @@ class WrapBnbAction extends Action_1.Action {
         });
     }
 }
-exports.WrapBnbAction = WrapBnbAction;

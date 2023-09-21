@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,12 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const _1 = __importDefault(require("."));
-const decimal_js_1 = __importDefault(require("decimal.js"));
+import dfs from ".";
+import Dec from "decimal.js";
 function test() {
     return __awaiter(this, void 0, void 0, function* () {
         // const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545");
@@ -43,8 +38,8 @@ function test() {
         // )
         // // const exec : any = await dfsWeb3.executeAction(a);
         // console.log(encodeForRecipe(a));
-        const r = new _1.default.Recipe("Auction Recipe", [
-            new _1.default.actions.trava.TravaAuctionCreateAuction("86", new decimal_js_1.default("1000")
+        const r = new dfs.Recipe("Auction Recipe", 56, [
+            new dfs.actions.trava.TravaAuctionCreateAuction("86", new Dec("1000")
                 .mul(Math.pow(10, 18))
                 .floor()
                 .toString(), "172800", "0", "0", "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43"),

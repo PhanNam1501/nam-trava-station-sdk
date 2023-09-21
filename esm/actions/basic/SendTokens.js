@@ -1,21 +1,18 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SendTokensAction = void 0;
-const Action_1 = require("../../Action");
-const addresses_1 = require("../../addresses");
+import { Action } from '../../Action';
+import { getAddr } from '../../addresses';
 /**
  * Transfers specified tokens from recipe (DsProxy) to specified addresses
  *
  * @category BasicActions
  */
-class SendTokensAction extends Action_1.Action {
+export class SendTokensAction extends Action {
     /**
      * @param tokens Token addressess
      * @param receivers Transfer recipients
      * @param amounts Transfer amounts (-1 for whole Recipe (DsProxy) balance)
      */
     constructor(tokens, receivers, amounts, contractAddress) {
-        const _contractAddress = typeof contractAddress === "undefined" ? (0, addresses_1.getAddr)('SendTokens') : contractAddress;
+        const _contractAddress = typeof contractAddress === "undefined" ? getAddr('SendTokens') : contractAddress;
         super('SendTokens', _contractAddress, //getAddr('SendTokens'),
         [
             'address[]',
@@ -34,4 +31,3 @@ class SendTokensAction extends Action_1.Action {
         }
     }
 }
-exports.SendTokensAction = SendTokensAction;

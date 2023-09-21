@@ -1,4 +1,5 @@
 // import Web3 from "web3";
+import BigNumber from "bignumber.js";
 import { SwapUtil } from "../../src/SwapUtils";
 import { JsonRpcProvider } from "ethers";
 // import Decimal from "decimal.js";
@@ -145,14 +146,14 @@ async function test() {
 
   let pair;
   let info;
-  for (let i = 0; i < 1; i++) {
-    for (let j = 1; j < listToken.length; j++) {
+  for (let i = 1; i < listToken.length; i++) {
+    for (let j = 0; j < 1; j++) {
       pair = await swapUtil.FactoryContract.getPair(listToken[i].address, listToken[j].address);
       console.log(listToken[i].name + "-" + listToken[j].name + " pair address is", pair)
       // console.log("Is " + listToken[i].name + "-" + listToken[j].name + " zero ", swapUtil.isZeroAddress(pair))
       // if(!swapUtil.isZeroAddress(pair)) {
       console.log("Test GetInformation")
-      info = await swapUtil.getInformationFromInput(listToken[i].address, listToken[j].address, 0.5 / 100, "100000000000");
+      info = await swapUtil.getInformationFromInput(listToken[i].address, listToken[j].address, 0.5 / 100, BigNumber(10**25).toFixed(0));
       console.log(info)
     }
   }
