@@ -7,6 +7,8 @@ export * from "./market/TravaBorrow";
 export * from "./market/TravaRepay";
 export * from "./market/TravaSupply";
 export * from "./market/TravaWithdraw";
+export * from "./market/TravaClaimRewards";
+export * from "./market/TravaConvertRewards";
 export * from "./staking/TravaStakingStake";
 export * from "./staking/TravaStakingRedeem";
 export * from "./staking/TravaStakingClaimRewards";

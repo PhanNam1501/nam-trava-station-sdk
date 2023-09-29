@@ -1,26 +1,69 @@
 # Table of contents
-1. [TRAVA STATION SDK](#TRAVA-STATION-SDK)
-    + [Utilities](#Utilities)
-    + [Trava Pools](#Trava-Pools)
-    + [Trava NFT Marketplace](#Trav-NFT-Marketplace)
-    + [Trava NFT Utilites](#Trava-NFT-Utilites)
-    + [Execute actions](#Execute-actions)
-    + [ABI IDSProxy Contract](#ABI-IDSProxy-Contract)
-2. [TRAVA SIMULATION ROUTE](#TRAVA-SIMULATION-ROUTE)
-    + [Initialize state](#Initialize-state)
-        + [Các action liên quan đến token](#các-action-liên-quan-đến-token)
-        + [Các action liên quan đến Pools](#các-action-liên-quan-đến-pools-deposit-borrow-withdraw-repay)
-        + [Các action liên quan đến NFT](#các-action-liên-qua-đến-nft)
-    + [Simulate state](#Simulate-state)
-        + [Simulate Utilities Actions](#simulate-utilities-actions)
-        + [Simulate Trava Pools Actions](#simulate-trava-pools-actions)
-        + [Simulate TravaNFT MarketPlace Actions](#simulate-trava-nft-marketplace)
-        + [Simulate TravaNFT Utilities Actions](#simulate-trava-nft-utilities)
-3. [Approve token](#Approve-token)
-    + [Approve ERCE20 token](#Approve-ERCE20-token)
-    + [Approve Armoury Contract](#Approve-Armory-Contract)
-    + [Approve Knight Contract](#Approve-Knight-Contract)
-    + [Approve token trong các Action](#Approve-token-trong-các-Action)
+- [Table of contents](#table-of-contents)
+- [TRAVA STATION SDK](#trava-station-sdk)
+  - [Utilities](#utilities)
+    - [Pull token](#pull-token)
+    - [Send token](#send-token)
+    - [Wrap token](#wrap-token)
+    - [Unwrap token](#unwrap-token)
+    - [Swap](#swap)
+  - [Trava Pools](#trava-pools)
+    - [Deposit](#deposit)
+    - [Borrow](#borrow)
+    - [Repay](#repay)
+    - [Withdraw](#withdraw)
+    - [claimRewards](#claimrewards)
+    - [convertRewards](#convertrewards)
+  - [Trava Staking](#trava-staking)
+    - [Stake](#stake)
+    - [Redeem (Withdraw)](#redeem-withdraw)
+    - [Claim](#claim)
+  - [Trava NFT Marketplace](#trava-nft-marketplace)
+    - [Buy](#buy)
+    - [Create Sale](#create-sale)
+    - [Cancel sale](#cancel-sale)
+  - [Trava NFT Utilites](#trava-nft-utilites)
+    - [Transfer armoury](#transfer-armoury)
+    - [Transfer Collection](#transfer-collection)
+  - [Execute actions](#execute-actions)
+  - [ABI IDSProxy Contract](#abi-idsproxy-contract)
+- [TRAVA SIMULATION ROUTE](#trava-simulation-route)
+  - [Initialize state](#initialize-state)
+    - [Các action liên quan đến token](#các-action-liên-quan-đến-token)
+    - [Các action liên quan đến pools: deposit, borrow, withdraw, repay](#các-action-liên-quan-đến-pools-deposit-borrow-withdraw-repay)
+    - [Các action liên qua đến nft](#các-action-liên-qua-đến-nft)
+  - [Simulate state](#simulate-state)
+    - [Simulate Utilities actions](#simulate-utilities-actions)
+      - [Pull token](#pull-token-1)
+    - [Sendtoken](#sendtoken)
+    - [Wrap](#wrap)
+    - [Unwrap](#unwrap)
+    - [Swap](#swap-1)
+  - [Simulate Trava Pools actions](#simulate-trava-pools-actions)
+    - [Deposit](#deposit-1)
+    - [Borrow](#borrow-1)
+    - [Repay](#repay-1)
+    - [Withdraw](#withdraw-1)
+  - [Simulate Trava NFT Marketplace](#simulate-trava-nft-marketplace)
+    - [Buy NFT](#buy-nft)
+    - [Create order NFT](#create-order-nft)
+    - [Cancel order](#cancel-order)
+  - [Simulate Trava NFT Utilities](#simulate-trava-nft-utilities)
+    - [Transfer armoury](#transfer-armoury-1)
+    - [Transfer collection](#transfer-collection-1)
+- [Approve token](#approve-token)
+  - [Approve ERCE20 token](#approve-erce20-token)
+    - [ABI contract ERC20 token](#abi-contract-erc20-token)
+    - [Cách approve token](#cách-approve-token)
+  - [Approve Armory Contract](#approve-armory-contract)
+    - [ABI contract Armoury](#abi-contract-armoury)
+    - [Approve armoury](#approve-armoury)
+  - [Approve Knight Contract](#approve-knight-contract)
+    - [ABI Knight Contract](#abi-knight-contract)
+    - [Approve Knight](#approve-knight)
+  - [Approve token trong các Action](#approve-token-trong-các-action)
+    - [Cách approve](#cách-approve)
+    - [Các actions cần approve](#các-actions-cần-approve)
 # TRAVA STATION SDK
 ```
 import {actions} from "trava-station-sdk"
@@ -114,6 +157,61 @@ const trava_withdraw_action = new actions.trava.TravaWithdraw(
     token,
     amount,
     to
+)
+```
+### claimRewards
+```
+asset = await getListTDTokenRewardsAddress(appState);
+amount = MAX_UINT256;
+```
+
+```
+const trava_withdraw_action = new actions.trava.TravaClaimRewards(
+    asset,
+    amount,
+    to,
+    contractAddress
+)
+```
+### convertRewards
+```
+amount = MAX_UINT256;
+```
+```
+const trava_withdraw_action = new actions.trava.TravaConvertRewards(
+    from,
+    amount,
+    to,
+    contractAddress
+)
+
+```
+## Trava Staking
+### Stake
+```
+const trava_staking_stake_action = new actions.trava.TravaStakingStake(
+  stakingPoolAddress,
+  smartWalletAddress,
+  amount,
+  contractAddress
+)
+```
+### Redeem (Withdraw)
+```
+const trava_staking_redeem_action = new actions.trava.TravaStakingRedeem(
+  stakingPoolAddress,
+  to,
+  amount,
+  contractAddress
+)
+```
+### Claim
+```
+const trava_staking_claim_action = new actions.trava.TravaStakingClaimRewards(
+  stakingPoolAddress,
+  to,
+  MAX_UINT256,
+  contractAddress
 )
 ```
 ## Trava NFT Marketplace
