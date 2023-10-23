@@ -1,7 +1,7 @@
-import { Action } from '../../Action';
-import { requireAddress } from '../../utils/general';
-import { getAddr } from '../../addresses';
-import { EthAddress, uint256 } from '../../types';
+import { Action } from '../../../../../Action';
+import { requireAddress } from '../../../../../utils/general';
+import { getAddr } from '../../../../../addresses';
+import { EthAddress, uint256 } from '../../../../../types';
 
 /**
  * TravaAuctionCreateAuction - Create NFT Auction in Trava

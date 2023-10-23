@@ -1,5 +1,5 @@
-import { Action } from '../../../../Action';
-import { EthAddress, uint256 } from '../../../../types';
+import { Action } from '../../../../../Action';
+import { EthAddress, uint256 } from '../../../../../types';
 /**
  * TravaNFTBuy - Buy NFT in Trava
  *

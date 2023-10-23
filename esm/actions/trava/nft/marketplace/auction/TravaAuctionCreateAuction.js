@@ -1,5 +1,5 @@
-import { Action } from '../../Action';
-import { getAddr } from '../../addresses';
+import { Action } from '../../../../../Action';
+import { getAddr } from '../../../../../addresses';
 /**
  * TravaAuctionCreateAuction - Create NFT Auction in Trava
  *

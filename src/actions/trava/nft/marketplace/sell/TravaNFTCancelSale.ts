@@ -1,6 +1,6 @@
-import { Action } from '../../../../Action';
-import { getAddr } from '../../../../addresses';
-import { EthAddress, uint256 } from '../../../../types';
+import { Action } from '../../../../../Action';
+import { getAddr } from '../../../../../addresses';
+import { EthAddress, uint256 } from '../../../../../types';
 
 /**
  * TravaNFTCreateSale - Sell NFT in Trava
