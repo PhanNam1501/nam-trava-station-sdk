@@ -18,10 +18,16 @@
     - [Stake](#stake)
     - [Redeem (Withdraw)](#redeem-withdraw)
     - [Claim](#claim)
-  - [Trava NFT Marketplace](#trava-nft-marketplace)
+  - [Trava NFT Marketplace / Sell](#trava-nft-marketplace--sell)
     - [Buy](#buy)
     - [Create Sale](#create-sale)
     - [Cancel sale](#cancel-sale)
+  - [Trava NFT Marketplace / Auction](#trava-nft-marketplace--auction)
+    - [Create Auction](#create-auction)
+    - [Cancel Auction](#cancel-auction)
+    - [Make bid Auction](#make-bid-auction)
+    - [Edit Auction Price](#edit-auction-price)
+    - [Finalize Auction](#finalize-auction)
   - [Trava NFT Utilites](#trava-nft-utilites)
     - [Transfer armoury](#transfer-armoury)
     - [Transfer Collection](#transfer-collection)
@@ -30,27 +36,6 @@
 - [TRAVA SIMULATION ROUTE](#trava-simulation-route)
   - [Initialize state](#initialize-state)
     - [Các action liên quan đến token](#các-action-liên-quan-đến-token)
-    - [Các action liên quan đến pools: deposit, borrow, withdraw, repay](#các-action-liên-quan-đến-pools-deposit-borrow-withdraw-repay)
-    - [Các action liên qua đến nft](#các-action-liên-qua-đến-nft)
-  - [Simulate state](#simulate-state)
-    - [Simulate Utilities actions](#simulate-utilities-actions)
-      - [Pull token](#pull-token-1)
-    - [Sendtoken](#sendtoken)
-    - [Wrap](#wrap)
-    - [Unwrap](#unwrap)
-    - [Swap](#swap-1)
-  - [Simulate Trava Pools actions](#simulate-trava-pools-actions)
-    - [Deposit](#deposit-1)
-    - [Borrow](#borrow-1)
-    - [Repay](#repay-1)
-    - [Withdraw](#withdraw-1)
-  - [Simulate Trava NFT Marketplace](#simulate-trava-nft-marketplace)
-    - [Buy NFT](#buy-nft)
-    - [Create order NFT](#create-order-nft)
-    - [Cancel order](#cancel-order)
-  - [Simulate Trava NFT Utilities](#simulate-trava-nft-utilities)
-    - [Transfer armoury](#transfer-armoury-1)
-    - [Transfer collection](#transfer-collection-1)
 - [Approve token](#approve-token)
   - [Approve ERCE20 token](#approve-erce20-token)
     - [ABI contract ERC20 token](#abi-contract-erc20-token)
@@ -214,7 +199,7 @@ const trava_staking_claim_action = new actions.trava.TravaStakingClaimRewards(
   contractAddress
 )
 ```
-## Trava NFT Marketplace
+## Trava NFT Marketplace / Sell
 ### Buy
 ```
 const trava_nft_buy_action = new actions.trava.TravaNFTBuy(
@@ -239,6 +224,46 @@ const trava_nft_cancel_sale_action = new actions.trava.TravaNFTCancelSale(
 )
 ```
 
+## Trava NFT Marketplace / Auction
+### Create Auction
+```
+const trava_nft_auction_create_action = new actions.trava.TravaNFTAuctionCreateAuction(
+    tokenId,
+    startingBid,
+    duration (s), 
+    ceilingPrice,
+    method
+)
+```
+### Cancel Auction
+```
+const trava_nft_auction_cancel_action = new actions.trava.TravaNFTAuctionCancelAuction(
+    tokenId,
+    to
+)
+```
+### Make bid Auction
+```
+const trava_nft_auction_make_bid = new actions.trava.TravaNFTAuctionMakeBid(
+    tokenId,
+    bidPrice, 
+    from
+)
+```
+### Edit Auction Price
+```
+const trava_nft_auction_eidt_action_price = new actions.trava.TravaNFTAuctionEditAuctionPrice(
+    tokenId,
+    startingBid
+)
+```
+### Finalize Auction
+```
+const trava_nft_auction_finalize_action = new actions.trava.TravaNFTAuctionFinalizeAuction(
+    tokenId,
+    to
+)
+```
 ## Trava NFT Utilites
 ### Transfer armoury
 ```
@@ -368,153 +393,6 @@ appState2 = await updateUserEthBalance(
     appState1
 )
 ```
-
-### Các action liên quan đến pools: deposit, borrow, withdraw, repay
-Khi sử dụng các action trong pools, thì thực hiện update state của user về pool này
-```
-appState3 = await updateTravaLPInfo(
-    appState2,
-    market
-)
-```
-
-### Các action liên qua đến nft
-nếu không tương tác vs marketplace
-```
-appState4 = await UpdateNFTBalance(
-    appState3
-)
-```
-
-nếu có tương tác với marketplace:
-```
-appState4 = await UpdateNFTBalance(
-    appState3
-)
-appState5 = await updateNFTState(
-    appState4
-)
-```
-## Simulate state
-Sau khi init state xong. Với mỗi state, các simulate khác nhau
-### Simulate Utilities actions
-#### Pull token
-```
-appState6 = await simulateSendToken(
-    appState5,
-    tokenAddress,
-    to: smart wallet address,
-    amount: number | string
-)
-```
-### Sendtoken
-```
-appState7 = await simulateSendToken(
-    appState6,
-    tokenAddress,
-    to: main wallet address,
-    amount: number | string
-)
-```
-### Wrap
-```
-appState8 = await simulateWrap(
-    appState7,
-    amount: number | string
-)
-```
-### Unwrap
-```
-appState9 = await simulateUnwrap(
-    appState8,
-    amount: number | string
-)
-```
-### Swap
-```
-appState10 = await simulateSwap(
-    appState9,
-    fromToken: token 1 address,
-    toToken: token2 address,
-    fromAmount: amount of token 1 will swap
-    toAmount: amount of token 2 will receive
-)
-```
-## Simulate Trava Pools actions
-### Deposit
-```
-appState11 = await SimulationSupply(
-    appState10,
-    tokenAddress,
-    amount: string
-)
-```
-### Borrow
-```
-appState12 = await SimulationBorrow(
-    appState11,
-    tokenAddress,
-    amount: string
-)
-```
-### Repay
-```
-appState13 = await SimulationRepay(
-    appState12,
-    tokenAddress,
-    amount: string
-)
-```
-### Withdraw
-```
-appState14 = await SimulationWWithdraw(
-    appState13,
-    tokenAddress,
-    amount
-)
-```
-## Simulate Trava NFT Marketplace
-### Buy NFT
-```
-appState15 = await simulateTravaNFTBuy(
-    appState14,
-    tokenId,
-    from, 
-    to
-)
-```
-### Create order NFT
-```
-appState16 = await simulateTravaNFTSell(
-    appState15,
-    tokenId,
-    price: numer | String, 
-    from: String
-)
-```
-### Cancel order
-## Simulate Trava NFT Utilities
-### Transfer armoury
-```
-appState18 = await simulateTravaNFTTransfer(
-    appState17,
-    from: address sender,
-    to: address receiver,
-    tokenId: nummber | string
-    contract: NFT_CORE address
-)
-```
-### Transfer collection
-```
-appState19 = await simulateTravaNFTTransfer(
-    appState18,
-    from: address sender,
-    to: address receiver,
-    tokenId: nummber | string
-    contract: NFT_COLLECTION address
-)
-```
-
 # Approve token
 ## Approve ERCE20 token
 ### ABI contract ERC20 token

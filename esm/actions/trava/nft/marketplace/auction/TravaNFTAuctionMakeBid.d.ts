@@ -1,10 +1,10 @@
 import { Action } from '../../../../../Action';
 import { EthAddress, uint256 } from '../../../../../types';
 /**
- * TravaAuctionMakeBid
+ * TravaNFTAuctionMakeBid
  *
  * @category Trava
  */
-export declare class TravaAuctionMakeBid extends Action {
+export declare class TravaNFTAuctionMakeBid extends Action {
     constructor(tokenId: uint256, bidPrice: uint256, from?: EthAddress, contractAddress?: string);
 }

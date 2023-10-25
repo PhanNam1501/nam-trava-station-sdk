@@ -32,7 +32,7 @@ async function test() {
   // console.log(encodeForRecipe(a));
   const r = new dfs.Recipe("Auction Recipe", 56, [
   
-    new dfs.actions.trava.TravaAuctionCreateAuction(
+    new dfs.actions.trava.TravaNFTAuctionCreateAuction(
       "86",
       new Dec("1000")
         .mul(10 ** 18)

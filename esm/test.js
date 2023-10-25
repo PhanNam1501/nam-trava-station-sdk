@@ -39,7 +39,7 @@ function test() {
         // // const exec : any = await dfsWeb3.executeAction(a);
         // console.log(encodeForRecipe(a));
         const r = new dfs.Recipe("Auction Recipe", 56, [
-            new dfs.actions.trava.TravaAuctionCreateAuction("86", new Dec("1000")
+            new dfs.actions.trava.TravaNFTAuctionCreateAuction("86", new Dec("1000")
                 .mul(Math.pow(10, 18))
                 .floor()
                 .toString(), "172800", "0", "0", "0x595622cBd0Fc4727DF476a1172AdA30A9dDf8F43"),

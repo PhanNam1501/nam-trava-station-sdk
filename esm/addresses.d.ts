@@ -9,6 +9,11 @@ export declare const listAddr: {
         TravaNFTBuy: string;
         TravaNFTCreateSale: string;
         TravaNFTCancelSale: string;
+        TravaNFTAuctionCancelAuction: string;
+        TravaNFTAuctionCreateAuction: string;
+        TravaNFTAuctionEditAuctionPrice: string;
+        TravaNFTAuctionFinalizeAuction: string;
+        TravaNFTAuctionMakeBid: string;
         PancakeSwapV2: string;
         PullToken: string;
         WrapBnb: string;
@@ -51,6 +56,11 @@ export declare const listAddr: {
         TravaNFTBuy: string;
         TravaNFTCreateSale: string;
         TravaNFTCancelSale: string;
+        TravaNFTAuctionCancelAuction: string;
+        TravaNFTAuctionCreateAuction: string;
+        TravaNFTAuctionEditAuctionPrice: string;
+        TravaNFTAuctionFinalizeAuction: string;
+        TravaNFTAuctionMakeBid: string;
         PancakeSwapV2: string;
         PullToken: string;
         WrapBnb: string;
