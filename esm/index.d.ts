@@ -9,6 +9,9 @@ import { getAddr } from './addresses';
 export type { EthAddress, Config, Network, Networks, bytes32, bytes, uint256, uint160, uint128, uint80, uint64, uint24, uint16, uint8, int24, };
 declare const listAddressesAllChains: {
     [x: number]: {
+        TravaAuctionFinalizeAuction: string;
+        TravaAuctionEditAuctionPrice: string;
+        TravaAuctionCancelAuction: string;
         TravaAuctionCreateAuction: string;
         TravaAuctionMakeBid: string;
         RecipeExecutor: string;
@@ -78,6 +81,9 @@ declare const listAddressesAllChains: {
         RouterAddress: string;
         FactoryAddress: string;
         WBNBAdress: string;
+        TravaAuctionFinalizeAuction?: undefined;
+        TravaAuctionEditAuctionPrice?: undefined;
+        TravaAuctionCancelAuction?: undefined;
         USDCAddress?: undefined;
         USDTAddress?: undefined;
         DAIAddress?: undefined;
@@ -95,6 +101,9 @@ declare const listAddressesAllChains: {
     };
 };
 declare const listAddresses: (chainId?: null) => {
+    TravaAuctionFinalizeAuction: string;
+    TravaAuctionEditAuctionPrice: string;
+    TravaAuctionCancelAuction: string;
     TravaAuctionCreateAuction: string;
     TravaAuctionMakeBid: string;
     RecipeExecutor: string;
@@ -164,6 +173,9 @@ declare const listAddresses: (chainId?: null) => {
     RouterAddress: string;
     FactoryAddress: string;
     WBNBAdress: string;
+    TravaAuctionFinalizeAuction?: undefined;
+    TravaAuctionEditAuctionPrice?: undefined;
+    TravaAuctionCancelAuction?: undefined;
     USDCAddress?: undefined;
     USDTAddress?: undefined;
     DAIAddress?: undefined;
@@ -190,6 +202,9 @@ declare const _default: {
     CONFIG: Config;
     networks: Networks;
     listAddresses: (chainId?: null) => {
+        TravaAuctionFinalizeAuction: string;
+        TravaAuctionEditAuctionPrice: string;
+        TravaAuctionCancelAuction: string;
         TravaAuctionCreateAuction: string;
         TravaAuctionMakeBid: string;
         RecipeExecutor: string;
@@ -259,6 +274,9 @@ declare const _default: {
         RouterAddress: string;
         FactoryAddress: string;
         WBNBAdress: string;
+        TravaAuctionFinalizeAuction?: undefined;
+        TravaAuctionEditAuctionPrice?: undefined;
+        TravaAuctionCancelAuction?: undefined;
         USDCAddress?: undefined;
         USDTAddress?: undefined;
         DAIAddress?: undefined;
@@ -276,6 +294,9 @@ declare const _default: {
     };
     listAddressesAllChains: {
         [x: number]: {
+            TravaAuctionFinalizeAuction: string;
+            TravaAuctionEditAuctionPrice: string;
+            TravaAuctionCancelAuction: string;
             TravaAuctionCreateAuction: string;
             TravaAuctionMakeBid: string;
             RecipeExecutor: string;
@@ -345,6 +366,9 @@ declare const _default: {
             RouterAddress: string;
             FactoryAddress: string;
             WBNBAdress: string;
+            TravaAuctionFinalizeAuction?: undefined;
+            TravaAuctionEditAuctionPrice?: undefined;
+            TravaAuctionCancelAuction?: undefined;
             USDCAddress?: undefined;
             USDTAddress?: undefined;
             DAIAddress?: undefined;

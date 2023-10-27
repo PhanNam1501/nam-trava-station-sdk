@@ -3,7 +3,10 @@ import { toChecksumAddress } from 'ethereumjs-util';
 export const listAddr = {
     [NETWORKS.bscTestnet.chainId]: {
         //Action address
-        TravaAuctionCreateAuction: "0xadD3754309A7bC4c74E58A9AAb8463a591047123",
+        TravaAuctionFinalizeAuction: "0x99Fc64FB9375A03e8ad7f5E7c45cd8BF87332368",
+        TravaAuctionEditAuctionPrice: "0x925Fa79927fBb9eB400f9D510F196db1C5Ec9340",
+        TravaAuctionCancelAuction: "0xA8eB406B2288F3AdDFa3239e3aA9775982d1824F",
+        TravaAuctionCreateAuction: "0xeb7a05f382268b36D3c3B05F84Ee4dA213a43f14",
         TravaAuctionMakeBid: "0xD291b6b7658a016de5a95240F36eea4fb481d228",
         RecipeExecutor: "0xc3A1B8ec1F11A02410e0e1Ef0b34BCD2fBeDC54a",
         DFSProxyRegistry: "0xddAe0A61D662711EC279686dE17EfB1F57253ab5",

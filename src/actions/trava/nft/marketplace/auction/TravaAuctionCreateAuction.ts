@@ -11,7 +11,7 @@ import { EthAddress, uint256 } from '../../../../../types';
 export class TravaAuctionCreateAuction extends Action {
   constructor(tokenId:uint256, startingBid:uint256, duration:uint256, ceilingPrice:uint256, method:uint256, from:EthAddress = getAddr('Empty'), contractAddress?: string) {
     const _contractAddress: string =
-      typeof contractAddress === "undefined" ? getAddr('TravaAuctionCreateAuction') : contractAddress;
+      typeof contractAddress === "undefined" ? getAddr('TravaAuctionFinalizeAuction') : contractAddress;
 
     super(
       'TravaNFTAuctionCreateAuction',
