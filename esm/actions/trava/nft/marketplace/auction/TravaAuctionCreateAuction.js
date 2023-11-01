@@ -7,7 +7,7 @@ import { getAddr } from '../../../../../addresses';
  */
 export class TravaAuctionCreateAuction extends Action {
     constructor(tokenId, startingBid, duration, ceilingPrice, method, from = getAddr('Empty'), contractAddress) {
-        const _contractAddress = typeof contractAddress === "undefined" ? getAddr('TravaAuctionCreateAuction') : contractAddress;
+        const _contractAddress = typeof contractAddress === "undefined" ? getAddr('TravaAuctionFinalizeAuction') : contractAddress;
         super('TravaNFTAuctionCreateAuction', _contractAddress, //getAddr('TravaAuctionCreateAuction'),
         ["uint256", "uint256", "uint256", "uint256", "uint256", "address"], [tokenId, startingBid, duration, ceilingPrice, method, from]);
     }
