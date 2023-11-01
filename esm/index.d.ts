@@ -9,6 +9,7 @@ import { getAddr } from './addresses';
 export type { EthAddress, Config, Network, Networks, bytes32, bytes, uint256, uint160, uint128, uint80, uint64, uint24, uint16, uint8, int24, };
 declare const listAddressesAllChains: {
     [x: number]: {
+        TravaGovernanceIncreaseUnlockTime: string;
         TravaGovernanceIncreaseLock: string;
         TravaGovernanceCreateLock: string;
         TravaAuctionFinalizeAuction: string;
@@ -83,6 +84,7 @@ declare const listAddressesAllChains: {
         RouterAddress: string;
         FactoryAddress: string;
         WBNBAdress: string;
+        TravaGovernanceIncreaseUnlockTime?: undefined;
         TravaGovernanceIncreaseLock?: undefined;
         TravaGovernanceCreateLock?: undefined;
         TravaAuctionFinalizeAuction?: undefined;
@@ -105,6 +107,7 @@ declare const listAddressesAllChains: {
     };
 };
 declare const listAddresses: (chainId?: null) => {
+    TravaGovernanceIncreaseUnlockTime: string;
     TravaGovernanceIncreaseLock: string;
     TravaGovernanceCreateLock: string;
     TravaAuctionFinalizeAuction: string;
@@ -179,6 +182,7 @@ declare const listAddresses: (chainId?: null) => {
     RouterAddress: string;
     FactoryAddress: string;
     WBNBAdress: string;
+    TravaGovernanceIncreaseUnlockTime?: undefined;
     TravaGovernanceIncreaseLock?: undefined;
     TravaGovernanceCreateLock?: undefined;
     TravaAuctionFinalizeAuction?: undefined;
@@ -210,6 +214,7 @@ declare const _default: {
     CONFIG: Config;
     networks: Networks;
     listAddresses: (chainId?: null) => {
+        TravaGovernanceIncreaseUnlockTime: string;
         TravaGovernanceIncreaseLock: string;
         TravaGovernanceCreateLock: string;
         TravaAuctionFinalizeAuction: string;
@@ -284,6 +289,7 @@ declare const _default: {
         RouterAddress: string;
         FactoryAddress: string;
         WBNBAdress: string;
+        TravaGovernanceIncreaseUnlockTime?: undefined;
         TravaGovernanceIncreaseLock?: undefined;
         TravaGovernanceCreateLock?: undefined;
         TravaAuctionFinalizeAuction?: undefined;
@@ -306,6 +312,7 @@ declare const _default: {
     };
     listAddressesAllChains: {
         [x: number]: {
+            TravaGovernanceIncreaseUnlockTime: string;
             TravaGovernanceIncreaseLock: string;
             TravaGovernanceCreateLock: string;
             TravaAuctionFinalizeAuction: string;
@@ -380,6 +387,7 @@ declare const _default: {
             RouterAddress: string;
             FactoryAddress: string;
             WBNBAdress: string;
+            TravaGovernanceIncreaseUnlockTime?: undefined;
             TravaGovernanceIncreaseLock?: undefined;
             TravaGovernanceCreateLock?: undefined;
             TravaAuctionFinalizeAuction?: undefined;

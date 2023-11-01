@@ -21,7 +21,7 @@ export class TravaGovernanceIncreaseLock extends Action {
 
     super(
       "TravaGovernanceIncreaseLock",
-      _contractAddress, //getAddr("TravaGovernanceCreateLock"),
+      _contractAddress, //getAddr("TravaGovernanceIncreaseLock"),
       ["address", "uint256", "uint256" , "address"],
       [token, tokenId, value , from]
     );

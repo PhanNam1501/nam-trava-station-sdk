@@ -1,6 +1,7 @@
 import { EthAddress } from "./types";
 export declare const listAddr: {
     [x: number]: {
+        TravaGovernanceIncreaseUnlockTime: string;
         TravaGovernanceIncreaseLock: string;
         TravaGovernanceCreateLock: string;
         TravaAuctionFinalizeAuction: string;
@@ -75,6 +76,7 @@ export declare const listAddr: {
         RouterAddress: string;
         FactoryAddress: string;
         WBNBAdress: string;
+        TravaGovernanceIncreaseUnlockTime?: undefined;
         TravaGovernanceIncreaseLock?: undefined;
         TravaGovernanceCreateLock?: undefined;
         TravaAuctionFinalizeAuction?: undefined;
