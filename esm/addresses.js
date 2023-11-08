@@ -63,7 +63,7 @@ export const listAddr = {
         TravaNFTCreateSale: "0xC4FbE950EfE866bcF1518EE04cFd53192Da5708e",
         TravaNFTCancelSale: "0x507ee79174a7951F21E363eca00f68d01C69BB80",
         TravaNFTAuctionCancelAuction: "0xE9072a41E66B4a44C7c60fBA407b36C0F3044656",
-        TravaNFTAuctionCreateAuction: "0xeb7a05f382268b36D3c3B05F84Ee4dA213a43f14",
+        TravaNFTAuctionCreateAuction: "0x53E08293A48092C7715FFF75C4f7708A4043AEd7",
         TravaNFTAuctionEditAuctionPrice: "0x6B4e1833E64c10544f870c1c92Db70f66b4685d9",
         TravaNFTAuctionFinalizeAuction: "0x710896b925dBBadAb6152fB0ec4602374B8B34DF",
         TravaNFTAuctionMakeBid: "0x1F3bE2e857333bf15c8A3b8C8eB1394b9e6F331E",
