@@ -264,6 +264,46 @@ const trava_nft_auction_finalize_action = new actions.trava.TravaNFTAuctionFinal
     to
 )
 ```
+
+## Trava NFT Mission / Heuristic Farming
+### Trava heuristic farming stake
+```
+const trava_nft_heuristic_farming_stake = new actions.trava.TravaNFTHeuristicFarmingStake(
+    heuristic farming address,
+    array<collection_id>,
+    level,
+    fromAddress,
+    contractAddress
+)
+```
+### Trava heuristic farming withdraw
+```
+const trava_nft_heuristic_farming_withdraw = new actions.trava.TravaNFTHeurisiticFarmingWithdraw(
+    heuristic farming address,
+    array<collection_id>,
+    level,
+    toAddress,
+    contractAddress
+)
+```
+### Trava heuristic farming claim reward
+```
+const trava_nft_heuristic_farming_claimRewards = new actions.trava.TravaNFTHeuristicFarmingClaimReward(
+    heuristic farming address,
+    array<collection_id>,
+    level,
+    contractAddress
+)
+```
+### Trava heuristic farming polish
+```
+const trava_nft_heuristic_farming_polish = new actions.trava.TravaNFTHeurisiticFarmingPolish(
+    heuristic farming address,
+    array<collection_id>,
+    level,
+    contractAddress
+)
+```
 ## Trava NFT Utilites
 ### Transfer armoury
 ```
