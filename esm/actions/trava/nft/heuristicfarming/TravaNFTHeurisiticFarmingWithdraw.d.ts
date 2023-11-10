@@ -5,6 +5,6 @@ import { EthAddress, uint128, bytes } from "../../../../types";
  *
  * @category Trava
  */
-export declare class TravaNFTHeurisiticFarmingWithdraw extends Action {
+export declare class TravaNFTHeuristicFarmingWithdraw extends Action {
     constructor(stakingVault: EthAddress, ids: bytes, level: uint128, to: EthAddress, contractAddress?: string);
 }

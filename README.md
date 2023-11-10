@@ -278,7 +278,7 @@ const trava_nft_heuristic_farming_stake = new actions.trava.TravaNFTHeuristicFar
 ```
 ### Trava heuristic farming withdraw
 ```
-const trava_nft_heuristic_farming_withdraw = new actions.trava.TravaNFTHeurisiticFarmingWithdraw(
+const trava_nft_heuristic_farming_withdraw = new actions.trava.TravaNFTheuristicFarmingWithdraw(
     heuristic farming address,
     array<collection_id>,
     level,
@@ -297,7 +297,7 @@ const trava_nft_heuristic_farming_claimRewards = new actions.trava.TravaNFTHeuri
 ```
 ### Trava heuristic farming polish
 ```
-const trava_nft_heuristic_farming_polish = new actions.trava.TravaNFTHeurisiticFarmingPolish(
+const trava_nft_heuristic_farming_polish = new actions.trava.TravaNFTheuristicFarmingPolish(
     heuristic farming address,
     array<collection_id>,
     level,

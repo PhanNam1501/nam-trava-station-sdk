@@ -7,7 +7,7 @@ import { EthAddress, uint256, uint128, bytes } from "../../../../types";
  *
  * @category Trava
  */
-export class TravaNFTHeurisiticFarmingWithdraw extends Action {
+export class TravaNFTHeuristicFarmingWithdraw extends Action {
   constructor(stakingVault: EthAddress, ids: bytes, level:uint128, to:EthAddress, contractAddress?: string) {
     const _contractAddress: string =
       typeof contractAddress === "undefined" ? getAddr('TravaNFTHeuristicFarmingWithdraw') : contractAddress;

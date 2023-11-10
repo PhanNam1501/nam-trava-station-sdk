@@ -5,7 +5,7 @@ import { getAddr } from "../../../../addresses";
  *
  * @category Trava
  */
-export class TravaNFTHeurisiticFarmingWithdraw extends Action {
+export class TravaNFTHeuristicFarmingWithdraw extends Action {
     constructor(stakingVault, ids, level, to, contractAddress) {
         const _contractAddress = typeof contractAddress === "undefined" ? getAddr('TravaNFTHeuristicFarmingWithdraw') : contractAddress;
         super("TravaNFTHeuristicFarmingWithdraw", _contractAddress, //getAddr("TravaNFTHeuristicFarmingWithdraw"),
