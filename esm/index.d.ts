@@ -9,6 +9,10 @@ import { getAddr } from './addresses';
 export type { EthAddress, Config, Network, Networks, bytes32, bytes, uint256, uint160, uint128, uint80, uint64, uint24, uint16, uint8, int24, };
 declare const listAddressesAllChains: {
     [x: number]: {
+        TravaNFTHeuristicFarmingPolish: string;
+        TravaNFTHeuristicFarmingWithdraw: string;
+        TravaNFTHeuristicFarmingClaimReward: string;
+        TravaNFTHeuristicFarmingStake: string;
         TravaAuctionCreateAuction: string;
         TravaAuctionMakeBid: string;
         RecipeExecutor: string;
@@ -88,6 +92,10 @@ declare const listAddressesAllChains: {
         RouterAddress: string;
         FactoryAddress: string;
         WBNBAdress: string;
+        TravaNFTHeuristicFarmingPolish?: undefined;
+        TravaNFTHeuristicFarmingWithdraw?: undefined;
+        TravaNFTHeuristicFarmingClaimReward?: undefined;
+        TravaNFTHeuristicFarmingStake?: undefined;
         USDCAddress?: undefined;
         USDTAddress?: undefined;
         DAIAddress?: undefined;
@@ -105,6 +113,10 @@ declare const listAddressesAllChains: {
     };
 };
 declare const listAddresses: (chainId?: null) => {
+    TravaNFTHeuristicFarmingPolish: string;
+    TravaNFTHeuristicFarmingWithdraw: string;
+    TravaNFTHeuristicFarmingClaimReward: string;
+    TravaNFTHeuristicFarmingStake: string;
     TravaAuctionCreateAuction: string;
     TravaAuctionMakeBid: string;
     RecipeExecutor: string;
@@ -184,6 +196,10 @@ declare const listAddresses: (chainId?: null) => {
     RouterAddress: string;
     FactoryAddress: string;
     WBNBAdress: string;
+    TravaNFTHeuristicFarmingPolish?: undefined;
+    TravaNFTHeuristicFarmingWithdraw?: undefined;
+    TravaNFTHeuristicFarmingClaimReward?: undefined;
+    TravaNFTHeuristicFarmingStake?: undefined;
     USDCAddress?: undefined;
     USDTAddress?: undefined;
     DAIAddress?: undefined;
@@ -210,6 +226,10 @@ declare const _default: {
     CONFIG: Config;
     networks: Networks;
     listAddresses: (chainId?: null) => {
+        TravaNFTHeuristicFarmingPolish: string;
+        TravaNFTHeuristicFarmingWithdraw: string;
+        TravaNFTHeuristicFarmingClaimReward: string;
+        TravaNFTHeuristicFarmingStake: string;
         TravaAuctionCreateAuction: string;
         TravaAuctionMakeBid: string;
         RecipeExecutor: string;
@@ -289,6 +309,10 @@ declare const _default: {
         RouterAddress: string;
         FactoryAddress: string;
         WBNBAdress: string;
+        TravaNFTHeuristicFarmingPolish?: undefined;
+        TravaNFTHeuristicFarmingWithdraw?: undefined;
+        TravaNFTHeuristicFarmingClaimReward?: undefined;
+        TravaNFTHeuristicFarmingStake?: undefined;
         USDCAddress?: undefined;
         USDTAddress?: undefined;
         DAIAddress?: undefined;
@@ -306,6 +330,10 @@ declare const _default: {
     };
     listAddressesAllChains: {
         [x: number]: {
+            TravaNFTHeuristicFarmingPolish: string;
+            TravaNFTHeuristicFarmingWithdraw: string;
+            TravaNFTHeuristicFarmingClaimReward: string;
+            TravaNFTHeuristicFarmingStake: string;
             TravaAuctionCreateAuction: string;
             TravaAuctionMakeBid: string;
             RecipeExecutor: string;
@@ -385,6 +413,10 @@ declare const _default: {
             RouterAddress: string;
             FactoryAddress: string;
             WBNBAdress: string;
+            TravaNFTHeuristicFarmingPolish?: undefined;
+            TravaNFTHeuristicFarmingWithdraw?: undefined;
+            TravaNFTHeuristicFarmingClaimReward?: undefined;
+            TravaNFTHeuristicFarmingStake?: undefined;
             USDCAddress?: undefined;
             USDTAddress?: undefined;
             DAIAddress?: undefined;

@@ -1,6 +1,10 @@
 import { EthAddress } from "./types";
 export declare const listAddr: {
     [x: number]: {
+        TravaNFTHeuristicFarmingPolish: string;
+        TravaNFTHeuristicFarmingWithdraw: string;
+        TravaNFTHeuristicFarmingClaimReward: string;
+        TravaNFTHeuristicFarmingStake: string;
         TravaAuctionCreateAuction: string;
         TravaAuctionMakeBid: string;
         RecipeExecutor: string;
@@ -80,6 +84,10 @@ export declare const listAddr: {
         RouterAddress: string;
         FactoryAddress: string;
         WBNBAdress: string;
+        TravaNFTHeuristicFarmingPolish?: undefined;
+        TravaNFTHeuristicFarmingWithdraw?: undefined;
+        TravaNFTHeuristicFarmingClaimReward?: undefined;
+        TravaNFTHeuristicFarmingStake?: undefined;
         USDCAddress?: undefined;
         USDTAddress?: undefined;
         DAIAddress?: undefined;
