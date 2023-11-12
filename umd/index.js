@@ -21148,11 +21148,11 @@ __webpack_require__.r(__webpack_exports__);
  * @category Trava
  */
 class TravaNFTVeTravaBuy extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
-  constructor(tokenId, to, contractAddress) {
+  constructor(tokenId, price, option, from, to, contractAddress) {
     var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('TravaNFTVeTravaBuy') : contractAddress;
     super("TravaNFTVeTravaBuy", _contractAddress,
     //getAddr('TravaNFTVeTravaBuy'),
-    ["uint256", "address"], [tokenId, to]);
+    ["uint256", "uint256", "uint256", "address", "address"], [tokenId, price, option, from, to]);
   }
 }
 
