@@ -5,6 +5,10 @@ import { toChecksumAddress } from 'ethereumjs-util';
 export const listAddr = {
   [NETWORKS.bscTestnet.chainId]: {
     //Action address
+    TravaNFTHeuristicFarmingPolish:"0x0891a7309d2071A94Eb59e8cf86AB8D9551c0DD8",
+    TravaNFTHeuristicFarmingWithdraw:"0xf3D4113C9Bbf3E3C85FC9a90fCDD6E6d6Da072E7",
+    TravaNFTHeuristicFarmingClaimReward:"0x3B8e4Fe0e9893122B54cb075D1291e29918d2457",
+    TravaNFTHeuristicFarmingStake:"0x40B45b24f0cc21323f42F9e4CFf76226c8366f9a",
     TravaAuctionCreateAuction: "0xadD3754309A7bC4c74E58A9AAb8463a591047123",
     TravaAuctionMakeBid: "0xD291b6b7658a016de5a95240F36eea4fb481d228",
     RecipeExecutor: "0xc3A1B8ec1F11A02410e0e1Ef0b34BCD2fBeDC54a",

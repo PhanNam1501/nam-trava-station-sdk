@@ -18,6 +18,10 @@
     - [Stake](#stake)
     - [Redeem (Withdraw)](#redeem-withdraw)
     - [Claim](#claim)
+  - [Trava NFT Marketplace / VeTrava](#trava-nft-marketplace--vetrava)
+    - [Buy](#buy)
+    - [Create Sale](#create-sale)
+    - [Cancel Sale](#cancel-sale)
   - [Trava NFT Marketplace / Sell](#trava-nft-marketplace--sell)
     - [Buy](#buy)
     - [Create Sale](#create-sale)
@@ -198,6 +202,33 @@ const trava_staking_claim_action = new actions.trava.TravaStakingClaimRewards(
   MAX_UINT256,
   contractAddress
 )
+```
+## Trava NFT Marketplace / veTrava
+### Buy
+```
+const trava_nft_ve_trava_buy = new actions.trava.TravaNFTVeTravaBuy(
+    tokenId,
+    price,
+    option,
+    from,
+    to
+)
+```
+### Create Sale
+```
+const trava_nft_ve_trava_create_sale = new actions.trava.TravaNFTVeTravaCreateSale(
+    tokenId,
+    price,
+    option,
+    from
+  )
+```
+### Cancel Sale
+```
+const trava_nft_ve_trava_cancel_sale = new actions.trava.TravaNFTVeTravaCancelSale(
+    tokenId,
+    to
+  )
 ```
 ## Trava NFT Marketplace / Sell
 ### Buy
