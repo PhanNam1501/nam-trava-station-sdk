@@ -211,7 +211,8 @@ const trava_nft_ve_trava_buy = new actions.trava.TravaNFTVeTravaBuy(
     price,
     option,
     from,
-    to
+    to,
+    contractAddress
 )
 ```
 ### Create Sale
@@ -220,14 +221,16 @@ const trava_nft_ve_trava_create_sale = new actions.trava.TravaNFTVeTravaCreateSa
     tokenId,
     price,
     option,
-    from
+    from,
+    contractAddress
   )
 ```
 ### Cancel Sale
 ```
 const trava_nft_ve_trava_cancel_sale = new actions.trava.TravaNFTVeTravaCancelSale(
     tokenId,
-    to
+    to,
+    contractAddress
   )
 ```
 ## Trava NFT Marketplace / Sell
