@@ -32,6 +32,10 @@
     - [Make bid Auction](#make-bid-auction)
     - [Edit Auction Price](#edit-auction-price)
     - [Finalize Auction](#finalize-auction)
+  - [Trava NFT Mission / Expedition](#trava-nft-mission--expedition)
+    - [Trava Expedition abandon](#trava-expedition-abandon)
+    - [Trava Expedition deploy](#trava-expedition-deploy)
+    - [Trava Expedition withdraw](#trava-expedition-withdraw)
   - [Trava NFT Utilites](#trava-nft-utilites)
     - [Transfer armoury](#transfer-armoury)
     - [Transfer Collection](#transfer-collection)
@@ -296,6 +300,38 @@ const trava_nft_auction_eidt_action_price = new actions.trava.TravaNFTAuctionEdi
 const trava_nft_auction_finalize_action = new actions.trava.TravaNFTAuctionFinalizeAuction(
     tokenId,
     to
+)
+```
+## Trava NFT Mission / Expedition
+### Trava Expedition abandon
+```
+const trava_nft_expedition_abandon = new actions.trava.TravaNFTExpeditionAbandon(
+    expedition address,
+    tokenId,
+    toAddress,
+    contractAddress
+)
+```
+### Trava Expedition deploy
+```
+const trava_nft_expedition_deploy = new actions.trava.TravaNFTExpeditionDeploy(
+    expedition address,
+    tokenId,
+    array<buffWinRateTickets>,
+    array<buffExpTickets>,
+    fromKnightAddress,
+    fromTokenAddress,
+    contractAddress
+)
+```
+### Trava expedition withdraw
+```
+const trava_nft_expedtion_withdraw = new actions.trava.TravaNFTExpeditionWithdraw(
+    expedition address,
+    tokenId,
+    toKnight,
+    toToken,
+    contractAddress
 )
 ```
 ## Trava NFT Utilites

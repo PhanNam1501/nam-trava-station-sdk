@@ -1,6 +1,6 @@
 import { Action } from "../../../../Action"
 import { getAddr } from "../../../../addresses";
-import { EthAddress, uint256, bytes } from "../../../../types";
+import { EthAddress, uint256 } from "../../../../types";
 
 /**
  * TravaNFTExpeditionWithdraw - Withdraw NFT and reward in expedition
@@ -8,15 +8,15 @@ import { EthAddress, uint256, bytes } from "../../../../types";
  * @category Trava
  */
 export class TravaNFTExpeditionWithdraw extends Action {
-    constructor(deployingVault: EthAddress, id: uint256, to: EthAddress, contractAddress?: string) {
+    constructor(deployingVault: EthAddress, id: uint256, toKnight: EthAddress, toToken:EthAddress, contractAddress?: string) {
         const _contractAddress: string =
             typeof contractAddress === "undefined" ? getAddr('TravaNFTExpeditionWithdraw') : contractAddress;
 
         super(
             "TravaNFTExpeditionWithdraw",
-            _contractAddress, //getAddr("TravaNFTExpeditionDeploy"),
-            ["address", "uint256", "address"],
-            [deployingVault, id, to]
+            _contractAddress, //getAddr("TravaNFTExpeditionWithdraw"),
+            ["address", "uint256", "address", "address"],
+            [deployingVault, id, toKnight , toToken]
         );
     }
 
