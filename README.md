@@ -32,6 +32,10 @@
     - [Make bid Auction](#make-bid-auction)
     - [Edit Auction Price](#edit-auction-price)
     - [Finalize Auction](#finalize-auction)
+  - [Trava NFT Mission / Expedition](#trava-nft-mission--expedition)
+    - [Trava Expedition abandon](#trava-expedition-abandon)
+    - [Trava Expedition deploy](#trava-expedition-deploy)
+    - [Trava Expedition withdraw](#trava-expedition-withdraw)
   - [Trava NFT Utilites](#trava-nft-utilites)
     - [Transfer armoury](#transfer-armoury)
     - [Transfer Collection](#transfer-collection)
@@ -211,7 +215,8 @@ const trava_nft_ve_trava_buy = new actions.trava.TravaNFTVeTravaBuy(
     price,
     option,
     from,
-    to
+    to,
+    contractAddress
 )
 ```
 ### Create Sale
@@ -220,14 +225,16 @@ const trava_nft_ve_trava_create_sale = new actions.trava.TravaNFTVeTravaCreateSa
     tokenId,
     price,
     option,
-    from
+    from,
+    contractAddress
   )
 ```
 ### Cancel Sale
 ```
 const trava_nft_ve_trava_cancel_sale = new actions.trava.TravaNFTVeTravaCancelSale(
     tokenId,
-    to
+    to,
+    contractAddress
   )
 ```
 ## Trava NFT Marketplace / Sell
@@ -313,8 +320,7 @@ const trava_nft_heuristic_farming_withdraw = new actions.trava.TravaNFTheuristic
     heuristic farming address,
     array<collection_id>,
     level,
-    toAddress,
-    contractAddress
+    to address
 )
 ```
 ### Trava heuristic farming claim reward
@@ -326,12 +332,43 @@ const trava_nft_heuristic_farming_claimRewards = new actions.trava.TravaNFTHeuri
     contractAddress
 )
 ```
+## Trava NFT Mission / Expedition
+### Trava Expedition abandon
+```
+const trava_nft_expedition_abandon = new actions.trava.TravaNFTExpeditionAbandon(
+    expedition address,
+    tokenId,
+    toAddress,
+    contractAddress
+)
+```
 ### Trava heuristic farming polish
 ```
 const trava_nft_heuristic_farming_polish = new actions.trava.TravaNFTheuristicFarmingPolish(
     heuristic farming address,
     array<collection_id>,
-    level,
+    level
+)
+```
+### Trava Expedition deploy
+```
+const trava_nft_expedition_deploy = new actions.trava.TravaNFTExpeditionDeploy(
+    expedition address,
+    tokenId,
+    array<buffWinRateTickets>,
+    array<buffExpTickets>,
+    fromKnightAddress,
+    fromTokenAddress,
+    contractAddress
+)
+```
+### Trava expedition withdraw
+```
+const trava_nft_expedtion_withdraw = new actions.trava.TravaNFTExpeditionWithdraw(
+    expedition address,
+    tokenId,
+    toKnight,
+    toToken,
     contractAddress
 )
 ```
