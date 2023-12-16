@@ -1,4 +1,4 @@
 export * from './RadiantBorrow';
-export * from './RadiantPayback';
+export * from './RadiantRepay';
 export * from './RadiantSupply';
 export * from './RadiantWithdraw';

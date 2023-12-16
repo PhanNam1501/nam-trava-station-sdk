@@ -3,10 +3,10 @@ import { getAddr } from "../../addresses";
 import { EthAddress, uint256 } from "../../types";
 
 /**
- * CreamPayback - Payback Token to Lending Pool
+ * CreamRepay - Repay Token to Lending Pool
  * @category Cream
  */
-export class CreamPayback extends Action {
+export class CreamRepay extends Action {
     constructor(
         cTokenAddress: EthAddress,
         amount: uint256,
@@ -15,11 +15,11 @@ export class CreamPayback extends Action {
         contractAddress?: string
     ) {
         const _contractAddress: string =
-            typeof contractAddress === "undefined" ? getAddr('CreamPayback') : contractAddress;
+            typeof contractAddress === "undefined" ? getAddr('CreamRepay') : contractAddress;
 
         super(
-            "CreamPayback",
-            _contractAddress, //getAddr("CreamPayback"),
+            "CreamRepay",
+            _contractAddress, //getAddr("CreamRepay"),
             ["address", "uint256", "address", "address"],
             [cTokenAddress, amount, from, onBehalf]
         );

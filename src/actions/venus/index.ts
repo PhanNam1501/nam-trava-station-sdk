@@ -1,4 +1,4 @@
 export * from './VenusBorrow';
-export * from './VenusPayback';
+export * from './VenusRepay';
 export * from './VenusSupply';
 export * from './VenusWithdraw';

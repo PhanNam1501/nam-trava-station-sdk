@@ -3,10 +3,10 @@ import { getAddr } from "../../addresses";
 import { EthAddress, uint256 } from "../../types";
 
 /**
- * GranaryPayback - Payback Token to Lending Pool
- * @category Granary
+ * RadiantRepay - Repay Token to Lending Pool
+ * @category Radiant
  */
-export class GranaryPayback extends Action {
+export class RadiantRepay extends Action {
     constructor(
         market: EthAddress,
         tokenAddr: EthAddress,
@@ -17,11 +17,11 @@ export class GranaryPayback extends Action {
         contractAddress?: string
     ) {
         const _contractAddress: string =
-            typeof contractAddress === "undefined" ? getAddr('GranaryPayback') : contractAddress;
+            typeof contractAddress === "undefined" ? getAddr('RadiantRepay') : contractAddress;
 
         super(
-            "GranaryPayback",
-            _contractAddress, //getAddr("GranaryPayback"),
+            "RadiantRepay",
+            _contractAddress, //getAddr("RadiantRepay"),
             ["address", "address", "uint256", "uint256", "address", "address"],
             [market, tokenAddr, amount, ratemode, from, onBehalf]
         );

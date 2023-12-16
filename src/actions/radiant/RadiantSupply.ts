@@ -22,7 +22,7 @@ export class RadiantSupply extends Action {
         super(
             "RadiantSupply",
             _contractAddress, //getAddr("RadiantSupply"),
-            ["address", "address", "uint256", "uint256", "address", "address"],
+            ["address", "address", "uint256", "uint256", "address", "bool"],
             [market, tokenAddr, amount, from, onBehalf, enableAsColl]
         );
     }

@@ -3,25 +3,25 @@ import { getAddr } from "../../addresses";
 import { EthAddress, uint256 } from "../../types";
 
 /**
- * WePiggyPayback - Payback Token to Lending Pool
- * @category WePiggy
+ * VenusRepay - Repay Token to Lending Pool
+ * @category Venus
  */
-export class WePiggyPayback extends Action {
+export class VenusRepay extends Action {
     constructor(
-        pTokenAddress: EthAddress,
+        vTokenAddress: EthAddress,
         amount: uint256,
         from: EthAddress,
         onBehalf: EthAddress,
         contractAddress?: string
     ) {
         const _contractAddress: string =
-            typeof contractAddress === "undefined" ? getAddr('WePiggyPayback') : contractAddress;
+            typeof contractAddress === "undefined" ? getAddr('VenusRepay') : contractAddress;
 
         super(
-            "WePiggyPayback",
-            _contractAddress, //getAddr("WePiggyPayback"),
+            "VenusRepay",
+            _contractAddress, //getAddr("VenusRepay"),
             ["address", "uint256", "address", "address"],
-            [pTokenAddress, amount, from, onBehalf]
+            [vTokenAddress, amount, from, onBehalf]
         );
     }
 }

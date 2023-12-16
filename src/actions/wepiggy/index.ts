@@ -1,4 +1,4 @@
 export * from './WePiggyBorrow';
-export * from './WePiggyPayback';
+export * from './WePiggyRepay';
 export * from './WePiggySupply';
 export * from './WePiggyWithdraw';

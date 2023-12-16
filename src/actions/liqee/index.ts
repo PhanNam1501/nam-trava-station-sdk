@@ -1,4 +1,4 @@
 export * from './LiqeeBorrow';
-export * from './LiqeePayback';
+export * from './LiqeeRepay';
 export * from './LiqeeSupply';
 export * from './LiqeeWithdraw';

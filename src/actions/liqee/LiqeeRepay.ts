@@ -3,10 +3,10 @@ import { getAddr } from "../../addresses";
 import { EthAddress, uint256 } from "../../types";
 
 /**
- * LiqeePayback - Payback Token to Lending Pool
+ * LiqeeRepay - Repay Token to Lending Pool
  * @category Liqee
  */
-export class LiqeePayback extends Action {
+export class LiqeeRepay extends Action {
     constructor(
         iTokenAddress: EthAddress,
         amount: uint256,
@@ -15,11 +15,11 @@ export class LiqeePayback extends Action {
         contractAddress?: string
     ) {
         const _contractAddress: string =
-            typeof contractAddress === "undefined" ? getAddr('LiqeePayback') : contractAddress;
+            typeof contractAddress === "undefined" ? getAddr('LiqeeRepay') : contractAddress;
 
         super(
-            "LiqeePayback",
-            _contractAddress, //getAddr("LiqeePayback"),
+            "LiqeeRepay",
+            _contractAddress, //getAddr("LiqeeRepay"),
             ["address", "uint256", "address", "address"],
             [iTokenAddress, amount, from, onBehalf]
         );

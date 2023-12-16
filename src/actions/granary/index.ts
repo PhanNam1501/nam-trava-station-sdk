@@ -1,4 +1,4 @@
 export * from './GranaryBorrow';
-export * from './GranaryPayback';
+export * from './GranaryRepay';
 export * from './GranarySupply';
 export * from './GranaryWithdraw';
