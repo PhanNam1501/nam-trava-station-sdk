@@ -69,7 +69,7 @@ export const listAddr = {
     TravaStakingRedeem: "0x8c08F0a32D764fC8D0E98C5C9FDB1c8eCC777758",
     TravaStakingClaimRewards: "0x5417704fe7D2f3C12B35aF239a42B5b8033A7BF7",
     // pancake swap
-    RouterAddress: "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3",
+    RouterAddress: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
     FactoryAddress: "0xB7926C0430Afb07AA7DEfDE6DA862aE0Bde767bc",
     // token address
     WBNBAdress: "0x910CB19698Eac48a6AB7Ccc9542B756f2Bdd67C6",
