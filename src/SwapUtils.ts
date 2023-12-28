@@ -68,6 +68,33 @@ export class SwapUtil {
         return address.toLowerCase() === ZeroAddress
     }
 
+    isTodToken(_tokenAddress: EthAddress): boolean {
+        return _tokenAddress.toLowerCase() == getAddr("TODAddress", this.chainId).toLowerCase()
+    }
+
+    isBusdToken(_tokenAddress: EthAddress): boolean {
+        return _tokenAddress.toLowerCase() == getAddr("BUSDAddress", this.chainId).toLowerCase()
+    }
+
+    isWbnbToken(_tokenAddress: EthAddress): boolean {
+        return _tokenAddress.toLowerCase() == getAddr("WBNBAddress", this.chainId).toLowerCase()
+    }
+
+    async getFromReserve(fromToken: EthAddress, toToken: EthAddress) {
+        let fromR;
+        let pair1Addr = await this.FactoryContract.getPair(fromToken, toToken)
+        let pair1Contract = new PairContract(this.web3,pair1Addr)
+        const reserve  = await pair1Contract.getReserves();
+        if(BigNumber(fromToken).isLessThan( toToken))
+        {
+            fromR = reserve[0]
+        }
+        else 
+        {
+            fromR = reserve[1]
+        }
+        return String(fromR)
+    }
     async getInformationFromInput (
         _fromToken : EthAddress,
         _toToken :EthAddress,
@@ -82,26 +109,15 @@ export class SwapUtil {
         let minimumReceive = BigNumber(0);
         let pairAddr = await this.FactoryContract.getPair(fromToken,toToken)
         let needUseMultihop = false;
-        let WBNBAddress = getAddr("WBNBAdress", this.chainId);
+        let WBNBAddress = getAddr("WBNBAddress", this.chainId);
         if(!this.isZeroAddress(pairAddr))
         {
-            let fromR;
-            let toR;
+            // let toR;
             path = [fromToken,toToken]
-            let pairAddr = await this.FactoryContract.getPair(fromToken,toToken)
-            let pairContract = new PairContract(this.web3,pairAddr)
-            const reserve  = await pairContract.getReserves();
             let amountOutFromContract  = await this.RouterContract.getAmountOut(amountFrom,path)
-            if(BigNumber(fromToken).isLessThan(toToken))
-            {
-             fromR = String(reserve[0])
-             toR = String(reserve[1])
-            }
-            else 
-            {
-             fromR = String(reserve[1])
-             toR =String(reserve[0])
-            }
+            
+            let fromR = await this.getFromReserve(fromToken, toToken)
+            
             let tmpImpact = BigNumber(amountFrom).div(BigNumber(amountFrom).plus(fromR));
             if(Number(tmpImpact) > 5/100)
             {
@@ -111,26 +127,33 @@ export class SwapUtil {
             minimumReceive = (BigNumber(amountOutFromContract[1]).multipliedBy(1-slippage));
             impact = tmpImpact
         }
-        if((this.isZeroAddress(pairAddr) || needUseMultihop ) &&(fromToken.toLowerCase() != WBNBAddress.toLowerCase() &&  toToken.toLowerCase() !=  WBNBAddress.toLowerCase()))
-        {
-            path = [fromToken, WBNBAddress, toToken]
+        else {   
+            let BUSDAddress = getAddr("BUSDAddress", this.chainId)
+            let fromR = "0";
+            if(this.isTodToken(toToken)) {
+                if(this.isWbnbToken(fromToken)) {
+                    path = [fromToken, BUSDAddress, toToken]
+                    fromR = await this.getFromReserve(fromToken, BUSDAddress);
+                } else {
+                    path = [fromToken, WBNBAddress, BUSDAddress, toToken]
+                    fromR = await this.getFromReserve(fromToken, WBNBAddress);
+                }
+            } else if(this.isTodToken(fromToken)) {
+                if(this.isWbnbToken(toToken)) {
+                    path = [fromToken, BUSDAddress, toToken]
+                } else {
+                    path = [fromToken, BUSDAddress, WBNBAddress, toToken]
+                }
+                fromR = await this.getFromReserve(fromToken, BUSDAddress);
+            } else {
+                path = [fromToken, WBNBAddress, toToken]
+                fromR = await this.getFromReserve(fromToken, WBNBAddress);
+            }
+            
             let amountOutFromContract  = await this.RouterContract.getAmountOut(amountFrom,path)
-            let pair1Addr = await this.FactoryContract.getPair(fromToken, WBNBAddress)
-            let pair1Contract = new PairContract(this.web3,pair1Addr)
-            const reserve  = await pair1Contract.getReserves();
-            let fromR;
-            if(BigNumber(fromToken).isLessThan( WBNBAddress))
-            {
-             fromR = reserve[0]
-            }
-            else 
-            {
-             fromR = reserve[1]
-            }
-            amountOut = amountOutFromContract[2];
-            minimumReceive = (BigNumber(amountOutFromContract[2]).multipliedBy(1-slippage))
+            amountOut = amountOutFromContract[path.length - 1];
+            minimumReceive = (BigNumber(amountOutFromContract[path.length - 1]).multipliedBy(1-slippage))
             impact = (BigNumber(amountFrom).div(BigNumber(amountFrom).plus(fromR)))
-
         }  
         return {
             amountIn : amountFrom,
@@ -155,7 +178,7 @@ export class SwapUtil {
       let maximumSold = BigNumber(0);
       let pairAddr = await this.FactoryContract.getPair(fromToken,toToken)
       let needUseMultihop = false;
-      let WBNBAddress = getAddr("WBNBAdress", this.chainId);
+      let WBNBAddress = getAddr("WBNBAddress", this.chainId);
       if(!this.isZeroAddress(pairAddr))
       {
           let fromR;

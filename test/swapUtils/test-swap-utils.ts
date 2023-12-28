@@ -2,6 +2,7 @@
 import BigNumber from "bignumber.js";
 import { SwapUtil } from "../../src/SwapUtils";
 import { JsonRpcProvider } from "ethers";
+import { getAddr } from "../../src/addresses";
 // import Decimal from "decimal.js";
 
 const listToken = [
@@ -159,23 +160,31 @@ const BscMainnetTokens = [
 ];
 async function test() {
   const web3 = new JsonRpcProvider("https://bsc.publicnode.com");
-  let chainId = (await web3.getNetwork()).chainId
-  const swapUtil = new SwapUtil("https://bsc.publicnode.com", Number(chainId.toString()));
+  let chainId = Number((await web3.getNetwork()).chainId)
+  const swapUtil = new SwapUtil("https://bsc.publicnode.com", chainId);
   console.log("=======TEST FACTORY======");
 
-  let pair;
-  let info;
-  for (let i = 0; i < 1; i++) {
-   for (let j = 1; j < BscMainnetTokens.length; j++) {
-      pair = await swapUtil.FactoryContract.getPair(BscMainnetTokens[i].address, BscMainnetTokens[j].address);
-      console.log(BscMainnetTokens[i].symbol + "-" + BscMainnetTokens[j].symbol + " pair address is", pair)
-      // console.log("Is " + BscMainnetTokens[i].name + "-" + BscMainnetTokens[j].name + " zero ", swapUtil.isZeroAddress(pair))
-      // if(!swapUtil.isZeroAddress(pair)) {
-      // console.log("Test GetInformation")
-      // info = await swapUtil.getInformationFromInput(BscMainnetTokens[i].address, BscMainnetTokens[j].address, 0.5 / 100, BigNumber(10**18).toFixed(0));
-      // console.log(info)
-    }
-  }
+  let res = await swapUtil.getInformationFromInput(
+    getAddr("TRAVAAddress", chainId),
+    getAddr("TODAddress", chainId),
+    5/100,
+    BigNumber(1e18).toFixed()
+  )
+
+  console.log(res)
+  // let pair;
+  // let info;
+  // for (let i = 0; i < 1; i++) {
+  //  for (let j = 1; j < BscMainnetTokens.length; j++) {
+  //     pair = await swapUtil.FactoryContract.getPair(BscMainnetTokens[i].address, BscMainnetTokens[j].address);
+  //     console.log(BscMainnetTokens[i].symbol + "-" + BscMainnetTokens[j].symbol + " pair address is", pair)
+  //     // console.log("Is " + BscMainnetTokens[i].name + "-" + BscMainnetTokens[j].name + " zero ", swapUtil.isZeroAddress(pair))
+  //     // if(!swapUtil.isZeroAddress(pair)) {
+  //     // console.log("Test GetInformation")
+  //     // info = await swapUtil.getInformationFromInput(BscMainnetTokens[i].address, BscMainnetTokens[j].address, 0.5 / 100, BigNumber(10**18).toFixed(0));
+  //     // console.log(info)
+  //   }
+  // }
 }
 // const cakeTravaPair = await swapUtil.FactoryContract.getPair("0x0391bE54E72F7e001f6BBc331777710b4f2999Ef","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c");
 // console.log("CAKE-TRAVA address is",cakeTravaPair)

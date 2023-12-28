@@ -392,6 +392,25 @@ const trava_nft_transfer_Collection_action = new actions.trava.TravaNFTTransfer(
 )
 ```
 
+## Trava Liquidity Campain
+const swapUtil = new SwapUtil(web3);
+const info = new await swapUtil.getInformationFromInput(tokenAddr1, tokenAddr2, slipparage, amount);
+const minimumReceive = info.minimumReceive
+const priceImpact = info.priceImpact;
+const path = info.path;
+```
+const trava_liquidity_campain_buy_token = new actions.trava.LiquidityCampainBuyToken(
+  buy_token_with_reference address,
+  amountIn,
+  amountOutIn,
+  path,
+  to, 
+  deadline,
+  referred,
+  from,
+  liquidity campain buy token address
+)
+```
 ## Execute actions
 Sau khi có được các action xong, để execute Freight
 giả sử kết hợp action supply và borrow, repay và withdraw
