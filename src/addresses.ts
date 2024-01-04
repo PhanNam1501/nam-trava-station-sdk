@@ -72,6 +72,7 @@ export const listAddr = {
     RouterAddress: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
     FactoryAddress: "0xB7926C0430Afb07AA7DEfDE6DA862aE0Bde767bc",
     // token address
+    BNBAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
     WBNBAddress: "0x910CB19698Eac48a6AB7Ccc9542B756f2Bdd67C6",
     USDCAddress: "0x345dCB7B8F17D342A3639d1D9bD649189f2D0162",
     USDTAddress: "0x780397E17dBF97259F3b697Ca3a394fa483A1419",
@@ -87,7 +88,7 @@ export const listAddr = {
     TRAVAAddress: "0xE1F005623934D3D8C724EC68Cc9bFD95498D4435",
     BUSDAddress: "0x2CEC38C779d6b962bc877777b6f70937d21c9c38",
     TODAddress: "0xFca3Cf5E82F595D4f20C24D007ae5E2e94fab2f0",
-    LiquidityCampainBuyToken: "0xd381E60595142110126E938878B2dC3C1d66a20b"
+    LiquidityCampaignBuyToken: "0xd381E60595142110126E938878B2dC3C1d66a20b"
   },
   [NETWORKS.bscMainnet.chainId]: {
     //Action address
@@ -124,11 +125,12 @@ export const listAddr = {
     RouterAddress: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
     FactoryAddress: "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73",
     // token address
-    TRAVAAddress: "0x0391bE54E72F7e001f6BBc331777710b4f2999Ef",
+    BNBAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
     WBNBAddress: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     TODAddress: "0x21d5Fa5ECf2605c0E835Ae054AF9bbA0468e5951",
     BUSDAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-    LiquidityCampainBuyToken: "0x554A4A145a4E8d09DE49e1e79bc7091EF67073aD",
+    TRAVAAddress: "0x0391bE54E72F7e001f6BBc331777710b4f2999Ef",
+    LiquidityCampaignBuyToken: "0x67d102e05BDd9F480f8D45C755b8FFA040bC1701",
   },
 };
 

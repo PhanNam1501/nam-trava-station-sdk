@@ -3,11 +3,11 @@ import { getAddr } from "../../../addresses";
 import { EthAddress, bytes, uint256 } from "../../../types";
 
 /**
- * LiquidityCampainBuyToken - Buy Token from Action Vault and referre address 
+ * LiquidityCampaignBuyToken - Buy Token from Action Vault and referre address 
  *
  * @category Trava
  */
-export class LiquidityCampainBuyToken extends Action {
+export class LiquidityCampaignBuyToken extends Action {
   constructor(
     campainAction: EthAddress,
     amountIn: uint256,
@@ -20,12 +20,12 @@ export class LiquidityCampainBuyToken extends Action {
     contractAddress?: string
   ) {
     const _contractAddress: string =
-      typeof contractAddress === "undefined" ? getAddr('LiquidityCampainBuyToken') : contractAddress;
+      typeof contractAddress === "undefined" ? getAddr('LiquidityCampaignBuyToken') : contractAddress;
 
     super(
-      "LiquidityCampainBuyToken",
-      _contractAddress, //getAddr("LiquidityCampainBuyToken"),
-      ["address", "uint256", "uint256", "address[]", "address", "uint256", "address", "from"],
+      "LiquidityCampaignBuyToken",
+      _contractAddress, //getAddr("LiquidityCampaignBuyToken"),
+      ["address", "uint256", "uint256", "address[]", "address", "uint256", "address", "address"],
       [campainAction, amountIn, amountOutIn, path, to, deadline, referred, from]
     );
 

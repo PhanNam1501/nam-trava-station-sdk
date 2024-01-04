@@ -80,6 +80,10 @@ export class SwapUtil {
         return _tokenAddress.toLowerCase() == getAddr("WBNBAddress", this.chainId).toLowerCase()
     }
 
+    isBnbToken(_tokenAddress: EthAddress): boolean {
+        return _tokenAddress.toLowerCase() == getAddr("BNBAddress", this.chainId).toLowerCase()
+    }
+
     async getFromReserve(fromToken: EthAddress, toToken: EthAddress) {
         let fromR;
         let pair1Addr = await this.FactoryContract.getPair(fromToken, toToken)
@@ -101,7 +105,13 @@ export class SwapUtil {
         slippage : number,
         amountFrom : uint256
     ): Promise<SwapInfoIfInput>{
+        let WBNBAddress = getAddr("WBNBAddress", this.chainId);
+        
         let fromToken = convertHexStringToAddress(_fromToken);
+        if(this.isBnbToken(_fromToken)) {
+            fromToken = WBNBAddress;
+        }
+        
         let toToken = convertHexStringToAddress(_toToken);
         let path : EthAddress[] =[];
         let amountOut = "0" ;
@@ -109,7 +119,6 @@ export class SwapUtil {
         let minimumReceive = BigNumber(0);
         let pairAddr = await this.FactoryContract.getPair(fromToken,toToken)
         let needUseMultihop = false;
-        let WBNBAddress = getAddr("WBNBAddress", this.chainId);
         if(!this.isZeroAddress(pairAddr))
         {
             // let toR;
