@@ -11,7 +11,7 @@ export class LiquidityCampaignRedeem extends Action {
     constructor(
         stakingPool: EthAddress,
         to: EthAddress,
-        amount: EthAddress,
+        amount: uint256,
         contractAddress?: string
     ) {
         const _contractAddress: string =

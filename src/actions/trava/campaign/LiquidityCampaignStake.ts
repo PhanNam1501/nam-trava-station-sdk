@@ -11,7 +11,8 @@ export class LiquidityCampaignStake extends Action {
     constructor(
         stakingPool: EthAddress,
         onBehalfOf: EthAddress,
-        amount: EthAddress,
+        amount: uint256,
+        from: EthAddress,
         contractAddress?: string
     ) {
         const _contractAddress: string =
@@ -20,8 +21,8 @@ export class LiquidityCampaignStake extends Action {
         super(
             "LiquidityCampaignStake",
             _contractAddress, //getAddr("LiquidityCampaignStake"),
-            ["address", "address", "uint256"],
-            [stakingPool, onBehalfOf, amount]
+            ["address", "address", "uint256", "address"],
+            [stakingPool, onBehalfOf, amount, from]
         );
 
 
