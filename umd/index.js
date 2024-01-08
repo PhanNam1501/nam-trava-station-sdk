@@ -509,13 +509,14 @@ var listAddr = {
     TravaWithdraw: "0x92f93da4C46c66ea8C154a93c49663Cf83990244",
     TravaClaimRewards: "0xC37a6D456657815dB1fb3A4bcf660E2a135f1C67",
     TravaConvertRewards: "0xA74EC723b099f00Ed33a29c36Ca8B498a9a75B21",
-    TravaStakingStake: "0x9C144C1182Eb10D6e3011259F31EfA0757fA302F",
+    TravaStakingStake: "0x45983b928A7259b23cE6EaF1fb28A0f06933AEFF",
     TravaStakingRedeem: "0x8c08F0a32D764fC8D0E98C5C9FDB1c8eCC777758",
     TravaStakingClaimRewards: "0x5417704fe7D2f3C12B35aF239a42B5b8033A7BF7",
     // pancake swap
     RouterAddress: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
     FactoryAddress: "0xB7926C0430Afb07AA7DEfDE6DA862aE0Bde767bc",
     // token address
+    BNBAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
     WBNBAddress: "0x910CB19698Eac48a6AB7Ccc9542B756f2Bdd67C6",
     USDCAddress: "0x345dCB7B8F17D342A3639d1D9bD649189f2D0162",
     USDTAddress: "0x780397E17dBF97259F3b697Ca3a394fa483A1419",
@@ -567,7 +568,7 @@ var listAddr = {
     //mainnet
     TravaConvertRewards: "0xB4f02C99488938D9F0703b3929d1B6Fb36860eD4",
     //mainnet
-    TravaStakingStake: "0x98De3e52B649E6Fe755618a12C2fF4EFEc8CeAfe",
+    TravaStakingStake: "0x01Bfdbd936E576A7a6038DBf9DD133160D3B61A9",
     //mainnet
     TravaStakingRedeem: "0xc25Ac9F3Fc69d8EAE396eb4dfcE7D805D1650E71",
     //mainnet
@@ -577,10 +578,11 @@ var listAddr = {
     RouterAddress: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
     FactoryAddress: "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73",
     // token address
-    TRAVAAddress: "0x0391bE54E72F7e001f6BBc331777710b4f2999Ef",
+    BNBAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
     WBNBAddress: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     TODAddress: "0x21d5Fa5ECf2605c0E835Ae054AF9bbA0468e5951",
     BUSDAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+    TRAVAAddress: "0x0391bE54E72F7e001f6BBc331777710b4f2999Ef",
     LiquidityCampaignBuyToken: "0x67d102e05BDd9F480f8D45C755b8FFA040bC1701"
   }
 };
@@ -20437,14 +20439,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   wepiggy: () => (/* reexport module object */ _wepiggy__WEBPACK_IMPORTED_MODULE_5__)
 /* harmony export */ });
 /* harmony import */ var _trava__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(115);
-/* harmony import */ var _pancakeswap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(169);
-/* harmony import */ var _basic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(171);
-/* harmony import */ var _venus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(179);
-/* harmony import */ var _cream__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(184);
-/* harmony import */ var _wepiggy__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(189);
-/* harmony import */ var _radiant__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(194);
-/* harmony import */ var _granary__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(199);
-/* harmony import */ var _liqee__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(204);
+/* harmony import */ var _pancakeswap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(173);
+/* harmony import */ var _basic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(175);
+/* harmony import */ var _venus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(183);
+/* harmony import */ var _cream__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(188);
+/* harmony import */ var _wepiggy__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(193);
+/* harmony import */ var _radiant__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(198);
+/* harmony import */ var _granary__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(203);
+/* harmony import */ var _liqee__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(208);
 
 
 
@@ -20464,6 +20466,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   LiquidityCampaignBuyToken: () => (/* reexport safe */ _campaign__WEBPACK_IMPORTED_MODULE_4__.LiquidityCampaignBuyToken),
+/* harmony export */   LiquidityCampaignBuyTokenGateway: () => (/* reexport safe */ _campaign__WEBPACK_IMPORTED_MODULE_4__.LiquidityCampaignBuyTokenGateway),
+/* harmony export */   LiquidityCampaignClaimRewards: () => (/* reexport safe */ _campaign__WEBPACK_IMPORTED_MODULE_4__.LiquidityCampaignClaimRewards),
+/* harmony export */   LiquidityCampaignRedeem: () => (/* reexport safe */ _campaign__WEBPACK_IMPORTED_MODULE_4__.LiquidityCampaignRedeem),
+/* harmony export */   LiquidityCampaignStake: () => (/* reexport safe */ _campaign__WEBPACK_IMPORTED_MODULE_4__.LiquidityCampaignStake),
 /* harmony export */   TravaBorrow: () => (/* reexport safe */ _market__WEBPACK_IMPORTED_MODULE_1__.TravaBorrow),
 /* harmony export */   TravaClaimRewards: () => (/* reexport safe */ _market__WEBPACK_IMPORTED_MODULE_1__.TravaClaimRewards),
 /* harmony export */   TravaConvertRewards: () => (/* reexport safe */ _market__WEBPACK_IMPORTED_MODULE_1__.TravaConvertRewards),
@@ -21865,11 +21871,11 @@ __webpack_require__.r(__webpack_exports__);
  * @category Trava
  */
 class TravaStakingStake extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
-  constructor(stakingPool, onBehalfOf, amount, contractAddress) {
+  constructor(stakingPool, onBehalfOf, amount, from, contractAddress) {
     var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('TravaStakingStake') : contractAddress;
     super("TravaStakingStake", _contractAddress,
     //getAddr("TravaStakingStake"),
-    ["address", "address", "uint256"], [stakingPool, onBehalfOf, amount]);
+    ["address", "address", "uint256", "address"], [stakingPool, onBehalfOf, amount, from]);
   }
 }
 
@@ -21880,9 +21886,21 @@ class TravaStakingStake extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   LiquidityCampaignBuyToken: () => (/* reexport safe */ _TravaTodCampaignBuyToken__WEBPACK_IMPORTED_MODULE_0__.LiquidityCampaignBuyToken)
+/* harmony export */   LiquidityCampaignBuyToken: () => (/* reexport safe */ _LiquidityCampaignBuyToken__WEBPACK_IMPORTED_MODULE_0__.LiquidityCampaignBuyToken),
+/* harmony export */   LiquidityCampaignBuyTokenGateway: () => (/* reexport safe */ _LiquidityCampaignBuyTokenGateway__WEBPACK_IMPORTED_MODULE_1__.LiquidityCampaignBuyTokenGateway),
+/* harmony export */   LiquidityCampaignClaimRewards: () => (/* reexport safe */ _LiquidityCampaignClaimRewards__WEBPACK_IMPORTED_MODULE_4__.LiquidityCampaignClaimRewards),
+/* harmony export */   LiquidityCampaignRedeem: () => (/* reexport safe */ _LiquidityCampaignRedeem__WEBPACK_IMPORTED_MODULE_3__.LiquidityCampaignRedeem),
+/* harmony export */   LiquidityCampaignStake: () => (/* reexport safe */ _LiquidityCampaignStake__WEBPACK_IMPORTED_MODULE_2__.LiquidityCampaignStake)
 /* harmony export */ });
-/* harmony import */ var _TravaTodCampaignBuyToken__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(168);
+/* harmony import */ var _LiquidityCampaignBuyToken__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(168);
+/* harmony import */ var _LiquidityCampaignBuyTokenGateway__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(169);
+/* harmony import */ var _LiquidityCampaignStake__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(170);
+/* harmony import */ var _LiquidityCampaignRedeem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(171);
+/* harmony import */ var _LiquidityCampaignClaimRewards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(172);
+
+
+
+
 
 
 /***/ }),
@@ -21920,13 +21938,122 @@ class LiquidityCampaignBuyToken extends _Action__WEBPACK_IMPORTED_MODULE_0__.Act
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PancakeSwapV2: () => (/* reexport safe */ _PancakeSwapV2__WEBPACK_IMPORTED_MODULE_0__.PancakeSwapV2)
+/* harmony export */   LiquidityCampaignBuyTokenGateway: () => (/* binding */ LiquidityCampaignBuyTokenGateway)
 /* harmony export */ });
-/* harmony import */ var _PancakeSwapV2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(170);
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 
+
+/**
+ * LiquidityCampaignBuyTokenGateway - Buy Token from Action Vault and referre address 
+ *
+ * @category Trava
+ */
+class LiquidityCampaignBuyTokenGateway extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(campainAction, amountIn, amountOutIn, path, to, deadline, referred, from, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('LiquidityCampaignBuyTokenGateway') : contractAddress;
+    super("LiquidityCampaignBuyTokenGateway", _contractAddress,
+    //getAddr("LiquidityCampaignBuyTokenGateway"),
+    ["address", "uint256", "uint256", "address[]", "address", "uint256", "address", "address"], [campainAction, amountIn, amountOutIn, path, to, deadline, referred, from]);
+    this.mappableArgs = [campainAction, amountIn, amountOutIn, path, to, deadline, referred, from].flat();
+  }
+}
 
 /***/ }),
 /* 170 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LiquidityCampaignStake: () => (/* binding */ LiquidityCampaignStake)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ * LiquidityCampaignStake - Buy Token from Action Vault and referre address 
+ *
+ * @category Trava
+ */
+class LiquidityCampaignStake extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(stakingPool, onBehalfOf, amount, from, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('LiquidityCampaignStake') : contractAddress;
+    super("LiquidityCampaignStake", _contractAddress,
+    //getAddr("LiquidityCampaignStake"),
+    ["address", "address", "uint256", "address"], [stakingPool, onBehalfOf, amount, from]);
+  }
+}
+
+/***/ }),
+/* 171 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LiquidityCampaignRedeem: () => (/* binding */ LiquidityCampaignRedeem)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ * LiquidityCampaignRedeem - Buy Token from Action Vault and referre address 
+ *
+ * @category Trava
+ */
+class LiquidityCampaignRedeem extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(stakingPool, to, amount, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('LiquidityCampaignRedeem') : contractAddress;
+    super("LiquidityCampaignRedeem", _contractAddress,
+    //getAddr("LiquidityCampaignRedeem"),
+    ["address", "address", "uint256"], [stakingPool, to, amount]);
+  }
+}
+
+/***/ }),
+/* 172 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LiquidityCampaignClaimRewards: () => (/* binding */ LiquidityCampaignClaimRewards)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ * LiquidityCampaignClaimRewards - Buy Token from Action Vault and referre address 
+ *
+ * @category Trava
+ */
+class LiquidityCampaignClaimRewards extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(stakingPool, to, amount, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('LiquidityCampaignClaimRewards') : contractAddress;
+    super("LiquidityCampaignClaimRewards", _contractAddress,
+    //getAddr("LiquidityCampaignClaimRewards"),
+    ["address", "address", "uint256"], [stakingPool, to, amount]);
+  }
+}
+
+/***/ }),
+/* 173 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PancakeSwapV2: () => (/* reexport safe */ _PancakeSwapV2__WEBPACK_IMPORTED_MODULE_0__.PancakeSwapV2)
+/* harmony export */ });
+/* harmony import */ var _PancakeSwapV2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(174);
+
+
+/***/ }),
+/* 174 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21954,7 +22081,7 @@ class PancakeSwapV2 extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 171 */
+/* 175 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21967,12 +22094,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   UnwrapBnbAction: () => (/* reexport safe */ _UnwrapBNB__WEBPACK_IMPORTED_MODULE_4__.UnwrapBnbAction),
 /* harmony export */   WrapBnbAction: () => (/* reexport safe */ _WrapBNB__WEBPACK_IMPORTED_MODULE_3__.WrapBnbAction)
 /* harmony export */ });
-/* harmony import */ var _PullToken__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(172);
-/* harmony import */ var _SendToken__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(174);
-/* harmony import */ var _SendTokenAndUnwrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(175);
-/* harmony import */ var _WrapBNB__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(176);
-/* harmony import */ var _UnwrapBNB__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(177);
-/* harmony import */ var _SendTokens__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(178);
+/* harmony import */ var _PullToken__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(176);
+/* harmony import */ var _SendToken__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(178);
+/* harmony import */ var _SendTokenAndUnwrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(179);
+/* harmony import */ var _WrapBNB__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(180);
+/* harmony import */ var _UnwrapBNB__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(181);
+/* harmony import */ var _SendTokens__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(182);
 
 
 
@@ -21981,7 +22108,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 172 */
+/* 176 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21989,7 +22116,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PullTokenAction: () => (/* binding */ PullTokenAction)
 /* harmony export */ });
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(173);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(177);
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
@@ -22022,7 +22149,7 @@ class PullTokenAction extends _Action__WEBPACK_IMPORTED_MODULE_1__.Action {
 }
 
 /***/ }),
-/* 173 */
+/* 177 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22066,7 +22193,7 @@ var parsePriceFromContract = (price, from, to) => new (decimal_js__WEBPACK_IMPOR
 var formatPriceForContract = (price, from, to) => new (decimal_js__WEBPACK_IMPORTED_MODULE_0___default())(price).mul(10 ** (0,_zennomi_tokens__WEBPACK_IMPORTED_MODULE_1__.getAssetInfo)(to).decimals).mul(10 ** (18 - (0,_zennomi_tokens__WEBPACK_IMPORTED_MODULE_1__.getAssetInfo)(from).decimals)).floor().toString();
 
 /***/ }),
-/* 174 */
+/* 178 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22075,7 +22202,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SendTokenAction: () => (/* binding */ SendTokenAction)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(173);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(177);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
 
@@ -22099,7 +22226,7 @@ class SendTokenAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 175 */
+/* 179 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22108,7 +22235,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SendTokenAndUnwrapAction: () => (/* binding */ SendTokenAndUnwrapAction)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(173);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(177);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
 
@@ -22134,7 +22261,7 @@ class SendTokenAndUnwrapAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Acti
 }
 
 /***/ }),
-/* 176 */
+/* 180 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22172,7 +22299,7 @@ class WrapBnbAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 177 */
+/* 181 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22181,7 +22308,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   UnwrapBnbAction: () => (/* binding */ UnwrapBnbAction)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(173);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(177);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
 
@@ -22206,7 +22333,7 @@ class UnwrapBnbAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 178 */
+/* 182 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22248,7 +22375,7 @@ class SendTokensAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 179 */
+/* 183 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22259,17 +22386,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   VenusSupply: () => (/* reexport safe */ _VenusSupply__WEBPACK_IMPORTED_MODULE_2__.VenusSupply),
 /* harmony export */   VenusWithdraw: () => (/* reexport safe */ _VenusWithdraw__WEBPACK_IMPORTED_MODULE_3__.VenusWithdraw)
 /* harmony export */ });
-/* harmony import */ var _VenusBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(180);
-/* harmony import */ var _VenusRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(181);
-/* harmony import */ var _VenusSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(182);
-/* harmony import */ var _VenusWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(183);
+/* harmony import */ var _VenusBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(184);
+/* harmony import */ var _VenusRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(185);
+/* harmony import */ var _VenusSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(186);
+/* harmony import */ var _VenusWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(187);
 
 
 
 
 
 /***/ }),
-/* 180 */
+/* 184 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22295,7 +22422,7 @@ class VenusBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 181 */
+/* 185 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22321,7 +22448,7 @@ class VenusRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 182 */
+/* 186 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22349,7 +22476,7 @@ class VenusSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 183 */
+/* 187 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22377,7 +22504,7 @@ class VenusWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 184 */
+/* 188 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22388,17 +22515,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   CreamSupply: () => (/* reexport safe */ _CreamSupply__WEBPACK_IMPORTED_MODULE_2__.CreamSupply),
 /* harmony export */   CreamWithdraw: () => (/* reexport safe */ _CreamWithdraw__WEBPACK_IMPORTED_MODULE_3__.CreamWithdraw)
 /* harmony export */ });
-/* harmony import */ var _CreamBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(185);
-/* harmony import */ var _CreamRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(186);
-/* harmony import */ var _CreamSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(187);
-/* harmony import */ var _CreamWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(188);
+/* harmony import */ var _CreamBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(189);
+/* harmony import */ var _CreamRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(190);
+/* harmony import */ var _CreamSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(191);
+/* harmony import */ var _CreamWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(192);
 
 
 
 
 
 /***/ }),
-/* 185 */
+/* 189 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22424,7 +22551,7 @@ class CreamBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 186 */
+/* 190 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22450,7 +22577,7 @@ class CreamRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 187 */
+/* 191 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22478,7 +22605,7 @@ class CreamSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 188 */
+/* 192 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22506,7 +22633,7 @@ class CreamWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 189 */
+/* 193 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22517,17 +22644,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   WePiggySupply: () => (/* reexport safe */ _WePiggySupply__WEBPACK_IMPORTED_MODULE_2__.WePiggySupply),
 /* harmony export */   WePiggyWithdraw: () => (/* reexport safe */ _WePiggyWithdraw__WEBPACK_IMPORTED_MODULE_3__.WePiggyWithdraw)
 /* harmony export */ });
-/* harmony import */ var _WePiggyBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(190);
-/* harmony import */ var _WePiggyRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(191);
-/* harmony import */ var _WePiggySupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(192);
-/* harmony import */ var _WePiggyWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(193);
+/* harmony import */ var _WePiggyBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(194);
+/* harmony import */ var _WePiggyRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(195);
+/* harmony import */ var _WePiggySupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(196);
+/* harmony import */ var _WePiggyWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(197);
 
 
 
 
 
 /***/ }),
-/* 190 */
+/* 194 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22553,7 +22680,7 @@ class WePiggyBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 191 */
+/* 195 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22579,7 +22706,7 @@ class WePiggyRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 192 */
+/* 196 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22607,7 +22734,7 @@ class WePiggySupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 193 */
+/* 197 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22635,7 +22762,7 @@ class WePiggyWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 194 */
+/* 198 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22646,17 +22773,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   RadiantSupply: () => (/* reexport safe */ _RadiantSupply__WEBPACK_IMPORTED_MODULE_2__.RadiantSupply),
 /* harmony export */   RadiantWithdraw: () => (/* reexport safe */ _RadiantWithdraw__WEBPACK_IMPORTED_MODULE_3__.RadiantWithdraw)
 /* harmony export */ });
-/* harmony import */ var _RadiantBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(195);
-/* harmony import */ var _RadiantRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(196);
-/* harmony import */ var _RadiantSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(197);
-/* harmony import */ var _RadiantWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(198);
+/* harmony import */ var _RadiantBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(199);
+/* harmony import */ var _RadiantRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(200);
+/* harmony import */ var _RadiantSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(201);
+/* harmony import */ var _RadiantWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(202);
 
 
 
 
 
 /***/ }),
-/* 195 */
+/* 199 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22682,7 +22809,7 @@ class RadiantBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 196 */
+/* 200 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22708,7 +22835,7 @@ class RadiantRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 197 */
+/* 201 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22734,7 +22861,7 @@ class RadiantSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 198 */
+/* 202 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22760,7 +22887,7 @@ class RadiantWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 199 */
+/* 203 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22771,17 +22898,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   GranarySupply: () => (/* reexport safe */ _GranarySupply__WEBPACK_IMPORTED_MODULE_2__.GranarySupply),
 /* harmony export */   GranaryWithdraw: () => (/* reexport safe */ _GranaryWithdraw__WEBPACK_IMPORTED_MODULE_3__.GranaryWithdraw)
 /* harmony export */ });
-/* harmony import */ var _GranaryBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(200);
-/* harmony import */ var _GranaryRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(201);
-/* harmony import */ var _GranarySupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(202);
-/* harmony import */ var _GranaryWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(203);
+/* harmony import */ var _GranaryBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(204);
+/* harmony import */ var _GranaryRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(205);
+/* harmony import */ var _GranarySupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(206);
+/* harmony import */ var _GranaryWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(207);
 
 
 
 
 
 /***/ }),
-/* 200 */
+/* 204 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22807,7 +22934,7 @@ class GranaryBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 201 */
+/* 205 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22833,7 +22960,7 @@ class GranaryRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 202 */
+/* 206 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22859,7 +22986,7 @@ class GranarySupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 203 */
+/* 207 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22885,7 +23012,7 @@ class GranaryWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 204 */
+/* 208 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22896,17 +23023,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   LiqeeSupply: () => (/* reexport safe */ _LiqeeSupply__WEBPACK_IMPORTED_MODULE_2__.LiqeeSupply),
 /* harmony export */   LiqeeWithdraw: () => (/* reexport safe */ _LiqeeWithdraw__WEBPACK_IMPORTED_MODULE_3__.LiqeeWithdraw)
 /* harmony export */ });
-/* harmony import */ var _LiqeeBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(205);
-/* harmony import */ var _LiqeeRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(206);
-/* harmony import */ var _LiqeeSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(207);
-/* harmony import */ var _LiqeeWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(208);
+/* harmony import */ var _LiqeeBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(209);
+/* harmony import */ var _LiqeeRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(210);
+/* harmony import */ var _LiqeeSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(211);
+/* harmony import */ var _LiqeeWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(212);
 
 
 
 
 
 /***/ }),
-/* 205 */
+/* 209 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22932,7 +23059,7 @@ class LiqeeBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 206 */
+/* 210 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22958,7 +23085,7 @@ class LiqeeRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 207 */
+/* 211 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22984,7 +23111,7 @@ class LiqeeSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 208 */
+/* 212 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23010,7 +23137,7 @@ class LiqeeWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 209 */
+/* 213 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23021,15 +23148,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   RouterContract: () => (/* binding */ RouterContract),
 /* harmony export */   SwapUtil: () => (/* binding */ SwapUtil)
 /* harmony export */ });
-/* harmony import */ var _abis_Swap_PancakeSwapRouter_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(210);
-/* harmony import */ var _abis_Swap_PancakeSwapFactory_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(211);
-/* harmony import */ var _abis_Swap_PancakeSwapPair_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(212);
+/* harmony import */ var _abis_Swap_PancakeSwapRouter_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(214);
+/* harmony import */ var _abis_Swap_PancakeSwapFactory_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(215);
+/* harmony import */ var _abis_Swap_PancakeSwapPair_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(216);
 /* harmony import */ var decimal_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
 /* harmony import */ var decimal_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(decimal_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(113);
 /* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
-/* harmony import */ var bignumber_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(213);
+/* harmony import */ var bignumber_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(217);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -23114,6 +23241,9 @@ class SwapUtil {
   isWbnbToken(_tokenAddress) {
     return _tokenAddress.toLowerCase() == (0,_addresses__WEBPACK_IMPORTED_MODULE_5__.getAddr)("WBNBAddress", this.chainId).toLowerCase();
   }
+  isBnbToken(_tokenAddress) {
+    return _tokenAddress.toLowerCase() == (0,_addresses__WEBPACK_IMPORTED_MODULE_5__.getAddr)("BNBAddress", this.chainId).toLowerCase();
+  }
   getFromReserve(fromToken, toToken) {
     var _this5 = this;
     return _asyncToGenerator(function* () {
@@ -23132,7 +23262,11 @@ class SwapUtil {
   getInformationFromInput(_fromToken, _toToken, slippage, amountFrom) {
     var _this6 = this;
     return _asyncToGenerator(function* () {
+      var WBNBAddress = (0,_addresses__WEBPACK_IMPORTED_MODULE_5__.getAddr)("WBNBAddress", _this6.chainId);
       var fromToken = (0,_addresses__WEBPACK_IMPORTED_MODULE_5__.convertHexStringToAddress)(_fromToken);
+      if (_this6.isBnbToken(_fromToken)) {
+        fromToken = WBNBAddress;
+      }
       var toToken = (0,_addresses__WEBPACK_IMPORTED_MODULE_5__.convertHexStringToAddress)(_toToken);
       var path = [];
       var amountOut = "0";
@@ -23140,7 +23274,6 @@ class SwapUtil {
       var minimumReceive = (0,bignumber_js__WEBPACK_IMPORTED_MODULE_6__["default"])(0);
       var pairAddr = yield _this6.FactoryContract.getPair(fromToken, toToken);
       var needUseMultihop = false;
-      var WBNBAddress = (0,_addresses__WEBPACK_IMPORTED_MODULE_5__.getAddr)("WBNBAddress", _this6.chainId);
       if (!_this6.isZeroAddress(pairAddr)) {
         // let toR;
         path = [fromToken, toToken];
@@ -23253,28 +23386,28 @@ class SwapUtil {
 }
 
 /***/ }),
-/* 210 */
+/* 214 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('[{"inputs":[{"internalType":"address","name":"_factory","type":"address"},{"internalType":"address","name":"_WETH","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"WETH","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"amountADesired","type":"uint256"},{"internalType":"uint256","name":"amountBDesired","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"addLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"},{"internalType":"uint256","name":"liquidity","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amountTokenDesired","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"addLiquidityETH","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"},{"internalType":"uint256","name":"liquidity","type":"uint256"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountIn","outputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountOut","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"}],"name":"getAmountsIn","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"}],"name":"getAmountsOut","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"reserveA","type":"uint256"},{"internalType":"uint256","name":"reserveB","type":"uint256"}],"name":"quote","outputs":[{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidityETH","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidityETHSupportingFeeOnTransferTokens","outputs":[{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityETHWithPermit","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityETHWithPermitSupportingFeeOnTransferTokens","outputs":[{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityWithPermit","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapETHForExactTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETH","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETHSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"amountInMax","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapTokensForExactETH","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"amountInMax","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapTokensForExactTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]');
 
 /***/ }),
-/* 211 */
+/* 215 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('[{"inputs":[{"internalType":"address","name":"_feeToSetter","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"token0","type":"address"},{"indexed":true,"internalType":"address","name":"token1","type":"address"},{"indexed":false,"internalType":"address","name":"pair","type":"address"},{"indexed":false,"internalType":"uint256","name":"","type":"uint256"}],"name":"PairCreated","type":"event"},{"constant":true,"inputs":[],"name":"INIT_CODE_PAIR_HASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allPairs","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"allPairsLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"}],"name":"createPair","outputs":[{"internalType":"address","name":"pair","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"feeTo","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"feeToSetter","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"getPair","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_feeTo","type":"address"}],"name":"setFeeTo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_feeToSetter","type":"address"}],"name":"setFeeToSetter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]');
 
 /***/ }),
-/* 212 */
+/* 216 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount0","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1","type":"uint256"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"Burn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount0","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount0In","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1In","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount0Out","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1Out","type":"uint256"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"Swap","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint112","name":"reserve0","type":"uint112"},{"indexed":false,"internalType":"uint112","name":"reserve1","type":"uint112"}],"name":"Sync","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"DOMAIN_SEPARATOR","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MINIMUM_LIQUIDITY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"PERMIT_TYPEHASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"burn","outputs":[{"internalType":"uint256","name":"amount0","type":"uint256"},{"internalType":"uint256","name":"amount1","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getReserves","outputs":[{"internalType":"uint112","name":"_reserve0","type":"uint112"},{"internalType":"uint112","name":"_reserve1","type":"uint112"},{"internalType":"uint32","name":"_blockTimestampLast","type":"uint32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_token0","type":"address"},{"internalType":"address","name":"_token1","type":"address"}],"name":"initialize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"kLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"mint","outputs":[{"internalType":"uint256","name":"liquidity","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"nonces","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"permit","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"price0CumulativeLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"price1CumulativeLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"skim","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount0Out","type":"uint256"},{"internalType":"uint256","name":"amount1Out","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"swap","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sync","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"token0","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"token1","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]');
 
 /***/ }),
-/* 213 */
+/* 217 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -26279,7 +26412,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Recipe__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
 /* harmony import */ var _DfsWeb3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(108);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(114);
-/* harmony import */ var _SwapUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(209);
+/* harmony import */ var _SwapUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(213);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7);
 /* Export types here */

@@ -26,6 +26,7 @@ export declare class SwapUtil {
     isTodToken(_tokenAddress: EthAddress): boolean;
     isBusdToken(_tokenAddress: EthAddress): boolean;
     isWbnbToken(_tokenAddress: EthAddress): boolean;
+    isBnbToken(_tokenAddress: EthAddress): boolean;
     getFromReserve(fromToken: EthAddress, toToken: EthAddress): Promise<string>;
     getInformationFromInput(_fromToken: EthAddress, _toToken: EthAddress, slippage: number, amountFrom: uint256): Promise<SwapInfoIfInput>;
     getInformationFromOutput(_fromToken: EthAddress, _toToken: EthAddress, slippage: number, amountTo: uint256): Promise<SwapInfoIfOutput>;

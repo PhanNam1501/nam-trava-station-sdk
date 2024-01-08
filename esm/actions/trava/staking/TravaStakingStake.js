@@ -6,9 +6,9 @@ import { getAddr } from "../../../addresses";
  * @category Trava
  */
 export class TravaStakingStake extends Action {
-    constructor(stakingPool, onBehalfOf, amount, contractAddress) {
+    constructor(stakingPool, onBehalfOf, amount, from, contractAddress) {
         const _contractAddress = typeof contractAddress === "undefined" ? getAddr('TravaStakingStake') : contractAddress;
         super("TravaStakingStake", _contractAddress, //getAddr("TravaStakingStake"),
-        ["address", "address", "uint256"], [stakingPool, onBehalfOf, amount]);
+        ["address", "address", "uint256", "address"], [stakingPool, onBehalfOf, amount, from]);
     }
 }

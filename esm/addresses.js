@@ -63,13 +63,14 @@ export const listAddr = {
         TravaWithdraw: "0x92f93da4C46c66ea8C154a93c49663Cf83990244",
         TravaClaimRewards: "0xC37a6D456657815dB1fb3A4bcf660E2a135f1C67",
         TravaConvertRewards: "0xA74EC723b099f00Ed33a29c36Ca8B498a9a75B21",
-        TravaStakingStake: "0x9C144C1182Eb10D6e3011259F31EfA0757fA302F",
+        TravaStakingStake: "0x45983b928A7259b23cE6EaF1fb28A0f06933AEFF",
         TravaStakingRedeem: "0x8c08F0a32D764fC8D0E98C5C9FDB1c8eCC777758",
         TravaStakingClaimRewards: "0x5417704fe7D2f3C12B35aF239a42B5b8033A7BF7",
         // pancake swap
         RouterAddress: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
         FactoryAddress: "0xB7926C0430Afb07AA7DEfDE6DA862aE0Bde767bc",
         // token address
+        BNBAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
         WBNBAddress: "0x910CB19698Eac48a6AB7Ccc9542B756f2Bdd67C6",
         USDCAddress: "0x345dCB7B8F17D342A3639d1D9bD649189f2D0162",
         USDTAddress: "0x780397E17dBF97259F3b697Ca3a394fa483A1419",
@@ -115,17 +116,18 @@ export const listAddr = {
         TravaWithdraw: "0x6B9766FBB57b299eF757c58E066191cD03801705",
         TravaClaimRewards: "0x904B65716A5e6cA937af77B4498C0Bca14eCca57",
         TravaConvertRewards: "0xB4f02C99488938D9F0703b3929d1B6Fb36860eD4",
-        TravaStakingStake: "0x98De3e52B649E6Fe755618a12C2fF4EFEc8CeAfe",
+        TravaStakingStake: "0x01Bfdbd936E576A7a6038DBf9DD133160D3B61A9",
         TravaStakingRedeem: "0xc25Ac9F3Fc69d8EAE396eb4dfcE7D805D1650E71",
         TravaStakingClaimRewards: "0xaAB14589dc039D2b06655E19e6304F9FcB34c285",
         // pancake swap
         RouterAddress: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
         FactoryAddress: "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73",
         // token address
-        TRAVAAddress: "0x0391bE54E72F7e001f6BBc331777710b4f2999Ef",
+        BNBAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
         WBNBAddress: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
         TODAddress: "0x21d5Fa5ECf2605c0E835Ae054AF9bbA0468e5951",
         BUSDAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+        TRAVAAddress: "0x0391bE54E72F7e001f6BBc331777710b4f2999Ef",
         LiquidityCampaignBuyToken: "0x67d102e05BDd9F480f8D45C755b8FFA040bC1701",
     },
 };

@@ -66,6 +66,7 @@ export declare const listAddr: {
         TravaStakingClaimRewards: string;
         RouterAddress: string;
         FactoryAddress: string;
+        BNBAddress: string;
         WBNBAddress: string;
         USDCAddress: string;
         USDTAddress: string;
@@ -114,10 +115,11 @@ export declare const listAddr: {
         TravaStakingClaimRewards: string;
         RouterAddress: string;
         FactoryAddress: string;
-        TRAVAAddress: string;
+        BNBAddress: string;
         WBNBAddress: string;
         TODAddress: string;
         BUSDAddress: string;
+        TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
         GranarySupply?: undefined;
         GranaryBorrow?: undefined;

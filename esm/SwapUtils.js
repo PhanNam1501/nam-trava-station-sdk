@@ -75,6 +75,9 @@ export class SwapUtil {
     isWbnbToken(_tokenAddress) {
         return _tokenAddress.toLowerCase() == getAddr("WBNBAddress", this.chainId).toLowerCase();
     }
+    isBnbToken(_tokenAddress) {
+        return _tokenAddress.toLowerCase() == getAddr("BNBAddress", this.chainId).toLowerCase();
+    }
     getFromReserve(fromToken, toToken) {
         return __awaiter(this, void 0, void 0, function* () {
             let fromR;
@@ -92,7 +95,11 @@ export class SwapUtil {
     }
     getInformationFromInput(_fromToken, _toToken, slippage, amountFrom) {
         return __awaiter(this, void 0, void 0, function* () {
+            let WBNBAddress = getAddr("WBNBAddress", this.chainId);
             let fromToken = convertHexStringToAddress(_fromToken);
+            if (this.isBnbToken(_fromToken)) {
+                fromToken = WBNBAddress;
+            }
             let toToken = convertHexStringToAddress(_toToken);
             let path = [];
             let amountOut = "0";
@@ -100,7 +107,6 @@ export class SwapUtil {
             let minimumReceive = BigNumber(0);
             let pairAddr = yield this.FactoryContract.getPair(fromToken, toToken);
             let needUseMultihop = false;
-            let WBNBAddress = getAddr("WBNBAddress", this.chainId);
             if (!this.isZeroAddress(pairAddr)) {
                 // let toR;
                 path = [fromToken, toToken];
