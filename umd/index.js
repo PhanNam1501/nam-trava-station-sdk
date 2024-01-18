@@ -22856,7 +22856,7 @@ class RadiantSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
     var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('RadiantSupply') : contractAddress;
     super("RadiantSupply", _contractAddress,
     //getAddr("RadiantSupply"),
-    ["address", "address", "uint256", "uint256", "address", "bool"], [market, tokenAddr, amount, from, onBehalf, enableAsColl]);
+    ["address", "address", "uint256", "address", "address", "bool"], [market, tokenAddr, amount, from, onBehalf, enableAsColl]);
   }
 }
 
@@ -22981,7 +22981,7 @@ class GranarySupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
     var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('GranarySupply') : contractAddress;
     super("GranarySupply", _contractAddress,
     //getAddr("GranarySupply"),
-    ["address", "address", "uint256", "uint256", "address", "bool"], [market, tokenAddr, amount, from, onBehalf, enableAsColl]);
+    ["address", "address", "uint256", "address", "address", "bool"], [market, tokenAddr, amount, from, onBehalf, enableAsColl]);
   }
 }
 

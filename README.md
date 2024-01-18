@@ -459,6 +459,259 @@ const trava_liquidity_campaign_redeem = new actions.trava.LiquidityCampaignRedee
   liquidity campaign redeem action address
 )
 ```
+
+## Forked Aave Lending Pool
+### Granary Lending Pool
+#### Granary Supply
+```
+const granary_supply_action = new actions.granary.GranarySupply(
+    market: address of lending pool,
+    token: address of token selected,
+    amount: uint256,
+    from: _from address,
+    onBehalfOf: address of proxy,
+    enableAsColl: true,
+    action granary supply address
+)
+```
+#### Granary Withdraw
+```
+const granary_withdraw_action = new actions.granary.GranaryWithdraw(
+    market: address of lending pool,
+    token: address of token selected,
+    amount: uint256,
+    to: _from address,
+    action granary withdraw address
+)
+```
+#### Granary Borrow
+```
+const granary_borrow_action = new actions.granary.GranaryBorrow(
+    market: address of lending pool,
+    token: address of token selected,
+    amount: uint256,
+    rateMode = 2,
+    to: _from address,
+    onBehalfOf: address of proxy,
+    action granary borrow address
+)
+```
+#### Granary Repay
+```
+const granary_repay_action = new actions.granary.GranaryRepay(
+    market: address of lending pool,
+    token: address of token selected,
+    amount: uint256,
+    rateMode = 2,
+    from: _from address,
+    onBehalfOf: address of proxy,
+    action granary repay address
+)
+```
+### Radiant Lending Pool
+#### Radiant Supply
+```
+const radiant_supply_action = new actions.radiant.RadiantSupply(
+    market: address of lending pool,
+    token: address of token selected,
+    amount: uint256,
+    from: _from address,
+    onBehalfOf: address of proxy,
+    enableAsColl: true,
+    action radiant supply address
+)
+```
+#### Radiant Withdraw
+```
+const radiant_withdraw_action = new actions.radiant.RadiantWithdraw(
+    market: address of lending pool,
+    token: address of token selected,
+    amount: uint256,
+    to: _from address,
+    action radiant withdraw address
+)
+```
+#### Radiant Borrow
+```
+const radiant_borrow_action = new actions.radiant.RadiantBorrow(
+    market: address of lending pool,
+    token: address of token selected,
+    amount: uint256,
+    rateMode = 2,
+    to: _from address,
+    onBehalfOf: address of proxy,
+    action radiant borrow address
+)
+```
+#### Radiant Repay
+```
+const radiant_repay_action = new actions.radiant.RadiantRepay(
+    market: address of lending pool,
+    token: address of token selected,
+    amount: uint256,
+    rateMode = 2,
+    from: _from address,
+    onBehalfOf: address of proxy,
+    action radiant repay address
+)
+```
+## Forked Compound Lending Pool
+### Venus Lending Pool
+#### Venus Supply
+```
+const venus_supply_action = new actions.venus.VenusSupply(
+    cTokenAddress,
+    from,
+    amount,
+    enableAsColl: true,
+    action venus supply address
+)
+```
+#### Venus Withdraw
+```
+const venus_withdraw_action = new actions.venus.VenusWithdraw(
+    cTokenAddress,
+    amount,
+    to,
+    action venus withdraw address
+)
+```
+#### Venus Borrow
+```
+const venus_borrow_action = new actions.venus.VenusBorrow(
+    cTokenAddress,
+    amount,
+    to,
+    action venus borrow address
+)
+```
+#### Venus Repay
+```
+const venus_repay_action = new actions.venus.VenusRepay(
+    cTokenAddress,
+    amount,
+    from,
+    smart wallet address
+    action venus repay address
+)
+```
+### Cream Lending Pool
+#### Cream Supply
+```
+const cream_supply_action = new actions.cream.CreamSupply(
+    cTokenAddress,
+    from,
+    amount,
+    enableAsColl: true,
+    action cream supply address
+)
+```
+#### Cream Withdraw
+```
+const cream_withdraw_action = new actions.cream.CreamWithdraw(
+    cTokenAddress,
+    amount,
+    to,
+    action cream withdraw address
+)
+```
+#### Cream Borrow
+```
+const cream_borrow_action = new actions.cream.CreamBorrow(
+    cTokenAddress,
+    amount,
+    to,
+    action cream borrow address
+)
+```
+#### Cream Repay
+```
+const cream_repay_action = new actions.cream.CreamRepay(
+    cTokenAddress,
+    amount,
+    from,
+    smart wallet address
+    action cream repay address
+)
+```
+### Liqee Lending Pool
+#### Liqee Supply
+```
+const liqee_supply_action = new actions.liqee.LiqeeSupply(
+    cTokenAddress,
+    from,
+    amount,
+    enableAsColl: true,
+    action liqee supply address
+)
+```
+#### Liqee Withdraw
+```
+const liqee_withdraw_action = new actions.liqee.LiqeeWithdraw(
+    cTokenAddress,
+    amount,
+    to,
+    action liqee withdraw address
+)
+```
+#### Liqee Borrow
+```
+const liqee_borrow_action = new actions.liqee.LiqeeBorrow(
+    cTokenAddress,
+    amount,
+    to,
+    action liqee borrow address
+)
+```
+#### Liqee Repay
+```
+const liqee_repay_action = new actions.liqee.LiqeeRepay(
+    cTokenAddress,
+    amount,
+    from,
+    smart wallet address
+    action liqee repay address
+)
+```
+### Wepiggy Lending Pool
+#### Wepiggy Supply
+```
+const wepiggy_supply_action = new actions.wepiggy.WepiggySupply(
+    cTokenAddress,
+    from,
+    amount,
+    enableAsColl: true,
+    action wepiggy supply address
+)
+```
+#### Wepiggy Withdraw
+```
+const wepiggy_withdraw_action = new actions.wepiggy.WepiggyWithdraw(
+    cTokenAddress,
+    amount,
+    to,
+    action wepiggy withdraw address
+)
+```
+#### Wepiggy Borrow
+```
+const wepiggy_borrow_action = new actions.wepiggy.WepiggyBorrow(
+    cTokenAddress,
+    amount,
+    to,
+    action wepiggy borrow address
+)
+```
+#### Wepiggy Repay
+```
+const wepiggy_repay_action = new actions.wepiggy.WepiggyRepay(
+    cTokenAddress,
+    amount,
+    from,
+    smart wallet address
+    action wepiggy repay address
+)
+```
 ## Execute actions
 Sau khi có được các action xong, để execute Freight
 giả sử kết hợp action supply và borrow, repay và withdraw

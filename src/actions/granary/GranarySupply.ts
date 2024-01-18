@@ -22,7 +22,7 @@ export class GranarySupply extends Action {
         super(
             "GranarySupply",
             _contractAddress, //getAddr("GranarySupply"),
-            ["address", "address", "uint256", "uint256", "address", "bool"],
+            ["address", "address", "uint256", "address", "address", "bool"],
             [market, tokenAddr, amount, from, onBehalf, enableAsColl]
         );
     }
