@@ -7,7 +7,7 @@ import { EthAddress, bytes, uint256 } from "../../../types";
  *
  * @category Trava
  */
-export class LiquidityCampaignBuyTokenGatewayGateway extends Action {
+export class LiquidityCampaignBuyTokenGateway extends Action {
   constructor(
     campainAction: EthAddress,
     amountIn: uint256,

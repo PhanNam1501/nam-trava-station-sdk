@@ -392,14 +392,15 @@ const trava_nft_transfer_Collection_action = new actions.trava.TravaNFTTransfer(
 )
 ```
 
-## Trava Liquidity Campain
+## Trava Liquidity Campaign
+### Trava Liquidity Campaign Buy Token 
 const swapUtil = new SwapUtil(web3);
 const info = new await swapUtil.getInformationFromInput(tokenAddr1, tokenAddr2, slipparage, amount);
 const minimumReceive = info.minimumReceive
 const priceImpact = info.priceImpact;
 const path = info.path;
 ```
-const trava_liquidity_campain_buy_token = new actions.trava.LiquidityCampainBuyToken(
+const trava_liquidity_campaign_buy_token = new actions.trava.LiquidityCampaignBuyToken(
   buy_token_with_reference address,
   amountIn,
   amountOutIn,
@@ -408,7 +409,54 @@ const trava_liquidity_campain_buy_token = new actions.trava.LiquidityCampainBuyT
   deadline,
   referred,
   from,
-  liquidity campain buy token address
+  liquidity campaign buy token address
+)
+```
+### Trava Liquidity Campaign Buy Token Gateway
+const swapUtil = new SwapUtil(web3);
+const info = new await swapUtil.getInformationFromInput(tokenAddr1, tokenAddr2, slipparage, amount);
+const minimumReceive = info.minimumReceive
+const priceImpact = info.priceImpact;
+const path = info.path;
+```
+const trava_liquidity_campaign_buy_token_gateway = new actions.trava.LiquidityCampaignBuyTokenGateway(
+  buy_token_with_reference address,
+  amountIn,
+  amountOutIn,
+  path,
+  to, 
+  deadline,
+  referred,
+  from,
+  liquidity campaign buy token gateway action address
+)
+```
+### Trava Liquidity Campaign Stake
+```
+const trava_liquidity_campaign_stake = new actions.trava.LiquidityCampaignStake(
+  vault address,
+  address smart wallet,
+  amount,
+  from address,
+  liquidity campaign stake action address
+)
+```
+### Trava Liquidity Campaign Claim rewards
+```
+const trava_liquidity_campaign_claim_rewards = new actions.trava.LiquidityCampaignClaimRewards(
+  vault address,
+  to address,
+  amount,
+  liquidity campaign claim rewards action address
+)
+```
+### Trava Liquidity Campaign Redeem
+```
+const trava_liquidity_campaign_redeem = new actions.trava.LiquidityCampaignRedeem(
+  vault address,
+  to address,
+  amount,
+  liquidity campaign redeem action address
 )
 ```
 ## Execute actions

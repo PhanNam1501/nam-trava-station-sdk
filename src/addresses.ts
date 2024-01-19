@@ -68,7 +68,7 @@ export const listAddr = {
     TravaWithdraw: "0x92f93da4C46c66ea8C154a93c49663Cf83990244",
     TravaClaimRewards: "0xC37a6D456657815dB1fb3A4bcf660E2a135f1C67",
     TravaConvertRewards: "0xA74EC723b099f00Ed33a29c36Ca8B498a9a75B21",
-    TravaStakingStake: "0x9C144C1182Eb10D6e3011259F31EfA0757fA302F",
+    TravaStakingStake: "0x45983b928A7259b23cE6EaF1fb28A0f06933AEFF",
     TravaStakingRedeem: "0x8c08F0a32D764fC8D0E98C5C9FDB1c8eCC777758",
     TravaStakingClaimRewards: "0x5417704fe7D2f3C12B35aF239a42B5b8033A7BF7",
     // pancake swap
@@ -121,7 +121,7 @@ export const listAddr = {
     TravaWithdraw: "0x6B9766FBB57b299eF757c58E066191cD03801705",
     TravaClaimRewards: "0x904B65716A5e6cA937af77B4498C0Bca14eCca57", //mainnet
     TravaConvertRewards: "0xB4f02C99488938D9F0703b3929d1B6Fb36860eD4", //mainnet
-    TravaStakingStake: "0x98De3e52B649E6Fe755618a12C2fF4EFEc8CeAfe", //mainnet
+    TravaStakingStake: "0x01Bfdbd936E576A7a6038DBf9DD133160D3B61A9", //mainnet
     TravaStakingRedeem: "0xc25Ac9F3Fc69d8EAE396eb4dfcE7D805D1650E71", //mainnet
     TravaStakingClaimRewards: "0xaAB14589dc039D2b06655E19e6304F9FcB34c285", //mainnet
     // pancake swap

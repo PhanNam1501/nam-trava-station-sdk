@@ -74,6 +74,7 @@ declare const listAddressesAllChains: {
         TravaStakingClaimRewards: string;
         RouterAddress: string;
         FactoryAddress: string;
+        BNBAddress: string;
         WBNBAddress: string;
         USDCAddress: string;
         USDTAddress: string;
@@ -122,10 +123,11 @@ declare const listAddressesAllChains: {
         TravaStakingClaimRewards: string;
         RouterAddress: string;
         FactoryAddress: string;
-        TRAVAAddress: string;
+        BNBAddress: string;
         WBNBAddress: string;
         TODAddress: string;
         BUSDAddress: string;
+        TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
         GranarySupply?: undefined;
         GranaryBorrow?: undefined;
@@ -240,6 +242,7 @@ declare const listAddresses: (chainId?: null) => {
     TravaStakingClaimRewards: string;
     RouterAddress: string;
     FactoryAddress: string;
+    BNBAddress: string;
     WBNBAddress: string;
     USDCAddress: string;
     USDTAddress: string;
@@ -288,10 +291,11 @@ declare const listAddresses: (chainId?: null) => {
     TravaStakingClaimRewards: string;
     RouterAddress: string;
     FactoryAddress: string;
-    TRAVAAddress: string;
+    BNBAddress: string;
     WBNBAddress: string;
     TODAddress: string;
     BUSDAddress: string;
+    TRAVAAddress: string;
     LiquidityCampaignBuyToken: string;
     GranarySupply?: undefined;
     GranaryBorrow?: undefined;
@@ -415,6 +419,7 @@ declare const _default: {
         TravaStakingClaimRewards: string;
         RouterAddress: string;
         FactoryAddress: string;
+        BNBAddress: string;
         WBNBAddress: string;
         USDCAddress: string;
         USDTAddress: string;
@@ -463,10 +468,11 @@ declare const _default: {
         TravaStakingClaimRewards: string;
         RouterAddress: string;
         FactoryAddress: string;
-        TRAVAAddress: string;
+        BNBAddress: string;
         WBNBAddress: string;
         TODAddress: string;
         BUSDAddress: string;
+        TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
         GranarySupply?: undefined;
         GranaryBorrow?: undefined;
@@ -581,6 +587,7 @@ declare const _default: {
             TravaStakingClaimRewards: string;
             RouterAddress: string;
             FactoryAddress: string;
+            BNBAddress: string;
             WBNBAddress: string;
             USDCAddress: string;
             USDTAddress: string;
@@ -629,10 +636,11 @@ declare const _default: {
             TravaStakingClaimRewards: string;
             RouterAddress: string;
             FactoryAddress: string;
-            TRAVAAddress: string;
+            BNBAddress: string;
             WBNBAddress: string;
             TODAddress: string;
             BUSDAddress: string;
+            TRAVAAddress: string;
             LiquidityCampaignBuyToken: string;
             GranarySupply?: undefined;
             GranaryBorrow?: undefined;
