@@ -7,4 +7,5 @@ import * as wepiggy from './wepiggy';
 import * as radiant from './radiant';
 import * as granary from './granary';
 import * as liqee from './liqee';
-export { trava, pancake, basic, venus, cream, wepiggy, radiant, granary, liqee };
+import * as fee from './fee';
+export { trava, pancake, basic, venus, cream, wepiggy, radiant, granary, liqee, fee };

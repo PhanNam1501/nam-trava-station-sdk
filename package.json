@@ -1,6 +1,6 @@
 {
-  "name": "trava-station-sdk",
-  "version": "1.0.62",
+  "name": "phuong-trava-station-sdk",
+  "version": "3.0.4",
   "description": "",
   "main": "./umd/index.js",
   "module": "./esm/index.js",
