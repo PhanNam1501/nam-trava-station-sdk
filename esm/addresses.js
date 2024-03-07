@@ -3,6 +3,9 @@ import { toChecksumAddress } from 'ethereumjs-util';
 export const listAddr = {
     [NETWORKS.bscTestnet.chainId]: {
         //Action address
+        LiquidityCampaignClaimRewards: "0x252F478f0Ff737b48386523FFb0a62B8406F57E6",
+        LiquidityCampaignRedeem: "0x2d22804aed533a99D98d6B65B7Ff72300F14A229",
+        LiquidityCampaignStake: "0xcE8A7ED8922cC1CC79ee0c4f388AAAA934D6bb96",
         GranarySupply: "0xF152579B9bFfafD5F8CF0295d02D7a8624ca6dEd",
         GranaryBorrow: "0x0C58EE953332aAC26d0a1B8b1138417Ff6498c99",
         GranaryRepay: "0x731653635e2ef132b0DD5b661C24F4a184E94d58",
@@ -90,6 +93,12 @@ export const listAddr = {
     },
     [NETWORKS.bscMainnet.chainId]: {
         //Action address
+        VenusWithdraw: "0x73d2EfAECba52cFD329A31cBf74FF216A6E65f0A",
+        VenusRepay: "0xa5aD08C356F564273EBc4C4A7ED66Ef878c3BFdc",
+        VenusBorrow: "0x852727FE904BF5A1Bd8316D034c1d6500051532c",
+        VenusSupply: "0x39629E81266804Dc30b9a2a821e5D1ba0c0cB89f",
+        VenusSupplyGateWay: "0xca0b00dD1C7c1ae34eA693000758e6Ab009ED0c3",
+        VenusCollateral: "0x9B74A506a089F1bcF320B36D644cfDFdb0188564",
         DFSProxyRegistry: "0x147f157cB4E328e9C0DB68dBa5305FB7C29e7328",
         RecipeExecutor: "0x8185f9a9ecE74Fe4dC665F5aF64F11E65bD0259a",
         TravaAuctionCreateAuction: "0xadD3754309A7bC4c74E58A9AAb8463a591047123",

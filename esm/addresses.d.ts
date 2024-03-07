@@ -1,6 +1,9 @@
 import { EthAddress } from "./types";
 export declare const listAddr: {
     [x: number]: {
+        LiquidityCampaignClaimRewards: string;
+        LiquidityCampaignRedeem: string;
+        LiquidityCampaignStake: string;
         GranarySupply: string;
         GranaryBorrow: string;
         GranaryRepay: string;
@@ -83,7 +86,15 @@ export declare const listAddr: {
         BUSDAddress: string;
         TODAddress: string;
         LiquidityCampaignBuyToken: string;
+        VenusSupplyGateWay?: undefined;
+        VenusCollateral?: undefined;
     } | {
+        VenusWithdraw: string;
+        VenusRepay: string;
+        VenusBorrow: string;
+        VenusSupply: string;
+        VenusSupplyGateWay: string;
+        VenusCollateral: string;
         DFSProxyRegistry: string;
         RecipeExecutor: string;
         TravaAuctionCreateAuction: string;
@@ -121,6 +132,9 @@ export declare const listAddr: {
         BUSDAddress: string;
         TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
+        LiquidityCampaignClaimRewards?: undefined;
+        LiquidityCampaignRedeem?: undefined;
+        LiquidityCampaignStake?: undefined;
         GranarySupply?: undefined;
         GranaryBorrow?: undefined;
         GranaryRepay?: undefined;
@@ -141,10 +155,6 @@ export declare const listAddr: {
         CreamBorrow?: undefined;
         CreamRepay?: undefined;
         CreamWithdraw?: undefined;
-        VenusWithdraw?: undefined;
-        VenusRepay?: undefined;
-        VenusBorrow?: undefined;
-        VenusSupply?: undefined;
         TravaNFTExpeditionWithdraw?: undefined;
         TravaNFTExpeditionDeploy?: undefined;
         TravaNFTExpeditionAbandon?: undefined;
