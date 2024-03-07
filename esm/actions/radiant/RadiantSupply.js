@@ -8,6 +8,6 @@ export class RadiantSupply extends Action {
     constructor(market, tokenAddr, amount, from, onBehalf, enableAsColl, contractAddress) {
         const _contractAddress = typeof contractAddress === "undefined" ? getAddr('RadiantSupply') : contractAddress;
         super("RadiantSupply", _contractAddress, //getAddr("RadiantSupply"),
-        ["address", "address", "uint256", "uint256", "address", "bool"], [market, tokenAddr, amount, from, onBehalf, enableAsColl]);
+        ["address", "address", "uint256", "address", "address", "bool"], [market, tokenAddr, amount, from, onBehalf, enableAsColl]);
     }
 }

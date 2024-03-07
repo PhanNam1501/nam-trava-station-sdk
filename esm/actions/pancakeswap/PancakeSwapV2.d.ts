@@ -1,5 +1,5 @@
-import { Action } from '../../Action';
-import { EthAddress, uint256, bytes } from '../../types';
+import { Action } from "../../Action";
+import { EthAddress, uint256, bytes } from "../../types";
 /**
  * PancakeSwapV2 - swap token in PancakeSwap
  *
