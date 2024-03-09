@@ -5,6 +5,7 @@ import { Strategy } from './Strategy';
 import { DfsWeb3 } from './DfsWeb3';
 import * as actions from './actions';
 import * as triggers from './triggers';
+import * as services from './services';
 import { SwapUtil } from './SwapUtils';
 import { configure, getNetworkData, CONFIG, NETWORKS as networks } from './config';
 import { getAddr } from './addresses';
@@ -365,7 +366,7 @@ declare const listAddresses: (chainId?: null) => {
     XRPAddress?: undefined;
     DOGEAddress?: undefined;
 };
-export { Action, Recipe, DfsWeb3, Strategy, actions, triggers, SwapUtil, configure, getNetworkData, CONFIG, networks, listAddresses, listAddressesAllChains, getAddr, };
+export { Action, Recipe, DfsWeb3, Strategy, actions, triggers, services, SwapUtil, configure, getNetworkData, CONFIG, networks, listAddresses, listAddressesAllChains, getAddr, };
 declare const _default: {
     Action: typeof Action;
     Recipe: typeof Recipe;
@@ -373,6 +374,7 @@ declare const _default: {
     Strategy: typeof Strategy;
     actions: typeof actions;
     triggers: typeof triggers;
+    services: typeof services;
     configure: (config: Config) => void;
     getNetworkData: (chainId: number) => Network;
     CONFIG: Config;
