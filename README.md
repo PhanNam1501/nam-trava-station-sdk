@@ -470,7 +470,7 @@ const granary_supply_action = new actions.granary.GranarySupply(
     amount: uint256,
     from: _from address,
     onBehalfOf: address of proxy,
-    enableAsColl: true,
+    enableAsColl: false,
     action granary supply address
 )
 ```
@@ -517,7 +517,7 @@ const radiant_supply_action = new actions.radiant.RadiantSupply(
     amount: uint256,
     from: _from address,
     onBehalfOf: address of proxy,
-    enableAsColl: true,
+    enableAsColl: false,
     action radiant supply address
 )
 ```
@@ -557,13 +557,21 @@ const radiant_repay_action = new actions.radiant.RadiantRepay(
 ```
 ## Forked Compound Lending Pool
 ### Venus Lending Pool
+#### Venus Collateral
+```
+const venus_collateral_action = new actions.venus.VenusSupply(
+    list cTokenAddress,
+    list EnableAsCol,
+    action venus collateral address
+)
+```
 #### Venus Supply
 ```
 const venus_supply_action = new actions.venus.VenusSupply(
     cTokenAddress,
     from,
     amount,
-    enableAsColl: true,
+    enableAsColl: false,
     action venus supply address
 )
 ```
@@ -596,13 +604,21 @@ const venus_repay_action = new actions.venus.VenusRepay(
 )
 ```
 ### Cream Lending Pool
+#### Cream Collateral
+```
+const cream_collateral_action = new actions.cream.VenusSupply(
+    list cTokenAddress,
+    list EnableAsCol,
+    action cream collateral address
+)
+```
 #### Cream Supply
 ```
 const cream_supply_action = new actions.cream.CreamSupply(
     cTokenAddress,
     from,
     amount,
-    enableAsColl: true,
+    enableAsColl: false,
     action cream supply address
 )
 ```
@@ -641,7 +657,7 @@ const liqee_supply_action = new actions.liqee.LiqeeSupply(
     cTokenAddress,
     from,
     amount,
-    enableAsColl: true,
+    enableAsColl: false,
     action liqee supply address
 )
 ```
@@ -674,13 +690,21 @@ const liqee_repay_action = new actions.liqee.LiqeeRepay(
 )
 ```
 ### Wepiggy Lending Pool
+#### WePiggy Collateral
+```
+const wepiggy_collateral_action = new actions.wepiggy.VenusSupply(
+    list cTokenAddress,
+    list EnableAsCol,
+    action wepiggy collateral address
+)
+```
 #### Wepiggy Supply
 ```
 const wepiggy_supply_action = new actions.wepiggy.WepiggySupply(
     cTokenAddress,
     from,
     amount,
-    enableAsColl: true,
+    enableAsColl: false,
     action wepiggy supply address
 )
 ```
