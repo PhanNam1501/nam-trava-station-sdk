@@ -11,6 +11,7 @@ import { Action } from './Action';
 import { Recipe } from './Recipe';
 import { Strategy } from './Strategy';
 import { DfsWeb3 } from './DfsWeb3';
+import { StrategySub } from './StrategySub';
 
 import * as actions from './actions';
 import * as triggers from './triggers';
@@ -36,7 +37,7 @@ const listAddresses = (chainId = null) => _listAddresses[chainId || CONFIG.chain
 
 
 export {
-  Action, Recipe, DfsWeb3, Strategy,
+  Action, Recipe, DfsWeb3, Strategy, StrategySub,
   actions, triggers, services, SwapUtil,
   configure, getNetworkData, CONFIG, networks,
   listAddresses, listAddressesAllChains, getAddr,
@@ -47,6 +48,7 @@ export default {
   Recipe,
   DfsWeb3,
   Strategy,
+  StrategySub,
   actions,
   triggers,
   services,

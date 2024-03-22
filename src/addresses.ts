@@ -5,6 +5,8 @@ import { toChecksumAddress } from 'ethereumjs-util';
 export const listAddr = {
   [NETWORKS.bscTestnet.chainId]: {
     //Action address
+    SubProxy:"0x7A8B178176d9396C2dc33B574Ccf8C9080c62a6c",
+    AaveV2RatioTrigger:"0xf51D4D1DDad8003F538ee983843b628D1fD2AAD8",
     LiquidityCampaignClaimRewards: "0x252F478f0Ff737b48386523FFb0a62B8406F57E6",
     LiquidityCampaignRedeem: "0x2d22804aed533a99D98d6B65B7Ff72300F14A229",
     LiquidityCampaignStake: "0xcE8A7ED8922cC1CC79ee0c4f388AAAA934D6bb96",
