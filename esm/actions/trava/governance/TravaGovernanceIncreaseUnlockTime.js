@@ -1,7 +1,11 @@
 import { Action } from "../../../Action";
 import { getAddr } from "../../../addresses";
 /**
+<<<<<<< HEAD
  * TravaGovernanceIncreaseUnlockTime - Borrow Token in Lending Pool
+=======
+ * TravaGovernanceIncreaseUnlockTime - Increase unlock time in governance
+>>>>>>> origin/ngan-sdk
  *
  * @category Trava
  */

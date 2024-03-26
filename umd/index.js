@@ -20521,6 +20521,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /***/ }),
 /* 116 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -20590,21 +20591,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
-<<<<<<< HEAD
- * TravaGovernanceCreateLock - Borrow Token in Lending Pool
-=======
  * TravaGovernanceCreateLock - Create lock in governance
->>>>>>> origin/ngan/sdk
  *
  * @category Trava
  */
 
 class TravaGovernanceCreateLock extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
-  constructor(token, value, lock_duration, to, from, contractAddress) {
+  constructor() {
+    var token = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('Empty');
+    var value = arguments.length > 1 ? arguments[1] : undefined;
+    var locktime = arguments.length > 2 ? arguments[2] : undefined;
+    var to = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('Empty');
+    var from = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('Empty');
+    var contractAddress = arguments.length > 5 ? arguments[5] : undefined;
     var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('TravaGovernanceCreateLock') : contractAddress;
     super("TravaGovernanceCreateLock", _contractAddress,
     //getAddr("TravaGovernanceCreateLock"),
-    ["address", "uint256", "uint256", "address", "address"], [token, value, lock_duration, to, from]);
+    ["address", "uint256", "uint256", "address", "address"], [token, value, locktime, to, from]);
   }
 }
 
@@ -20650,7 +20653,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
+<<<<<<< HEAD
  * TravaGovernanceIncreaseUnlockTime - Borrow Token in Lending Pool
+=======
+ * TravaGovernanceIncreaseUnlockTime - Increase unlock time in governance
+>>>>>>> origin/ngan-sdk
  *
  * @category Trava
  */
