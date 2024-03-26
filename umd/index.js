@@ -20553,6 +20553,22 @@ class StrategySub {
     var startegySub = [this.strategyId, this.isBundle, this.triggersData, this.actionsData];
     return iface.encodeFunctionData(functionFragment, [startegySub]);
   }
+  encodeForActiveSub(subId) {
+    var iface = new ethers__WEBPACK_IMPORTED_MODULE_3__.ethers.Interface(_abis_SubProxy_json__WEBPACK_IMPORTED_MODULE_1__);
+    var functionFragment = iface.getFunctionName("activateSub");
+    return [this.subProxyAddress, iface.encodeFunctionData(functionFragment, [subId])];
+  }
+  encodeForDeactiveSub(subId) {
+    var iface = new ethers__WEBPACK_IMPORTED_MODULE_3__.ethers.Interface(_abis_SubProxy_json__WEBPACK_IMPORTED_MODULE_1__);
+    var functionFragment = iface.getFunctionName("deactivateSub");
+    return [this.subProxyAddress, iface.encodeFunctionData(functionFragment, [subId])];
+  }
+  encodeForUpdateSubData(subId) {
+    var iface = new ethers__WEBPACK_IMPORTED_MODULE_3__.ethers.Interface(_abis_SubProxy_json__WEBPACK_IMPORTED_MODULE_1__);
+    var functionFragment = iface.getFunctionName("updateSubData");
+    var startegySub = [this.strategyId, this.isBundle, this.triggersData, this.actionsData];
+    return [this.subProxyAddress, iface.encodeFunctionData(functionFragment, [subId, startegySub])];
+  }
 }
 
 /***/ }),
@@ -23642,6 +23658,9 @@ var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_0__.ethers.AbiCoder();
 var TimeTriggerService = {
   encode(startTime, endTime) {
     return [abiCoder.encode(['uint256', 'uint256'], [startTime, endTime])];
+  },
+  decode(triggerData) {
+    return [abiCoder.decode(['uint256', 'uint256'], triggerData)];
   }
 };
 

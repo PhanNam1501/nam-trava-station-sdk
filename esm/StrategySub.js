@@ -35,4 +35,29 @@ export class StrategySub {
         const startegySub = [this.strategyId, this.isBundle, this.triggersData, this.actionsData];
         return iface.encodeFunctionData(functionFragment, [startegySub]);
     }
+    encodeForActiveSub(subId) {
+        const iface = new ethers.Interface(SubProxyAbi);
+        const functionFragment = iface.getFunctionName("activateSub");
+        return [
+            this.subProxyAddress,
+            iface.encodeFunctionData(functionFragment, [subId])
+        ];
+    }
+    encodeForDeactiveSub(subId) {
+        const iface = new ethers.Interface(SubProxyAbi);
+        const functionFragment = iface.getFunctionName("deactivateSub");
+        return [
+            this.subProxyAddress,
+            iface.encodeFunctionData(functionFragment, [subId])
+        ];
+    }
+    encodeForUpdateSubData(subId) {
+        const iface = new ethers.Interface(SubProxyAbi);
+        const functionFragment = iface.getFunctionName("updateSubData");
+        const startegySub = [this.strategyId, this.isBundle, this.triggersData, this.actionsData];
+        return [
+            this.subProxyAddress,
+            iface.encodeFunctionData(functionFragment, [subId, startegySub])
+        ];
+    }
 }
