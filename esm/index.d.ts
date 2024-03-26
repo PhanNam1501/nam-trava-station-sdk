@@ -1,14 +1,23 @@
 import type { EthAddress, Config, Network, Networks, bytes32, bytes, uint256, uint160, uint128, uint80, uint64, uint24, uint16, uint8, int24 } from './types';
 import { Action } from './Action';
 import { Recipe } from './Recipe';
+import { Strategy } from './Strategy';
 import { DfsWeb3 } from './DfsWeb3';
+import { StrategySub } from './StrategySub';
 import * as actions from './actions';
+import * as triggers from './triggers';
+import * as services from './services';
 import { SwapUtil } from './SwapUtils';
 import { configure, getNetworkData, CONFIG, NETWORKS as networks } from './config';
 import { getAddr } from './addresses';
 export type { EthAddress, Config, Network, Networks, bytes32, bytes, uint256, uint160, uint128, uint80, uint64, uint24, uint16, uint8, int24, };
 declare const listAddressesAllChains: {
     [x: number]: {
+        SubProxy: string;
+        AaveV2RatioTrigger: string;
+        LiquidityCampaignClaimRewards: string;
+        LiquidityCampaignRedeem: string;
+        LiquidityCampaignStake: string;
         GranarySupply: string;
         GranaryBorrow: string;
         GranaryRepay: string;
@@ -91,7 +100,15 @@ declare const listAddressesAllChains: {
         BUSDAddress: string;
         TODAddress: string;
         LiquidityCampaignBuyToken: string;
+        VenusSupplyGateWay?: undefined;
+        VenusCollateral?: undefined;
     } | {
+        VenusWithdraw: string;
+        VenusRepay: string;
+        VenusBorrow: string;
+        VenusSupply: string;
+        VenusSupplyGateWay: string;
+        VenusCollateral: string;
         DFSProxyRegistry: string;
         RecipeExecutor: string;
         TravaAuctionCreateAuction: string;
@@ -129,6 +146,11 @@ declare const listAddressesAllChains: {
         BUSDAddress: string;
         TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
+        SubProxy?: undefined;
+        AaveV2RatioTrigger?: undefined;
+        LiquidityCampaignClaimRewards?: undefined;
+        LiquidityCampaignRedeem?: undefined;
+        LiquidityCampaignStake?: undefined;
         GranarySupply?: undefined;
         GranaryBorrow?: undefined;
         GranaryRepay?: undefined;
@@ -149,10 +171,6 @@ declare const listAddressesAllChains: {
         CreamBorrow?: undefined;
         CreamRepay?: undefined;
         CreamWithdraw?: undefined;
-        VenusWithdraw?: undefined;
-        VenusRepay?: undefined;
-        VenusBorrow?: undefined;
-        VenusSupply?: undefined;
         TravaNFTExpeditionWithdraw?: undefined;
         TravaNFTExpeditionDeploy?: undefined;
         TravaNFTExpeditionAbandon?: undefined;
@@ -177,6 +195,11 @@ declare const listAddressesAllChains: {
     };
 };
 declare const listAddresses: (chainId?: null) => {
+    SubProxy: string;
+    AaveV2RatioTrigger: string;
+    LiquidityCampaignClaimRewards: string;
+    LiquidityCampaignRedeem: string;
+    LiquidityCampaignStake: string;
     GranarySupply: string;
     GranaryBorrow: string;
     GranaryRepay: string;
@@ -259,7 +282,15 @@ declare const listAddresses: (chainId?: null) => {
     BUSDAddress: string;
     TODAddress: string;
     LiquidityCampaignBuyToken: string;
+    VenusSupplyGateWay?: undefined;
+    VenusCollateral?: undefined;
 } | {
+    VenusWithdraw: string;
+    VenusRepay: string;
+    VenusBorrow: string;
+    VenusSupply: string;
+    VenusSupplyGateWay: string;
+    VenusCollateral: string;
     DFSProxyRegistry: string;
     RecipeExecutor: string;
     TravaAuctionCreateAuction: string;
@@ -297,6 +328,11 @@ declare const listAddresses: (chainId?: null) => {
     BUSDAddress: string;
     TRAVAAddress: string;
     LiquidityCampaignBuyToken: string;
+    SubProxy?: undefined;
+    AaveV2RatioTrigger?: undefined;
+    LiquidityCampaignClaimRewards?: undefined;
+    LiquidityCampaignRedeem?: undefined;
+    LiquidityCampaignStake?: undefined;
     GranarySupply?: undefined;
     GranaryBorrow?: undefined;
     GranaryRepay?: undefined;
@@ -317,10 +353,6 @@ declare const listAddresses: (chainId?: null) => {
     CreamBorrow?: undefined;
     CreamRepay?: undefined;
     CreamWithdraw?: undefined;
-    VenusWithdraw?: undefined;
-    VenusRepay?: undefined;
-    VenusBorrow?: undefined;
-    VenusSupply?: undefined;
     TravaNFTExpeditionWithdraw?: undefined;
     TravaNFTExpeditionDeploy?: undefined;
     TravaNFTExpeditionAbandon?: undefined;
@@ -343,17 +375,26 @@ declare const listAddresses: (chainId?: null) => {
     XRPAddress?: undefined;
     DOGEAddress?: undefined;
 };
-export { Action, Recipe, DfsWeb3, actions, SwapUtil, configure, getNetworkData, CONFIG, networks, listAddresses, listAddressesAllChains, getAddr, };
+export { Action, Recipe, DfsWeb3, Strategy, StrategySub, actions, triggers, services, SwapUtil, configure, getNetworkData, CONFIG, networks, listAddresses, listAddressesAllChains, getAddr, };
 declare const _default: {
     Action: typeof Action;
     Recipe: typeof Recipe;
     DfsWeb3: typeof DfsWeb3;
+    Strategy: typeof Strategy;
+    StrategySub: typeof StrategySub;
     actions: typeof actions;
+    triggers: typeof triggers;
+    services: typeof services;
     configure: (config: Config) => void;
     getNetworkData: (chainId: number) => Network;
     CONFIG: Config;
     networks: Networks;
     listAddresses: (chainId?: null) => {
+        SubProxy: string;
+        AaveV2RatioTrigger: string;
+        LiquidityCampaignClaimRewards: string;
+        LiquidityCampaignRedeem: string;
+        LiquidityCampaignStake: string;
         GranarySupply: string;
         GranaryBorrow: string;
         GranaryRepay: string;
@@ -436,7 +477,15 @@ declare const _default: {
         BUSDAddress: string;
         TODAddress: string;
         LiquidityCampaignBuyToken: string;
+        VenusSupplyGateWay?: undefined;
+        VenusCollateral?: undefined;
     } | {
+        VenusWithdraw: string;
+        VenusRepay: string;
+        VenusBorrow: string;
+        VenusSupply: string;
+        VenusSupplyGateWay: string;
+        VenusCollateral: string;
         DFSProxyRegistry: string;
         RecipeExecutor: string;
         TravaAuctionCreateAuction: string;
@@ -474,6 +523,11 @@ declare const _default: {
         BUSDAddress: string;
         TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
+        SubProxy?: undefined;
+        AaveV2RatioTrigger?: undefined;
+        LiquidityCampaignClaimRewards?: undefined;
+        LiquidityCampaignRedeem?: undefined;
+        LiquidityCampaignStake?: undefined;
         GranarySupply?: undefined;
         GranaryBorrow?: undefined;
         GranaryRepay?: undefined;
@@ -494,10 +548,6 @@ declare const _default: {
         CreamBorrow?: undefined;
         CreamRepay?: undefined;
         CreamWithdraw?: undefined;
-        VenusWithdraw?: undefined;
-        VenusRepay?: undefined;
-        VenusBorrow?: undefined;
-        VenusSupply?: undefined;
         TravaNFTExpeditionWithdraw?: undefined;
         TravaNFTExpeditionDeploy?: undefined;
         TravaNFTExpeditionAbandon?: undefined;
@@ -522,6 +572,11 @@ declare const _default: {
     };
     listAddressesAllChains: {
         [x: number]: {
+            SubProxy: string;
+            AaveV2RatioTrigger: string;
+            LiquidityCampaignClaimRewards: string;
+            LiquidityCampaignRedeem: string;
+            LiquidityCampaignStake: string;
             GranarySupply: string;
             GranaryBorrow: string;
             GranaryRepay: string;
@@ -604,7 +659,15 @@ declare const _default: {
             BUSDAddress: string;
             TODAddress: string;
             LiquidityCampaignBuyToken: string;
+            VenusSupplyGateWay?: undefined;
+            VenusCollateral?: undefined;
         } | {
+            VenusWithdraw: string;
+            VenusRepay: string;
+            VenusBorrow: string;
+            VenusSupply: string;
+            VenusSupplyGateWay: string;
+            VenusCollateral: string;
             DFSProxyRegistry: string;
             RecipeExecutor: string;
             TravaAuctionCreateAuction: string;
@@ -642,6 +705,11 @@ declare const _default: {
             BUSDAddress: string;
             TRAVAAddress: string;
             LiquidityCampaignBuyToken: string;
+            SubProxy?: undefined;
+            AaveV2RatioTrigger?: undefined;
+            LiquidityCampaignClaimRewards?: undefined;
+            LiquidityCampaignRedeem?: undefined;
+            LiquidityCampaignStake?: undefined;
             GranarySupply?: undefined;
             GranaryBorrow?: undefined;
             GranaryRepay?: undefined;
@@ -662,10 +730,6 @@ declare const _default: {
             CreamBorrow?: undefined;
             CreamRepay?: undefined;
             CreamWithdraw?: undefined;
-            VenusWithdraw?: undefined;
-            VenusRepay?: undefined;
-            VenusBorrow?: undefined;
-            VenusSupply?: undefined;
             TravaNFTExpeditionWithdraw?: undefined;
             TravaNFTExpeditionDeploy?: undefined;
             TravaNFTExpeditionAbandon?: undefined;

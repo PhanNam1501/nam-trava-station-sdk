@@ -7,7 +7,7 @@
 		exports["trava-station-sdk"] = factory(require("web3-eth-abi"), require("web3-utils"), require("@zennomi/tokens"), require("decimal.js"), require("ethers"));
 	else
 		root["trava-station-sdk"] = factory(root["web3-eth-abi"], root["web3-utils"], root["@zennomi/tokens"], root["decimal.js"], root["ethers"]);
-})(this, (__WEBPACK_EXTERNAL_MODULE__2__, __WEBPACK_EXTERNAL_MODULE__3__, __WEBPACK_EXTERNAL_MODULE__6__, __WEBPACK_EXTERNAL_MODULE__9__, __WEBPACK_EXTERNAL_MODULE__113__) => {
+})(this, (__WEBPACK_EXTERNAL_MODULE__2__, __WEBPACK_EXTERNAL_MODULE__3__, __WEBPACK_EXTERNAL_MODULE__6__, __WEBPACK_EXTERNAL_MODULE__9__, __WEBPACK_EXTERNAL_MODULE__114__) => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ([
 /* 0 */,
@@ -449,6 +449,11 @@ __webpack_require__.r(__webpack_exports__);
 var listAddr = {
   [_config__WEBPACK_IMPORTED_MODULE_0__.NETWORKS.bscTestnet.chainId]: {
     //Action address
+    SubProxy: "0x7A8B178176d9396C2dc33B574Ccf8C9080c62a6c",
+    AaveV2RatioTrigger: "0xf51D4D1DDad8003F538ee983843b628D1fD2AAD8",
+    LiquidityCampaignClaimRewards: "0x252F478f0Ff737b48386523FFb0a62B8406F57E6",
+    LiquidityCampaignRedeem: "0x2d22804aed533a99D98d6B65B7Ff72300F14A229",
+    LiquidityCampaignStake: "0xcE8A7ED8922cC1CC79ee0c4f388AAAA934D6bb96",
     GranarySupply: "0xF152579B9bFfafD5F8CF0295d02D7a8624ca6dEd",
     GranaryBorrow: "0x0C58EE953332aAC26d0a1B8b1138417Ff6498c99",
     GranaryRepay: "0x731653635e2ef132b0DD5b661C24F4a184E94d58",
@@ -536,6 +541,12 @@ var listAddr = {
   },
   [_config__WEBPACK_IMPORTED_MODULE_0__.NETWORKS.bscMainnet.chainId]: {
     //Action address
+    VenusWithdraw: "0x73d2EfAECba52cFD329A31cBf74FF216A6E65f0A",
+    VenusRepay: "0xa5aD08C356F564273EBc4C4A7ED66Ef878c3BFdc",
+    VenusBorrow: "0x852727FE904BF5A1Bd8316D034c1d6500051532c",
+    VenusSupply: "0x39629E81266804Dc30b9a2a821e5D1ba0c0cB89f",
+    VenusSupplyGateWay: "0xca0b00dD1C7c1ae34eA693000758e6Ab009ED0c3",
+    VenusCollateral: "0x9B74A506a089F1bcF320B36D644cfDFdb0188564",
     DFSProxyRegistry: "0x147f157cB4E328e9C0DB68dBa5305FB7C29e7328",
     RecipeExecutor: "0x8185f9a9ecE74Fe4dC665F5aF64F11E65bD0259a",
     TravaAuctionCreateAuction: "0xadD3754309A7bC4c74E58A9AAb8463a591047123",
@@ -20258,15 +20269,78 @@ module.exports = JSON.parse('[{"inputs":[],"name":"NonContractCall","type":"erro
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Strategy: () => (/* binding */ Strategy)
+/* harmony export */ });
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+/**
+ *
+ * @category Base Classes
+ */
+class Strategy {
+  constructor(name) {
+    _defineProperty(this, "name", void 0);
+    _defineProperty(this, "subSlots", void 0);
+    _defineProperty(this, "actions", void 0);
+    _defineProperty(this, "triggers", void 0);
+    _defineProperty(this, "numSubSlots", void 0);
+    this.name = name;
+    this.subSlots = {};
+    this.actions = [];
+    this.triggers = [];
+    this.numSubSlots = 0;
+  }
+  addSubSlot(name, type) {
+    this.subSlots[name] = {
+      type,
+      index: this.numSubSlots + 128
+    };
+    this.numSubSlots++;
+  }
+  addTrigger(newTrigger) {
+    this.triggers.push(newTrigger);
+  }
+  addAction(newAction) {
+    this.actions.push(newAction);
+  }
+  print() {
+    console.log("Name: ".concat(this.name));
+    console.log("Slots: ".concat(this.subSlots));
+    console.log("Action: ".concat(this.actions[0]));
+  }
+  getSubSlots() {
+    return this.subSlots;
+  }
+  encodeForDsProxyCall() {
+    var triggerIds = this.triggers.map(trigger => trigger.getId());
+    var paramMappings = [];
+    var actionIds = [];
+    this.actions.forEach(action => {
+      var actionEncoded = action.encodeForStrategy(this.subSlots);
+      actionIds.push(actionEncoded[0]);
+      paramMappings.push(actionEncoded[1]);
+    });
+    return [this.name, triggerIds, actionIds, paramMappings];
+  }
+}
+
+/***/ }),
+/* 109 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DfsWeb3: () => (/* binding */ DfsWeb3)
 /* harmony export */ });
-/* harmony import */ var _abis_DFSProxyRegistry_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(109);
-/* harmony import */ var _abis_ProxyRegistry_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(110);
-/* harmony import */ var _abis_DsProxy_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(111);
-/* harmony import */ var _abis_Bep20_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(112);
+/* harmony import */ var _abis_DFSProxyRegistry_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(110);
+/* harmony import */ var _abis_ProxyRegistry_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(111);
+/* harmony import */ var _abis_DsProxy_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(112);
+/* harmony import */ var _abis_Bep20_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(113);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
-/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(113);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(114);
 /* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_6__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -20387,42 +20461,109 @@ class DfsWeb3 {
 }
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('[{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"build","outputs":[{"internalType":"address payable","name":"proxy","type":"address"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"buildProxy","outputs":[{"internalType":"address payable","name":"proxy","type":"address"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"factory_","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"proxies","outputs":[{"internalType":"contract DSProxy","name":"","type":"address"}],"stateMutability":"view","type":"function"}]');
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('[{"constant":false,"inputs":[],"name":"build","outputs":[{"name":"proxy","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"proxies","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"owner","type":"address"}],"name":"build","outputs":[{"name":"proxy","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"factory_","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('[{"constant":false,"inputs":[{"name":"owner_","type":"address"}],"name":"setOwner","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"cache","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"authority_","type":"address"}],"name":"setAuthority","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"authority","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_cacheAddr","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":true,"inputs":[{"indexed":true,"name":"sig","type":"bytes4"},{"indexed":true,"name":"guy","type":"address"},{"indexed":true,"name":"foo","type":"bytes32"},{"indexed":true,"name":"bar","type":"bytes32"},{"indexed":false,"name":"wad","type":"uint256"},{"indexed":false,"name":"fax","type":"bytes"}],"name":"LogNote","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"authority","type":"address"}],"name":"LogSetAuthority","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"}],"name":"LogSetOwner","type":"event"},{"constant":false,"inputs":[{"name":"_target","type":"address"},{"name":"_data","type":"bytes"}],"name":"execute","outputs":[{"name":"response","type":"bytes32"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_code","type":"bytes"},{"name":"_data","type":"bytes"}],"name":"execute","outputs":[{"name":"target","type":"address"},{"name":"response","type":"bytes32"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_cacheAddr","type":"address"}],"name":"setCache","outputs":[{"name":"","type":"bool"}],"payable":true,"stateMutability":"payable","type":"function"}]');
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('[{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}]');
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__113__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__114__;
 
 /***/ }),
-/* 114 */
+/* 115 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   StrategySub: () => (/* binding */ StrategySub)
+/* harmony export */ });
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _abis_SubProxy_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(116);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(114);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_3__);
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
+
+var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_3__.ethers.AbiCoder();
+
+/**
+ *
+ * @category Base Classes
+ */
+class StrategySub {
+  constructor(strategyId, isBundle, triggersData, actionsData, chainId) {
+    _defineProperty(this, "strategyId", void 0);
+    _defineProperty(this, "isBundle", void 0);
+    _defineProperty(this, "actionsData", void 0);
+    _defineProperty(this, "triggersData", void 0);
+    _defineProperty(this, "subProxyAddress", void 0);
+    this.strategyId = strategyId;
+    this.isBundle = isBundle;
+    this.actionsData = actionsData;
+    this.triggersData = triggersData;
+    var _chainId = typeof chainId === "undefined" ? _config__WEBPACK_IMPORTED_MODULE_0__.CONFIG.chainId : chainId;
+    this.subProxyAddress = (0,_addresses__WEBPACK_IMPORTED_MODULE_2__.getAddr)('SubProxy', _chainId);
+  }
+
+  /**
+  * Encode arguments for calling the action set via DsProxy
+  * @returns `address` & `data` to be passed on to DSProxy's `execute(address _target, bytes memory _data)`
+  */
+  encodeForDsProxyCall() {
+    var iface = new ethers__WEBPACK_IMPORTED_MODULE_3__.ethers.Interface(_abis_SubProxy_json__WEBPACK_IMPORTED_MODULE_1__);
+    var functionFragment = iface.getFunctionName("subscribeToStrategy");
+    var startegySub = [this.strategyId, this.isBundle, this.triggersData, this.actionsData];
+    return [this.subProxyAddress, iface.encodeFunctionData(functionFragment, [startegySub])];
+  }
+  encodeForFunctionData() {
+    var iface = new ethers__WEBPACK_IMPORTED_MODULE_3__.ethers.Interface(_abis_SubProxy_json__WEBPACK_IMPORTED_MODULE_1__);
+    var functionFragment = iface.getFunctionName("subscribeToStrategy");
+    var startegySub = [this.strategyId, this.isBundle, this.triggersData, this.actionsData];
+    return iface.encodeFunctionData(functionFragment, [startegySub]);
+  }
+}
+
+/***/ }),
+/* 116 */
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('[{"inputs":[],"name":"NonContractCall","type":"error"},{"inputs":[],"name":"SenderNotAdmin","type":"error"},{"inputs":[],"name":"SenderNotOwner","type":"error"},{"inputs":[],"name":"EXECUTE_SELECTOR","outputs":[{"internalType":"bytes4","name":"","type":"bytes4"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_subId","type":"uint256"}],"name":"activateSub","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"adminVault","outputs":[{"internalType":"contract AdminVault","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_subId","type":"uint256"}],"name":"deactivateSub","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_contractAddr","type":"address"}],"name":"givePermission","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"kill","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"registry","outputs":[{"internalType":"contract DFSRegistry","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_contractAddr","type":"address"}],"name":"removePermission","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"components":[{"internalType":"uint64","name":"strategyOrBundleId","type":"uint64"},{"internalType":"bool","name":"isBundle","type":"bool"},{"internalType":"bytes[]","name":"triggerData","type":"bytes[]"},{"internalType":"bytes32[]","name":"subData","type":"bytes32[]"}],"internalType":"struct StrategyModel.StrategySub","name":"_sub","type":"tuple"}],"name":"subscribeToStrategy","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_subId","type":"uint256"},{"components":[{"internalType":"uint64","name":"strategyOrBundleId","type":"uint64"},{"internalType":"bool","name":"isBundle","type":"bool"},{"internalType":"bytes[]","name":"triggerData","type":"bytes[]"},{"internalType":"bytes32[]","name":"subData","type":"bytes32[]"}],"internalType":"struct StrategyModel.StrategySub","name":"_sub","type":"tuple"}],"name":"updateAndActivateSub","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_subId","type":"uint256"},{"components":[{"internalType":"uint64","name":"strategyOrBundleId","type":"uint64"},{"internalType":"bool","name":"isBundle","type":"bool"},{"internalType":"bytes[]","name":"triggerData","type":"bytes[]"},{"internalType":"bytes32[]","name":"subData","type":"bytes32[]"}],"internalType":"struct StrategyModel.StrategySub","name":"_sub","type":"tuple"}],"name":"updateSubData","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_token","type":"address"},{"internalType":"address","name":"_receiver","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"withdrawStuckFunds","outputs":[],"stateMutability":"nonpayable","type":"function"}]');
+
+/***/ }),
+/* 117 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20430,6 +20571,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   basic: () => (/* reexport module object */ _basic__WEBPACK_IMPORTED_MODULE_2__),
 /* harmony export */   cream: () => (/* reexport module object */ _cream__WEBPACK_IMPORTED_MODULE_4__),
+/* harmony export */   fee: () => (/* reexport module object */ _fee__WEBPACK_IMPORTED_MODULE_9__),
 /* harmony export */   granary: () => (/* reexport module object */ _granary__WEBPACK_IMPORTED_MODULE_7__),
 /* harmony export */   liqee: () => (/* reexport module object */ _liqee__WEBPACK_IMPORTED_MODULE_8__),
 /* harmony export */   pancake: () => (/* reexport module object */ _pancakeswap__WEBPACK_IMPORTED_MODULE_1__),
@@ -20438,15 +20580,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   venus: () => (/* reexport module object */ _venus__WEBPACK_IMPORTED_MODULE_3__),
 /* harmony export */   wepiggy: () => (/* reexport module object */ _wepiggy__WEBPACK_IMPORTED_MODULE_5__)
 /* harmony export */ });
-/* harmony import */ var _trava__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(115);
-/* harmony import */ var _pancakeswap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(173);
-/* harmony import */ var _basic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(175);
-/* harmony import */ var _venus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(183);
-/* harmony import */ var _cream__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(188);
-/* harmony import */ var _wepiggy__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(193);
-/* harmony import */ var _radiant__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(198);
-/* harmony import */ var _granary__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(203);
-/* harmony import */ var _liqee__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(208);
+/* harmony import */ var _trava__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(118);
+/* harmony import */ var _pancakeswap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(177);
+/* harmony import */ var _basic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(179);
+/* harmony import */ var _venus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(187);
+/* harmony import */ var _cream__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(194);
+/* harmony import */ var _wepiggy__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(200);
+/* harmony import */ var _radiant__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(206);
+/* harmony import */ var _granary__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(211);
+/* harmony import */ var _liqee__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(216);
+/* harmony import */ var _fee__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(221);
+
 
 
 
@@ -20459,7 +20603,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 115 */
+/* 118 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20470,6 +20614,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   LiquidityCampaignClaimRewards: () => (/* reexport safe */ _campaign__WEBPACK_IMPORTED_MODULE_4__.LiquidityCampaignClaimRewards),
 /* harmony export */   LiquidityCampaignRedeem: () => (/* reexport safe */ _campaign__WEBPACK_IMPORTED_MODULE_4__.LiquidityCampaignRedeem),
 /* harmony export */   LiquidityCampaignStake: () => (/* reexport safe */ _campaign__WEBPACK_IMPORTED_MODULE_4__.LiquidityCampaignStake),
+/* harmony export */   OraiStake: () => (/* reexport safe */ _market__WEBPACK_IMPORTED_MODULE_1__.OraiStake),
 /* harmony export */   TravaBorrow: () => (/* reexport safe */ _market__WEBPACK_IMPORTED_MODULE_1__.TravaBorrow),
 /* harmony export */   TravaClaimRewards: () => (/* reexport safe */ _market__WEBPACK_IMPORTED_MODULE_1__.TravaClaimRewards),
 /* harmony export */   TravaConvertRewards: () => (/* reexport safe */ _market__WEBPACK_IMPORTED_MODULE_1__.TravaConvertRewards),
@@ -20510,11 +20655,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaSupply: () => (/* reexport safe */ _market__WEBPACK_IMPORTED_MODULE_1__.TravaSupply),
 /* harmony export */   TravaWithdraw: () => (/* reexport safe */ _market__WEBPACK_IMPORTED_MODULE_1__.TravaWithdraw)
 /* harmony export */ });
-/* harmony import */ var _governance__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(116);
-/* harmony import */ var _market__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(123);
-/* harmony import */ var _nft__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(130);
-/* harmony import */ var _staking__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(163);
-/* harmony import */ var _campaign__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(167);
+/* harmony import */ var _governance__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(119);
+/* harmony import */ var _market__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(126);
+/* harmony import */ var _nft__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(134);
+/* harmony import */ var _staking__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(167);
+/* harmony import */ var _campaign__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(171);
 
 
 
@@ -20523,7 +20668,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 116 */
+/* 119 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20536,12 +20681,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaGovernanceMerge: () => (/* reexport safe */ _TravaGovernanceMerge__WEBPACK_IMPORTED_MODULE_4__.TravaGovernanceMerge),
 /* harmony export */   TravaGovernanceWithdraw: () => (/* reexport safe */ _TravaGovernanceWithdraw__WEBPACK_IMPORTED_MODULE_5__.TravaGovernanceWithdraw)
 /* harmony export */ });
-/* harmony import */ var _TravaGovernanceCompound__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(117);
-/* harmony import */ var _TravaGovernanceCreateLock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(118);
-/* harmony import */ var _TravaGovernanceIncreaseAmount__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(119);
-/* harmony import */ var _TravaGovernanceIncreaseUnlockTime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(120);
-/* harmony import */ var _TravaGovernanceMerge__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(121);
-/* harmony import */ var _TravaGovernanceWithdraw__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(122);
+/* harmony import */ var _TravaGovernanceCompound__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(120);
+/* harmony import */ var _TravaGovernanceCreateLock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(121);
+/* harmony import */ var _TravaGovernanceIncreaseAmount__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(122);
+/* harmony import */ var _TravaGovernanceIncreaseUnlockTime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(123);
+/* harmony import */ var _TravaGovernanceMerge__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(124);
+/* harmony import */ var _TravaGovernanceWithdraw__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(125);
 
 
 
@@ -20550,7 +20695,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 117 */
+/* 120 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20578,7 +20723,7 @@ class TravaGovernanceCompound extends _Action__WEBPACK_IMPORTED_MODULE_0__.Actio
 }
 
 /***/ }),
-/* 118 */
+/* 121 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20612,7 +20757,7 @@ class TravaGovernanceCreateLock extends _Action__WEBPACK_IMPORTED_MODULE_0__.Act
 }
 
 /***/ }),
-/* 119 */
+/* 122 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20640,7 +20785,7 @@ class TravaGovernanceIncreaseAmount extends _Action__WEBPACK_IMPORTED_MODULE_0__
 }
 
 /***/ }),
-/* 120 */
+/* 123 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20672,7 +20817,7 @@ class TravaGovernanceIncreaseUnlockTime extends _Action__WEBPACK_IMPORTED_MODULE
 }
 
 /***/ }),
-/* 121 */
+/* 124 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20700,7 +20845,7 @@ class TravaGovernanceMerge extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 122 */
+/* 125 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20728,12 +20873,13 @@ class TravaGovernanceWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Actio
 }
 
 /***/ }),
-/* 123 */
+/* 126 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   OraiStake: () => (/* reexport safe */ _OraiStake__WEBPACK_IMPORTED_MODULE_6__.OraiStake),
 /* harmony export */   TravaBorrow: () => (/* reexport safe */ _TravaBorrow__WEBPACK_IMPORTED_MODULE_0__.TravaBorrow),
 /* harmony export */   TravaClaimRewards: () => (/* reexport safe */ _TravaClaimRewards__WEBPACK_IMPORTED_MODULE_1__.TravaClaimRewards),
 /* harmony export */   TravaConvertRewards: () => (/* reexport safe */ _TravaConvertRewards__WEBPACK_IMPORTED_MODULE_2__.TravaConvertRewards),
@@ -20741,12 +20887,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaSupply: () => (/* reexport safe */ _TravaSupply__WEBPACK_IMPORTED_MODULE_4__.TravaSupply),
 /* harmony export */   TravaWithdraw: () => (/* reexport safe */ _TravaWithdraw__WEBPACK_IMPORTED_MODULE_5__.TravaWithdraw)
 /* harmony export */ });
-/* harmony import */ var _TravaBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(124);
-/* harmony import */ var _TravaClaimRewards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(125);
-/* harmony import */ var _TravaConvertRewards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(126);
-/* harmony import */ var _TravaRepay__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(127);
-/* harmony import */ var _TravaSupply__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(128);
-/* harmony import */ var _TravaWithdraw__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(129);
+/* harmony import */ var _TravaBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(127);
+/* harmony import */ var _TravaClaimRewards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(128);
+/* harmony import */ var _TravaConvertRewards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(129);
+/* harmony import */ var _TravaRepay__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(130);
+/* harmony import */ var _TravaSupply__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(131);
+/* harmony import */ var _TravaWithdraw__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(132);
+/* harmony import */ var _OraiStake__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(133);
+
 
 
 
@@ -20755,7 +20903,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 124 */
+/* 127 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20783,7 +20931,7 @@ class TravaBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 125 */
+/* 128 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20811,7 +20959,7 @@ class TravaClaimRewards extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 126 */
+/* 129 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20838,7 +20986,7 @@ class TravaConvertRewards extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 127 */
+/* 130 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20866,7 +21014,7 @@ class TravaRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 128 */
+/* 131 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20894,7 +21042,7 @@ class TravaSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 129 */
+/* 132 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20921,7 +21069,32 @@ class TravaWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 130 */
+/* 133 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   OraiStake: () => (/* binding */ OraiStake)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ * Orai Stake
+ *
+ */
+
+class OraiStake extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(market, token, amount, timeStamp, exchangeRate, signature, from, onBehalfOf, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('OraiStake') : contractAddress;
+    super("OraiStake", _contractAddress, ["address", "address", "uint256", "uint256", "uint256", "bytes", "address", "address"], [market, token, amount, timeStamp, exchangeRate, signature, from, onBehalfOf]);
+  }
+}
+
+/***/ }),
+/* 134 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20952,11 +21125,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaNFTVeTravaCancelSale: () => (/* reexport safe */ _marketplace__WEBPACK_IMPORTED_MODULE_0__.TravaNFTVeTravaCancelSale),
 /* harmony export */   TravaNFTVeTravaCreateSale: () => (/* reexport safe */ _marketplace__WEBPACK_IMPORTED_MODULE_0__.TravaNFTVeTravaCreateSale)
 /* harmony export */ });
-/* harmony import */ var _marketplace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(131);
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(146);
-/* harmony import */ var _heuristicfarming__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(148);
-/* harmony import */ var _expedition__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(153);
-/* harmony import */ var _dilutionstaking__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(157);
+/* harmony import */ var _marketplace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(135);
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(150);
+/* harmony import */ var _heuristicfarming__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(152);
+/* harmony import */ var _expedition__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(157);
+/* harmony import */ var _dilutionstaking__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(161);
 
 
 
@@ -20964,7 +21137,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 131 */
+/* 135 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20982,15 +21155,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaNFTVeTravaCancelSale: () => (/* reexport safe */ _veTrava__WEBPACK_IMPORTED_MODULE_2__.TravaNFTVeTravaCancelSale),
 /* harmony export */   TravaNFTVeTravaCreateSale: () => (/* reexport safe */ _veTrava__WEBPACK_IMPORTED_MODULE_2__.TravaNFTVeTravaCreateSale)
 /* harmony export */ });
-/* harmony import */ var _sell__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(132);
-/* harmony import */ var _auction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(136);
-/* harmony import */ var _veTrava__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(142);
+/* harmony import */ var _sell__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(136);
+/* harmony import */ var _auction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(140);
+/* harmony import */ var _veTrava__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(146);
 
 
 
 
 /***/ }),
-/* 132 */
+/* 136 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21000,15 +21173,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaNFTCancelSale: () => (/* reexport safe */ _TravaNFTCancelSale__WEBPACK_IMPORTED_MODULE_1__.TravaNFTCancelSale),
 /* harmony export */   TravaNFTCreateSale: () => (/* reexport safe */ _TravaNFTCreateSale__WEBPACK_IMPORTED_MODULE_2__.TravaNFTCreateSale)
 /* harmony export */ });
-/* harmony import */ var _TravaNFTBuy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(133);
-/* harmony import */ var _TravaNFTCancelSale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(134);
-/* harmony import */ var _TravaNFTCreateSale__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(135);
+/* harmony import */ var _TravaNFTBuy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(137);
+/* harmony import */ var _TravaNFTCancelSale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(138);
+/* harmony import */ var _TravaNFTCreateSale__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(139);
 
 
 
 
 /***/ }),
-/* 133 */
+/* 137 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21035,7 +21208,7 @@ class TravaNFTBuy extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 134 */
+/* 138 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21062,7 +21235,7 @@ class TravaNFTCancelSale extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 135 */
+/* 139 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21089,7 +21262,7 @@ class TravaNFTCreateSale extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 136 */
+/* 140 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21101,11 +21274,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaNFTAuctionFinalizeAuction: () => (/* reexport safe */ _TravaNFTAuctionFinalizeAuction__WEBPACK_IMPORTED_MODULE_3__.TravaNFTAuctionFinalizeAuction),
 /* harmony export */   TravaNFTAuctionMakeBid: () => (/* reexport safe */ _TravaNFTAuctionMakeBid__WEBPACK_IMPORTED_MODULE_4__.TravaNFTAuctionMakeBid)
 /* harmony export */ });
-/* harmony import */ var _TravaNFTAuctionCancelAuction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(137);
-/* harmony import */ var _TravaNFTAuctionCreateAuction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(138);
-/* harmony import */ var _TravaNFTAuctionEditAuctionPrice__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(139);
-/* harmony import */ var _TravaNFTAuctionFinalizeAuction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(140);
-/* harmony import */ var _TravaNFTAuctionMakeBid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(141);
+/* harmony import */ var _TravaNFTAuctionCancelAuction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(141);
+/* harmony import */ var _TravaNFTAuctionCreateAuction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(142);
+/* harmony import */ var _TravaNFTAuctionEditAuctionPrice__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(143);
+/* harmony import */ var _TravaNFTAuctionFinalizeAuction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(144);
+/* harmony import */ var _TravaNFTAuctionMakeBid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(145);
 
 
 
@@ -21113,7 +21286,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 137 */
+/* 141 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21142,7 +21315,7 @@ class TravaNFTAuctionCancelAuction extends _Action__WEBPACK_IMPORTED_MODULE_0__.
 }
 
 /***/ }),
-/* 138 */
+/* 142 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21171,7 +21344,7 @@ class TravaNFTAuctionCreateAuction extends _Action__WEBPACK_IMPORTED_MODULE_0__.
 }
 
 /***/ }),
-/* 139 */
+/* 143 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21198,7 +21371,7 @@ class TravaNFTAuctionEditAuctionPrice extends _Action__WEBPACK_IMPORTED_MODULE_0
 }
 
 /***/ }),
-/* 140 */
+/* 144 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21227,7 +21400,7 @@ class TravaNFTAuctionFinalizeAuction extends _Action__WEBPACK_IMPORTED_MODULE_0_
 }
 
 /***/ }),
-/* 141 */
+/* 145 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21256,7 +21429,7 @@ class TravaNFTAuctionMakeBid extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action
 }
 
 /***/ }),
-/* 142 */
+/* 146 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21266,15 +21439,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaNFTVeTravaCancelSale: () => (/* reexport safe */ _TravaNFTVeTravaCancelSale__WEBPACK_IMPORTED_MODULE_1__.TravaNFTVeTravaCancelSale),
 /* harmony export */   TravaNFTVeTravaCreateSale: () => (/* reexport safe */ _TravaNFTVeTravaCreateSale__WEBPACK_IMPORTED_MODULE_2__.TravaNFTVeTravaCreateSale)
 /* harmony export */ });
-/* harmony import */ var _TravaNFTVeTravaBuy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(143);
-/* harmony import */ var _TravaNFTVeTravaCancelSale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(144);
-/* harmony import */ var _TravaNFTVeTravaCreateSale__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(145);
+/* harmony import */ var _TravaNFTVeTravaBuy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(147);
+/* harmony import */ var _TravaNFTVeTravaCancelSale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(148);
+/* harmony import */ var _TravaNFTVeTravaCreateSale__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(149);
 
 
 
 
 /***/ }),
-/* 143 */
+/* 147 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21301,7 +21474,7 @@ class TravaNFTVeTravaBuy extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 144 */
+/* 148 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21328,7 +21501,7 @@ class TravaNFTVeTravaCancelSale extends _Action__WEBPACK_IMPORTED_MODULE_0__.Act
 }
 
 /***/ }),
-/* 145 */
+/* 149 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21355,7 +21528,7 @@ class TravaNFTVeTravaCreateSale extends _Action__WEBPACK_IMPORTED_MODULE_0__.Act
 }
 
 /***/ }),
-/* 146 */
+/* 150 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21363,11 +21536,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   TravaNFTTransfer: () => (/* reexport safe */ _TravaNFTTransfer__WEBPACK_IMPORTED_MODULE_0__.TravaNFTTransfer)
 /* harmony export */ });
-/* harmony import */ var _TravaNFTTransfer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(147);
+/* harmony import */ var _TravaNFTTransfer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(151);
 
 
 /***/ }),
-/* 147 */
+/* 151 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21394,7 +21567,7 @@ class TravaNFTTransfer extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 148 */
+/* 152 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21405,17 +21578,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaNFTHeuristicFarmingStake: () => (/* reexport safe */ _TravaNFTHeuristicFarmingStake__WEBPACK_IMPORTED_MODULE_0__.TravaNFTHeuristicFarmingStake),
 /* harmony export */   TravaNFTHeuristicFarmingWithdraw: () => (/* reexport safe */ _TravaNFTHeurisiticFarmingWithdraw__WEBPACK_IMPORTED_MODULE_3__.TravaNFTHeuristicFarmingWithdraw)
 /* harmony export */ });
-/* harmony import */ var _TravaNFTHeuristicFarmingStake__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(149);
-/* harmony import */ var _TravaNFTHeuristicFarmingClaimReward__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(150);
-/* harmony import */ var _TravaNFTHeuristicFarmingPolish__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(151);
-/* harmony import */ var _TravaNFTHeurisiticFarmingWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(152);
+/* harmony import */ var _TravaNFTHeuristicFarmingStake__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(153);
+/* harmony import */ var _TravaNFTHeuristicFarmingClaimReward__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(154);
+/* harmony import */ var _TravaNFTHeuristicFarmingPolish__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(155);
+/* harmony import */ var _TravaNFTHeurisiticFarmingWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(156);
 
 
 
 
 
 /***/ }),
-/* 149 */
+/* 153 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21443,7 +21616,7 @@ class TravaNFTHeuristicFarmingStake extends _Action__WEBPACK_IMPORTED_MODULE_0__
 }
 
 /***/ }),
-/* 150 */
+/* 154 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21471,7 +21644,7 @@ class TravaNFTHeuristicFarmingClaimReward extends _Action__WEBPACK_IMPORTED_MODU
 }
 
 /***/ }),
-/* 151 */
+/* 155 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21499,7 +21672,7 @@ class TravaNFTHeuristicFarmingPolish extends _Action__WEBPACK_IMPORTED_MODULE_0_
 }
 
 /***/ }),
-/* 152 */
+/* 156 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21527,7 +21700,7 @@ class TravaNFTHeuristicFarmingWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_
 }
 
 /***/ }),
-/* 153 */
+/* 157 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21537,15 +21710,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaNFTExpeditionDeploy: () => (/* reexport safe */ _TravaNFTExpeditionDeploy__WEBPACK_IMPORTED_MODULE_1__.TravaNFTExpeditionDeploy),
 /* harmony export */   TravaNFTExpeditionWithdraw: () => (/* reexport safe */ _TravaNFTExpeditionWithdraw__WEBPACK_IMPORTED_MODULE_2__.TravaNFTExpeditionWithdraw)
 /* harmony export */ });
-/* harmony import */ var _TravaNFTExpeditionAbandon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(154);
-/* harmony import */ var _TravaNFTExpeditionDeploy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(155);
-/* harmony import */ var _TravaNFTExpeditionWithdraw__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(156);
+/* harmony import */ var _TravaNFTExpeditionAbandon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(158);
+/* harmony import */ var _TravaNFTExpeditionDeploy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(159);
+/* harmony import */ var _TravaNFTExpeditionWithdraw__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(160);
 
 
 
 
 /***/ }),
-/* 154 */
+/* 158 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21572,7 +21745,7 @@ class TravaNFTExpeditionAbandon extends _Action__WEBPACK_IMPORTED_MODULE_0__.Act
 }
 
 /***/ }),
-/* 155 */
+/* 159 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21600,7 +21773,7 @@ class TravaNFTExpeditionDeploy extends _Action__WEBPACK_IMPORTED_MODULE_0__.Acti
 }
 
 /***/ }),
-/* 156 */
+/* 160 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21627,7 +21800,7 @@ class TravaNFTExpeditionWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Ac
 }
 
 /***/ }),
-/* 157 */
+/* 161 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21639,11 +21812,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaNFTDilutionStakingWithdrawBattlefield: () => (/* reexport safe */ _TravaNFTDilutionStakingWithdrawBattlefield__WEBPACK_IMPORTED_MODULE_3__.TravaNFTDilutionStakingWithdrawBattlefield),
 /* harmony export */   TravaNFTDilutionStakingWithdrawPrivateBattlefield: () => (/* reexport safe */ _TravaNFTDilutionStakingWithdrawPrivateBattlefield__WEBPACK_IMPORTED_MODULE_4__.TravaNFTDilutionStakingWithdrawPrivateBattlefield)
 /* harmony export */ });
-/* harmony import */ var _TravaNFTDilutionStakingDeployPrivateBattlefield__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(158);
-/* harmony import */ var _TravaNFTDilutionStakingJoinBattlefield__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(159);
-/* harmony import */ var _TravaNFTDilutionStakingRetreatPrivateBattlefield__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(160);
-/* harmony import */ var _TravaNFTDilutionStakingWithdrawBattlefield__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(161);
-/* harmony import */ var _TravaNFTDilutionStakingWithdrawPrivateBattlefield__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(162);
+/* harmony import */ var _TravaNFTDilutionStakingDeployPrivateBattlefield__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(162);
+/* harmony import */ var _TravaNFTDilutionStakingJoinBattlefield__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(163);
+/* harmony import */ var _TravaNFTDilutionStakingRetreatPrivateBattlefield__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(164);
+/* harmony import */ var _TravaNFTDilutionStakingWithdrawBattlefield__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(165);
+/* harmony import */ var _TravaNFTDilutionStakingWithdrawPrivateBattlefield__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(166);
 
 
 
@@ -21651,7 +21824,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 158 */
+/* 162 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21678,7 +21851,7 @@ class TravaNFTDilutionStakingDeployPrivateBattlefield extends _Action__WEBPACK_I
 }
 
 /***/ }),
-/* 159 */
+/* 163 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21706,7 +21879,7 @@ class TravaNFTDilutionStakingJoinBattlefield extends _Action__WEBPACK_IMPORTED_M
 }
 
 /***/ }),
-/* 160 */
+/* 164 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21733,7 +21906,7 @@ class TravaNFTDilutionStakingRetreatPrivateBattlefield extends _Action__WEBPACK_
 }
 
 /***/ }),
-/* 161 */
+/* 165 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21760,7 +21933,7 @@ class TravaNFTDilutionStakingWithdrawBattlefield extends _Action__WEBPACK_IMPORT
 }
 
 /***/ }),
-/* 162 */
+/* 166 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21788,7 +21961,7 @@ class TravaNFTDilutionStakingWithdrawPrivateBattlefield extends _Action__WEBPACK
 }
 
 /***/ }),
-/* 163 */
+/* 167 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21798,15 +21971,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   TravaStakingRedeem: () => (/* reexport safe */ _TravaStakingRedeem__WEBPACK_IMPORTED_MODULE_1__.TravaStakingRedeem),
 /* harmony export */   TravaStakingStake: () => (/* reexport safe */ _TravaStakingStake__WEBPACK_IMPORTED_MODULE_2__.TravaStakingStake)
 /* harmony export */ });
-/* harmony import */ var _TravaStakingClaimRewards__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(164);
-/* harmony import */ var _TravaStakingRedeem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(165);
-/* harmony import */ var _TravaStakingStake__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(166);
+/* harmony import */ var _TravaStakingClaimRewards__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(168);
+/* harmony import */ var _TravaStakingRedeem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(169);
+/* harmony import */ var _TravaStakingStake__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(170);
 
 
 
 
 /***/ }),
-/* 164 */
+/* 168 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21833,7 +22006,7 @@ class TravaStakingClaimRewards extends _Action__WEBPACK_IMPORTED_MODULE_0__.Acti
 }
 
 /***/ }),
-/* 165 */
+/* 169 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21860,7 +22033,7 @@ class TravaStakingRedeem extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 166 */
+/* 170 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21887,7 +22060,7 @@ class TravaStakingStake extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 167 */
+/* 171 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21899,11 +22072,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   LiquidityCampaignRedeem: () => (/* reexport safe */ _LiquidityCampaignRedeem__WEBPACK_IMPORTED_MODULE_3__.LiquidityCampaignRedeem),
 /* harmony export */   LiquidityCampaignStake: () => (/* reexport safe */ _LiquidityCampaignStake__WEBPACK_IMPORTED_MODULE_2__.LiquidityCampaignStake)
 /* harmony export */ });
-/* harmony import */ var _LiquidityCampaignBuyToken__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(168);
-/* harmony import */ var _LiquidityCampaignBuyTokenGateway__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(169);
-/* harmony import */ var _LiquidityCampaignStake__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(170);
-/* harmony import */ var _LiquidityCampaignRedeem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(171);
-/* harmony import */ var _LiquidityCampaignClaimRewards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(172);
+/* harmony import */ var _LiquidityCampaignBuyToken__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(172);
+/* harmony import */ var _LiquidityCampaignBuyTokenGateway__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(173);
+/* harmony import */ var _LiquidityCampaignStake__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(174);
+/* harmony import */ var _LiquidityCampaignRedeem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(175);
+/* harmony import */ var _LiquidityCampaignClaimRewards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(176);
 
 
 
@@ -21911,7 +22084,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 168 */
+/* 172 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21939,7 +22112,7 @@ class LiquidityCampaignBuyToken extends _Action__WEBPACK_IMPORTED_MODULE_0__.Act
 }
 
 /***/ }),
-/* 169 */
+/* 173 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21967,7 +22140,7 @@ class LiquidityCampaignBuyTokenGateway extends _Action__WEBPACK_IMPORTED_MODULE_
 }
 
 /***/ }),
-/* 170 */
+/* 174 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21994,7 +22167,7 @@ class LiquidityCampaignStake extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action
 }
 
 /***/ }),
-/* 171 */
+/* 175 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22021,7 +22194,7 @@ class LiquidityCampaignRedeem extends _Action__WEBPACK_IMPORTED_MODULE_0__.Actio
 }
 
 /***/ }),
-/* 172 */
+/* 176 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22048,7 +22221,7 @@ class LiquidityCampaignClaimRewards extends _Action__WEBPACK_IMPORTED_MODULE_0__
 }
 
 /***/ }),
-/* 173 */
+/* 177 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22056,11 +22229,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PancakeSwapV2: () => (/* reexport safe */ _PancakeSwapV2__WEBPACK_IMPORTED_MODULE_0__.PancakeSwapV2)
 /* harmony export */ });
-/* harmony import */ var _PancakeSwapV2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(174);
+/* harmony import */ var _PancakeSwapV2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(178);
 
 
 /***/ }),
-/* 174 */
+/* 178 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22079,7 +22252,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 class PancakeSwapV2 extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
   constructor(amountIn, amountOutMin, path, to, deadline, from, contractAddress) {
-    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('PancakeSwapV2') : contractAddress;
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)("PancakeSwapV2") : contractAddress;
     super("PancakeSwapV2", _contractAddress,
     //getAddr('PancakeSwapV2'),
     ["uint256", "uint256", "address[]", "address", "uint256", "address"], [amountIn, amountOutMin, path, to, deadline, from]);
@@ -22088,7 +22261,7 @@ class PancakeSwapV2 extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 175 */
+/* 179 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22101,12 +22274,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   UnwrapBnbAction: () => (/* reexport safe */ _UnwrapBNB__WEBPACK_IMPORTED_MODULE_4__.UnwrapBnbAction),
 /* harmony export */   WrapBnbAction: () => (/* reexport safe */ _WrapBNB__WEBPACK_IMPORTED_MODULE_3__.WrapBnbAction)
 /* harmony export */ });
-/* harmony import */ var _PullToken__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(176);
-/* harmony import */ var _SendToken__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(178);
-/* harmony import */ var _SendTokenAndUnwrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(179);
-/* harmony import */ var _WrapBNB__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(180);
-/* harmony import */ var _UnwrapBNB__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(181);
-/* harmony import */ var _SendTokens__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(182);
+/* harmony import */ var _PullToken__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(180);
+/* harmony import */ var _SendToken__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(182);
+/* harmony import */ var _SendTokenAndUnwrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(183);
+/* harmony import */ var _WrapBNB__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(184);
+/* harmony import */ var _UnwrapBNB__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(185);
+/* harmony import */ var _SendTokens__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(186);
 
 
 
@@ -22115,7 +22288,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
-/* 176 */
+/* 180 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22123,7 +22296,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PullTokenAction: () => (/* binding */ PullTokenAction)
 /* harmony export */ });
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(177);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(181);
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
@@ -22156,7 +22329,7 @@ class PullTokenAction extends _Action__WEBPACK_IMPORTED_MODULE_1__.Action {
 }
 
 /***/ }),
-/* 177 */
+/* 181 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22200,7 +22373,7 @@ var parsePriceFromContract = (price, from, to) => new (decimal_js__WEBPACK_IMPOR
 var formatPriceForContract = (price, from, to) => new (decimal_js__WEBPACK_IMPORTED_MODULE_0___default())(price).mul(10 ** (0,_zennomi_tokens__WEBPACK_IMPORTED_MODULE_1__.getAssetInfo)(to).decimals).mul(10 ** (18 - (0,_zennomi_tokens__WEBPACK_IMPORTED_MODULE_1__.getAssetInfo)(from).decimals)).floor().toString();
 
 /***/ }),
-/* 178 */
+/* 182 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22209,7 +22382,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SendTokenAction: () => (/* binding */ SendTokenAction)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(177);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(181);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
 
@@ -22233,7 +22406,7 @@ class SendTokenAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 179 */
+/* 183 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22242,7 +22415,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SendTokenAndUnwrapAction: () => (/* binding */ SendTokenAndUnwrapAction)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(177);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(181);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
 
@@ -22268,7 +22441,7 @@ class SendTokenAndUnwrapAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Acti
 }
 
 /***/ }),
-/* 180 */
+/* 184 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22306,7 +22479,7 @@ class WrapBnbAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 181 */
+/* 185 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22315,7 +22488,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   UnwrapBnbAction: () => (/* binding */ UnwrapBnbAction)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(177);
+/* harmony import */ var _utils_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(181);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 
 
@@ -22340,7 +22513,7 @@ class UnwrapBnbAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 182 */
+/* 186 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22382,28 +22555,34 @@ class SendTokensAction extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 183 */
+/* 187 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VenusBorrow: () => (/* reexport safe */ _VenusBorrow__WEBPACK_IMPORTED_MODULE_0__.VenusBorrow),
+/* harmony export */   VenusCollateral: () => (/* reexport safe */ _VenusCollateral__WEBPACK_IMPORTED_MODULE_4__.VenusCollateral),
 /* harmony export */   VenusRepay: () => (/* reexport safe */ _VenusRepay__WEBPACK_IMPORTED_MODULE_1__.VenusRepay),
 /* harmony export */   VenusSupply: () => (/* reexport safe */ _VenusSupply__WEBPACK_IMPORTED_MODULE_2__.VenusSupply),
+/* harmony export */   VenusSupplyGateWay: () => (/* reexport safe */ _VenusSupplyGateWay__WEBPACK_IMPORTED_MODULE_5__.VenusSupplyGateWay),
 /* harmony export */   VenusWithdraw: () => (/* reexport safe */ _VenusWithdraw__WEBPACK_IMPORTED_MODULE_3__.VenusWithdraw)
 /* harmony export */ });
-/* harmony import */ var _VenusBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(184);
-/* harmony import */ var _VenusRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(185);
-/* harmony import */ var _VenusSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(186);
-/* harmony import */ var _VenusWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(187);
+/* harmony import */ var _VenusBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(188);
+/* harmony import */ var _VenusRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(189);
+/* harmony import */ var _VenusSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(190);
+/* harmony import */ var _VenusWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(191);
+/* harmony import */ var _VenusCollateral__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(192);
+/* harmony import */ var _VenusSupplyGateWay__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(193);
+
+
 
 
 
 
 
 /***/ }),
-/* 184 */
+/* 188 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22429,7 +22608,7 @@ class VenusBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 185 */
+/* 189 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22455,7 +22634,7 @@ class VenusRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 186 */
+/* 190 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22483,7 +22662,7 @@ class VenusSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 187 */
+/* 191 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22511,28 +22690,86 @@ class VenusWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 188 */
+/* 192 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   VenusCollateral: () => (/* binding */ VenusCollateral)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ * VenusCollateral - Collateral Token to Lending Pool
+ * @category Venus
+ */
+class VenusCollateral extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(cTokenAddress, enableAsColl, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('VenusCollateral') : contractAddress;
+    super("VenusCollateral", _contractAddress,
+    //getAddr("VenusCollateral"),
+    ["address[]", "bool[]"], [cTokenAddress, enableAsColl]);
+    this.mappableArgs = [cTokenAddress, enableAsColl].flat();
+  }
+}
+
+/***/ }),
+/* 193 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   VenusSupplyGateWay: () => (/* binding */ VenusSupplyGateWay)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ * VenusSupplyGateWay - Supply Token to Lending Pool
+ *
+ * @category Venus
+ * need to approve token first
+ */
+class VenusSupplyGateWay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(vTokenAddress, amount, from, enableAsColl, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('VenusSupplyGateWay') : contractAddress;
+    super("VenusSupplyGateWay", _contractAddress,
+    //getAddr("VenusSupplyGateWay"),
+    ["address", "uint256", "address", "bool"], [vTokenAddress, amount, from, enableAsColl]);
+  }
+}
+
+/***/ }),
+/* 194 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   CreamBorrow: () => (/* reexport safe */ _CreamBorrow__WEBPACK_IMPORTED_MODULE_0__.CreamBorrow),
+/* harmony export */   CreamCollateral: () => (/* reexport safe */ _CreamCollateral__WEBPACK_IMPORTED_MODULE_4__.CreamCollateral),
 /* harmony export */   CreamRepay: () => (/* reexport safe */ _CreamRepay__WEBPACK_IMPORTED_MODULE_1__.CreamRepay),
 /* harmony export */   CreamSupply: () => (/* reexport safe */ _CreamSupply__WEBPACK_IMPORTED_MODULE_2__.CreamSupply),
 /* harmony export */   CreamWithdraw: () => (/* reexport safe */ _CreamWithdraw__WEBPACK_IMPORTED_MODULE_3__.CreamWithdraw)
 /* harmony export */ });
-/* harmony import */ var _CreamBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(189);
-/* harmony import */ var _CreamRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(190);
-/* harmony import */ var _CreamSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(191);
-/* harmony import */ var _CreamWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(192);
+/* harmony import */ var _CreamBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(195);
+/* harmony import */ var _CreamRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(196);
+/* harmony import */ var _CreamSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(197);
+/* harmony import */ var _CreamWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(198);
+/* harmony import */ var _CreamCollateral__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(199);
+
 
 
 
 
 
 /***/ }),
-/* 189 */
+/* 195 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22558,7 +22795,7 @@ class CreamBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 190 */
+/* 196 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22584,7 +22821,7 @@ class CreamRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 191 */
+/* 197 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22612,7 +22849,7 @@ class CreamSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 192 */
+/* 198 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22640,28 +22877,58 @@ class CreamWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 193 */
+/* 199 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CreamCollateral: () => (/* binding */ CreamCollateral)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ * CreamCollateral - Collateral Token to Lending Pool
+ * @category Cream
+ */
+class CreamCollateral extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(cTokenAddress, enableAsColl, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('CreamCollateral') : contractAddress;
+    super("CreamCollateral", _contractAddress,
+    //getAddr("CreamCollateral"),
+    ["address[]", "bool[]"], [cTokenAddress, enableAsColl]);
+    this.mappableArgs = [cTokenAddress, enableAsColl].flat();
+  }
+}
+
+/***/ }),
+/* 200 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   WePiggyBorrow: () => (/* reexport safe */ _WePiggyBorrow__WEBPACK_IMPORTED_MODULE_0__.WePiggyBorrow),
+/* harmony export */   WePiggyCollateral: () => (/* reexport safe */ _WePiggyCollateral__WEBPACK_IMPORTED_MODULE_4__.WePiggyCollateral),
 /* harmony export */   WePiggyRepay: () => (/* reexport safe */ _WePiggyRepay__WEBPACK_IMPORTED_MODULE_1__.WePiggyRepay),
 /* harmony export */   WePiggySupply: () => (/* reexport safe */ _WePiggySupply__WEBPACK_IMPORTED_MODULE_2__.WePiggySupply),
 /* harmony export */   WePiggyWithdraw: () => (/* reexport safe */ _WePiggyWithdraw__WEBPACK_IMPORTED_MODULE_3__.WePiggyWithdraw)
 /* harmony export */ });
-/* harmony import */ var _WePiggyBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(194);
-/* harmony import */ var _WePiggyRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(195);
-/* harmony import */ var _WePiggySupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(196);
-/* harmony import */ var _WePiggyWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(197);
+/* harmony import */ var _WePiggyBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(201);
+/* harmony import */ var _WePiggyRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(202);
+/* harmony import */ var _WePiggySupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(203);
+/* harmony import */ var _WePiggyWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(204);
+/* harmony import */ var _WePiggyCollateral__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(205);
+
 
 
 
 
 
 /***/ }),
-/* 194 */
+/* 201 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22687,7 +22954,7 @@ class WePiggyBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 195 */
+/* 202 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22713,7 +22980,7 @@ class WePiggyRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 196 */
+/* 203 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22741,7 +23008,7 @@ class WePiggySupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 197 */
+/* 204 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22769,7 +23036,34 @@ class WePiggyWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 198 */
+/* 205 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   WePiggyCollateral: () => (/* binding */ WePiggyCollateral)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ * WePiggyCollateral - Collateral Token to Lending Pool
+ * @category WePiggy
+ */
+class WePiggyCollateral extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(cTokenAddress, enableAsColl, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('WePiggyCollateral') : contractAddress;
+    super("WePiggyCollateral", _contractAddress,
+    //getAddr("WePiggyCollateral"),
+    ["address[]", "bool[]"], [cTokenAddress, enableAsColl]);
+    this.mappableArgs = [cTokenAddress, enableAsColl].flat();
+  }
+}
+
+/***/ }),
+/* 206 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22780,17 +23074,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   RadiantSupply: () => (/* reexport safe */ _RadiantSupply__WEBPACK_IMPORTED_MODULE_2__.RadiantSupply),
 /* harmony export */   RadiantWithdraw: () => (/* reexport safe */ _RadiantWithdraw__WEBPACK_IMPORTED_MODULE_3__.RadiantWithdraw)
 /* harmony export */ });
-/* harmony import */ var _RadiantBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(199);
-/* harmony import */ var _RadiantRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(200);
-/* harmony import */ var _RadiantSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(201);
-/* harmony import */ var _RadiantWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(202);
+/* harmony import */ var _RadiantBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(207);
+/* harmony import */ var _RadiantRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(208);
+/* harmony import */ var _RadiantSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(209);
+/* harmony import */ var _RadiantWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(210);
 
 
 
 
 
 /***/ }),
-/* 199 */
+/* 207 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22816,7 +23110,7 @@ class RadiantBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 200 */
+/* 208 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22842,7 +23136,7 @@ class RadiantRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 201 */
+/* 209 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22868,7 +23162,7 @@ class RadiantSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 202 */
+/* 210 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22894,7 +23188,7 @@ class RadiantWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 203 */
+/* 211 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22905,17 +23199,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   GranarySupply: () => (/* reexport safe */ _GranarySupply__WEBPACK_IMPORTED_MODULE_2__.GranarySupply),
 /* harmony export */   GranaryWithdraw: () => (/* reexport safe */ _GranaryWithdraw__WEBPACK_IMPORTED_MODULE_3__.GranaryWithdraw)
 /* harmony export */ });
-/* harmony import */ var _GranaryBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(204);
-/* harmony import */ var _GranaryRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(205);
-/* harmony import */ var _GranarySupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(206);
-/* harmony import */ var _GranaryWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(207);
+/* harmony import */ var _GranaryBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
+/* harmony import */ var _GranaryRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(213);
+/* harmony import */ var _GranarySupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(214);
+/* harmony import */ var _GranaryWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(215);
 
 
 
 
 
 /***/ }),
-/* 204 */
+/* 212 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22941,7 +23235,7 @@ class GranaryBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 205 */
+/* 213 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22967,7 +23261,7 @@ class GranaryRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 206 */
+/* 214 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22993,7 +23287,7 @@ class GranarySupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 207 */
+/* 215 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23019,7 +23313,7 @@ class GranaryWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 208 */
+/* 216 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23030,17 +23324,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   LiqeeSupply: () => (/* reexport safe */ _LiqeeSupply__WEBPACK_IMPORTED_MODULE_2__.LiqeeSupply),
 /* harmony export */   LiqeeWithdraw: () => (/* reexport safe */ _LiqeeWithdraw__WEBPACK_IMPORTED_MODULE_3__.LiqeeWithdraw)
 /* harmony export */ });
-/* harmony import */ var _LiqeeBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(209);
-/* harmony import */ var _LiqeeRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(210);
-/* harmony import */ var _LiqeeSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(211);
-/* harmony import */ var _LiqeeWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(212);
+/* harmony import */ var _LiqeeBorrow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(217);
+/* harmony import */ var _LiqeeRepay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(218);
+/* harmony import */ var _LiqeeSupply__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(219);
+/* harmony import */ var _LiqeeWithdraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(220);
 
 
 
 
 
 /***/ }),
-/* 209 */
+/* 217 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23066,7 +23360,7 @@ class LiqeeBorrow extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 210 */
+/* 218 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23092,7 +23386,7 @@ class LiqeeRepay extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 211 */
+/* 219 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23118,7 +23412,7 @@ class LiqeeSupply extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 212 */
+/* 220 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23144,7 +23438,219 @@ class LiqeeWithdraw extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
 }
 
 /***/ }),
-/* 213 */
+/* 221 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   GasFeeTaker: () => (/* reexport safe */ _GasFeeTaker__WEBPACK_IMPORTED_MODULE_0__.GasFeeTaker)
+/* harmony export */ });
+/* harmony import */ var _GasFeeTaker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(222);
+
+
+/***/ }),
+/* 222 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   GasFeeTaker: () => (/* binding */ GasFeeTaker)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ * GasFeeTaker
+ */
+
+class GasFeeTaker extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(gasUsed, feeToken, availableAmount, dfsFeeDivider, path, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('GasFeeTaker') : contractAddress;
+    super("GasFeeTaker", _contractAddress, ["uint256", "address", "uint256", "uint256", "address[]"], [gasUsed, feeToken, availableAmount, dfsFeeDivider, path]);
+    this.mappableArgs = [gasUsed, feeToken, availableAmount, dfsFeeDivider, path].flat();
+  }
+}
+
+/***/ }),
+/* 223 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AaveV2RatioTrigger: () => (/* reexport safe */ _AaveV2RatioTrigger__WEBPACK_IMPORTED_MODULE_1__.AaveV2RatioTrigger),
+/* harmony export */   TimeTrigger: () => (/* reexport safe */ _TimeTrigger__WEBPACK_IMPORTED_MODULE_0__.TimeTrigger)
+/* harmony export */ });
+/* harmony import */ var _TimeTrigger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(224);
+/* harmony import */ var _AaveV2RatioTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(225);
+
+
+
+/***/ }),
+/* 224 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TimeTrigger: () => (/* binding */ TimeTrigger)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ *
+ *
+ * @category Triggers
+ */
+class TimeTrigger extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(startTime, endTime, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('TimeTrigger') : contractAddress;
+    super('TimeTrigger', _contractAddress, ['uint256', 'uint256'], [startTime, endTime]);
+  }
+}
+
+/***/ }),
+/* 225 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AaveV2RatioTrigger: () => (/* binding */ AaveV2RatioTrigger)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+/**
+ *
+ *
+ * @category Triggers
+ */
+class AaveV2RatioTrigger extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
+  constructor(user, market, ratio, state, contractAddress) {
+    var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('AaveV2RatioTrigger') : contractAddress;
+    super('AaveV2RatioTrigger', _contractAddress, ['address', 'address', 'uint256', 'uint8'], [user, market, ratio, state]);
+  }
+}
+
+/***/ }),
+/* 226 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AutoCompoundStrategySub: () => (/* reexport safe */ _StrategySubService__WEBPACK_IMPORTED_MODULE_0__.AutoCompoundStrategySub),
+/* harmony export */   AutoCompoundSubData: () => (/* reexport safe */ _SubDataService__WEBPACK_IMPORTED_MODULE_1__.AutoCompoundSubData),
+/* harmony export */   TimeTriggerService: () => (/* reexport safe */ _TriggerDataService__WEBPACK_IMPORTED_MODULE_2__.TimeTriggerService)
+/* harmony export */ });
+/* harmony import */ var _StrategySubService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(227);
+/* harmony import */ var _SubDataService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(228);
+/* harmony import */ var _TriggerDataService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(229);
+
+
+
+
+/***/ }),
+/* 227 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AutoCompoundStrategySub: () => (/* binding */ AutoCompoundStrategySub)
+/* harmony export */ });
+/* harmony import */ var _SubDataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(228);
+/* harmony import */ var _TriggerDataService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(229);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(114);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_2__.ethers.AbiCoder();
+var MAX_UINT256 = ethers__WEBPACK_IMPORTED_MODULE_2__.ethers.MaxUint256;
+var AutoCompoundStrategySub = {
+  encodeForStartgySubWithGas(stakingPool, claimTo, amountClaim, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path, startTime, endTime, startegyIdOrBundle, isBundle) {
+    var subData = _SubDataService__WEBPACK_IMPORTED_MODULE_0__.AutoCompoundSubData.encodeForSubDataWithGas(stakingPool, claimTo, amountClaim, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path);
+    var triggerData = _TriggerDataService__WEBPACK_IMPORTED_MODULE_1__.TimeTriggerService.encode(startTime, endTime);
+    return [startegyIdOrBundle, isBundle, triggerData, subData];
+  },
+  encodeForStrategySub(vaultAddress, claimTo, stakeOnBehalfOf, from, startTime, endTime, startegyIdOrBundle) {
+    var subData = _SubDataService__WEBPACK_IMPORTED_MODULE_0__.AutoCompoundSubData.encodeForSubData(vaultAddress, claimTo, stakeOnBehalfOf, from);
+    var triggerData = _TriggerDataService__WEBPACK_IMPORTED_MODULE_1__.TimeTriggerService.encode(startTime, endTime);
+    var isBundle = false;
+    return [startegyIdOrBundle, isBundle, triggerData, subData];
+  }
+};
+
+/***/ }),
+/* 228 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AutoCompoundSubData: () => (/* binding */ AutoCompoundSubData)
+/* harmony export */ });
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(114);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_0__);
+
+var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_0__.ethers.AbiCoder();
+var MAX_UINT256 = ethers__WEBPACK_IMPORTED_MODULE_0__.ethers.MaxUint256;
+var AutoCompoundSubData = {
+  encodeForSubDataWithGas(stakingPool, claimTo, amountClaim, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path) {
+    var stakingPoolEncoded = abiCoder.encode(['address'], [stakingPool]);
+    var claimToEncoded = abiCoder.encode(['address'], [claimTo]);
+    var amountClaimEncoded = abiCoder.encode(['uint256'], [amountClaim]);
+    var stakeOnBehalfOfEncoded = abiCoder.encode(['address'], [stakeOnBehalfOf]);
+    var amountStakeEncoded = abiCoder.encode(['uint256'], [amountStake]);
+    var fromEncoded = abiCoder.encode(['address'], [from]);
+    var gasUsedEncoded = abiCoder.encode(['uint256'], [gasUsed]);
+    var feeTokenEncoded = abiCoder.encode(['address'], [feeToken]);
+    var availableAmountEncoded = abiCoder.encode(['uint256'], [availableAmount]);
+    var dfsFeeDividerEncoded = abiCoder.encode(['uint256'], [dfsFeeDivider]);
+    var path0Encoded = abiCoder.encode(['address'], [path[0]]);
+    var path1Encoded = abiCoder.encode(['address'], [path[1]]);
+    return [stakingPoolEncoded, claimToEncoded, amountClaimEncoded, stakingPoolEncoded, stakeOnBehalfOfEncoded, amountStakeEncoded, fromEncoded, gasUsedEncoded, feeTokenEncoded, availableAmountEncoded, dfsFeeDividerEncoded, path0Encoded, path1Encoded];
+  },
+  encodeForSubData(vaultAddress, claimTo, stakeOnBehalfOf, from) {
+    var stakingPoolEncoded = abiCoder.encode(['address'], [vaultAddress]);
+    var claimToEncoded = abiCoder.encode(['address'], [claimTo]);
+    var amountClaimEncoded = abiCoder.encode(['uint256'], [MAX_UINT256]);
+    var stakeOnBehalfOfEncoded = abiCoder.encode(['address'], [stakeOnBehalfOf]);
+    var amountStakeEncoded = abiCoder.encode(['uint256'], [MAX_UINT256]);
+    var fromEncoded = abiCoder.encode(['address'], [from]);
+    return [stakingPoolEncoded, claimToEncoded, amountClaimEncoded, stakingPoolEncoded, stakeOnBehalfOfEncoded, amountStakeEncoded, fromEncoded];
+  }
+};
+
+/***/ }),
+/* 229 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TimeTriggerService: () => (/* binding */ TimeTriggerService)
+/* harmony export */ });
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(114);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_0__);
+
+var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_0__.ethers.AbiCoder();
+var TimeTriggerService = {
+  encode(startTime, endTime) {
+    return [abiCoder.encode(['uint256', 'uint256'], [startTime, endTime])];
+  }
+};
+
+/***/ }),
+/* 230 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23155,15 +23661,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   RouterContract: () => (/* binding */ RouterContract),
 /* harmony export */   SwapUtil: () => (/* binding */ SwapUtil)
 /* harmony export */ });
-/* harmony import */ var _abis_Swap_PancakeSwapRouter_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(214);
-/* harmony import */ var _abis_Swap_PancakeSwapFactory_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(215);
-/* harmony import */ var _abis_Swap_PancakeSwapPair_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(216);
+/* harmony import */ var _abis_Swap_PancakeSwapRouter_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(231);
+/* harmony import */ var _abis_Swap_PancakeSwapFactory_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(232);
+/* harmony import */ var _abis_Swap_PancakeSwapPair_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(233);
 /* harmony import */ var decimal_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
 /* harmony import */ var decimal_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(decimal_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(113);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(114);
 /* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
-/* harmony import */ var bignumber_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(217);
+/* harmony import */ var bignumber_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(234);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -23393,28 +23899,28 @@ class SwapUtil {
 }
 
 /***/ }),
-/* 214 */
+/* 231 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('[{"inputs":[{"internalType":"address","name":"_factory","type":"address"},{"internalType":"address","name":"_WETH","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"WETH","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"amountADesired","type":"uint256"},{"internalType":"uint256","name":"amountBDesired","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"addLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"},{"internalType":"uint256","name":"liquidity","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amountTokenDesired","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"addLiquidityETH","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"},{"internalType":"uint256","name":"liquidity","type":"uint256"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountIn","outputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountOut","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"}],"name":"getAmountsIn","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"}],"name":"getAmountsOut","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"reserveA","type":"uint256"},{"internalType":"uint256","name":"reserveB","type":"uint256"}],"name":"quote","outputs":[{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidityETH","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidityETHSupportingFeeOnTransferTokens","outputs":[{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityETHWithPermit","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityETHWithPermitSupportingFeeOnTransferTokens","outputs":[{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityWithPermit","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapETHForExactTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETH","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETHSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"amountInMax","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapTokensForExactETH","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"amountInMax","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapTokensForExactTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]');
 
 /***/ }),
-/* 215 */
+/* 232 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('[{"inputs":[{"internalType":"address","name":"_feeToSetter","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"token0","type":"address"},{"indexed":true,"internalType":"address","name":"token1","type":"address"},{"indexed":false,"internalType":"address","name":"pair","type":"address"},{"indexed":false,"internalType":"uint256","name":"","type":"uint256"}],"name":"PairCreated","type":"event"},{"constant":true,"inputs":[],"name":"INIT_CODE_PAIR_HASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allPairs","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"allPairsLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"}],"name":"createPair","outputs":[{"internalType":"address","name":"pair","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"feeTo","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"feeToSetter","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"getPair","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_feeTo","type":"address"}],"name":"setFeeTo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_feeToSetter","type":"address"}],"name":"setFeeToSetter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]');
 
 /***/ }),
-/* 216 */
+/* 233 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount0","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1","type":"uint256"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"Burn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount0","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount0In","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1In","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount0Out","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1Out","type":"uint256"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"Swap","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint112","name":"reserve0","type":"uint112"},{"indexed":false,"internalType":"uint112","name":"reserve1","type":"uint112"}],"name":"Sync","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"DOMAIN_SEPARATOR","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"MINIMUM_LIQUIDITY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"PERMIT_TYPEHASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"burn","outputs":[{"internalType":"uint256","name":"amount0","type":"uint256"},{"internalType":"uint256","name":"amount1","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getReserves","outputs":[{"internalType":"uint112","name":"_reserve0","type":"uint112"},{"internalType":"uint112","name":"_reserve1","type":"uint112"},{"internalType":"uint32","name":"_blockTimestampLast","type":"uint32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_token0","type":"address"},{"internalType":"address","name":"_token1","type":"address"}],"name":"initialize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"kLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"mint","outputs":[{"internalType":"uint256","name":"liquidity","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"nonces","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"permit","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"price0CumulativeLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"price1CumulativeLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"skim","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount0Out","type":"uint256"},{"internalType":"uint256","name":"amount1Out","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"swap","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"sync","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"token0","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"token1","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]');
 
 /***/ }),
-/* 217 */
+/* 234 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -26402,26 +26908,34 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Action: () => (/* reexport safe */ _Action__WEBPACK_IMPORTED_MODULE_0__.Action),
-/* harmony export */   CONFIG: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG),
-/* harmony export */   DfsWeb3: () => (/* reexport safe */ _DfsWeb3__WEBPACK_IMPORTED_MODULE_2__.DfsWeb3),
+/* harmony export */   CONFIG: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_9__.CONFIG),
+/* harmony export */   DfsWeb3: () => (/* reexport safe */ _DfsWeb3__WEBPACK_IMPORTED_MODULE_3__.DfsWeb3),
 /* harmony export */   Recipe: () => (/* reexport safe */ _Recipe__WEBPACK_IMPORTED_MODULE_1__.Recipe),
-/* harmony export */   SwapUtil: () => (/* reexport safe */ _SwapUtils__WEBPACK_IMPORTED_MODULE_4__.SwapUtil),
-/* harmony export */   actions: () => (/* reexport module object */ _actions__WEBPACK_IMPORTED_MODULE_3__),
-/* harmony export */   configure: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_5__.configure),
+/* harmony export */   Strategy: () => (/* reexport safe */ _Strategy__WEBPACK_IMPORTED_MODULE_2__.Strategy),
+/* harmony export */   StrategySub: () => (/* reexport safe */ _StrategySub__WEBPACK_IMPORTED_MODULE_4__.StrategySub),
+/* harmony export */   SwapUtil: () => (/* reexport safe */ _SwapUtils__WEBPACK_IMPORTED_MODULE_8__.SwapUtil),
+/* harmony export */   actions: () => (/* reexport module object */ _actions__WEBPACK_IMPORTED_MODULE_5__),
+/* harmony export */   configure: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_9__.configure),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   getAddr: () => (/* reexport safe */ _addresses__WEBPACK_IMPORTED_MODULE_6__.getAddr),
-/* harmony export */   getNetworkData: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_5__.getNetworkData),
+/* harmony export */   getAddr: () => (/* reexport safe */ _addresses__WEBPACK_IMPORTED_MODULE_10__.getAddr),
+/* harmony export */   getNetworkData: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_9__.getNetworkData),
 /* harmony export */   listAddresses: () => (/* binding */ listAddresses),
 /* harmony export */   listAddressesAllChains: () => (/* binding */ listAddressesAllChains),
-/* harmony export */   networks: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_5__.NETWORKS)
+/* harmony export */   networks: () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_9__.NETWORKS),
+/* harmony export */   services: () => (/* reexport module object */ _services__WEBPACK_IMPORTED_MODULE_7__),
+/* harmony export */   triggers: () => (/* reexport module object */ _triggers__WEBPACK_IMPORTED_MODULE_6__)
 /* harmony export */ });
 /* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _Recipe__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var _DfsWeb3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(108);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(114);
-/* harmony import */ var _SwapUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(213);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
-/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7);
+/* harmony import */ var _Strategy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(108);
+/* harmony import */ var _DfsWeb3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(109);
+/* harmony import */ var _StrategySub__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(115);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(117);
+/* harmony import */ var _triggers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(223);
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(226);
+/* harmony import */ var _SwapUtils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(230);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(8);
+/* harmony import */ var _addresses__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(7);
 /* Export types here */
 
 /* Export methods, classes and other here */
@@ -26429,32 +26943,39 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//   import * as triggers from './triggers';
+
+
+
+
+
 //   import * as utils from './utils';
 
 
 
-var listAddressesAllChains = _addresses__WEBPACK_IMPORTED_MODULE_6__.listAddr;
+var listAddressesAllChains = _addresses__WEBPACK_IMPORTED_MODULE_10__.listAddr;
 var listAddresses = function listAddresses() {
   var chainId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  return _addresses__WEBPACK_IMPORTED_MODULE_6__.listAddr[chainId || _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG.chainId];
+  return _addresses__WEBPACK_IMPORTED_MODULE_10__.listAddr[chainId || _config__WEBPACK_IMPORTED_MODULE_9__.CONFIG.chainId];
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   Action: _Action__WEBPACK_IMPORTED_MODULE_0__.Action,
   Recipe: _Recipe__WEBPACK_IMPORTED_MODULE_1__.Recipe,
-  DfsWeb3: _DfsWeb3__WEBPACK_IMPORTED_MODULE_2__.DfsWeb3,
-  actions: _actions__WEBPACK_IMPORTED_MODULE_3__,
-  // triggers,
+  DfsWeb3: _DfsWeb3__WEBPACK_IMPORTED_MODULE_3__.DfsWeb3,
+  Strategy: _Strategy__WEBPACK_IMPORTED_MODULE_2__.Strategy,
+  StrategySub: _StrategySub__WEBPACK_IMPORTED_MODULE_4__.StrategySub,
+  actions: _actions__WEBPACK_IMPORTED_MODULE_5__,
+  triggers: _triggers__WEBPACK_IMPORTED_MODULE_6__,
+  services: _services__WEBPACK_IMPORTED_MODULE_7__,
   // utils,
-  configure: _config__WEBPACK_IMPORTED_MODULE_5__.configure,
-  getNetworkData: _config__WEBPACK_IMPORTED_MODULE_5__.getNetworkData,
-  CONFIG: _config__WEBPACK_IMPORTED_MODULE_5__.CONFIG,
-  networks: _config__WEBPACK_IMPORTED_MODULE_5__.NETWORKS,
+  configure: _config__WEBPACK_IMPORTED_MODULE_9__.configure,
+  getNetworkData: _config__WEBPACK_IMPORTED_MODULE_9__.getNetworkData,
+  CONFIG: _config__WEBPACK_IMPORTED_MODULE_9__.CONFIG,
+  networks: _config__WEBPACK_IMPORTED_MODULE_9__.NETWORKS,
   listAddresses,
   listAddressesAllChains,
-  getAddr: _addresses__WEBPACK_IMPORTED_MODULE_6__.getAddr,
-  SwapUtil: _SwapUtils__WEBPACK_IMPORTED_MODULE_4__.SwapUtil
+  getAddr: _addresses__WEBPACK_IMPORTED_MODULE_10__.getAddr,
+  SwapUtil: _SwapUtils__WEBPACK_IMPORTED_MODULE_8__.SwapUtil
 });
 })();
 
