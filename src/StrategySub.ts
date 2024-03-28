@@ -21,8 +21,7 @@ export class StrategySub {
   triggersData: Array<string>;
 
   subProxyAddress: string;
-
-
+  
 
   constructor(strategyId: number, isBundle: boolean, triggersData: Array<string>, actionsData:Array<string>, chainId?: number) {
     this.strategyId = strategyId;
@@ -58,7 +57,14 @@ export class StrategySub {
    
   }
 
-
-
+  encodeForUpdateSubData(subId:number):Array<string>{
+    const iface = new ethers.Interface(SubProxyAbi);
+    const functionFragment = iface.getFunctionName("updateSubData");
+    const startegySub = [this.strategyId, this.isBundle, this.triggersData, this.actionsData];
+    return [
+      this.subProxyAddress,
+      iface.encodeFunctionData(functionFragment, [subId, startegySub])
+    ];
+  }
 
 }

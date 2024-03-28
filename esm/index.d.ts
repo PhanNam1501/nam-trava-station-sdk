@@ -4,6 +4,7 @@ import { Recipe } from './Recipe';
 import { Strategy } from './Strategy';
 import { DfsWeb3 } from './DfsWeb3';
 import { StrategySub } from './StrategySub';
+import { StrategySubUtils } from './StrategySubUtils';
 import * as actions from './actions';
 import * as triggers from './triggers';
 import * as services from './services';
@@ -375,13 +376,14 @@ declare const listAddresses: (chainId?: null) => {
     XRPAddress?: undefined;
     DOGEAddress?: undefined;
 };
-export { Action, Recipe, DfsWeb3, Strategy, StrategySub, actions, triggers, services, SwapUtil, configure, getNetworkData, CONFIG, networks, listAddresses, listAddressesAllChains, getAddr, };
+export { Action, Recipe, DfsWeb3, Strategy, StrategySub, StrategySubUtils, actions, triggers, services, SwapUtil, configure, getNetworkData, CONFIG, networks, listAddresses, listAddressesAllChains, getAddr, };
 declare const _default: {
     Action: typeof Action;
     Recipe: typeof Recipe;
     DfsWeb3: typeof DfsWeb3;
     Strategy: typeof Strategy;
     StrategySub: typeof StrategySub;
+    StrategySubUtils: typeof StrategySubUtils;
     actions: typeof actions;
     triggers: typeof triggers;
     services: typeof services;
