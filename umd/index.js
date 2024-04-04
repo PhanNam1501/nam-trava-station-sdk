@@ -449,6 +449,7 @@ __webpack_require__.r(__webpack_exports__);
 var listAddr = {
   [_config__WEBPACK_IMPORTED_MODULE_0__.NETWORKS.bscTestnet.chainId]: {
     //Action address
+    SubStorage: "0xDcd41A255415c96b532Bc52e85850770D64A936e",
     SubProxy: "0x7A8B178176d9396C2dc33B574Ccf8C9080c62a6c",
     AaveV2RatioTrigger: "0xf51D4D1DDad8003F538ee983843b628D1fD2AAD8",
     LiquidityCampaignClaimRewards: "0x252F478f0Ff737b48386523FFb0a62B8406F57E6",
@@ -20593,7 +20594,6 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_3__.ethers.AbiCoder();
-
 /**
  *
  * @category Base Classes
@@ -20601,8 +20601,10 @@ var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_3__.ethers.AbiCoder();
 class StrategySubUtils {
   constructor(chainId) {
     _defineProperty(this, "subProxyAddress", void 0);
+    _defineProperty(this, "subStorage", void 0);
     var _chainId = typeof chainId === "undefined" ? _config__WEBPACK_IMPORTED_MODULE_0__.CONFIG.chainId : chainId;
     this.subProxyAddress = (0,_addresses__WEBPACK_IMPORTED_MODULE_2__.getAddr)('SubProxy', _chainId);
+    this.subStorage = (0,_addresses__WEBPACK_IMPORTED_MODULE_2__.getAddr)('SubStorage', _chainId);
   }
   encodeForActiveSub(subId) {
     var iface = new ethers__WEBPACK_IMPORTED_MODULE_3__.ethers.Interface(_abis_SubProxy_json__WEBPACK_IMPORTED_MODULE_1__);
@@ -20614,6 +20616,14 @@ class StrategySubUtils {
     var functionFragment = iface.getFunctionName("deactivateSub");
     return [this.subProxyAddress, iface.encodeFunctionData(functionFragment, [subId])];
   }
+  //   async getUserProxy(subId: number): Promise<EthAddress> {
+  //     // const iface = new ethers.Interface(StrategyStorageAbi);
+  //     const contract = new ethers.Contract(this.subStorage, SubStorageAbi);
+  //     const storedData = await contract.strategiesSubs(subId);
+  //     await storedData;
+  //     return storedData.userProxy;
+  //   }
+
 }
 
 /***/ }),
@@ -20714,7 +20724,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nft__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(135);
 /* harmony import */ var _staking__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(168);
 /* harmony import */ var _campaign__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(172);
-
 
 
 
@@ -20852,11 +20861,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
-<<<<<<< HEAD
- * TravaGovernanceIncreaseUnlockTime - Borrow Token in Lending Pool
-=======
  * TravaGovernanceIncreaseUnlockTime - Increase unlock time in governance
->>>>>>> origin/ngan-sdk
  *
  * @category Trava
  */
@@ -23630,8 +23635,8 @@ __webpack_require__.r(__webpack_exports__);
 var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_2__.ethers.AbiCoder();
 var MAX_UINT256 = ethers__WEBPACK_IMPORTED_MODULE_2__.ethers.MaxUint256;
 var AutoCompoundStrategySub = {
-  encodeForStartgySubWithGas(stakingPool, claimTo, amountClaim, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path, startTime, endTime, startegyIdOrBundle, isBundle) {
-    var subData = _SubDataService__WEBPACK_IMPORTED_MODULE_0__.AutoCompoundSubData.encodeForSubDataWithGas(stakingPool, claimTo, amountClaim, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path);
+  encodeForStartgySubWithGas(rewardPool, claimTo, amountClaim, stakingPool, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path, startTime, endTime, startegyIdOrBundle, isBundle) {
+    var subData = _SubDataService__WEBPACK_IMPORTED_MODULE_0__.AutoCompoundSubData.encodeForSubDataWithGas(rewardPool, claimTo, amountClaim, stakingPool, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path);
     var triggerData = _TriggerDataService__WEBPACK_IMPORTED_MODULE_1__.TimeTriggerService.encode(startTime, endTime);
     return [startegyIdOrBundle, isBundle, triggerData, subData];
   },
@@ -23658,7 +23663,8 @@ __webpack_require__.r(__webpack_exports__);
 var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_0__.ethers.AbiCoder();
 var MAX_UINT256 = ethers__WEBPACK_IMPORTED_MODULE_0__.ethers.MaxUint256;
 var AutoCompoundSubData = {
-  encodeForSubDataWithGas(stakingPool, claimTo, amountClaim, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path) {
+  encodeForSubDataWithGas(rewardPool, claimTo, amountClaim, stakingPool, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path) {
+    var rewardPoolEncoded = abiCoder.encode(['address'], [rewardPool]);
     var stakingPoolEncoded = abiCoder.encode(['address'], [stakingPool]);
     var claimToEncoded = abiCoder.encode(['address'], [claimTo]);
     var amountClaimEncoded = abiCoder.encode(['uint256'], [amountClaim]);
@@ -23671,7 +23677,7 @@ var AutoCompoundSubData = {
     var dfsFeeDividerEncoded = abiCoder.encode(['uint256'], [dfsFeeDivider]);
     var path0Encoded = abiCoder.encode(['address'], [path[0]]);
     var path1Encoded = abiCoder.encode(['address'], [path[1]]);
-    return [stakingPoolEncoded, claimToEncoded, amountClaimEncoded, stakingPoolEncoded, stakeOnBehalfOfEncoded, amountStakeEncoded, fromEncoded, gasUsedEncoded, feeTokenEncoded, availableAmountEncoded, dfsFeeDividerEncoded, path0Encoded, path1Encoded];
+    return [rewardPoolEncoded, claimToEncoded, amountClaimEncoded, stakingPoolEncoded, stakeOnBehalfOfEncoded, amountStakeEncoded, fromEncoded, gasUsedEncoded, feeTokenEncoded, availableAmountEncoded, dfsFeeDividerEncoded, path0Encoded, path1Encoded];
   },
   encodeForSubData(vaultAddress, claimTo, stakeOnBehalfOf, from) {
     var stakingPoolEncoded = abiCoder.encode(['address'], [vaultAddress]);

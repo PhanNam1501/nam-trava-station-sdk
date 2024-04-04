@@ -11,6 +11,7 @@ export class StrategySubUtils {
     constructor(chainId) {
         const _chainId = typeof chainId === "undefined" ? CONFIG.chainId : chainId;
         this.subProxyAddress = getAddr('SubProxy', _chainId);
+        this.subStorage = getAddr('SubStorage', _chainId);
     }
     encodeForActiveSub(subId) {
         const iface = new ethers.Interface(SubProxyAbi);

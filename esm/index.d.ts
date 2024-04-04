@@ -14,6 +14,7 @@ import { getAddr } from './addresses';
 export type { EthAddress, Config, Network, Networks, bytes32, bytes, uint256, uint160, uint128, uint80, uint64, uint24, uint16, uint8, int24, };
 declare const listAddressesAllChains: {
     [x: number]: {
+        SubStorage: string;
         SubProxy: string;
         AaveV2RatioTrigger: string;
         LiquidityCampaignClaimRewards: string;
@@ -149,7 +150,8 @@ declare const listAddressesAllChains: {
         BUSDAddress: string;
         TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
-        GasFeeTaker: string;
+        SubStorage?: undefined;
+        SubProxy?: undefined;
         AaveV2RatioTrigger?: undefined;
         LiquidityCampaignClaimRewards?: undefined;
         LiquidityCampaignRedeem?: undefined;
@@ -198,6 +200,7 @@ declare const listAddressesAllChains: {
     };
 };
 declare const listAddresses: (chainId?: null) => {
+    SubStorage: string;
     SubProxy: string;
     AaveV2RatioTrigger: string;
     LiquidityCampaignClaimRewards: string;
@@ -333,7 +336,8 @@ declare const listAddresses: (chainId?: null) => {
     BUSDAddress: string;
     TRAVAAddress: string;
     LiquidityCampaignBuyToken: string;
-    GasFeeTaker: string;
+    SubStorage?: undefined;
+    SubProxy?: undefined;
     AaveV2RatioTrigger?: undefined;
     LiquidityCampaignClaimRewards?: undefined;
     LiquidityCampaignRedeem?: undefined;
@@ -396,6 +400,7 @@ declare const _default: {
     CONFIG: Config;
     networks: Networks;
     listAddresses: (chainId?: null) => {
+        SubStorage: string;
         SubProxy: string;
         AaveV2RatioTrigger: string;
         LiquidityCampaignClaimRewards: string;
@@ -531,7 +536,8 @@ declare const _default: {
         BUSDAddress: string;
         TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
-        GasFeeTaker: string;
+        SubStorage?: undefined;
+        SubProxy?: undefined;
         AaveV2RatioTrigger?: undefined;
         LiquidityCampaignClaimRewards?: undefined;
         LiquidityCampaignRedeem?: undefined;
@@ -580,6 +586,7 @@ declare const _default: {
     };
     listAddressesAllChains: {
         [x: number]: {
+            SubStorage: string;
             SubProxy: string;
             AaveV2RatioTrigger: string;
             LiquidityCampaignClaimRewards: string;
@@ -715,7 +722,8 @@ declare const _default: {
             BUSDAddress: string;
             TRAVAAddress: string;
             LiquidityCampaignBuyToken: string;
-            GasFeeTaker: string;
+            SubStorage?: undefined;
+            SubProxy?: undefined;
             AaveV2RatioTrigger?: undefined;
             LiquidityCampaignClaimRewards?: undefined;
             LiquidityCampaignRedeem?: undefined;

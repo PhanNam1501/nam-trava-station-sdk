@@ -7,9 +7,10 @@ const MAX_UINT256 = ethers.MaxUint256;
 
 export const AutoCompoundStrategySub = {
     encodeForStartgySubWithGas(
-        stakingPool: EthAddress,
+        rewardPool: EthAddress,
         claimTo: EthAddress,
         amountClaim: uint256,
+        stakingPool:EthAddress,
         stakeOnBehalfOf: EthAddress,
         amountStake: uint256,
         from: EthAddress,
@@ -23,7 +24,7 @@ export const AutoCompoundStrategySub = {
         startegyIdOrBundle: uint256,
         isBundle: boolean,
     ) {
-        const subData = AutoCompoundSubData.encodeForSubDataWithGas(stakingPool, claimTo, amountClaim, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path);
+        const subData = AutoCompoundSubData.encodeForSubDataWithGas(rewardPool, claimTo, amountClaim, stakingPool, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path);
         const triggerData = TimeTriggerService.encode(startTime, endTime);
 
         return [startegyIdOrBundle, isBundle, triggerData, subData];

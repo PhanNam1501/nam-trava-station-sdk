@@ -1,6 +1,7 @@
 import { EthAddress } from "./types";
 export declare const listAddr: {
     [x: number]: {
+        SubStorage: string;
         SubProxy: string;
         AaveV2RatioTrigger: string;
         LiquidityCampaignClaimRewards: string;
@@ -136,7 +137,8 @@ export declare const listAddr: {
         BUSDAddress: string;
         TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
-        GasFeeTaker: string;
+        SubStorage?: undefined;
+        SubProxy?: undefined;
         AaveV2RatioTrigger?: undefined;
         LiquidityCampaignClaimRewards?: undefined;
         LiquidityCampaignRedeem?: undefined;
