@@ -89,9 +89,11 @@ export declare const listAddr: {
         BUSDAddress: string;
         TODAddress: string;
         LiquidityCampaignBuyToken: string;
+        GasFeeTaker: string;
         VenusSupplyGateWay?: undefined;
         VenusCollateral?: undefined;
     } | {
+        SubProxy: string;
         VenusWithdraw: string;
         VenusRepay: string;
         VenusBorrow: string;

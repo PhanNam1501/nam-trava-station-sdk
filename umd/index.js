@@ -538,10 +538,12 @@ var listAddr = {
     TRAVAAddress: "0xE1F005623934D3D8C724EC68Cc9bFD95498D4435",
     BUSDAddress: "0x2CEC38C779d6b962bc877777b6f70937d21c9c38",
     TODAddress: "0xFca3Cf5E82F595D4f20C24D007ae5E2e94fab2f0",
-    LiquidityCampaignBuyToken: "0xd381E60595142110126E938878B2dC3C1d66a20b"
+    LiquidityCampaignBuyToken: "0xd381E60595142110126E938878B2dC3C1d66a20b",
+    GasFeeTaker: "0x40D3BEF74852449F7b4dD36D844f685bBedc12C4"
   },
   [_config__WEBPACK_IMPORTED_MODULE_0__.NETWORKS.bscMainnet.chainId]: {
     //Action address
+    SubProxy: "0x254954c6Ef6201E1a82e271b131bE81098d4421c",
     VenusWithdraw: "0x73d2EfAECba52cFD329A31cBf74FF216A6E65f0A",
     VenusRepay: "0xa5aD08C356F564273EBc4C4A7ED66Ef878c3BFdc",
     VenusBorrow: "0x852727FE904BF5A1Bd8316D034c1d6500051532c",
@@ -595,7 +597,8 @@ var listAddr = {
     TODAddress: "0x21d5Fa5ECf2605c0E835Ae054AF9bbA0468e5951",
     BUSDAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
     TRAVAAddress: "0x0391bE54E72F7e001f6BBc331777710b4f2999Ef",
-    LiquidityCampaignBuyToken: "0x67d102e05BDd9F480f8D45C755b8FFA040bC1701"
+    LiquidityCampaignBuyToken: "0x67d102e05BDd9F480f8D45C755b8FFA040bC1701",
+    GasFeeTaker: "0x65bB3A421B50041fB159e776878bbe9F2E50c6d4"
   }
 };
 
@@ -20591,7 +20594,6 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_3__.ethers.AbiCoder();
-
 /**
  *
  * @category Base Classes
@@ -20614,7 +20616,6 @@ class StrategySubUtils {
     var functionFragment = iface.getFunctionName("deactivateSub");
     return [this.subProxyAddress, iface.encodeFunctionData(functionFragment, [subId])];
   }
-
   //   async getUserProxy(subId: number): Promise<EthAddress> {
   //     // const iface = new ethers.Interface(StrategyStorageAbi);
   //     const contract = new ethers.Contract(this.subStorage, SubStorageAbi);
@@ -20622,6 +20623,7 @@ class StrategySubUtils {
   //     await storedData;
   //     return storedData.userProxy;
   //   }
+
 }
 
 /***/ }),
@@ -20797,21 +20799,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
-<<<<<<< HEAD
- * TravaGovernanceCreateLock - Borrow Token in Lending Pool
-=======
  * TravaGovernanceCreateLock - Create lock in governance
->>>>>>> origin/ngan/sdk
  *
  * @category Trava
  */
 
 class TravaGovernanceCreateLock extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
-  constructor(token, value, lock_duration, to, from, contractAddress) {
+  constructor() {
+    var token = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('Empty');
+    var value = arguments.length > 1 ? arguments[1] : undefined;
+    var locktime = arguments.length > 2 ? arguments[2] : undefined;
+    var to = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('Empty');
+    var from = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('Empty');
+    var contractAddress = arguments.length > 5 ? arguments[5] : undefined;
     var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('TravaGovernanceCreateLock') : contractAddress;
     super("TravaGovernanceCreateLock", _contractAddress,
     //getAddr("TravaGovernanceCreateLock"),
-    ["address", "uint256", "uint256", "address", "address"], [token, value, lock_duration, to, from]);
+    ["address", "uint256", "uint256", "address", "address"], [token, value, locktime, to, from]);
   }
 }
 
@@ -20857,7 +20861,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * TravaGovernanceIncreaseUnlockTime - Borrow Token in Lending Pool
+ * TravaGovernanceIncreaseUnlockTime - Increase unlock time in governance
  *
  * @category Trava
  */
@@ -22759,16 +22763,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /**
  * VenusCollateral - Collateral Token to Lending Pool
- *
  * @category Venus
  */
 class VenusCollateral extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
-  constructor(cTokens, enableAsColl, contractAddress) {
+  constructor(cTokenAddress, enableAsColl, contractAddress) {
     var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('VenusCollateral') : contractAddress;
     super("VenusCollateral", _contractAddress,
     //getAddr("VenusCollateral"),
-    ["address[]", "bool[]"], [cTokens, enableAsColl]);
-    this.mappableArgs = [cTokens, enableAsColl].flat();
+    ["address[]", "bool[]"], [cTokenAddress, enableAsColl]);
+    this.mappableArgs = [cTokenAddress, enableAsColl].flat();
   }
 }
 
@@ -22947,16 +22950,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /**
  * CreamCollateral - Collateral Token to Lending Pool
- *
  * @category Cream
  */
 class CreamCollateral extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
-  constructor(cTokens, enableAsColl, contractAddress) {
+  constructor(cTokenAddress, enableAsColl, contractAddress) {
     var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('CreamCollateral') : contractAddress;
     super("CreamCollateral", _contractAddress,
     //getAddr("CreamCollateral"),
-    ["address[]", "bool[]"], [cTokens, enableAsColl]);
-    this.mappableArgs = [cTokens, enableAsColl].flat();
+    ["address[]", "bool[]"], [cTokenAddress, enableAsColl]);
+    this.mappableArgs = [cTokenAddress, enableAsColl].flat();
   }
 }
 
@@ -23106,17 +23108,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * WePiggyCollateral - Enable Collateral Token to Lending Pool
- *
+ * WePiggyCollateral - Collateral Token to Lending Pool
  * @category WePiggy
  */
 class WePiggyCollateral extends _Action__WEBPACK_IMPORTED_MODULE_0__.Action {
-  constructor(cTokens, enableAsColl, contractAddress) {
+  constructor(cTokenAddress, enableAsColl, contractAddress) {
     var _contractAddress = typeof contractAddress === "undefined" ? (0,_addresses__WEBPACK_IMPORTED_MODULE_1__.getAddr)('WePiggyCollateral') : contractAddress;
     super("WePiggyCollateral", _contractAddress,
     //getAddr("WePiggyCollateral"),
-    ["address[]", "bool[]"], [cTokens, enableAsColl]);
-    this.mappableArgs = [cTokens, enableAsColl].flat();
+    ["address[]", "bool[]"], [cTokenAddress, enableAsColl]);
+    this.mappableArgs = [cTokenAddress, enableAsColl].flat();
   }
 }
 

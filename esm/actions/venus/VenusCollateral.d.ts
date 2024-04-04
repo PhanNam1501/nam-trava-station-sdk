@@ -1,10 +1,9 @@
 import { Action } from "../../Action";
-import { bytes } from "../../types";
+import { EthAddress } from "../../types";
 /**
  * VenusCollateral - Collateral Token to Lending Pool
- *
  * @category Venus
  */
 export declare class VenusCollateral extends Action {
-    constructor(cTokens: bytes, enableAsColl: bytes, contractAddress?: string);
+    constructor(cTokenAddress: Array<EthAddress>, enableAsColl: Array<boolean>, contractAddress?: string);
 }

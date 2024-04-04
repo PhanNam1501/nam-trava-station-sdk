@@ -1,10 +1,9 @@
 import { Action } from "../../Action";
-import { bytes } from "../../types";
+import { EthAddress } from "../../types";
 /**
  * CreamCollateral - Collateral Token to Lending Pool
- *
  * @category Cream
  */
 export declare class CreamCollateral extends Action {
-    constructor(cTokens: bytes, enableAsColl: bytes, contractAddress?: string);
+    constructor(cTokenAddress: Array<EthAddress>, enableAsColl: Array<boolean>, contractAddress?: string);
 }

@@ -3,7 +3,11 @@ import { getAddr } from "../../../addresses";
 import { EthAddress, uint256 } from "../../../types";
 
 /**
+<<<<<<< HEAD
  * TravaGovernanceIncreaseUnlockTime - Borrow Token in Lending Pool
+=======
+ * TravaGovernanceIncreaseUnlockTime - Increase unlock time in governance
+>>>>>>> origin/ngan-sdk
  *
  * @category Trava
  */

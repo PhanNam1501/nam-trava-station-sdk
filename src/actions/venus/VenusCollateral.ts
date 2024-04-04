@@ -1,16 +1,15 @@
 import { Action } from "../../Action";
 import { getAddr } from "../../addresses";
-import { EthAddress, bytes, uint256 } from "../../types";
+import { EthAddress, uint256 } from "../../types";
 
 /**
  * VenusCollateral - Collateral Token to Lending Pool
- *
  * @category Venus
  */
 export class VenusCollateral extends Action {
     constructor(
-        cTokens: bytes,
-        enableAsColl: bytes,
+        cTokenAddress: Array<EthAddress>,
+        enableAsColl: Array<boolean>,
         contractAddress?: string
     ) {
         const _contractAddress: string =
@@ -20,11 +19,8 @@ export class VenusCollateral extends Action {
             "VenusCollateral",
             _contractAddress, //getAddr("VenusCollateral"),
             ["address[]", "bool[]"],
-            [cTokens, enableAsColl]
+            [cTokenAddress, enableAsColl]
         );
-
-        this.mappableArgs = [cTokens , enableAsColl].flat();
-
-
+        this.mappableArgs = [cTokenAddress, enableAsColl].flat();
     }
 }
