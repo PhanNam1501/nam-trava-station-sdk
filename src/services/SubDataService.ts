@@ -7,9 +7,10 @@ const MAX_UINT256 = ethers.MaxUint256;
 
 export const AutoCompoundSubData = {
     encodeForSubDataWithGas(
-        stakingPool: EthAddress,
+        rewardPool: EthAddress,
         claimTo: EthAddress,
         amountClaim: uint256,
+        stakingPool:EthAddress,
         stakeOnBehalfOf: EthAddress,
         amountStake: uint256,
         from: EthAddress,
@@ -19,6 +20,7 @@ export const AutoCompoundSubData = {
         dfsFeeDivider: uint256,
         path: Array<EthAddress>) {
 
+        const rewardPoolEncoded = abiCoder.encode(['address'] , [rewardPool]);
         const stakingPoolEncoded = abiCoder.encode(['address'], [stakingPool]);
         const claimToEncoded = abiCoder.encode(['address'], [claimTo]);
         const amountClaimEncoded = abiCoder.encode(['uint256'], [amountClaim]);
@@ -32,7 +34,7 @@ export const AutoCompoundSubData = {
 
         const path0Encoded = abiCoder.encode(['address'], [path[0]]);
         const path1Encoded = abiCoder.encode(['address'], [path[1]]);
-        return [stakingPoolEncoded, claimToEncoded, amountClaimEncoded, stakingPoolEncoded, stakeOnBehalfOfEncoded, amountStakeEncoded, fromEncoded, gasUsedEncoded, feeTokenEncoded, availableAmountEncoded, dfsFeeDividerEncoded, path0Encoded, path1Encoded]
+        return [rewardPoolEncoded, claimToEncoded, amountClaimEncoded, stakingPoolEncoded, stakeOnBehalfOfEncoded, amountStakeEncoded, fromEncoded, gasUsedEncoded, feeTokenEncoded, availableAmountEncoded, dfsFeeDividerEncoded, path0Encoded, path1Encoded]
     },
 
     encodeForSubData(

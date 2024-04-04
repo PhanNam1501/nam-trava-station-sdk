@@ -15,7 +15,5 @@ export declare class StrategySub {
     */
     encodeForDsProxyCall(): Array<string>;
     encodeForFunctionData(): string;
-    encodeForActiveSub(subId: number): Array<string>;
-    encodeForDeactiveSub(subId: number): Array<string>;
     encodeForUpdateSubData(subId: number): Array<string>;
 }
