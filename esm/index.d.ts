@@ -101,9 +101,11 @@ declare const listAddressesAllChains: {
         BUSDAddress: string;
         TODAddress: string;
         LiquidityCampaignBuyToken: string;
+        GasFeeTaker: string;
         VenusSupplyGateWay?: undefined;
         VenusCollateral?: undefined;
     } | {
+        SubProxy: string;
         VenusWithdraw: string;
         VenusRepay: string;
         VenusBorrow: string;
@@ -147,7 +149,7 @@ declare const listAddressesAllChains: {
         BUSDAddress: string;
         TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
-        SubProxy?: undefined;
+        GasFeeTaker: string;
         AaveV2RatioTrigger?: undefined;
         LiquidityCampaignClaimRewards?: undefined;
         LiquidityCampaignRedeem?: undefined;
@@ -283,9 +285,11 @@ declare const listAddresses: (chainId?: null) => {
     BUSDAddress: string;
     TODAddress: string;
     LiquidityCampaignBuyToken: string;
+    GasFeeTaker: string;
     VenusSupplyGateWay?: undefined;
     VenusCollateral?: undefined;
 } | {
+    SubProxy: string;
     VenusWithdraw: string;
     VenusRepay: string;
     VenusBorrow: string;
@@ -329,7 +333,7 @@ declare const listAddresses: (chainId?: null) => {
     BUSDAddress: string;
     TRAVAAddress: string;
     LiquidityCampaignBuyToken: string;
-    SubProxy?: undefined;
+    GasFeeTaker: string;
     AaveV2RatioTrigger?: undefined;
     LiquidityCampaignClaimRewards?: undefined;
     LiquidityCampaignRedeem?: undefined;
@@ -479,9 +483,11 @@ declare const _default: {
         BUSDAddress: string;
         TODAddress: string;
         LiquidityCampaignBuyToken: string;
+        GasFeeTaker: string;
         VenusSupplyGateWay?: undefined;
         VenusCollateral?: undefined;
     } | {
+        SubProxy: string;
         VenusWithdraw: string;
         VenusRepay: string;
         VenusBorrow: string;
@@ -525,7 +531,7 @@ declare const _default: {
         BUSDAddress: string;
         TRAVAAddress: string;
         LiquidityCampaignBuyToken: string;
-        SubProxy?: undefined;
+        GasFeeTaker: string;
         AaveV2RatioTrigger?: undefined;
         LiquidityCampaignClaimRewards?: undefined;
         LiquidityCampaignRedeem?: undefined;
@@ -661,9 +667,11 @@ declare const _default: {
             BUSDAddress: string;
             TODAddress: string;
             LiquidityCampaignBuyToken: string;
+            GasFeeTaker: string;
             VenusSupplyGateWay?: undefined;
             VenusCollateral?: undefined;
         } | {
+            SubProxy: string;
             VenusWithdraw: string;
             VenusRepay: string;
             VenusBorrow: string;
@@ -707,7 +715,7 @@ declare const _default: {
             BUSDAddress: string;
             TRAVAAddress: string;
             LiquidityCampaignBuyToken: string;
-            SubProxy?: undefined;
+            GasFeeTaker: string;
             AaveV2RatioTrigger?: undefined;
             LiquidityCampaignClaimRewards?: undefined;
             LiquidityCampaignRedeem?: undefined;
