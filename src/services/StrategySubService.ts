@@ -1,9 +1,5 @@
+import { StrategySubService, SubDataService, TriggerDataService } from ".";
 import { EthAddress, uint256 } from "../types";
-import { AutoCompoundSubData } from ".";
-import { TimeTriggerService } from ".";
-import { ethers } from "ethers";
-const abiCoder = new ethers.AbiCoder();
-const MAX_UINT256 = ethers.MaxUint256;
 
 export const AutoCompoundStrategySub = {
     encodeForStartgySubWithGas(
@@ -24,8 +20,8 @@ export const AutoCompoundStrategySub = {
         startegyIdOrBundle: uint256,
         isBundle: boolean,
     ) {
-        const subData = AutoCompoundSubData.encodeForSubDataWithGas(rewardPool, claimTo, amountClaim, stakingPool, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path);
-        const triggerData = TimeTriggerService.encode(startTime, endTime);
+        const subData = SubDataService.AutoCompoundSubData.encodeForSubDataWithGas(rewardPool, claimTo, amountClaim, stakingPool, stakeOnBehalfOf, amountStake, from, gasUsed, feeToken, availableAmount, dfsFeeDivider, path);
+        const triggerData = TriggerDataService.TimeTriggerService.encode(startTime, endTime);
 
         return [startegyIdOrBundle, isBundle, triggerData, subData];
     },
@@ -39,8 +35,8 @@ export const AutoCompoundStrategySub = {
         endTime:uint256,
         startegyIdOrBundle: uint256
     ){
-        const subData = AutoCompoundSubData.encodeForSubData(vaultAddress, claimTo, stakeOnBehalfOf, from);
-        const triggerData = TimeTriggerService.encode(startTime, endTime);
+        const subData = SubDataService.AutoCompoundSubData.encodeForSubData(vaultAddress, claimTo, stakeOnBehalfOf, from);
+        const triggerData = TriggerDataService.TimeTriggerService.encode(startTime, endTime);
         const isBundle = false;
         
         return [startegyIdOrBundle, isBundle, triggerData, subData];
