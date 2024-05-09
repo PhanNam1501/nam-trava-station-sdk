@@ -1,3 +1,5 @@
-export * as StrategySubService from './StrategySubService';
-export * as SubDataService from './SubDataService';
-export * as TriggerDataService from './TriggerDataService';
+import * as StrategySubService from './StrategySubService';
+import * as SubDataService from './SubDataService';
+import * as TriggerDataService from './TriggerDataService';
+
+export {StrategySubService, SubDataService, TriggerDataService};

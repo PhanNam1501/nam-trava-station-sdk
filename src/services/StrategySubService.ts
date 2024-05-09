@@ -1,4 +1,4 @@
-import { StrategySubService, SubDataService, TriggerDataService } from ".";
+import { SubDataService, TriggerDataService } from ".";
 import { EthAddress, uint256 } from "../types";
 
 export const AutoCompoundStrategySub = {
