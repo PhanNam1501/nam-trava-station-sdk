@@ -1,6 +1,6 @@
 import { EthAddress, uint256 } from "../types";
-import { AutoCompoundSubData } from "./SubDataService";
-import { TimeTriggerService } from "./TriggerDataService";
+import { AutoCompoundSubData } from ".";
+import { TimeTriggerService } from ".";
 import { ethers } from "ethers";
 const abiCoder = new ethers.AbiCoder();
 const MAX_UINT256 = ethers.MaxUint256;

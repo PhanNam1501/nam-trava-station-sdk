@@ -1,7 +1,5 @@
 
 import { ethers } from "ethers";
-import AbiCoder from "web3-eth-abi";
-
 const abiCoder = new ethers.AbiCoder()
 export const TimeTriggerService = {
     encode(startTime: string, endTime: string){
