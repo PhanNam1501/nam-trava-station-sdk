@@ -99,6 +99,7 @@ export const listAddr = {
   },
   [NETWORKS.bscMainnet.chainId]: {
     //Action address
+    SubStorage:"0x172B348D5a413bF3197BA7bAee5d8336cFBC80a3",
     SubProxy:"0x254954c6Ef6201E1a82e271b131bE81098d4421c",
     VenusWithdraw:"0x73d2EfAECba52cFD329A31cBf74FF216A6E65f0A",
     VenusRepay:"0xa5aD08C356F564273EBc4C4A7ED66Ef878c3BFdc",
