@@ -1,3 +1,4 @@
+import { PancakeRemoveLiquidityV2 } from "./actions/pancakeswap";
 import { CONFIG, NETWORKS } from "./config";
 import { EthAddress } from "./types";
 import { toChecksumAddress } from 'ethereumjs-util';
@@ -95,7 +96,9 @@ export const listAddr = {
     BUSDAddress: "0x2CEC38C779d6b962bc877777b6f70937d21c9c38",
     TODAddress: "0xFca3Cf5E82F595D4f20C24D007ae5E2e94fab2f0",
     LiquidityCampaignBuyToken: "0xd381E60595142110126E938878B2dC3C1d66a20b",
-    GasFeeTaker: "0x40D3BEF74852449F7b4dD36D844f685bBedc12C4"
+    GasFeeTaker: "0x40D3BEF74852449F7b4dD36D844f685bBedc12C4",
+    PancakeAddLiquidityV2: "0xa10cdF7a4236D42Bed3DE982c7f50d2159c35ad4",
+    PancakeRemoveLiquidityV2: "0xc8f8277ac8519B5CEECe443803A4133405506FcA"
   },
   [NETWORKS.bscMainnet.chainId]: {
     //Action address
@@ -146,7 +149,9 @@ export const listAddr = {
     BUSDAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
     TRAVAAddress: "0x0391bE54E72F7e001f6BBc331777710b4f2999Ef",
     LiquidityCampaignBuyToken: "0x67d102e05BDd9F480f8D45C755b8FFA040bC1701",
-    GasFeeTaker: "0x65bB3A421B50041fB159e776878bbe9F2E50c6d4"
+    GasFeeTaker: "0x65bB3A421B50041fB159e776878bbe9F2E50c6d4",
+    PancakeAddLiquidityV2: "0x5343bC6e3726F1f82E457E784d0c3626c99B1Db9",
+    PancakeRemoveLiquidityV2: "0x5eF2f89f94b15bc84343B5FDA7E12DEF0F8D02Ff"
   },
 };
 
