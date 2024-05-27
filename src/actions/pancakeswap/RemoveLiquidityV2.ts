@@ -26,7 +26,6 @@ export class PancakeRemoveLiquidityV2 extends Action {
     amountBMin: uint256,
     to: EthAddress,
     deadline: uint256,
-    from: EthAddress,
     contractAddress?: string
   ) {
     const _contractAddress: string =
@@ -37,8 +36,8 @@ export class PancakeRemoveLiquidityV2 extends Action {
     super(
         "PancakeRemoveLiquidityV2",
         _contractAddress, //getAddr('PancakeRemoveLiquidityV2'),
-        ["address", "address", "uint256", "uint256", "uint256", "address", "uint256", "address"],
-        [tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline, from]
+        ["address", "address", "uint256", "uint256", "uint256", "address", "uint256"],
+        [tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline]
     );
     this.mappableArgs = [
         tokenA,
@@ -48,7 +47,6 @@ export class PancakeRemoveLiquidityV2 extends Action {
         amountBMin,
         to,
         deadline,
-        from,
     ].flat();
   }
 }
