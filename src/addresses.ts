@@ -150,7 +150,7 @@ export const listAddr = {
     TRAVAAddress: "0x0391bE54E72F7e001f6BBc331777710b4f2999Ef",
     LiquidityCampaignBuyToken: "0x67d102e05BDd9F480f8D45C755b8FFA040bC1701",
     GasFeeTaker: "0x65bB3A421B50041fB159e776878bbe9F2E50c6d4",
-    PancakeAddLiquidityV2: "0x5343bC6e3726F1f82E457E784d0c3626c99B1Db9",
+    PancakeAddLiquidityV2: "0x0293Abc607e69A1d53fF7107410743F44f8e0077",
     PancakeRemoveLiquidityV2: "0x5eF2f89f94b15bc84343B5FDA7E12DEF0F8D02Ff"
   },
 };
