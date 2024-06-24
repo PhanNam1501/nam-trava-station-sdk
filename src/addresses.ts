@@ -151,7 +151,8 @@ export const listAddr = {
     LiquidityCampaignBuyToken: "0x67d102e05BDd9F480f8D45C755b8FFA040bC1701",
     GasFeeTaker: "0x65bB3A421B50041fB159e776878bbe9F2E50c6d4",
     PancakeAddLiquidityV2: "0x0293Abc607e69A1d53fF7107410743F44f8e0077",
-    PancakeRemoveLiquidityV2: "0x5eF2f89f94b15bc84343B5FDA7E12DEF0F8D02Ff"
+    PancakeRemoveLiquidityV2: "0xB71fA81A5130d1b995c4B85520d02971a65355B1 ",
+    OnchainPriceTrigger: "0x2fa49f46b0134022a93d33fe7c3ba345c9ec270f"
   },
 };
 
