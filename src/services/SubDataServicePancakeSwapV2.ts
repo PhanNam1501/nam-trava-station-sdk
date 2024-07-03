@@ -24,7 +24,10 @@ export const AutoSwapSubData = {
         const pancakeSwapV2Encoded = abiCoder.encode(['address'] , [pancakeSwapV2]);
         const amountInEncoded = abiCoder.encode(['uint256'], [amountIn]);
         const amountOutMinEncoded = abiCoder.encode(['uint256'], [amountOutMin]);
+
         const pathSwap0Encoded = abiCoder.encode(['address'], [pathSwap[0]]);
+        const pathSwap1Encoded = abiCoder.encode(['address'], [pathSwap[1]]);
+
         const toEncoded = abiCoder.encode(['address'], [to]);
         const deadlineEncoded = abiCoder.encode(['uint256'], [deadline]);
         const fromEncoded = abiCoder.encode(['address'], [from]);
@@ -36,7 +39,7 @@ export const AutoSwapSubData = {
 
         const path0Encoded = abiCoder.encode(['address'], [path[0]]);
         const path1Encoded = abiCoder.encode(['address'], [path[1]]);
-        return [pancakeSwapV2Encoded, amountInEncoded, amountOutMinEncoded, pathSwap0Encoded, toEncoded, deadlineEncoded, fromEncoded, gasUsedEncoded, feeTokenEncoded, availableAmountEncoded, dfsFeeDividerEncoded, path0Encoded, path1Encoded]
+        return [pancakeSwapV2Encoded, amountInEncoded, amountOutMinEncoded, pathSwap0Encoded, pathSwap1Encoded, toEncoded, deadlineEncoded, fromEncoded, gasUsedEncoded, feeTokenEncoded, availableAmountEncoded, dfsFeeDividerEncoded, path0Encoded, path1Encoded]
     },
 
     encodeForSubData(
@@ -52,6 +55,7 @@ export const AutoSwapSubData = {
         const amountInEncoded = abiCoder.encode(['uint256'], [amountIn]);
         const amountOutMinEncoded = abiCoder.encode(['uint256'], [amountOutMin]);
         const pathSwap0Encoded = abiCoder.encode(['address'], [pathSwap[0]]);
+        const pathSwap1Encoded = abiCoder.encode(['address'], [pathSwap[1]])
         const toEncoded = abiCoder.encode(['address'], [to]);
         const deadlineEncoded = abiCoder.encode(['uint256'], [deadline]);
         const fromEncoded = abiCoder.encode(['address'], [from]);

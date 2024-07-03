@@ -1,6 +1,6 @@
 {
-  "name": "trava-station-sdk-v2",
-  "version": "1.0.7",
+  "name": "trava-station-sdk",
+  "version": "1.0.79",
   "description": "",
   "main": "./umd/index.js",
   "module": "./esm/index.js",
