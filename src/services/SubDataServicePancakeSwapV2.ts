@@ -59,6 +59,6 @@ export const AutoSwapSubData = {
         const toEncoded = abiCoder.encode(['address'], [to]);
         const deadlineEncoded = abiCoder.encode(['uint256'], [deadline]);
         const fromEncoded = abiCoder.encode(['address'], [from]);
-        return [pancakeSwapV2Encoded, amountInEncoded, amountOutMinEncoded, pathSwap0Encoded, toEncoded, deadlineEncoded, fromEncoded]
+        return [pancakeSwapV2Encoded, amountInEncoded, amountOutMinEncoded, pathSwap0Encoded, pathSwap0Encoded, toEncoded, deadlineEncoded, fromEncoded]
     }
 }
