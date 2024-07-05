@@ -23882,8 +23882,7 @@ var AutoSwapSubData = {
     var pancakeSwapV2Encoded = abiCoder.encode(['address'], [pancakeSwapV2]);
     var amountInEncoded = abiCoder.encode(['uint256'], [amountIn]);
     var amountOutMinEncoded = abiCoder.encode(['uint256'], [amountOutMin]);
-    var pathSwap0Encoded = abiCoder.encode(['address'], [pathSwap[0]]);
-    var pathSwap1Encoded = abiCoder.encode(['address'], [pathSwap[1]]);
+    var pathSwapEncode = pathSwap.map(e => abiCoder.encode(['address'], [e]));
     var toEncoded = abiCoder.encode(['address'], [to]);
     var deadlineEncoded = abiCoder.encode(['uint256'], [deadline]);
     var fromEncoded = abiCoder.encode(['address'], [from]);
@@ -23891,20 +23890,18 @@ var AutoSwapSubData = {
     var feeTokenEncoded = abiCoder.encode(['address'], [feeToken]);
     var availableAmountEncoded = abiCoder.encode(['uint256'], [availableAmount]);
     var dfsFeeDividerEncoded = abiCoder.encode(['uint256'], [dfsFeeDivider]);
-    var path0Encoded = abiCoder.encode(['address'], [path[0]]);
-    var path1Encoded = abiCoder.encode(['address'], [path[1]]);
-    return [pancakeSwapV2Encoded, amountInEncoded, amountOutMinEncoded, pathSwap0Encoded, pathSwap1Encoded, toEncoded, deadlineEncoded, fromEncoded, gasUsedEncoded, feeTokenEncoded, availableAmountEncoded, dfsFeeDividerEncoded, path0Encoded, path1Encoded];
+    var pathEncode = path.map(e => abiCoder.encode(['address'], [e]));
+    return [amountInEncoded, amountOutMinEncoded, ...pathSwapEncode, toEncoded, deadlineEncoded, fromEncoded, gasUsedEncoded, feeTokenEncoded, availableAmountEncoded, dfsFeeDividerEncoded, ...pathEncode];
   },
   encodeForSubData(pancakeSwapV2, amountIn, amountOutMin, pathSwap, to, deadline, from) {
     var pancakeSwapV2Encoded = abiCoder.encode(['address'], [pancakeSwapV2]);
     var amountInEncoded = abiCoder.encode(['uint256'], [amountIn]);
     var amountOutMinEncoded = abiCoder.encode(['uint256'], [amountOutMin]);
-    var pathSwap0Encoded = abiCoder.encode(['address'], [pathSwap[0]]);
-    var pathSwap1Encoded = abiCoder.encode(['address'], [pathSwap[1]]);
+    var pathSwapEncode = pathSwap.map(e => abiCoder.encode(['address'], [e]));
     var toEncoded = abiCoder.encode(['address'], [to]);
     var deadlineEncoded = abiCoder.encode(['uint256'], [deadline]);
     var fromEncoded = abiCoder.encode(['address'], [from]);
-    return [pancakeSwapV2Encoded, amountInEncoded, amountOutMinEncoded, pathSwap0Encoded, pathSwap0Encoded, toEncoded, deadlineEncoded, fromEncoded];
+    return [amountInEncoded, amountOutMinEncoded, ...pathSwapEncode, toEncoded, deadlineEncoded, fromEncoded];
   }
 };
 
@@ -23923,10 +23920,10 @@ __webpack_require__.r(__webpack_exports__);
 var abiCoder = new ethers__WEBPACK_IMPORTED_MODULE_0__.ethers.AbiCoder();
 var OnchainPriceTriggerService = {
   encode(pair, tokenIn, triggerPrice, state) {
-    return [abiCoder.encode(['string', 'string', 'string', 'string'], [pair, tokenIn, triggerPrice, state])];
+    return [abiCoder.encode(['address', 'address', 'uint256', 'uint8'], [pair, tokenIn, triggerPrice, state])];
   },
   decode(triggerData) {
-    return [abiCoder.decode(['string', 'string', 'string', 'string'], triggerData)];
+    return [abiCoder.decode(['address', 'address', 'uint256', 'uint8'], triggerData)];
   }
 };
 

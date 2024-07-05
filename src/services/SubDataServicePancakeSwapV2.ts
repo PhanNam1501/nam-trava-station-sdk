@@ -45,7 +45,7 @@ export const AutoSwapSubData = {
             deadlineEncoded, 
             fromEncoded, 
             gasUsedEncoded, 
-            ...feeTokenEncoded, 
+            feeTokenEncoded, 
             availableAmountEncoded, 
             dfsFeeDividerEncoded, 
             ...pathEncode
