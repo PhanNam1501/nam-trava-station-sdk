@@ -23904,7 +23904,7 @@ var AutoSwapSubData = {
     var toEncoded = abiCoder.encode(['address'], [to]);
     var deadlineEncoded = abiCoder.encode(['uint256'], [deadline]);
     var fromEncoded = abiCoder.encode(['address'], [from]);
-    return [pancakeSwapV2Encoded, amountInEncoded, amountOutMinEncoded, pathSwap0Encoded, toEncoded, deadlineEncoded, fromEncoded];
+    return [pancakeSwapV2Encoded, amountInEncoded, amountOutMinEncoded, pathSwap0Encoded, pathSwap0Encoded, toEncoded, deadlineEncoded, fromEncoded];
   }
 };
 
