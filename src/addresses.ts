@@ -171,6 +171,9 @@ export const listAddr = {
     OnchainPriceTrigger: "0x2fa49f46b0134022a93d33fe7c3ba345c9ec270f",
 
     ValasSupply: "0x9581fea9b9Ab079f6e66Ed5502E466Afd88d2b68",
+    ValasBorrow: "0x41dd7db88c24b94f42850c0D9C3f2aF09BD7b75d",
+    ValasRepay: "0xE41AD19a35b040a6B8710f925c43A776F26747CA",
+    ValasWithdraw: "0x64f6eE324cD53d804c3a018a419475562Bd2a4C6",
   },
 };
 
