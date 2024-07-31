@@ -111,7 +111,7 @@ export const listAddr = {
     VenusSupplyGateWay: "0xca0b00dD1C7c1ae34eA693000758e6Ab009ED0c3",
     VenusCollateral: "0x9B74A506a089F1bcF320B36D644cfDFdb0188564",  
     GranaryBorrow: "0x3e90239d6DF735390845e36a1714c40c801b7db7",
-    GranaryRepay: "0xAc7BCa40664F8A92e283Ae3596C8Fd5AEFCFd72B",
+    GranaryRepay: "0x9A25f6D7df179Cf15774e9d6C36110a7d759f2c0",
     GranarySupply: "0x3c23DCB0E5ADe93fE08Da0678A3210B07E61A472",
     GranaryWithdraw: "0xe934bEC718859b103E9cf1bf6084658E6FCC40D8",
     RadiantBorrow: "0xb7EbdB72473Deb661d04698c7384a52591CDD649",
@@ -168,7 +168,9 @@ export const listAddr = {
     GasFeeTaker: "0x65bB3A421B50041fB159e776878bbe9F2E50c6d4",
     PancakeAddLiquidityV2: "0x0293Abc607e69A1d53fF7107410743F44f8e0077",
     PancakeRemoveLiquidityV2: "0xB71fA81A5130d1b995c4B85520d02971a65355B1 ",
-    OnchainPriceTrigger: "0x2fa49f46b0134022a93d33fe7c3ba345c9ec270f"
+    OnchainPriceTrigger: "0x2fa49f46b0134022a93d33fe7c3ba345c9ec270f",
+
+    ValasSupply: "0x9581fea9b9Ab079f6e66Ed5502E466Afd88d2b68",
   },
 };
 
