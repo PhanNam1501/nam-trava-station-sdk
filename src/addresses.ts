@@ -174,6 +174,12 @@ export const listAddr = {
     ValasBorrow: "0x41dd7db88c24b94f42850c0D9C3f2aF09BD7b75d",
     ValasRepay: "0xE41AD19a35b040a6B8710f925c43A776F26747CA",
     ValasWithdraw: "0x64f6eE324cD53d804c3a018a419475562Bd2a4C6",
+
+    ApeswapSupply: "0x41035939a78267ece068d7eDd05bB0ecD205FDdb",
+    ApeswapCollateral: "0xd361ecfCf5a7b54074923247F2dB8154E7cA451a",
+    ApeswapBorrow: "0xee19da7AAC0695c75bb6354A344cD0Fe31b0A757",
+    ApeswapRepay: "0x3230F3fab585b77e68bDD0A3Cfd5C2C1c0a4DDb1",
+    ApeswapWithdraw: "0xA078a1CB0833D2132FbA6e59fB5B30760F253546",
   },
 };
 
