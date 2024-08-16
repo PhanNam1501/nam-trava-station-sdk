@@ -9,5 +9,6 @@ import * as granary from './granary';
 import * as liqee from './liqee';
 import * as fee from './fee';
 import * as valas from './valas';
+import * as apeswap from './apeswap';
 
-export { trava, pancake, basic, venus, cream, wepiggy, radiant, granary, liqee, fee, valas };
+export { trava, pancake, basic, venus, cream, wepiggy, radiant, granary, liqee, fee, valas, apeswap };

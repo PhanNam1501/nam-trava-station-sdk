@@ -3,12 +3,12 @@ import { getAddr } from "../../addresses";
 import { EthAddress, uint256 } from "../../types";
 
 /**
- * VenusSupply - Supply Token to Lending Pool
+ * ApeswapSupply - Supply Token to Lending Pool
  *
- * @category Venus
+ * @category Apeswap
  * need to approve token first
  */
-export class VenusSupply extends Action {
+export class ApeswapSupply extends Action {
     constructor(
         vTokenAddress: EthAddress,
         amount: uint256,
@@ -17,11 +17,11 @@ export class VenusSupply extends Action {
         contractAddress?: string
     ) {
         const _contractAddress: string =
-            typeof contractAddress === "undefined" ? getAddr('VenusSupply') : contractAddress;
+            typeof contractAddress === "undefined" ? getAddr('ApeswapSupply') : contractAddress;
 
         super(
-            "VenusSupply",
-            _contractAddress, //getAddr("VenusSupply"),
+            "ApeswapSupply",
+            _contractAddress, //getAddr("ApeswapSupply"),
             ["address", "uint256", "address" , "bool"],
             [vTokenAddress, amount, from, enableAsColl]
         );
