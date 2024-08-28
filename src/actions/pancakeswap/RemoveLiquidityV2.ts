@@ -1,6 +1,6 @@
 import { Action } from "../../Action";
 import { getAddr } from "../../addresses";
-import { EthAddress, uint256, bytes } from "../../types";
+import { EthAddress, uint256 } from "../../types";
 
 /**
  * PancakeRemoveLiquidityV2 - remove liquidity from PancakeSwap
