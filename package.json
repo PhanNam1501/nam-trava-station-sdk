@@ -1,6 +1,6 @@
 {
-  "name": "phuong-trava-station-sdk",
-  "version": "3.0.4",
+  "name": "tuannam1-trava-station-sdk",
+  "version": "3.0.11",
   "description": "",
   "main": "./umd/index.js",
   "module": "./esm/index.js",
@@ -22,6 +22,7 @@
     "bignumber.js": "^9.1.1",
     "decimal.js": "^10.2.1",
     "ethers": "6.7.0",
+    "tuannam1-trava-station-sdk": "file:",
     "web3-eth-abi": "^1.8.0",
     "web3-utils": "^1.8.0"
   },

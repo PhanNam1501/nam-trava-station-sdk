@@ -91,6 +91,9 @@ declare const listAddressesAllChains: {
         BUSDAddress: string;
         TODAddress: string;
         LiquidityCampaignBuyToken: string;
+        ADDLIAddress: string;
+        RMVLIAddress: string;
+        SWAPLIAddress: string;
     } | {
         DFSProxyRegistry: string;
         RecipeExecutor: string;
@@ -174,6 +177,9 @@ declare const listAddressesAllChains: {
         CAKEAddress?: undefined;
         XRPAddress?: undefined;
         DOGEAddress?: undefined;
+        ADDLIAddress?: undefined;
+        RMVLIAddress?: undefined;
+        SWAPLIAddress?: undefined;
     };
 };
 declare const listAddresses: (chainId?: null) => {
@@ -259,6 +265,9 @@ declare const listAddresses: (chainId?: null) => {
     BUSDAddress: string;
     TODAddress: string;
     LiquidityCampaignBuyToken: string;
+    ADDLIAddress: string;
+    RMVLIAddress: string;
+    SWAPLIAddress: string;
 } | {
     DFSProxyRegistry: string;
     RecipeExecutor: string;
@@ -342,6 +351,9 @@ declare const listAddresses: (chainId?: null) => {
     CAKEAddress?: undefined;
     XRPAddress?: undefined;
     DOGEAddress?: undefined;
+    ADDLIAddress?: undefined;
+    RMVLIAddress?: undefined;
+    SWAPLIAddress?: undefined;
 };
 export { Action, Recipe, DfsWeb3, actions, SwapUtil, configure, getNetworkData, CONFIG, networks, listAddresses, listAddressesAllChains, getAddr, };
 declare const _default: {
@@ -436,6 +448,9 @@ declare const _default: {
         BUSDAddress: string;
         TODAddress: string;
         LiquidityCampaignBuyToken: string;
+        ADDLIAddress: string;
+        RMVLIAddress: string;
+        SWAPLIAddress: string;
     } | {
         DFSProxyRegistry: string;
         RecipeExecutor: string;
@@ -519,6 +534,9 @@ declare const _default: {
         CAKEAddress?: undefined;
         XRPAddress?: undefined;
         DOGEAddress?: undefined;
+        ADDLIAddress?: undefined;
+        RMVLIAddress?: undefined;
+        SWAPLIAddress?: undefined;
     };
     listAddressesAllChains: {
         [x: number]: {
@@ -604,6 +622,9 @@ declare const _default: {
             BUSDAddress: string;
             TODAddress: string;
             LiquidityCampaignBuyToken: string;
+            ADDLIAddress: string;
+            RMVLIAddress: string;
+            SWAPLIAddress: string;
         } | {
             DFSProxyRegistry: string;
             RecipeExecutor: string;
@@ -687,6 +708,9 @@ declare const _default: {
             CAKEAddress?: undefined;
             XRPAddress?: undefined;
             DOGEAddress?: undefined;
+            ADDLIAddress?: undefined;
+            RMVLIAddress?: undefined;
+            SWAPLIAddress?: undefined;
         };
     };
     getAddr: (name: string, chainId?: number) => string;

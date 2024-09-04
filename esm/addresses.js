@@ -40,7 +40,7 @@ export const listAddr = {
         TravaAuctionCreateAuction: "0xadD3754309A7bC4c74E58A9AAb8463a591047123",
         TravaAuctionMakeBid: "0xD291b6b7658a016de5a95240F36eea4fb481d228",
         RecipeExecutor: "0xc3A1B8ec1F11A02410e0e1Ef0b34BCD2fBeDC54a",
-        DFSProxyRegistry: "0xddAe0A61D662711EC279686dE17EfB1F57253ab5",
+        DFSProxyRegistry: "0x3007999dC94880FaAeb1a10C8E24d0C09Bc45097",
         TravaNFTTransfer: "0x7D2AA60a1741a52F66f81EA2acb30e5BF3761A55",
         TravaNFTBuy: "0x859C6B79c3503611b410Bc01d219131e784022e3",
         TravaNFTCreateSale: "0xe169e64496C314398b3f06fD335dbf47B1B6A6Aa",
@@ -86,7 +86,10 @@ export const listAddr = {
         TRAVAAddress: "0xE1F005623934D3D8C724EC68Cc9bFD95498D4435",
         BUSDAddress: "0x2CEC38C779d6b962bc877777b6f70937d21c9c38",
         TODAddress: "0xFca3Cf5E82F595D4f20C24D007ae5E2e94fab2f0",
-        LiquidityCampaignBuyToken: "0xd381E60595142110126E938878B2dC3C1d66a20b"
+        LiquidityCampaignBuyToken: "0xd381E60595142110126E938878B2dC3C1d66a20b",
+        ADDLIAddress: "0xed1453E7e9e0a1d104A436d3822fd2a1FC17F0B2",
+        RMVLIAddress: "0x4A10e4630F5A336526b749d2daCE8EB3B9CbA658",
+        SWAPLIAddress: "0x9C1a12a2db2e1D3654AaA2e8cA07022355EcB3f1"
     },
     [NETWORKS.bscMainnet.chainId]: {
         //Action address
@@ -140,12 +143,14 @@ export const getAddr = (name, chainId = CONFIG.chainId) => {
     const _chainId = typeof chainId === "undefined" ? CONFIG.chainId : chainId;
     const actions = listAddr[_chainId];
     // skip this check if we're in testing mode
-    if (!CONFIG.testingMode) {
-        if (!actions)
-            throw new Error(`Cannot find address for chainId: ${_chainId}.`);
-        if (!actions[name])
-            throw new Error(`Cannot find address for name: ${name} (chainId: ${_chainId}).`);
-    }
+    // if (!CONFIG.testingMode) {
+    //   if (!actions)
+    //     throw new Error(`Cannot find address for chainId: ${_chainId}.`);
+    //   if (!actions[name as keyof typeof actions])
+    //     throw new Error(
+    //       `Cannot find address for name: ${name} (chainId: ${_chainId}).`
+    //     );
+    // }
     return actions[name];
 };
 export const convertHexStringToAddress = (hexString) => {

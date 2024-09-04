@@ -83,6 +83,9 @@ export declare const listAddr: {
         BUSDAddress: string;
         TODAddress: string;
         LiquidityCampaignBuyToken: string;
+        ADDLIAddress: string;
+        RMVLIAddress: string;
+        SWAPLIAddress: string;
     } | {
         DFSProxyRegistry: string;
         RecipeExecutor: string;
@@ -166,6 +169,9 @@ export declare const listAddr: {
         CAKEAddress?: undefined;
         XRPAddress?: undefined;
         DOGEAddress?: undefined;
+        ADDLIAddress?: undefined;
+        RMVLIAddress?: undefined;
+        SWAPLIAddress?: undefined;
     };
 };
 /**
