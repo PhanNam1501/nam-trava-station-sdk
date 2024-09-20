@@ -12,9 +12,8 @@ export class addLiquidity extends Action {
   constructor(
     exchange: EthAddress,
     token: EthAddress,
-    maxSlippage: string,
     from: EthAddress,
-    amount : string,
+    amount : uint256,
     contractAddress?: string
   ) {
     const _contractAddress: string =
@@ -23,8 +22,8 @@ export class addLiquidity extends Action {
     super(
       "addLiquidity",
       _contractAddress, //getAddr("TravaSupply"),
-      ["address", "address", "uint256", "address", "uint256"],
-      [exchange, token, maxSlippage, from, amount]
+      ["address", "address", "address", "uint256"],
+      [exchange, token, from, amount]
     );
   }
 }

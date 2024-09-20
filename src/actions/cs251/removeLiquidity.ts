@@ -13,8 +13,8 @@ export class removeLiquidity extends Action {
     exchange: EthAddress,
     token: EthAddress,
     to: EthAddress,
-    amount : string,
-    contractAddress?: string
+    amount : uint256,
+    contractAddress?: uint256
   ) {
     const _contractAddress: string =
       typeof contractAddress === "undefined" ? getAddr('RMVLIAddress') : contractAddress;

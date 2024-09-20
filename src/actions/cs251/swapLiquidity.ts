@@ -13,8 +13,9 @@ export class swapLiquidity extends Action {
     exchange: EthAddress,
     token: EthAddress,
     from: EthAddress,
-    maxSlippage: string,
-    amount : string,
+    to: EthAddress,
+    maxSlippage: uint256,
+    amount : uint256,
     checkETH: boolean,
     contractAddress?: string
   ) {
@@ -24,8 +25,8 @@ export class swapLiquidity extends Action {
     super(
       "swapLiquidity",
       _contractAddress, //getAddr("TravaSupply"),
-      ["address", "address", "address", "uint256", "uint256", "bool"],
-      [exchange, token, from, maxSlippage, amount, checkETH]
+      ["address", "address", "address", "address", "uint256", "uint256", "bool"],
+      [exchange, token, from, to, maxSlippage, amount, checkETH]
     );
   }
 }
